@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CETAP_LOB.Mapping;
+using GalaSoft.MvvmLight.Threading;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,10 @@ namespace CETAP_LOB
     /// </summary>
     public partial class App : Application
     {
+        static App()
+        {
+            DispatcherHelper.Initialize();
+            Maps.Initialize();
+        }
     }
 }

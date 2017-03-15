@@ -1,0 +1,182 @@
+<UserControl x:Class="LOB.View.processing.BioQAView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Converters="clr-namespace:LOB.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             BorderThickness="0,1,0,0" DataContext="{Binding BioQA, Source={StaticResource Locator}}">
+  <FrameworkElement.Resources>
+    <Converters:NumberToColorConverter x:Key="NumberToColorConverter"/>
+    <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+      <Style.Triggers>
+        <Trigger Property="Validation.HasError" Value="true">
+          <Setter Property="FrameworkElement.ToolTip"
+                  Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource self}}"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </FrameworkElement.Resources>
+  <Control.BorderBrush>
+    <SolidColorBrush Color="{Binding SettingsAppearance.SelectedAccentColor, Source={StaticResource Locator}}"/>
+  </Control.BorderBrush>
+  <Grid Margin="0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="305*"/>
+      <RowDefinition Height="15*"/>
+      <RowDefinition Height="379*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="47*"/>
+      <ColumnDefinition Width="13*"/>
+      <ColumnDefinition Width="68*"/>
+      <ColumnDefinition Width="112*"/>
+    </Grid.ColumnDefinitions>
+    <ListBox BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible"
+             ItemsSource="{Binding DirList}" SelectedItem="{Binding SelectedFile}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="4,0" Foreground="{Binding NoOfErrors, Converter={StaticResource NumberToColorConverter}}"
+                       Text="{Binding SName}"/>
+          </StackPanel>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ListBox>
+    <StackPanel Grid.RowSpan="3" Grid.Column="1">
+      <mui:ModernButton Margin="5,10,5,10" HorizontalAlignment="Center" EllipseDiameter="50"
+                        IconData="F1 M 24,13 C 27.1521,13 29.9945,14.3258 32,16.4501 L 32,11 35,14 35,22 27,22 24,19 29.5903,19 C 28.217,17.4656 26.2212,16.5 24,16.5 20.1969,16.5 17.055,19.3306 16.5661,23 L 13.0448,23 C 13.5501,17.3935 18.262,13 24,13 M 24,31.5 C 27.8031,31.5 30.945,28.6694 31.4339,25 L 34.9552,25 C 34.4499,30.6065 29.738,35 24,35 20.8479,35 18.0055,33.6742 16,31.5499 L 16,37 13,34 13,26 21,26 24,29 18.4097,29 C 19.783,30.5344 21.7787,31.5 24,31.5 Z"
+                        IconHeight="35" IconWidth="35" ToolTip="Refresh"/>
+      <mui:ModernButton Margin="5,10,5,10" HorizontalAlignment="Center" EllipseDiameter="50"/>
+      <mui:ModernButton Margin="5,10,5,10" HorizontalAlignment="Center" EllipseDiameter="50" ToolTip="Auto Clean"/>
+      <mui:ModernButton Margin="5,250,5,10" HorizontalAlignment="Center" EllipseDiameter="50" ToolTip="Save to DB"/>
+      <mui:ModernButton Margin="5,10,5,10" HorizontalAlignment="Center" VerticalAlignment="Bottom" EllipseDiameter="50"
+                        IconData="M 18.151175,25.844 L 21.165303,25.844 21.199,25.868802 17.134266,30.286999 15.666999,30.286999 M 23.04,25.752001 L 26.097354,25.752001 28.685999,30.378001 27.296575,30.378001 M 36.909339,7.5459213 C 35.326011,7.5459213 34.043488,8.6605629 34.043488,10.034267 34.043488,11.406681 35.326011,12.519993 36.909339,12.519993 38.491362,12.519993 39.772686,11.406681 39.772686,10.034267 39.772686,8.6605629 38.491362,7.5459213 36.909339,7.5459213 M 26.599364,7.5459213 C 25.017137,7.5459213 23.734616,8.6605629 23.734615,10.034267 23.734616,11.406681 25.017137,12.519993 26.599364,12.519993 28.181391,12.519993 29.465211,11.406681 29.465211,10.034267 29.465211,8.6605629 28.181391,7.5459213 26.599364,7.5459213 M 0,6.1290001 L 6.5139999,10.420711 6.5139999,17.68133 0,21.973 M 8.6259995,5.3110003 L 22.236752,5.3110003 C 21.911151,6.0519928 21.58825,6.7864055 21.301749,7.4387741 20.994448,8.1327748 20.840847,8.8710875 20.840847,9.6315007 20.840847,12.728117 23.443657,15.247729 26.64817,15.247729 28.847378,15.247729 30.770586,14.087477 31.75369,12.3218 32.400792,13.48205 33.455397,14.36999 34.721002,14.850511 L 34.721002,22.048829 26.90977,22.048829 26.90977,23.670001 17.072532,23.670001 17.072532,22.048829 8.6259995,22.048829 M 28.338985,0.0013161717 C 28.699736,-0.0080255331 29.082805,0.032174252 29.470511,0.12787811 30.799834,0.45600684 31.592849,1.2386069 31.753052,2.1761162 31.915854,1.2386069 32.707466,0.45600684 34.036987,0.12787811 35.589015,-0.25493844 37.06564,0.25031577 37.336443,1.2620468 37.348143,1.3075776 40.370396,8.1814284 40.370396,8.1814284 40.568199,8.6267428 40.674999,9.117598 40.674999,9.6318831 40.674999,11.678785 38.96797,13.339 36.861135,13.339 34.900104,13.339 33.289477,11.902787 33.070773,10.056467 33.061572,10.043367 31.956054,3.9677648 31.753052,2.8349328 31.553846,3.9677648 30.445628,10.043367 30.445627,10.043367 30.217825,11.902787 28.607098,13.339 26.648765,13.339 24.540629,13.339 22.831,11.678785 22.831,9.6318831 22.831,9.117598 22.940403,8.6267428 23.137006,8.1814284 23.137007,8.1814284 26.160357,1.3075776 26.172156,1.2620468 26.375335,0.50324858 27.256731,0.029343484 28.338985,0.0013161717 Z"
+                        IconHeight="30" IconWidth="30" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+    </StackPanel>
+    <DataGrid Grid.RowSpan="3" Grid.Column="2" AutoGenerateColumns="false" Background="Transparent"
+              BorderThickness="1" CanUserDeleteRows="true" CanUserResizeColumns="true" CanUserSortColumns="true"
+              EnableColumnVirtualization="true" EnableRowVirtualization="true"
+              HorizontalScrollBarVisibility="Visible">
+      <DataGrid.Columns>
+        <DataGridTemplateColumn Header="Errors" SortMemberPath="errorCount">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding errorCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="ScanNo" SortMemberPath="ScanNo">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding ScanNo, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Edited" SortMemberPath="edited">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding Edited, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Barcode" SortMemberPath="Barcode">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding Barcode, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding Barcode, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="NBT Reference" SortMemberPath="Reference">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding Reference, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding Reference, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Surname" SortMemberPath="Surname">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding Surname, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding Surname, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="First Name" SortMemberPath="FirstName">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Initials" SortMemberPath="Initials">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding LoadWriters.writers/initials, NotifyOnValidationError=true, Source={StaticResource Locator}, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding Initials, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="South African ID" SortMemberPath="SAID">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding SAID, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding SAID, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Foreign ID" SortMemberPath="ForeignID">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Style="{StaticResource TextBlockStyle}"
+                         Text="{Binding ForeignID, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding ForeignID, Mode=TwoWay, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=true, ValidatesOnDataErrors=true}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+    <ListBox Grid.Row="2"/>
+  </Grid>
+</UserControl>

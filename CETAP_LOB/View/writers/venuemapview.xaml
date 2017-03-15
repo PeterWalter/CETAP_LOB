@@ -1,0 +1,42 @@
+<UserControl x:Class="LOB.View.writers.VenueMapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Custom="http://www.galasoft.ch/mvvmlight"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ignore="http://www.ignore.com"
+             xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             DataContext="{Binding VenueMap, Source={StaticResource Locator}}">
+  <FrameworkElement.Resources>
+    <ControlTemplate x:Key="CustomPushpinTemplate" TargetType="{x:Type m:Pushpin}"/>
+    <DataTemplate x:Key="VenueTemplate">
+      <m:Pushpin Template="{StaticResource CustomPushpinTemplate}" Content="{Binding Writers}"
+                 m:MapLayer.Position="{Binding Place}"/>
+    </DataTemplate>
+  </FrameworkElement.Resources>
+  <Grid>
+    <m:Map x:Name="myMap" Grid.ColumnSpan="2" AnimationLevel="Full" Center="-27.50, 25.2"
+           CredentialsProvider="AjyTpjyAov5az5PjF0olzsjm9h5UbAs4wI6Gvt-elszUhmkjqPGKX-3b6N5sI9ZN" Culture="EN"
+           Heading="0" Mode="AerialWithLabels" ZoomLevel="5.3">
+      <Interaction.Triggers>
+        <EventTrigger EventName="MouseRightButtonDown">
+          <Custom:EventToCommand PassEventArgsToCommand="true"
+                                 Command="{Binding VenueMap.NewVenueLocationCommand, Mode=OneWay, Source={StaticResource Locator}}"/>
+        </EventTrigger>
+      </Interaction.Triggers>
+      <m:MapCore.Children>
+        <m:MapItemsControl ItemTemplate="{StaticResource VenueTemplate}" ItemsSource="{Binding Venues}"/>
+        <m:MapLayer/>
+      </m:MapCore.Children>
+    </m:Map>
+    <StackPanel Width="95" Height="165" Margin="5,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Background="#FFEEBF21" Opacity="0.4">
+      <StackPanel>
+        <Label Margin=" 1,1,1,1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">Venue Code</Label>
+        <TextBox Width="100" Margin=" 1,1,1,10"/>
+      </StackPanel>
+      <Button Margin="0,0,0,0" Content="Button" Opacity="0.55"/>
+    </StackPanel>
+  </Grid>
+</UserControl>
