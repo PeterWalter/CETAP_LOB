@@ -366,62 +366,72 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void DuplicatesWithinAQBatches()
     {
-      List<ForDuplicatesBarcodesBDO> duplicatesBarcodesBdoList = new List<ForDuplicatesBarcodesBDO>();
-      foreach (IEnumerable<ForDuplicatesBarcodesBDO> duplicatesBarcodesBdos in BatchRecords.GroupBy<ForDuplicatesBarcodesBDO, long>((Func<ForDuplicatesBarcodesBDO, long>) (x => x.Barcode)).Where<IGrouping<long, ForDuplicatesBarcodesBDO>>((Func<IGrouping<long, ForDuplicatesBarcodesBDO>, bool>) (g => g.Count<ForDuplicatesBarcodesBDO>() > 1)).Select<IGrouping<long, ForDuplicatesBarcodesBDO>, IGrouping<long, ForDuplicatesBarcodesBDO>>((Func<IGrouping<long, ForDuplicatesBarcodesBDO>, IGrouping<long, ForDuplicatesBarcodesBDO>>) (g => g)))
-      {
-        foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in duplicatesBarcodesBdos)
-        {
-          duplicatesBarcodesBdo.Reason = "Duplicate Barcode in QA Batches";
-          duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
-        }
-      }
-      foreach (IEnumerable<ForDuplicatesBarcodesBDO> duplicatesBarcodesBdos in BatchRecords.GroupBy<ForDuplicatesBarcodesBDO, long>((Func<ForDuplicatesBarcodesBDO, long>) (x => x.RefNo)).Where<IGrouping<long, ForDuplicatesBarcodesBDO>>((Func<IGrouping<long, ForDuplicatesBarcodesBDO>, bool>) (g => g.Count<ForDuplicatesBarcodesBDO>() > 1)).Select<IGrouping<long, ForDuplicatesBarcodesBDO>, IGrouping<long, ForDuplicatesBarcodesBDO>>((Func<IGrouping<long, ForDuplicatesBarcodesBDO>, IGrouping<long, ForDuplicatesBarcodesBDO>>) (g => g)).ToList<IGrouping<long, ForDuplicatesBarcodesBDO>>())
-      {
-        foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in duplicatesBarcodesBdos)
-        {
-          duplicatesBarcodesBdo.Reason = "Duplicate NBT numbers in AQ Batches";
-          duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
-        }
-      }
-      foreach (IEnumerable<ForDuplicatesBarcodesBDO> duplicatesBarcodesBdos in BatchRecords.Where<ForDuplicatesBarcodesBDO>((Func<ForDuplicatesBarcodesBDO, bool>) (x => x.SAID.HasValue)).GroupBy<ForDuplicatesBarcodesBDO, long?>((Func<ForDuplicatesBarcodesBDO, long?>) (x => x.SAID)).Where<IGrouping<long?, ForDuplicatesBarcodesBDO>>((Func<IGrouping<long?, ForDuplicatesBarcodesBDO>, bool>) (g => g.Count<ForDuplicatesBarcodesBDO>() > 1)).Select<IGrouping<long?, ForDuplicatesBarcodesBDO>, IGrouping<long?, ForDuplicatesBarcodesBDO>>((Func<IGrouping<long?, ForDuplicatesBarcodesBDO>, IGrouping<long?, ForDuplicatesBarcodesBDO>>) (g => g)).ToList<IGrouping<long?, ForDuplicatesBarcodesBDO>>())
-      {
-        foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in duplicatesBarcodesBdos)
-        {
-          duplicatesBarcodesBdo.Reason = "Duplicate SA IDs in QA Batches";
-          duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
-        }
-      }
-      foreach (IEnumerable<ForDuplicatesBarcodesBDO> duplicatesBarcodesBdos in BatchRecords.Where<ForDuplicatesBarcodesBDO>((Func<ForDuplicatesBarcodesBDO, bool>) (x => x.FID.Trim() != "")).GroupBy<ForDuplicatesBarcodesBDO, string>((Func<ForDuplicatesBarcodesBDO, string>) (x => x.FID)).Where<IGrouping<string, ForDuplicatesBarcodesBDO>>((Func<IGrouping<string, ForDuplicatesBarcodesBDO>, bool>) (g => g.Count<ForDuplicatesBarcodesBDO>() > 1)).Select<IGrouping<string, ForDuplicatesBarcodesBDO>, IGrouping<string, ForDuplicatesBarcodesBDO>>((Func<IGrouping<string, ForDuplicatesBarcodesBDO>, IGrouping<string, ForDuplicatesBarcodesBDO>>) (x => x)).ToList<IGrouping<string, ForDuplicatesBarcodesBDO>>())
-      {
-        foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in duplicatesBarcodesBdos)
-        {
-          duplicatesBarcodesBdo.Reason = "Duplicate Foreign IDs in QA Batches";
-          duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
-        }
-      }
-      if (duplicatesBarcodesBdoList.Count<ForDuplicatesBarcodesBDO>() > 0)
-      {
-        HasDuplicates = true;
-        duplicatesBarcodesBdoList.Count<ForDuplicatesBarcodesBDO>();
-        GenerateDuplicatesReport(duplicatesBarcodesBdoList);
-      }
-      else
-        HasDuplicates = false;
+          var duplicatesBarcodesBdoList = new List<ForDuplicatesBarcodesBDO>();
+
+            var duplicates = BatchRecords.GroupBy(x => x.Barcode)
+                                         .Where(g => g.Skip(1).Any())
+                                         .SelectMany(g => g);
+                                        
+          
+            foreach (var duplicatesBarcodesBdo in duplicates)
+            {
+              duplicatesBarcodesBdo.Reason = "Duplicate Barcode in QA Batches";
+              duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
+            }
+          
+        var NBT_Duplicates = BatchRecords.GroupBy(x => x.RefNo)
+                                         .Where(g => g.Skip(1).Any())
+                                         .SelectMany(g => g);
+            
+            foreach (var duplicatesBarcodesBdo in NBT_Duplicates)
+            {
+                  duplicatesBarcodesBdo.Reason = "Duplicate NBT numbers in AQ Batches";
+                  duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
+            }
+
+            var SAID_Duplicates = BatchRecords.GroupBy(x => x.SAID)
+                                         .Where(g => g.Skip(1).Any() && g.Key.HasValue)
+                                         .SelectMany(g => g);
+
+            foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in SAID_Duplicates)
+            {
+                  duplicatesBarcodesBdo.Reason = "Duplicate SA IDs in QA Batches";
+                  duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
+            }
+
+            var FID_Duplicates = BatchRecords.GroupBy(x => x.FID)
+                                               .Where(g => g.Skip(1).Any() && g.Key != "")
+                                               .SelectMany(g => g);
+            foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in FID_Duplicates)
+            {
+                  duplicatesBarcodesBdo.Reason = "Duplicate Foreign IDs in QA Batches";
+                  duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
+            }
+        
+          if (duplicatesBarcodesBdoList.Count<ForDuplicatesBarcodesBDO>() > 0)
+          {
+                HasDuplicates = true;
+                duplicatesBarcodesBdoList.Count<ForDuplicatesBarcodesBDO>();
+                GenerateDuplicatesReport(duplicatesBarcodesBdoList);
+          }
+          else
+            HasDuplicates = false;
     }
 
     private void GenerateDuplicatesReport(List<ForDuplicatesBarcodesBDO> Duplicates)
     {
-      string messageBoxText = "There are " + Duplicates.Count<ForDuplicatesBarcodesBDO>().ToString() + " duplicate records in the (batches) QA folder. " + "See generated report in folder " + " Please re-run option after corrections";
-      if (!_service.DuplicateReportGeneration(Duplicates, Duplicatefile))
-        return;
-      if (Duplicates.Count<ForDuplicatesBarcodesBDO>() == 0)
-      {
-        int num1 = (int) MessageBox.Show("No duplicate records!");
-      }
-      else
-      {
-        int num2 = (int) MessageBox.Show(messageBoxText);
-      }
+          string messageBoxText = "There are " + Duplicates.Count().ToString() + " duplicate records in the (batches) QA folder. " + "See generated report in folder " + " Please re-run option after corrections";
+
+          if (!_service.DuplicateReportGeneration(Duplicates, Duplicatefile))
+                return;
+          if (Duplicates.Count() == 0)
+          {
+            int num1 = (int) MessageBox.Show("No duplicate records!");
+          }
+          else
+          {
+            int num2 = (int) MessageBox.Show(messageBoxText);
+          }
     }
 
     private void ReadBarcodes()

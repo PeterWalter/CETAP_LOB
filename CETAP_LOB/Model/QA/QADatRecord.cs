@@ -99,15 +99,15 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._testDate;
+        return _testDate;
       }
       set
       {
-        if (this._testDate == value)
+        if (_testDate == value)
           return;
-        this._testDate = value;
-        this.RaisePropertyChanged("TestDate");
-        this.RaisePropertyChanged("DOT");
+        _testDate = value;
+        RaisePropertyChanged("TestDate");
+        RaisePropertyChanged("DOT");
       }
     }
 
@@ -115,14 +115,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mycount;
+        return _mycount;
       }
       set
       {
-        if (this._mycount == value)
+        if (_mycount == value)
           return;
-        this._mycount = value;
-        this.RaisePropertyChanged("errorCount");
+        _mycount = value;
+        RaisePropertyChanged("errorCount");
       }
     }
 
@@ -130,14 +130,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mydatFile;
+        return _mydatFile;
       }
       set
       {
-        if (this._mydatFile == value)
+        if (_mydatFile == value)
           return;
-        this._mydatFile = value;
-        this.RaisePropertyChanged("DatFile");
+        _mydatFile = value;
+        RaisePropertyChanged("DatFile");
       }
     }
 
@@ -145,27 +145,27 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._nbt;
+        return _nbt;
       }
       set
       {
-        if (this._nbt == value)
+        if (_nbt == value)
           return;
-        this._nbt = value;
-        string str = this._nbt.Substring(1, 13);
-        if (!string.IsNullOrEmpty(this._nbt))
+        _nbt = value;
+        string str = _nbt.Substring(1, 13);
+        if (!string.IsNullOrEmpty(_nbt))
         {
-          if (this._nbt.Length != 14)
-            this.AddError("Reference", "Not proper length for NBT number");
+          if (_nbt.Length != 14)
+            AddError("Reference", "Not proper length for NBT number");
           else if (!HelperUtils.IsValidChecksum(str))
-            this.AddError("Reference", "Not a Valid NBT number");
+            AddError("Reference", "Not a Valid NBT number");
           else
-            this.RemoveError("Reference");
+            RemoveError("Reference");
         }
         else
-          this.AddError("Reference", "NBT number cannot be empty");
-        this.checkerrors();
-        this.RaisePropertyChanged("Reference");
+          AddError("Reference", "NBT number cannot be empty");
+        checkerrors();
+        RaisePropertyChanged("Reference");
       }
     }
 
@@ -173,120 +173,118 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._barcode;
+        return _barcode;
       }
       set
       {
-        if (this._barcode == value)
+        if (_barcode == value)
           return;
-        this._barcode = value;
-        this._barcode = this._barcode.Trim();
-        string barcode = this._barcode;
-        if (!string.IsNullOrEmpty(this._barcode))
+        _barcode = value;
+        _barcode = _barcode.Trim();
+        string barcode = _barcode;
+        if (!string.IsNullOrEmpty(_barcode))
         {
-          if (this._barcode.Length != 12)
-            this.AddError("Barcode", "Not proper length for Session ID number");
+          if (_barcode.Length != 12)
+            AddError("Barcode", "Not proper length for Session ID number");
           else if (!HelperUtils.IsValidChecksum(barcode))
-            this.AddError("Barcode", "Not a Valid Barcode number");
+            AddError("Barcode", "Not a Valid Barcode number");
           else
-            this.RemoveError("Barcode");
+            RemoveError("Barcode");
         }
         else
-          this.AddError("Barcode", "Barcode number cannot be empty");
-        this.checkerrors();
-        this.RaisePropertyChanged("Barcode");
+          AddError("Barcode", "Barcode number cannot be empty");
+        checkerrors();
+        RaisePropertyChanged("Barcode");
       }
     }
 
-    public string Surname
-    {
-      get
-      {
-        return this._surname;
-      }
-      set
-      {
-        if (this._surname == value)
-          return;
-        this._surname = value;
-        this._surname = this._surname.Trim();
-        if (string.IsNullOrEmpty(this._surname))
-          this.AddError("Surname", "Surname cannot be empty");
-        else
-          this.RemoveError("Surname");
-        MatchCollection matchCollection = new Regex("\\s").Matches(this._surname);
-        if (!string.IsNullOrEmpty(this._surname))
+        public string Surname
         {
-          if (Regex.IsMatch(this._surname, "\\d"))
-            this.AddError("Surname", "Surname cannot have digits");
-          else if (Regex.IsMatch(this._surname, "[\\.\\*=!@#%\\&\\$]"))
-            this.AddError("Surname", "First name cannot have special characters");
-          else if (matchCollection.Count < 3)
-          {
-            string surname = this._surname;
-            char[] chArray = new char[1]{ ' ' };
-            foreach (string str in surname.Split(chArray))
-            {
-              if (str.Length < 3)
-                this.AddError("Surname", "Part of Surname has few letters");
-            }
-          }
-          else if (matchCollection.Count > 2)
-            this.AddError("Surname", "Surname has too many spaces");
-          else
-            this.RemoveError("Surname");
-          ListSurnames.surname = this._surname;
-          if (ListSurnames.IsFound)
-            this.RemoveError("Surname");
+              get
+              {
+                    return _surname;
+              }
+              set
+              {
+                    if (_surname == value) return;
+                    _surname = value;
+                    _surname = _surname.Trim();
+                    if (string.IsNullOrEmpty(_surname))
+                        AddError("Surname", "Surname cannot be empty");
+                    else
+                        RemoveError("Surname");
+                    MatchCollection matchCollection = new Regex("\\s").Matches(_surname);
+                    if (!string.IsNullOrEmpty(_surname))
+                    {
+                          if (Regex.IsMatch(_surname, "\\d"))
+                                AddError("Surname", "Surname cannot have digits");
+                          else if (Regex.IsMatch(_surname, "[\\.\\*=!@#%\\&\\$]"))
+                                AddError("Surname", "First name cannot have special characters");
+                          else if (matchCollection.Count < 3)
+                          {
+                                string surname = _surname;
+                                char[] chArray = new char[1]{ ' ' };
+                                foreach (string str in surname.Split(chArray))
+                                {
+                                      if (str.Length < 3) AddError("Surname", "Part of Surname has few letters");
+                                }
+                          }
+                          else if (matchCollection.Count > 2)
+                                AddError("Surname", "Surname has too many spaces");
+                          else
+                                RemoveError("Surname");
+                          ListSurnames.surname = _surname;
+                          if (ListSurnames.IsFound)
+                            RemoveError("Surname");
+                    }
+                    checkerrors();
+                    RaisePropertyChanged("Surname");
+              }
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("Surname");
-      }
-    }
 
     public string FirstName
     {
       get
       {
-        return this._myname;
+        return _myname;
       }
       set
       {
-        if (this._myname == value)
+        if (_myname == value)
           return;
-        this._myname = value;
-        this._myname = this._myname.Trim();
-        MatchCollection matchCollection = new Regex("\\s").Matches(this._myname);
-        if (string.IsNullOrEmpty(this._myname))
-          this.AddError("FirstName", "FirstName cannot be empty");
+        _myname = value;
+        _myname = _myname.Trim();
+        MatchCollection matchCollection = new Regex("\\s").Matches(_myname);
+        if (string.IsNullOrEmpty(_myname))
+          AddError("FirstName", "FirstName cannot be empty");
         else
-          this.RemoveError("FirstName");
-        if (!string.IsNullOrWhiteSpace(this._myname))
+          RemoveError("FirstName");
+        if (!string.IsNullOrWhiteSpace(_myname))
         {
-          if (Regex.IsMatch(this._myname, "\\d"))
-            this.AddError("FirstName", "First name cannot have digits");
-          else if (Regex.IsMatch(this._myname, "[\\.\\*=!@#%\\&\\$]"))
-            this.AddError("FirstName", "First name cannot have special characters");
+          if (Regex.IsMatch(_myname, "\\d"))
+            AddError("FirstName", "First name cannot have digits");
+          else if (Regex.IsMatch(_myname, "[\\.\\*=!@#%\\&\\$]"))
+            AddError("FirstName", "First name cannot have special characters");
           else if (matchCollection.Count > 2)
-            this.AddError("FirstName", "Name has too many spaces");
+            AddError("FirstName", "Name has too many spaces");
           else if (matchCollection.Count < 3)
           {
-            string myname = this._myname;
+            string myname = _myname;
             char[] chArray = new char[1]{ ' ' };
             foreach (string str in myname.Split(chArray))
             {
               if (str.Length < 3)
-                this.AddError("FirstName", "Part of Name has few letters");
+                AddError("FirstName", "Part of Name has few letters");
             }
           }
           else
-            this.RemoveError("FirstName");
-          ApplicantNames.FirstName = this._myname;
+            RemoveError("FirstName");
+          ApplicantNames.FirstName = _myname;
           if (ApplicantNames.IsFound)
-            this.RemoveError("FirstName");
+            RemoveError("FirstName");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("FirstName");
+        checkerrors();
+        RaisePropertyChanged("FirstName");
       }
     }
 
@@ -294,15 +292,15 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._initials;
+        return _initials;
       }
       set
       {
-        if (this._initials == value)
+        if (_initials == value)
           return;
-        this._initials = value;
-        this.checkerrors();
-        this.RaisePropertyChanged("initials");
+        _initials = value;
+        checkerrors();
+        RaisePropertyChanged("initials");
       }
     }
 
@@ -310,33 +308,33 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._said;
+        return _said;
       }
       set
       {
-        if (this._said == value)
+        if (_said == value)
           return;
-        this._said = value;
-        MatchCollection matchCollection = new Regex("\\s").Matches(this._said);
-        if (!HelperUtils.IsValidChecksum(this._said))
-          this.AddError("SAID", "Not a Valid South African ID number");
+        _said = value;
+        MatchCollection matchCollection = new Regex("\\s").Matches(_said);
+        if (!HelperUtils.IsValidChecksum(_said))
+          AddError("SAID", "Not a Valid South African ID number");
         else
-          this.RemoveError("SAID");
+          RemoveError("SAID");
         if (matchCollection.Count > 0)
-          this.AddError("SAID", "South African ID number cannot have spaces");
-        else if (!Regex.IsMatch(this._said, "[0-9]"))
-          this.AddError("SAID", "SA Id does not have characters");
-        if (!HelperUtils.IsNumeric(this._said))
-          this.AddError("SAID", "SA ID cannot have characters");
-        else if (!string.IsNullOrWhiteSpace(this._said))
-          this.RemoveError("ForeignID");
+          AddError("SAID", "South African ID number cannot have spaces");
+        else if (!Regex.IsMatch(_said, "[0-9]"))
+          AddError("SAID", "SA Id does not have characters");
+        if (!HelperUtils.IsNumeric(_said))
+          AddError("SAID", "SA ID cannot have characters");
+        else if (!string.IsNullOrWhiteSpace(_said))
+          RemoveError("ForeignID");
         else
-          this.RemoveError("SAID");
-        this.CheckDOB();
-        this.checkerrors();
-        this.RaisePropertyChanged("SAID");
-        this.RaisePropertyChanged("DOB");
-        this.RaisePropertyChanged("ForeignID");
+          RemoveError("SAID");
+        CheckDOB();
+        checkerrors();
+        RaisePropertyChanged("SAID");
+        RaisePropertyChanged("DOB");
+        RaisePropertyChanged("ForeignID");
       }
     }
 
@@ -344,35 +342,35 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._foreignID;
+        return _foreignID;
       }
       set
       {
-        if (this._foreignID == value)
+        if (_foreignID == value)
           return;
-        this._foreignID = value;
-        if (string.IsNullOrWhiteSpace(this._said) && string.IsNullOrWhiteSpace(this._foreignID))
+        _foreignID = value;
+        if (string.IsNullOrWhiteSpace(_said) && string.IsNullOrWhiteSpace(_foreignID))
         {
-          this.AddError("SAID", "SA Id missing");
-          this.AddError("ForeignID", "Foreign Id missing");
+          AddError("SAID", "SA Id missing");
+          AddError("ForeignID", "Foreign Id missing");
         }
-        else if (string.IsNullOrWhiteSpace(this._said) && !string.IsNullOrWhiteSpace(this._foreignID))
+        else if (string.IsNullOrWhiteSpace(_said) && !string.IsNullOrWhiteSpace(_foreignID))
         {
-          this.RemoveError("SAID");
-          this.RemoveError("ForeignID");
+          RemoveError("SAID");
+          RemoveError("ForeignID");
         }
-        else if (!string.IsNullOrWhiteSpace(this._said))
+        else if (!string.IsNullOrWhiteSpace(_said))
         {
-          this.RemoveError("ForeignID");
+          RemoveError("ForeignID");
         }
         else
         {
-          this.RemoveError("ForeignID");
-          this.RemoveError("SAID");
+          RemoveError("ForeignID");
+          RemoveError("SAID");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("ForeignID");
-        this.RaisePropertyChanged("SAID");
+        checkerrors();
+        RaisePropertyChanged("ForeignID");
+        RaisePropertyChanged("SAID");
       }
     }
 
@@ -380,22 +378,22 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._dob;
+        return _dob;
       }
       set
       {
-        if (this._dob == value)
+        if (_dob == value)
           return;
-        this._dob = value;
-        TimeSpan timeSpan = DateTime.Now - this._dob;
+        _dob = value;
+        TimeSpan timeSpan = DateTime.Now - _dob;
         if (timeSpan.TotalDays < 3650.0 || timeSpan.TotalDays > 29100.0)
-          this.AddError("DOB", "Wrong age for Matric");
-        else if (!string.IsNullOrWhiteSpace(this._said) || !string.IsNullOrEmpty(this._said))
-          this.CheckDOB();
+          AddError("DOB", "Wrong age for Matric");
+        else if (!string.IsNullOrWhiteSpace(_said) || !string.IsNullOrEmpty(_said))
+          CheckDOB();
         else
-          this.RemoveError("DOB");
-        this.checkerrors();
-        this.RaisePropertyChanged("DOB");
+          RemoveError("DOB");
+        checkerrors();
+        RaisePropertyChanged("DOB");
       }
     }
 
@@ -403,47 +401,47 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myIdType;
+        return _myIdType;
       }
       set
       {
-        if (this._myIdType == value)
+        if (_myIdType == value)
           return;
-        this._myIdType = value;
-        string str = this._myIdType.Trim();
-        if (!string.IsNullOrWhiteSpace(this._said) || !string.IsNullOrEmpty(this._said))
+        _myIdType = value;
+        string str = _myIdType.Trim();
+        if (!string.IsNullOrWhiteSpace(_said) || !string.IsNullOrEmpty(_said))
         {
-          if (this.CSX_Number == "761")
+          if (CSX_Number == "761")
           {
             if (str != "1")
-              this.AddError("IDType", "type should be 1");
+              AddError("IDType", "type should be 1");
             else
-              this.RemoveError("IDType");
+              RemoveError("IDType");
           }
-          else if (this.CSX_Number == "667")
+          else if (CSX_Number == "667")
           {
-            if (this._myIdType != "S")
-              this.AddError("IDType", "type should be S");
+            if (_myIdType != "S")
+              AddError("IDType", "type should be S");
             else
-              this.RemoveError("IDType");
+              RemoveError("IDType");
           }
         }
-        else if (this.CSX_Number == "761")
+        else if (CSX_Number == "761")
         {
           if (str != "2")
-            this.AddError("IDType", "type should be 2");
+            AddError("IDType", "type should be 2");
           else
-            this.RemoveError("IDType");
+            RemoveError("IDType");
         }
-        else if (this.CSX_Number == "667")
+        else if (CSX_Number == "667")
         {
           if (str != "F")
-            this.AddError("IDType", "type should be F");
+            AddError("IDType", "type should be F");
           else
-            this.RemoveError("IDType");
+            RemoveError("IDType");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("IDType");
+        checkerrors();
+        RaisePropertyChanged("IDType");
       }
     }
 
@@ -451,38 +449,38 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._gender;
+        return _gender;
       }
       set
       {
-        if (this._gender == value)
+        if (_gender == value)
           return;
-        this._gender = value;
-        if (!string.IsNullOrWhiteSpace(this._said) || !string.IsNullOrEmpty(this._said))
+        _gender = value;
+        if (!string.IsNullOrWhiteSpace(_said) || !string.IsNullOrEmpty(_said))
         {
-          if (this._said.Length == 13)
+          if (_said.Length == 13)
           {
-            int int32 = Convert.ToInt32(this._said.Substring(6, 1));
-            if (this.CSX_Number == "761")
+            int int32 = Convert.ToInt32(_said.Substring(6, 1));
+            if (CSX_Number == "761")
             {
-              if (int32 < 5 && this._gender != "2")
-                this.AddError("Gender", "Gender should be 2");
-              else if (int32 > 4 && this._gender != "1")
-                this.AddError("Gender", "Wrong Gender should be 1");
+              if (int32 < 5 && _gender != "2")
+                AddError("Gender", "Gender should be 2");
+              else if (int32 > 4 && _gender != "1")
+                AddError("Gender", "Wrong Gender should be 1");
             }
-            if (this.CSX_Number == "667")
+            if (CSX_Number == "667")
             {
-              if (int32 < 5 && this._gender != "F")
-                this.AddError("Gender", "Gender should be F");
-              else if (int32 > 4 && this._gender != "M")
-                this.AddError("Gender", "Wrong Gender, should be M");
+              if (int32 < 5 && _gender != "F")
+                AddError("Gender", "Gender should be F");
+              else if (int32 > 4 && _gender != "M")
+                AddError("Gender", "Wrong Gender, should be M");
             }
           }
         }
         else
-          this.RemoveError("Gender");
-        this.checkerrors();
-        this.RaisePropertyChanged("Gender");
+          RemoveError("Gender");
+        checkerrors();
+        RaisePropertyChanged("Gender");
       }
     }
 
@@ -490,14 +488,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myCitizenship;
+        return _myCitizenship;
       }
       set
       {
-        if (this._myCitizenship == value)
+        if (_myCitizenship == value)
           return;
-        this._myCitizenship = value;
-        this.RaisePropertyChanged("Citizenship");
+        _myCitizenship = value;
+        RaisePropertyChanged("Citizenship");
       }
     }
 
@@ -505,25 +503,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._classi;
+        return _classi;
       }
       set
       {
-        if (this._classi == value)
+        if (_classi == value)
           return;
-        this._classi = value;
-        bool flag = HelperUtils.IsNumeric(this._classi);
-        if (string.IsNullOrWhiteSpace(this._classi))
-          this.AddError("Classification", "There should be a value");
+        _classi = value;
+        bool flag = HelperUtils.IsNumeric(_classi);
+        if (string.IsNullOrWhiteSpace(_classi))
+          AddError("Classification", "There should be a value");
         else if (flag)
         {
-          if (Convert.ToInt32(this._classi) > 5)
-            this.AddError("Classification", "Value should be less than 5");
+          if (Convert.ToInt32(_classi) > 5)
+            AddError("Classification", "Value should be less than 5");
         }
         else
-          this.RemoveError("Classification");
-        this.checkerrors();
-        this.RaisePropertyChanged("Classification");
+          RemoveError("Classification");
+        checkerrors();
+        RaisePropertyChanged("Classification");
       }
     }
 
@@ -531,19 +529,19 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myVenueCode;
+        return _myVenueCode;
       }
       set
       {
-        if (this._myVenueCode == value)
+        if (_myVenueCode == value)
           return;
-        this._myVenueCode = value;
-        if (this._myVenueCode != this._mydatFile.VenueCode.ToString("D5"))
-          this.AddError("VenueCode", "Wrong Venue Code");
+        _myVenueCode = value;
+        if (_myVenueCode != _mydatFile.VenueCode.ToString("D5"))
+          AddError("VenueCode", "Wrong Venue Code");
         else
-          this.RemoveError("VenueCode");
-        this.checkerrors();
-        this.RaisePropertyChanged("VenueCode");
+          RemoveError("VenueCode");
+        checkerrors();
+        RaisePropertyChanged("VenueCode");
       }
     }
 
@@ -551,19 +549,19 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._dot;
+        return _dot;
       }
       set
       {
-        if (this._dot == value)
+        if (_dot == value)
           return;
-        this._dot = value;
-        if (this._dot != this._testDate)
-          this.AddError("DOT", "Wrong Test date");
+        _dot = value;
+        if (_dot != _testDate)
+          AddError("DOT", "Wrong Test date");
         else
-          this.RemoveError("DOT");
-        this.checkerrors();
-        this.RaisePropertyChanged("DOT");
+          RemoveError("DOT");
+        checkerrors();
+        RaisePropertyChanged("DOT");
       }
     }
 
@@ -571,25 +569,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myHomeLanguage;
+        return _myHomeLanguage;
       }
       set
       {
-        if (this._myHomeLanguage == value)
+        if (_myHomeLanguage == value)
           return;
-        this._myHomeLanguage = value;
-        bool flag = HelperUtils.IsNumeric(this._myHomeLanguage);
-        if (string.IsNullOrWhiteSpace(this._myHomeLanguage))
-          this.AddError("HomeLanguage", "Language cannot be empty");
+        _myHomeLanguage = value;
+        bool flag = HelperUtils.IsNumeric(_myHomeLanguage);
+        if (string.IsNullOrWhiteSpace(_myHomeLanguage))
+          AddError("HomeLanguage", "Language cannot be empty");
         else if (flag)
         {
-          if (Convert.ToInt32(this._myHomeLanguage) > 12)
-            this.AddError("HomeLanguage", "Language should be below 13");
+          if (Convert.ToInt32(_myHomeLanguage) > 12)
+            AddError("HomeLanguage", "Language should be below 13");
         }
         else
-          this.RemoveError("HomeLanguage");
-        this.checkerrors();
-        this.RaisePropertyChanged("HomeLanguage");
+          RemoveError("HomeLanguage");
+        checkerrors();
+        RaisePropertyChanged("HomeLanguage");
       }
     }
 
@@ -597,25 +595,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._Slanguage;
+        return _Slanguage;
       }
       set
       {
-        if (this._Slanguage == value)
+        if (_Slanguage == value)
           return;
-        this._Slanguage = value;
-        bool flag = HelperUtils.IsNumeric(this._Slanguage);
-        if (string.IsNullOrWhiteSpace(this._Slanguage))
-          this.AddError("SchoolLanguage", "Language cannot be empty");
+        _Slanguage = value;
+        bool flag = HelperUtils.IsNumeric(_Slanguage);
+        if (string.IsNullOrWhiteSpace(_Slanguage))
+          AddError("SchoolLanguage", "Language cannot be empty");
         else if (flag)
         {
-          if (Convert.ToInt32(this._Slanguage) > 3)
-            this.AddError("SchoolLanguage", "Language should be 01, 02 or 03");
+          if (Convert.ToInt32(_Slanguage) > 3)
+            AddError("SchoolLanguage", "Language should be 01, 02 or 03");
         }
         else
-          this.RemoveError("SchoolLanguage");
-        this.checkerrors();
-        this.RaisePropertyChanged("SchoolLanguage");
+          RemoveError("SchoolLanguage");
+        checkerrors();
+        RaisePropertyChanged("SchoolLanguage");
       }
     }
 
@@ -623,19 +621,19 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myAQL_Language;
+        return _myAQL_Language;
       }
       set
       {
-        if (this._myAQL_Language == value)
+        if (_myAQL_Language == value)
           return;
-        this._myAQL_Language = value;
-        if (this._myAQL_Language.Trim() != this.DatFile.AQL_Language)
-          this.AddError("AQL_Language", "Wrong Language");
+        _myAQL_Language = value;
+        if (_myAQL_Language.Trim() != DatFile.AQL_Language)
+          AddError("AQL_Language", "Wrong Language");
         else
-          this.RemoveError("AQL_Language");
-        this.checkerrors();
-        this.RaisePropertyChanged("AQL_Language");
+          RemoveError("AQL_Language");
+        checkerrors();
+        RaisePropertyChanged("AQL_Language");
       }
     }
 
@@ -643,22 +641,22 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myAQLCode;
+        return _myAQLCode;
       }
       set
       {
-        if (this._myAQLCode == value)
+        if (_myAQLCode == value)
           return;
-        this._myAQLCode = value;
-        string str = this._myAQLCode.Trim();
-        if (this.AQLCOD.Length > 0)
-          this.AQLCOD = Convert.ToInt32(this.AQLCOD).ToString("000");
-        if (this.AQLCOD != str)
-          this.AddError("AQL_Code", "Wrong AQL Code");
+        _myAQLCode = value;
+        string str = _myAQLCode.Trim();
+        if (AQLCOD.Length > 0)
+          AQLCOD = Convert.ToInt32(AQLCOD).ToString("000");
+        if (AQLCOD != str)
+          AddError("AQL_Code", "Wrong AQL Code");
         else
-          this.RemoveError("AQL_Code");
-        this.checkerrors();
-        this.RaisePropertyChanged("AQL_Code");
+          RemoveError("AQL_Code");
+        checkerrors();
+        RaisePropertyChanged("AQL_Code");
       }
     }
 
@@ -666,25 +664,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mysection1;
+        return _mysection1;
       }
       set
       {
-        if (this._mysection1 == value)
+        if (_mysection1 == value)
           return;
-        this._mysection1 = value;
+        _mysection1 = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this._mysection1)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) _mysection1)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("Section1", "Errors in section 1");
+          AddError("Section1", "Errors in section 1");
         else
-          this.RemoveError("Section1");
-        this.checkerrors();
-        this.RaisePropertyChanged("Section1");
+          RemoveError("Section1");
+        checkerrors();
+        RaisePropertyChanged("Section1");
       }
     }
 
@@ -692,25 +690,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mysection2;
+        return _mysection2;
       }
       set
       {
-        if (this._mysection2 == value)
+        if (_mysection2 == value)
           return;
-        this._mysection2 = value;
+        _mysection2 = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this._mysection2)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) _mysection2)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("Section2", "Errors in section 2");
+          AddError("Section2", "Errors in section 2");
         else
-          this.RemoveError("Section2");
-        this.checkerrors();
-        this.RaisePropertyChanged("Section2");
+          RemoveError("Section2");
+        checkerrors();
+        RaisePropertyChanged("Section2");
       }
     }
 
@@ -718,25 +716,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mySection3;
+        return _mySection3;
       }
       set
       {
-        if (this._mySection3 == value)
+        if (_mySection3 == value)
           return;
-        this._mySection3 = value;
+        _mySection3 = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this._mySection3)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) _mySection3)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("Section3", "Errors in section 3");
+          AddError("Section3", "Errors in section 3");
         else
-          this.RemoveError("Section3");
-        this.checkerrors();
-        this.RaisePropertyChanged("Section3");
+          RemoveError("Section3");
+        checkerrors();
+        RaisePropertyChanged("Section3");
       }
     }
 
@@ -744,25 +742,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mySection4;
+        return _mySection4;
       }
       set
       {
-        if (this._mySection4 == value)
+        if (_mySection4 == value)
           return;
-        this._mySection4 = value;
+        _mySection4 = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this._mySection4)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) _mySection4)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("Section4", "Errors in section 4");
+          AddError("Section4", "Errors in section 4");
         else
-          this.RemoveError("Section4");
-        this.checkerrors();
-        this.RaisePropertyChanged("Section4");
+          RemoveError("Section4");
+        checkerrors();
+        RaisePropertyChanged("Section4");
       }
     }
 
@@ -770,25 +768,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mySection5;
+        return mySection5;
       }
       set
       {
-        if (this.mySection5 == value)
+        if (mySection5 == value)
           return;
-        this.mySection5 = value;
+        mySection5 = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this.mySection5)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) mySection5)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("Section5", "Errors in section 5");
+          AddError("Section5", "Errors in section 5");
         else
-          this.RemoveError("Section5");
-        this.checkerrors();
-        this.RaisePropertyChanged("Section5");
+          RemoveError("Section5");
+        checkerrors();
+        RaisePropertyChanged("Section5");
       }
     }
 
@@ -796,25 +794,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mySection6;
+        return _mySection6;
       }
       set
       {
-        if (this._mySection6 == value)
+        if (_mySection6 == value)
           return;
-        this._mySection6 = value;
+        _mySection6 = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this._mySection6)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) _mySection6)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("Section6", "Errors in section 6");
+          AddError("Section6", "Errors in section 6");
         else
-          this.RemoveError("Section6");
-        this.checkerrors();
-        this.RaisePropertyChanged("Section6");
+          RemoveError("Section6");
+        checkerrors();
+        RaisePropertyChanged("Section6");
       }
     }
 
@@ -822,25 +820,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mySection7;
+        return _mySection7;
       }
       set
       {
-        if (this._mySection7 == value)
+        if (_mySection7 == value)
           return;
-        this._mySection7 = value;
+        _mySection7 = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this._mySection7)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) _mySection7)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("Section7", "Errors in section 7");
+          AddError("Section7", "Errors in section 7");
         else
-          this.RemoveError("Section7");
-        this.checkerrors();
-        this.RaisePropertyChanged("Section7");
+          RemoveError("Section7");
+        checkerrors();
+        RaisePropertyChanged("Section7");
       }
     }
 
@@ -848,20 +846,20 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myMat_Language;
+        return _myMat_Language;
       }
       set
       {
-        if (this._myMat_Language == value)
+        if (_myMat_Language == value)
           return;
-        this._myMat_Language = value;
-        this._myMat_Language = this._myMat_Language.Trim();
-        if (this._myMat_Language != this.DatFile.MAT_Language)
-          this.AddError("Mat_Language", "Wrong Language");
+        _myMat_Language = value;
+        _myMat_Language = _myMat_Language.Trim();
+        if (_myMat_Language != DatFile.MAT_Language)
+          AddError("Mat_Language", "Wrong Language");
         else
-          this.RemoveError("Mat_Language");
-        this.checkerrors();
-        this.RaisePropertyChanged("Mat_Language");
+          RemoveError("Mat_Language");
+        checkerrors();
+        RaisePropertyChanged("Mat_Language");
       }
     }
 
@@ -869,32 +867,32 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myMatCode;
+        return _myMatCode;
       }
       set
       {
-        if (this._myMatCode == value)
+        if (_myMatCode == value)
           return;
-        this._myMatCode = value;
-        string str = this._myMatCode.Trim();
-        if (this.MATCOD.Length > 0)
-          this.MATCOD = Convert.ToInt32(this.MATCOD).ToString("000");
+        _myMatCode = value;
+        string str = _myMatCode.Trim();
+        if (MATCOD.Length > 0)
+          MATCOD = Convert.ToInt32(MATCOD).ToString("000");
         if (string.IsNullOrWhiteSpace(str))
         {
-          if (this.MATCOD != "")
-            this.AddError("MatCode", "MAT code should be " + this.MATCOD);
+          if (MATCOD != "")
+            AddError("MatCode", "MAT code should be " + MATCOD);
         }
         else if (!string.IsNullOrWhiteSpace(str))
         {
-          if (Convert.ToInt32(str).ToString("000") != this.MATCOD)
-            this.AddError("MatCode", "MAT code should be " + this.MATCOD);
+          if (Convert.ToInt32(str).ToString("000") != MATCOD)
+            AddError("MatCode", "MAT code should be " + MATCOD);
         }
         else
-          this.RemoveError("MatCode");
-        if (this.MATCOD == "" && str == "")
-          this.RemoveError("MatCode");
-        this.checkerrors();
-        this.RaisePropertyChanged("MatCode");
+          RemoveError("MatCode");
+        if (MATCOD == "" && str == "")
+          RemoveError("MatCode");
+        checkerrors();
+        RaisePropertyChanged("MatCode");
       }
     }
 
@@ -902,37 +900,37 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myMathSection;
+        return _myMathSection;
       }
       set
       {
-        if (this._myMathSection == value)
+        if (_myMathSection == value)
           return;
-        this._myMathSection = value;
+        _myMathSection = value;
         bool flag = false;
-        foreach (ModelBase modelBase in (Collection<DatAnswer>) this._myMathSection)
+        foreach (ModelBase modelBase in (Collection<DatAnswer>) _myMathSection)
         {
           if (modelBase.HasErrors)
             flag = true;
         }
         if (flag)
-          this.AddError("MathSection", "Errors in MAT section");
+          AddError("MathSection", "Errors in MAT section");
         else
-          this.RemoveError("MathSection");
-        if (this._mydatFile.TestCode == "0105" || this._mydatFile.TestCode == "0115")
+          RemoveError("MathSection");
+        if (_mydatFile.TestCode == "0105" || _mydatFile.TestCode == "0115")
         {
-          foreach (DatAnswer datAnswer in (Collection<DatAnswer>) this._myMathSection)
+          foreach (DatAnswer datAnswer in (Collection<DatAnswer>) _myMathSection)
           {
             if ((int) datAnswer.Value != 32)
               flag = true;
           }
           if (flag)
-            this.AddError("MathSection", "MAT section should be empty");
+            AddError("MathSection", "MAT section should be empty");
           else
-            this.RemoveError("MathSection");
+            RemoveError("MathSection");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("MathSection");
+        checkerrors();
+        RaisePropertyChanged("MathSection");
       }
     }
 
@@ -940,22 +938,22 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myfaculty1;
+        return _myfaculty1;
       }
       set
       {
-        if (this._myfaculty1 == value)
+        if (_myfaculty1 == value)
           return;
-        this._myfaculty1 = value;
-        this._myfaculty1 = this._myfaculty1.Trim();
-        if (string.IsNullOrEmpty(this._myfaculty1))
-          this.AddError("Faculty1", "Faculty cannot be empty");
-        else if (this._myfaculty1 == "*")
-          this.AddError("Faculty1", "Faculty cannot have (*)");
+        _myfaculty1 = value;
+        _myfaculty1 = _myfaculty1.Trim();
+        if (string.IsNullOrEmpty(_myfaculty1))
+          AddError("Faculty1", "Faculty cannot be empty");
+        else if (_myfaculty1 == "*")
+          AddError("Faculty1", "Faculty cannot have (*)");
         else
-          this.RemoveError("Faculty1");
-        this.checkerrors();
-        this.RaisePropertyChanged("Faculty1");
+          RemoveError("Faculty1");
+        checkerrors();
+        RaisePropertyChanged("Faculty1");
       }
     }
 
@@ -963,22 +961,22 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myFaculty2;
+        return _myFaculty2;
       }
       set
       {
-        if (this._myFaculty2 == value)
+        if (_myFaculty2 == value)
           return;
-        this._myFaculty2 = value;
-        if (!string.IsNullOrEmpty(this._myFaculty2.Trim()))
+        _myFaculty2 = value;
+        if (!string.IsNullOrEmpty(_myFaculty2.Trim()))
         {
-          if (this._myFaculty2 == "*")
-            this.AddError("Faculty2", "Faculty cannot have (*)");
+          if (_myFaculty2 == "*")
+            AddError("Faculty2", "Faculty cannot have (*)");
         }
         else
-          this.RemoveError("Faculty2");
-        this.checkerrors();
-        this.RaisePropertyChanged("Faculty2");
+          RemoveError("Faculty2");
+        checkerrors();
+        RaisePropertyChanged("Faculty2");
       }
     }
 
@@ -986,22 +984,22 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myFaculty3;
+        return _myFaculty3;
       }
       set
       {
-        if (this._myFaculty3 == value)
+        if (_myFaculty3 == value)
           return;
-        this._myFaculty3 = value;
-        if (!string.IsNullOrEmpty(this._myFaculty3.Trim()))
+        _myFaculty3 = value;
+        if (!string.IsNullOrEmpty(_myFaculty3.Trim()))
         {
-          if (this._myFaculty3 == "*")
-            this.AddError("Faculty3", "Faculty cannot have (*)");
+          if (_myFaculty3 == "*")
+            AddError("Faculty3", "Faculty cannot have (*)");
         }
         else
-          this.RemoveError("Faculty3");
-        this.checkerrors();
-        this.RaisePropertyChanged("Faculty3");
+          RemoveError("Faculty3");
+        checkerrors();
+        RaisePropertyChanged("Faculty3");
       }
     }
 
@@ -1009,14 +1007,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myEOL;
+        return _myEOL;
       }
       set
       {
-        if (this._myEOL == value)
+        if (_myEOL == value)
           return;
-        this._myEOL = value;
-        this.RaisePropertyChanged("EOL");
+        _myEOL = value;
+        RaisePropertyChanged("EOL");
       }
     }
 
@@ -1024,14 +1022,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myEdited;
+        return _myEdited;
       }
       set
       {
-        if (this._myEdited == value)
+        if (_myEdited == value)
           return;
-        this._myEdited = value;
-        this.RaisePropertyChanged("Edited");
+        _myEdited = value;
+        RaisePropertyChanged("Edited");
       }
     }
 
@@ -1039,14 +1037,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myScanNo;
+        return _myScanNo;
       }
       set
       {
-        if (this._myScanNo == value)
+        if (_myScanNo == value)
           return;
-        this._myScanNo = value;
-        this.RaisePropertyChanged("ScanNo");
+        _myScanNo = value;
+        RaisePropertyChanged("ScanNo");
       }
     }
 
@@ -1058,14 +1056,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._isSelected;
+        return _isSelected;
       }
       set
       {
-        if (this._isSelected == value)
+        if (_isSelected == value)
           return;
-        this._isSelected = value;
-        this.RaisePropertyChanged("IsSelected");
+        _isSelected = value;
+        RaisePropertyChanged("IsSelected");
       }
     }
 
@@ -1075,25 +1073,25 @@ namespace CETAP_LOB.Model.QA
 
     public QADatRecord(string file)
     {
-      this.DatFile = new datFileAttributes();
-      this.DatFile.SName = Path.GetFileNameWithoutExtension(file).ToUpper();
-      this.CSX_Number = this.DatFile.CSX.ToString();
+      DatFile = new datFileAttributes();
+      DatFile.SName = Path.GetFileNameWithoutExtension(file).ToUpper();
+      CSX_Number = DatFile.CSX.ToString();
     }
 
     private void checkerrors()
     {
-      if (this.HasErrors)
-        this.errorCount = this._errors.Count;
+      if (HasErrors)
+        errorCount = _errors.Count;
       else
-        this.errorCount = 0;
+        errorCount = 0;
     }
 
     public void CheckDOB()
     {
-      if (HelperUtils.DOBfromSAID(this._said) != string.Format("{0:dd/MM/yyyy}", (object) this._dob))
-        this.AddError("DOB", "ID and DOB not the same");
+      if (HelperUtils.DOBfromSAID(_said) != string.Format("{0:dd/MM/yyyy}", (object) _dob))
+        AddError("DOB", "ID and DOB not the same");
       else
-        this.RemoveError("DOB");
+        RemoveError("DOB");
     }
   }
 }

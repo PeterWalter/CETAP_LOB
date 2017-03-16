@@ -416,11 +416,11 @@ namespace CETAP_LOB.ViewModel.composite
       if (_service.RemoveRecordsInQueue(longList))
       {
         msg = longList.Count().ToString() + " records in Queue removed";
-                MessageBox.Show(msg);
+                System.Windows.Forms.MessageBox.Show(msg);
       }
       else
       {
-        msg = MessageBox.Show("No records found in Queue");
+        System.Windows.Forms.MessageBox.Show("No records found in Queue");
       }
     }
   }

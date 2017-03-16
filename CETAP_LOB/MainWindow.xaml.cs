@@ -3,16 +3,20 @@ using CETAP_LOB.ViewModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
-using CETAP_LOB;
+using FirstFloor.ModernUI.Windows.Controls;
+using System.CodeDom.Compiler;
+using System;
 
 namespace CETAP_LOB
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : ModernWindow
     {
         private IDataService _service { get; set; }
+       // private bool _contentLoaded;
+
         public MainWindow()
         {
             
@@ -20,6 +24,7 @@ namespace CETAP_LOB
             InitializeComponent();
             IDataService Service = new DataService();
             _service = Service;
+
             string message = "";
             bool isDB = _service.CheckForDatabase(ref message);
 
@@ -40,7 +45,9 @@ namespace CETAP_LOB
             ApplicationSettings.Default.DBAvailable = isDB;
             ApplicationSettings.Default.Save();
 
-            Closing += (s, e) => ViewModelLocator.Cleanup();
+          //  Closing += (s, e) => ViewModelLocator.Cleanup();
         }
+
+     
     }
 }

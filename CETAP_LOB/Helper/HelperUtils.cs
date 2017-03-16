@@ -27,7 +27,7 @@ namespace CETAP_LOB.Helper
       }
       catch (IOException ex)
       {
-        return true;
+        throw ex;
       }
       finally
       {

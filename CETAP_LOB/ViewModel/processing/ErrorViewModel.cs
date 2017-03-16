@@ -9,7 +9,7 @@ using CETAP_LOB.Database;
 using CETAP_LOB.Model;
 using System.Collections.ObjectModel;
 
-namespace LOB.ViewModel.processing
+namespace CETAP_LOB.ViewModel.processing
 {
   public class ErrorViewModel : ViewModelBase
   {

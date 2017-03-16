@@ -17,6 +17,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Globalization;
@@ -25,6 +26,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Transactions;
+using CETAP_LOB.Model.Composite;
 
 namespace CETAP_LOB.Model
 {
@@ -1207,7 +1210,7 @@ namespace CETAP_LOB.Model
             return allProfilesBDO;
 
         }
-        public List<TestBDO> GetTestFromDatFile(datFileAttributes datafile)
+        public List<TestBDO> GetTestFromDatFile(datFileAttributes datafile, IntakeYearsBDO intake)
         {
             List<TestBDO> myTest = new List<TestBDO>();
             string client = "Special";
@@ -1216,7 +1219,7 @@ namespace CETAP_LOB.Model
                 if (datafile.Client != "Special")
                 {
                     var di = context.TestProfiles
-                             .Where(a => a.Profile == datafile.Profile && a.TestAllocation.ClientType == "National")
+                             .Where(a => a.Profile == datafile.Profile && a.TestAllocation.ClientType == "National" && a.Intake == intake.Year)
                              .Select(v => v.TestAllocation.TestName).ToList();
                     if (di != null)
                     {
@@ -3258,7 +3261,7 @@ namespace CETAP_LOB.Model
                 // get the file numbers
                 int StartNum = context.EasyPayFiles.Where(s => s.DateWritten == Date1).Select(s => s.FileGenerationNumber).FirstOrDefault();
                 int endNum = context.EasyPayFiles.Where(s => s.DateWritten == Date2).Select(s => s.FileGenerationNumber).FirstOrDefault();
-                if (endNum != null && endNum != 0)
+                if ( endNum != 0)
                 {
                     var records = await context.Vw_EasyPayRecords.Where(x => x.File_Number >= StartNum && x.File_Number <= endNum).OrderBy(x => x.File_Number).Select(x => x).ToListAsync();
                     EPRecs = new ObservableCollection<Vw_EasyPayRecords>(records);
@@ -3553,7 +3556,7 @@ namespace CETAP_LOB.Model
                         foreach (Composit score in scores)
                         {
                             CompositBDO comp = new CompositBDO();
-                            comp = LOB.Mapping.Maps.CompositDALToCompositBDO(score);
+                            comp = Maps.CompositDALToCompositBDO(score);
                             //CompositDALToCompositBDO(comp, score);
                             //	testBDO.AllocatedTests = GetAllocatedTestsByTestID(testBDO.TestID);
                             NBTScores.Add(comp);
@@ -5457,7 +5460,7 @@ namespace CETAP_LOB.Model
                                 }
                                 else // creater new tracker
                                 {
-                                    var tracker = LOB.Mapping.Maps.ScanTrackerBDOToScanTrackerDAL(scantrackerBDO);
+                                    var tracker = Maps.ScanTrackerBDOToScanTrackerDAL(scantrackerBDO);
                                     tracker.DateModified = DateTime.Now;
                                     context.ScanTrackers.Add(tracker);
                                 }
@@ -5800,7 +5803,7 @@ namespace CETAP_LOB.Model
                 Added = true;
             }
 
-            ListSurnames.AddSurname(surname);
+            //ListSurnames.AddSurname(surname);
             return Added;
         }
 
@@ -5945,7 +5948,7 @@ namespace CETAP_LOB.Model
 
                             mdata.Barcode = record.SessionID;
                             string msize = string.Format("{0,-25}", record.AQL_Section7);
-                            mdata.TrialSection = new ObservableCollectionEx<DatAnswer>(HelperUtils.GetAnswerList(msize));
+                            mdata.TrialSection = new ObservableCollection<DatAnswer>(HelperUtils.GetAnswerList(msize));
                             //  QAData.Section1 = new ObservableCollection<DatAnswer>(HelperUtils.GetAnswerList(record.AQL_Section1));
                             records.Add(mdata);
                         }
@@ -5972,7 +5975,7 @@ namespace CETAP_LOB.Model
                             xdata.Barcode = record1.SessionID;
 
                             string msize = string.Format("{0,-25}", record1.AQL_Section7);
-                            xdata.TrialSection = new ObservableCollectionEx<DatAnswer>(HelperUtils.GetAnswerList(msize));
+                            xdata.TrialSection = new ObservableCollection<DatAnswer>(HelperUtils.GetAnswerList(msize));
                             records1.Add(xdata);
                         }
                         TrialData = new ObservableCollection<Section7>(records1);
@@ -5998,104 +6001,101 @@ namespace CETAP_LOB.Model
         {
 
             IntakeYearsBDO myYear = new IntakeYearsBDO();
-            List<ForDuplicatesBarcodesBDO> duplicatesBarcodesBdoList = new List<ForDuplicatesBarcodesBDO>();
-            int intakeYear = ApplicationSettings.Default.IntakeYear;
+            List<ForDuplicatesBarcodesBDO> duplicatesBarcodesBdoList = new List<ForDuplicatesBarcodesBDO>();            
 
             var myBatch = new List<Composit>();
+            myYear = GetIntakeRecord(ApplicationSettings.Default.IntakeYear);
 
-            myYear = GetIntakeRecord(intakeYear);
             using (CETAPEntities cetapEntities = new CETAPEntities())
             {
 
                 var Scores = cetapEntities.Composits.Where(x => x.DOT >= myYear.yearStart && x.DOT <= myYear.yearEnd).ToList();
 
                 // find duplicates in Database
-                var res = Scores.Where(x => x.Barcode.
-                ForDuplicatesBarcodesBDO result = from x in Scores
-                             join m in BatchRecords
-                             on x.Batch equals m.Barcode
-                             select BatchRecords;
-                if (result!=null)
+                var resu = BatchRecords.Where(x => Scores.Any(m => m.Barcode.Equals(x.Barcode)));
+            
+                if (resu != null)
                 {
-                    foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in result)
-                    {
-                        // find duplicates in Database
+                    foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in resu)
+                        duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
+                        {
 
-                        duplicatesBarcodesBdo.Reason = "Duplicate Barcode in Database";
-                        //duplicatesBarcodesBdo.FID = duplicatesBarcodesBdo.FID;
-                        //Barcode = duplicatesBarcodesBdo.Barcode;
-                        //RefNo = duplicatesBarcodesBdo.RefNo;
-                        //SAID = duplicatesBarcodesBdo.SAID;
-                        //Batch = duplicatesBarcodesBdo.Batch;
-                        duplicatesBarcodesBdo.DateModified = DateTime.Now;
-                        duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
-                    }
-
+                            Reason = "Duplicate Barcode in Database",
+                            FID = duplicatesBarcodesBdo.FID,
+                            Barcode = duplicatesBarcodesBdo.Barcode,
+                            RefNo = duplicatesBarcodesBdo.RefNo,
+                            SAID = duplicatesBarcodesBdo.SAID,
+                            Batch = duplicatesBarcodesBdo.Batch,
+                            DateModified = DateTime.Now
+                        });
+                  
                 }
 
             }
             //Check for duplicate NBT numbers
-            foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in BatchRecords.Where<ForDuplicatesBarcodesBDO>(new Func<ForDuplicatesBarcodesBDO, bool>(cDisplayClass15b1.\u003CFindDuplicatesFromDB\u003Eb__152)).ToList<ForDuplicatesBarcodesBDO>())
-                duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
-                {
-                    Reason = "NBT appears more than once in Database, Check if it should be scored for the third time",
-                    FID = duplicatesBarcodesBdo.FID,
-                    Barcode = duplicatesBarcodesBdo.Barcode,
-                    RefNo = duplicatesBarcodesBdo.RefNo,
-                    SAID = duplicatesBarcodesBdo.SAID,
-                    Batch = duplicatesBarcodesBdo.Batch,
-                    DateModified = DateTime.Now
-                });
-            
-            // Check duplicate SAID
-            myScores.Clear();
-            var source2 = Scores.Where(x => x.SAID != new long?()).GroupBy(m => m.SAID);
-            var predicate2 = (s => s.Count<Composit>() > 1);
-            foreach (IEnumerable<Composit> composits in source2.Where<IGrouping<long?, Composit>>(predicate2).ToList<IGrouping<long?, Composit>>())
+            var NBT_Duplicates = Scores.GroupBy(x => x.RefNo)
+                                         .Where(g => g.Skip(1).Any())
+                                         .SelectMany(g => g);
+            var res1 = BatchRecords.Where(x => NBT_Duplicates.Any(m => m.RefNo.Equals(x.RefNo)));
+            if (res1 != null)
             {
-                foreach (Composit composit in composits)
-                {
+                foreach(var duplicatesBarcodesBdo in res1)
+                    duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
+                    {
+                        Reason = "NBT appears more than once in Database, Check if it should be scored for the third time",
+                        FID = duplicatesBarcodesBdo.FID,
+                        Barcode = duplicatesBarcodesBdo.Barcode,
+                        RefNo = duplicatesBarcodesBdo.RefNo,
+                        SAID = duplicatesBarcodesBdo.SAID,
+                        Batch = duplicatesBarcodesBdo.Batch,
+                        DateModified = DateTime.Now
+                    });
 
-                    myScores.Add(composit);
-                }
             }
-                       List<ForDuplicatesBarcodesBDO> list = BatchRecords.Where(new Func<ForDuplicatesBarcodesBDO, bool>(cDisplayClass15b1.\u003CFindDuplicatesFromDB\u003Eb__154)).ToList<ForDuplicatesBarcodesBDO>();
-            foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in list)
-                duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
-                {
-                    Reason = "SAID appears more than once in Database, Check if it should be scored for the third time",
-                    FID = duplicatesBarcodesBdo.FID,
-                    Barcode = duplicatesBarcodesBdo.Barcode,
-                    RefNo = duplicatesBarcodesBdo.RefNo,
-                    SAID = duplicatesBarcodesBdo.SAID,
-                    Batch = duplicatesBarcodesBdo.Batch,
-                    DateModified = DateTime.Now
-                });
-         
-            // Check duplicate ForeignID
-            cDisplayClass15b1.myScores.Clear();
-            IQueryable<IGrouping<string, Composit>> source3 = Scores.Where<Composit>((System.Linq.Expressions.Expression<Func<Composit, bool>>)(f => f.ForeignID.Trim() != "")).GroupBy<Composit, string>((System.Linq.Expressions.Expression<Func<Composit, string>>)(m => m.ForeignID));
-            System.Linq.Expressions.Expression<Func<IGrouping<string, Composit>, bool>> predicate3 = (System.Linq.Expressions.Expression<Func<IGrouping<string, Composit>, bool>>)(s => s.Count<Composit>() > 1);
-            foreach (IEnumerable<Composit> composits in source3.Where<IGrouping<string, Composit>>(predicate3).ToList<IGrouping<string, Composit>>())
+
+            // Check duplicate SAID
+            var SAID_Duplicates = Scores.GroupBy(x => x.SAID)
+                                         .Where(g => g.Skip(1).Any() && g.Key.HasValue)
+                                         .SelectMany(g => g);
+            var res2 = BatchRecords.Where(y => SAID_Duplicates.Any(m => m.SAID.Equals(y.SAID)));
+            if (res2 != null)
             {
-                foreach (Composit composit in composits)
-                {
-                    // ISSUE: reference to a compiler-generated field
-                    cDisplayClass15b1.myScores.Add(composit);
-                }
+                foreach (var duplicatesBarcodesBdo in res2)
+                    duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
+                    {
+                        Reason = "SAID appears more than once in Database, Check if it should be scored for the third time",
+                        FID = duplicatesBarcodesBdo.FID,
+                        Barcode = duplicatesBarcodesBdo.Barcode,
+                        RefNo = duplicatesBarcodesBdo.RefNo,
+                        SAID = duplicatesBarcodesBdo.SAID,
+                        Batch = duplicatesBarcodesBdo.Batch,
+                        DateModified = DateTime.Now
+                    });
+
+            }
+
+
+            // Check duplicate ForeignID
+            var FID_Duplicates = Scores.GroupBy(x => x.ForeignID)
+                                        .Where(g => g.Skip(1).Any() && g.Key != "")
+                                        .SelectMany(g => g);
+            var res3 = BatchRecords.Where(xy => FID_Duplicates.Any(m => m.ForeignID.Equals(xy.FID)));
+            if (res3 != null)
+            {
+                foreach (var duplicatesBarcodesBdo in res3)
+                    duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
+                    {
+                        Reason = "Foreign ID appears more than once in Database, Check if it should be scored for the third time",
+                        FID = duplicatesBarcodesBdo.FID,
+                        Barcode = duplicatesBarcodesBdo.Barcode,
+                        RefNo = duplicatesBarcodesBdo.RefNo,
+                        SAID = duplicatesBarcodesBdo.SAID,
+                        Batch = duplicatesBarcodesBdo.Batch,
+                        DateModified = DateTime.Now
+                    });
+
             }
            
-            foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in list)
-                duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
-                {
-                    Reason = "Foreign ID appears more than once in Database, Check if it should be scored for the third time",
-                    FID = duplicatesBarcodesBdo.FID,
-                    Barcode = duplicatesBarcodesBdo.Barcode,
-                    RefNo = duplicatesBarcodesBdo.RefNo,
-                    SAID = duplicatesBarcodesBdo.SAID,
-                    Batch = duplicatesBarcodesBdo.Batch,
-                    DateModified = DateTime.Now
-                });
             return duplicatesBarcodesBdoList;
         }
             

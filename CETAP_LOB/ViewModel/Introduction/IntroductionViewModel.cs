@@ -7,7 +7,7 @@
 using GalaSoft.MvvmLight;
 using CETAP_LOB.Model;
 
-namespace LOB.ViewModel.Introduction
+namespace CETAP_LOB.ViewModel.Introduction
 {
   public class IntroductionViewModel : ViewModelBase
   {

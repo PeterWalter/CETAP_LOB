@@ -1,28 +1,22 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.ViewModel.processing.ScanTrackerViewModel
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
-using CETAP_LOB.BDO;
-using CETAP_LOB.Model;
-using ClosedXML.Excel;
-using FirstFloor.ModernUI.Windows.Controls;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using CETAP_LOB.BDO;
-using CETAP_LOB.Model;
-using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using CETAP_LOB.BDO;
+using CETAP_LOB.Model;
+using ClosedXML.Excel;
+using FirstFloor.ModernUI.Windows.Controls;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 
 namespace CETAP_LOB.ViewModel.processing
 {
-  public class ScanTrackerViewModel : ViewModelBase
+    public class ScanTrackerViewModel : ViewModelBase
   {
     public const string PeriodsPropertyName = "Periods";
     public const string IntakeRecordPropertyName = "IntakeRecord";
@@ -40,14 +34,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myPeriods;
+        return _myPeriods;
       }
       set
       {
-        if (this._myPeriods == value)
+        if (_myPeriods == value)
           return;
-        this._myPeriods = value;
-        this.RaisePropertyChanged("Periods");
+        _myPeriods = value;
+        RaisePropertyChanged("Periods");
       }
     }
 
@@ -55,14 +49,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._intakerecord;
+        return _intakerecord;
       }
       set
       {
-        if (this._intakerecord == value)
+        if (_intakerecord == value)
           return;
-        this._intakerecord = value;
-        this.RaisePropertyChanged("IntakeRecord");
+        _intakerecord = value;
+        RaisePropertyChanged("IntakeRecord");
       }
     }
 
@@ -70,51 +64,38 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._mytrackers;
+        return _mytrackers;
       }
       set
       {
-        if (this._mytrackers == value)
+        if (_mytrackers == value)
           return;
-        this._mytrackers = value;
-        this.RaisePropertyChanged("Trackers");
+        _mytrackers = value;
+        RaisePropertyChanged("Trackers");
       }
     }
 
     public ScanTrackerViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      List<ScanTrackerBDO> allTracks = this._service.GetAllTracks();
-      this._myPeriods = this._service.GetAllIntakeYears();
-      this._intakerecord = this._myPeriods.Where<IntakeYearsBDO>((Func<IntakeYearsBDO, bool>) (m => m.Year == ApplicationSettings.Default.IntakeYear)).FirstOrDefault<IntakeYearsBDO>();
-      this.Trackers = new ObservableCollection<ScanTrackerBDO>((IEnumerable<ScanTrackerBDO>) allTracks.Where<ScanTrackerBDO>((Func<ScanTrackerBDO, bool>) (x =>
-      {
-        if (!x.FileName.Contains("BIO"))
-        {
-          DateTime? dateBatched1 = x.DateBatched;
-          DateTime yearStart = this._intakerecord.yearStart;
-          if ((dateBatched1.HasValue ? (dateBatched1.GetValueOrDefault() >= yearStart ? 1 : 0) : 0) != 0)
-          {
-            DateTime? dateBatched2 = x.DateBatched;
-            DateTime yearEnd = this._intakerecord.yearEnd;
-            if (!dateBatched2.HasValue)
-              return false;
-            return dateBatched2.GetValueOrDefault() <= yearEnd;
-          }
-        }
-        return false;
-      })).OrderByDescending<ScanTrackerBDO, DateTime?>((Func<ScanTrackerBDO, DateTime?>) (q => q.DateBatched)));
+        List<ScanTrackerBDO> allTracks = _service.GetAllTracks();
+        _myPeriods = _service.GetAllIntakeYears();
+        _intakerecord = _myPeriods.Where(m => m.Year == ApplicationSettings.Default.IntakeYear).FirstOrDefault();
+            Trackers = new ObservableCollection<ScanTrackerBDO>(allTracks
+                       .Where(x => !x.FileName.Contains("BIO") && x.DateBatched >= _intakerecord.yearStart && x.DateBatched <= _intakerecord.yearEnd)
+                       .OrderByDescending(q => q.DateBatched));
+       
     }
 
     private void RegisterCommands()
     {
-      this.SavetoExcelCommand = new RelayCommand(new Action(this.SaveToExcelFile));
+      SavetoExcelCommand = new RelayCommand(new Action(SaveToExcelFile));
     }
 
     private void SaveToExcelFile()
@@ -125,44 +106,45 @@ namespace CETAP_LOB.ViewModel.processing
       bool? nullable = saveFileDialog.ShowDialog();
       if ((!nullable.GetValueOrDefault() ? 0 : (nullable.HasValue ? 1 : 0)) == 0)
         return;
-      this.GenerateExcelFile(saveFileDialog.FileName);
+      GenerateExcelFile(saveFileDialog.FileName);
     }
 
     private void GenerateExcelFile(string filename)
     {
-      XLWorkbook xlWorkbook = new XLWorkbook();
-      IXLWorksheet xlWorksheet = xlWorkbook.Worksheets.Add("Scan Tracker");
-      List<ScanTrackerBDO> list = this.Trackers.OrderByDescending<ScanTrackerBDO, DateTime?>((Func<ScanTrackerBDO, DateTime?>) (x => x.DateBatched)).ThenBy<ScanTrackerBDO, string>((Func<ScanTrackerBDO, string>) (v => v.BatchedBy)).Select<ScanTrackerBDO, ScanTrackerBDO>((Func<ScanTrackerBDO, ScanTrackerBDO>) (c => c)).ToList<ScanTrackerBDO>();
-      IXLRow xlRow = xlWorksheet.Row(1);
-      xlRow.Style.Font.Bold = true;
-      xlRow.Style.Font.FontSize = 12.0;
-      xlWorksheet.Cell(1, 1).Value = (object) "Batch ID";
-      xlWorksheet.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-      xlWorksheet.Cell(1, 1).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
-      xlWorksheet.Cell(1, 2).Value = (object) "Batch Name";
-      xlWorksheet.Cell(1, 2).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-      xlWorksheet.Cell(1, 3).Value = (object) "Batched By";
-      xlWorksheet.Cell(1, 4).Value = (object) "Date Batched";
-      xlWorksheet.Cell(1, 3).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-      xlWorksheet.Cell(1, 5).Value = (object) "Counted Answer Sheets";
-      xlWorksheet.Cell(1, 4).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-      xlWorksheet.Cell(1, 6).Value = (object) "Scan Date";
-      xlWorksheet.Cell(1, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-      xlWorksheet.Cell(1, 7).Value = (object) "Records Scanned";
-      xlWorksheet.Cell(1, 8).Value = (object) "Date Edited";
-      xlWorksheet.Cell(1, 9).Value = (object) "Edited Records";
-      xlWorksheet.Cell(1, 10).Value = (object) "Date QA'ed";
-      xlWorksheet.Cell(1, 11).Value = (object) "Records QA";
-      xlWorksheet.Cell(1, 12).Value = (object) "Date sent for Scoring";
-      xlWorksheet.Cell(1, 13).Value = (object) "Amount Scored";
-      xlWorksheet.Cell(1, 14).Value = (object) "Date Scores compiled";
-      xlWorksheet.Cell(1, 15).Value = (object) "Count Compiled";
-      xlWorksheet.Cell(1, 16).Value = (object) "Test Date";
-      xlWorksheet.Cell(1, 17).Value = (object) "Date File Modified";
-      xlWorksheet.Cell(1, 18).Value = (object) "Row Version";
-      xlWorksheet.Cell(2, 1).InsertData((IEnumerable) list);
+      var wb = new XLWorkbook();
+      var ws = wb.Worksheets.Add("Scan Tracker");
+      var list = Trackers.OrderByDescending(x => x.DateBatched).ThenBy(v => v.BatchedBy).Select(x => x).ToList();
+
+      var row1 = ws.Row(1);
+      row1.Style.Font.Bold = true;
+      row1.Style.Font.FontSize = 12.0;
+      ws.Cell(1, 1).Value =  "Batch ID";
+      ws.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+      ws.Cell(1, 1).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+      ws.Cell(1, 2).Value =  "Batch Name";
+      ws.Cell(1, 2).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+      ws.Cell(1, 3).Value =  "Batched By";
+      ws.Cell(1, 4).Value =  "Date Batched";
+      ws.Cell(1, 3).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+      ws.Cell(1, 5).Value =  "Counted Answer Sheets";
+      ws.Cell(1, 4).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+      ws.Cell(1, 6).Value =  "Scan Date";
+      ws.Cell(1, 5).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+      ws.Cell(1, 7).Value =  "Records Scanned";
+      ws.Cell(1, 8).Value =  "Date Edited";
+      ws.Cell(1, 9).Value =  "Edited Records";
+      ws.Cell(1, 10).Value =  "Date QA'ed";
+      ws.Cell(1, 11).Value =  "Records QA";
+      ws.Cell(1, 12).Value =  "Date sent for Scoring";
+      ws.Cell(1, 13).Value =  "Amount Scored";
+      ws.Cell(1, 14).Value =  "Date Scores compiled";
+      ws.Cell(1, 15).Value =  "Count Compiled";
+      ws.Cell(1, 16).Value =  "Test Date";
+      ws.Cell(1, 17).Value =  "Date File Modified";
+      ws.Cell(1, 18).Value =  "Row Version";
+      ws.Cell(2, 1).InsertData((IEnumerable) list);
       DateTime.Now.ToShortDateString();
-      xlWorkbook.SaveAs(filename);
+      wb.SaveAs(filename);
       int num = (int) ModernDialog.ShowMessage("Excel File has been saved to folder", "Save File!!", MessageBoxButton.OK, (Window) null);
     }
   }

@@ -59,14 +59,14 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myPeriods;
+        return _myPeriods;
       }
       set
       {
-        if (this._myPeriods == value)
+        if (_myPeriods == value)
           return;
-        this._myPeriods = value;
-        this.RaisePropertyChanged("Periods");
+        _myPeriods = value;
+        RaisePropertyChanged("Periods");
       }
     }
 
@@ -74,17 +74,17 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._intakerecord;
+        return _intakerecord;
       }
       set
       {
-        if (this._intakerecord == value)
+        if (_intakerecord == value)
           return;
-        this._intakerecord = value;
-        this._intakeYear = this._intakerecord.Year;
-        ApplicationSettings.Default.IntakeYear = this._intakeYear;
+        _intakerecord = value;
+        _intakeYear = _intakerecord.Year;
+        ApplicationSettings.Default.IntakeYear = _intakeYear;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("IntakeYear");
+        RaisePropertyChanged("IntakeYear");
       }
     }
 
@@ -92,16 +92,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._intakeYear;
+        return _intakeYear;
       }
       set
       {
-        if (this._intakeYear == value)
+        if (_intakeYear == value)
           return;
-        this._intakeYear = value;
-        ApplicationSettings.Default.IntakeYear = this._intakeYear;
+        _intakeYear = value;
+        ApplicationSettings.Default.IntakeYear = _intakeYear;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("IntakeYear");
+        RaisePropertyChanged("IntakeYear");
       }
     }
 
@@ -109,16 +109,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myScoreModFolder;
+        return _myScoreModFolder;
       }
       set
       {
-        if (this._myScoreModFolder == value)
+        if (_myScoreModFolder == value)
           return;
-        this._myScoreModFolder = value;
-        ApplicationSettings.Default.ScoreModerationFolder = this._myScoreModFolder;
+        _myScoreModFolder = value;
+        ApplicationSettings.Default.ScoreModerationFolder = _myScoreModFolder;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("ScoreModerationFolder");
+        RaisePropertyChanged("ScoreModerationFolder");
       }
     }
 
@@ -126,16 +126,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myScoreFolder;
+        return _myScoreFolder;
       }
       set
       {
-        if (this._myScoreFolder == value)
+        if (_myScoreFolder == value)
           return;
-        this._myScoreFolder = value;
-        ApplicationSettings.Default.ScoreFolder = this._myScoreFolder;
+        _myScoreFolder = value;
+        ApplicationSettings.Default.ScoreFolder = _myScoreFolder;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("ScoreFolder");
+        RaisePropertyChanged("ScoreFolder");
       }
     }
 
@@ -143,16 +143,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myFFSF;
+        return _myFFSF;
       }
       set
       {
-        if (this._myFFSF == value)
+        if (_myFFSF == value)
           return;
-        this._myFFSF = value;
-        ApplicationSettings.Default.FilesForScoring = this._myFFSF;
+        _myFFSF = value;
+        ApplicationSettings.Default.FilesForScoring = _myFFSF;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("FilesForScoringFolder");
+        RaisePropertyChanged("FilesForScoringFolder");
       }
     }
 
@@ -160,16 +160,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myFFSMF;
+        return _myFFSMF;
       }
       set
       {
-        if (this._myFFSMF == value)
+        if (_myFFSMF == value)
           return;
-        this._myFFSMF = value;
-        ApplicationSettings.Default.ModerationFilesForScoring = this._myFFSMF;
+        _myFFSMF = value;
+        ApplicationSettings.Default.ModerationFilesForScoring = _myFFSMF;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("FilesForScoringModerationFolder");
+        RaisePropertyChanged("FilesForScoringModerationFolder");
       }
     }
 
@@ -177,16 +177,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myQAFolder;
+        return _myQAFolder;
       }
       set
       {
-        if (this._myQAFolder == value)
+        if (_myQAFolder == value)
           return;
-        this._myQAFolder = value;
-        ApplicationSettings.Default.QAFolder = this._myQAFolder;
+        _myQAFolder = value;
+        ApplicationSettings.Default.QAFolder = _myQAFolder;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("QAFolder");
+        RaisePropertyChanged("QAFolder");
       }
     }
 
@@ -194,16 +194,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._editFolder;
+        return _editFolder;
       }
       set
       {
-        if (this._editFolder == value)
+        if (_editFolder == value)
           return;
-        this._editFolder = value;
-        ApplicationSettings.Default.EditingFolder = this._editFolder;
+        _editFolder = value;
+        ApplicationSettings.Default.EditingFolder = _editFolder;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("EditFolder");
+        RaisePropertyChanged("EditFolder");
       }
     }
 
@@ -211,156 +211,156 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._scanfolder;
+        return _scanfolder;
       }
       set
       {
-        if (this._scanfolder == value)
+        if (_scanfolder == value)
           return;
-        this._scanfolder = value;
-        ApplicationSettings.Default.ScanningFolder = this._scanfolder;
+        _scanfolder = value;
+        ApplicationSettings.Default.ScanningFolder = _scanfolder;
         ApplicationSettings.Default.Save();
-        this.RaisePropertyChanged("ScanFolder");
+        RaisePropertyChanged("ScanFolder");
       }
     }
 
     public ScanSettingsViewModel()
     {
-      this._service = (IDataService) new DataService();
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = (IDataService) new DataService();
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      this.ScanFolder = ApplicationSettings.Default.ScanningFolder;
-      this.EditFolder = ApplicationSettings.Default.EditingFolder;
-      this.QAFolder = ApplicationSettings.Default.QAFolder;
-      this.FilesForScoringFolder = ApplicationSettings.Default.FilesForScoring;
-      this.FilesForScoringModerationFolder = ApplicationSettings.Default.ModerationFilesForScoring;
-      this.ScoreModerationFolder = ApplicationSettings.Default.ScoreModerationFolder;
-      this.ScoreFolder = ApplicationSettings.Default.ScoreFolder;
-      this._intakeYear = ApplicationSettings.Default.IntakeYear;
+      ScanFolder = ApplicationSettings.Default.ScanningFolder;
+      EditFolder = ApplicationSettings.Default.EditingFolder;
+      QAFolder = ApplicationSettings.Default.QAFolder;
+      FilesForScoringFolder = ApplicationSettings.Default.FilesForScoring;
+      FilesForScoringModerationFolder = ApplicationSettings.Default.ModerationFilesForScoring;
+      ScoreModerationFolder = ApplicationSettings.Default.ScoreModerationFolder;
+      ScoreFolder = ApplicationSettings.Default.ScoreFolder;
+      _intakeYear = ApplicationSettings.Default.IntakeYear;
     }
 
     private void RegisterCommands()
     {
-      this.EditFolderBowserCommand = new RelayCommand(new Action(this.SelectEditFolder));
-      this.ScanFolderBowserCommand = new RelayCommand(new Action(this.SelectScanFolder));
-      this.QAFolderBowserCommand = new RelayCommand(new Action(this.SelectQAFolder));
-      this.ScoreFolderCommand = new RelayCommand(new Action(this.SelectScoreFolder));
-      this.FilesForScoringFolderCommand = new RelayCommand(new Action(this.SelectFilesForScoringFolder));
-      this.FilesForScoringFolderModerationCommand = new RelayCommand(new Action(this.SelectFilesForScoringModerationFolder));
-      this.ScoreModerationFolderCommand = new RelayCommand(new Action(this.SelectScoreModerationFolder));
-      this._myPeriods = new List<IntakeYearsBDO>();
-      this._myPeriods = this._service.GetAllIntakeYears();
-      this._intakerecord = this._myPeriods.Where<IntakeYearsBDO>((Func<IntakeYearsBDO, bool>) (x => x.Year == this._intakeYear)).FirstOrDefault<IntakeYearsBDO>();
+      EditFolderBowserCommand = new RelayCommand(new Action(SelectEditFolder));
+      ScanFolderBowserCommand = new RelayCommand(new Action(SelectScanFolder));
+      QAFolderBowserCommand = new RelayCommand(new Action(SelectQAFolder));
+      ScoreFolderCommand = new RelayCommand(new Action(SelectScoreFolder));
+      FilesForScoringFolderCommand = new RelayCommand(new Action(SelectFilesForScoringFolder));
+      FilesForScoringFolderModerationCommand = new RelayCommand(new Action(SelectFilesForScoringModerationFolder));
+      ScoreModerationFolderCommand = new RelayCommand(new Action(SelectScoreModerationFolder));
+      _myPeriods = new List<IntakeYearsBDO>();
+      _myPeriods = _service.GetAllIntakeYears();
+      _intakerecord = _myPeriods.Where<IntakeYearsBDO>((Func<IntakeYearsBDO, bool>) (x => x.Year == _intakeYear)).FirstOrDefault<IntakeYearsBDO>();
     }
 
     private void SelectScoreFolder()
     {
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      this.ScanFolder = ApplicationSettings.Default.ScoreFolder;
-      folderBrowserDialog.SelectedPath = this.ScoreFolder;
+      ScanFolder = ApplicationSettings.Default.ScoreFolder;
+      folderBrowserDialog.SelectedPath = ScoreFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
-      this.ScoreFolder = folderBrowserDialog.SelectedPath;
-      ApplicationSettings.Default.ScoreFolder = this.ScoreFolder;
+      ScoreFolder = folderBrowserDialog.SelectedPath;
+      ApplicationSettings.Default.ScoreFolder = ScoreFolder;
       ApplicationSettings.Default.Save();
     }
 
     private void SelectScoreModerationFolder()
     {
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      folderBrowserDialog.SelectedPath = this.ScoreModerationFolder;
+      folderBrowserDialog.SelectedPath = ScoreModerationFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
-      this.ScoreModerationFolder = folderBrowserDialog.SelectedPath;
-      ApplicationSettings.Default.ScoreModerationFolder = this.ScoreModerationFolder;
+      ScoreModerationFolder = folderBrowserDialog.SelectedPath;
+      ApplicationSettings.Default.ScoreModerationFolder = ScoreModerationFolder;
       ApplicationSettings.Default.Save();
     }
 
     private void SelectFilesForScoringFolder()
     {
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      folderBrowserDialog.SelectedPath = this.FilesForScoringFolder;
+      folderBrowserDialog.SelectedPath = FilesForScoringFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
-      this.FilesForScoringFolder = folderBrowserDialog.SelectedPath;
-      ApplicationSettings.Default.FilesForScoring = this.FilesForScoringFolder;
+      FilesForScoringFolder = folderBrowserDialog.SelectedPath;
+      ApplicationSettings.Default.FilesForScoring = FilesForScoringFolder;
       ApplicationSettings.Default.Save();
     }
 
     private void SelectFilesForScoringModerationFolder()
     {
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      folderBrowserDialog.SelectedPath = this.FilesForScoringModerationFolder;
+      folderBrowserDialog.SelectedPath = FilesForScoringModerationFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
-      this.FilesForScoringModerationFolder = folderBrowserDialog.SelectedPath;
-      ApplicationSettings.Default.ModerationFilesForScoring = this.FilesForScoringModerationFolder;
+      FilesForScoringModerationFolder = folderBrowserDialog.SelectedPath;
+      ApplicationSettings.Default.ModerationFilesForScoring = FilesForScoringModerationFolder;
       ApplicationSettings.Default.Save();
     }
 
     private void SelectQAFolder()
     {
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      folderBrowserDialog.SelectedPath = this.QAFolder;
+      folderBrowserDialog.SelectedPath = QAFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
-      this.QAFolder = folderBrowserDialog.SelectedPath;
-      ApplicationSettings.Default.QAFolder = this.QAFolder;
+      QAFolder = folderBrowserDialog.SelectedPath;
+      ApplicationSettings.Default.QAFolder = QAFolder;
       ApplicationSettings.Default.Save();
     }
 
     private void SelectScanFolder()
     {
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      folderBrowserDialog.SelectedPath = this.ScanFolder;
+      folderBrowserDialog.SelectedPath = ScanFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
-      this.ScanFolder = folderBrowserDialog.SelectedPath;
+      ScanFolder = folderBrowserDialog.SelectedPath;
     }
 
     private void SelectEditFolder()
     {
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-      folderBrowserDialog.SelectedPath = this.EditFolder;
+      folderBrowserDialog.SelectedPath = EditFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
-      this.EditFolder = folderBrowserDialog.SelectedPath;
+      EditFolder = folderBrowserDialog.SelectedPath;
     }
 
     private void StoreSettings()
     {
-      if (!this.IsSet)
+      if (!IsSet)
         return;
-      ApplicationSettings.Default.ScanningFolder = this.ScanFolder;
-      ApplicationSettings.Default.EditingFolder = this.EditFolder;
-      ApplicationSettings.Default.ScoreFolder = this.ScoreFolder;
-      ApplicationSettings.Default.ScoreModerationFolder = this.ScoreModerationFolder;
-      ApplicationSettings.Default.ModerationFilesForScoring = this.FilesForScoringModerationFolder;
-      ApplicationSettings.Default.FilesForScoring = this.FilesForScoringFolder;
-      ApplicationSettings.Default.IntakeYear = this.IntakeYear;
+      ApplicationSettings.Default.ScanningFolder = ScanFolder;
+      ApplicationSettings.Default.EditingFolder = EditFolder;
+      ApplicationSettings.Default.ScoreFolder = ScoreFolder;
+      ApplicationSettings.Default.ScoreModerationFolder = ScoreModerationFolder;
+      ApplicationSettings.Default.ModerationFilesForScoring = FilesForScoringModerationFolder;
+      ApplicationSettings.Default.FilesForScoring = FilesForScoringFolder;
+      ApplicationSettings.Default.IntakeYear = IntakeYear;
       ApplicationSettings.Default.Save();
     }
 
     public void SetScanSettings(string scanfolder, string editfolder, string Qafolder, int intakeYear)
     {
-      this.ScanFolder = scanfolder;
-      this.EditFolder = editfolder;
-      this.QAFolder = Qafolder;
-      this.IntakeYear = intakeYear;
-      this.IsSet = true;
+      ScanFolder = scanfolder;
+      EditFolder = editfolder;
+      QAFolder = Qafolder;
+      IntakeYear = intakeYear;
+      IsSet = true;
     }
 
     public void SetScoringSettings(string Scorefolder, string ScoreModFolder, string FFScoring, string MFFScoring)
     {
-      this.ScoreFolder = Scorefolder;
-      this.ScoreModerationFolder = ScoreModFolder;
-      this.FilesForScoringFolder = FFScoring;
-      this.FilesForScoringModerationFolder = MFFScoring;
-      this.IsSet = true;
+      ScoreFolder = Scorefolder;
+      ScoreModerationFolder = ScoreModFolder;
+      FilesForScoringFolder = FFScoring;
+      FilesForScoringModerationFolder = MFFScoring;
+      IsSet = true;
     }
   }
 }

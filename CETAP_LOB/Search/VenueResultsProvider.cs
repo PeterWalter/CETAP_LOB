@@ -13,6 +13,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CETAP_LOB;
 
 namespace LOB.Search
 {
@@ -38,7 +39,7 @@ namespace LOB.Search
             foreach (TestVenue testVenue in cetapEntities.TestVenues.ToList<TestVenue>().Where<TestVenue>((Func<TestVenue, bool>) (p => p.VenueCode.ToString().StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase))).Cast<object>())
             {
               VenueBDO venueBDO = new VenueBDO();
-              VenueResultsProvider.TestVenueToVenueBDO(venueBDO, testVenue);
+              TestVenueToVenueBDO(venueBDO, testVenue);
               this._results.Add(venueBDO);
             }
           }

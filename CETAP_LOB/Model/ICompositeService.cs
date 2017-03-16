@@ -28,7 +28,7 @@ namespace CETAP_LOB.Model
 
     CompositBDO getResultsByNBT(long NBT);
 
-    bool updateComposit(CompositBDO results, ref string message);
+    bool UpdateComposit(CompositBDO results, ref string message);
 
     bool deleteComposit(CompositBDO results, ref string message);
 

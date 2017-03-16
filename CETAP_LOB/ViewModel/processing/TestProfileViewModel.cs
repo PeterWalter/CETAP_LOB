@@ -6,7 +6,7 @@
 
 using GalaSoft.MvvmLight;
 
-namespace LOB.ViewModel.processing
+namespace CETAP_LOB.ViewModel.processing
 {
   public class TestProfileViewModel : ViewModelBase
   {

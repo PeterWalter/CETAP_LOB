@@ -4,25 +4,23 @@
 // MVID: 3597789E-8774-4427-AE20-07195D9380BD
 // Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
 
-using CETAP_LOB.BDO;
-using CETAP_LOB.Model;
-using FeserWard.Controls;
-using FirstFloor.ModernUI.Windows.Controls;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using CETAP_LOB.BDO;
-using CETAP_LOB.Model;
-using CETAP_LOB.Search;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using CETAP_LOB.BDO;
+using CETAP_LOB.Model;
+using CETAP_LOB.Search;
+using FeserWard.Controls;
+using FirstFloor.ModernUI.Windows.Controls;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 
 namespace CETAP_LOB.ViewModel.processing
 {
-  public class TestsViewModel : ViewModelBase
+    public class TestsViewModel : ViewModelBase
   {
     public const string PeriodsPropertyName = "Periods";
     public const string IntakeRecordPropertyName = "IntakeRecord";

@@ -1,9 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.ViewModel.processing.BatchViewModel
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
-
+﻿
 using FeserWard.Controls;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight;
@@ -90,14 +85,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myPeriods;
+        return _myPeriods;
       }
       set
       {
-        if (this._myPeriods == value)
+        if (_myPeriods == value)
           return;
-        this._myPeriods = value;
-        this.RaisePropertyChanged("Periods");
+        _myPeriods = value;
+        RaisePropertyChanged("Periods");
       }
     }
 
@@ -105,14 +100,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._intakerecord;
+        return _intakerecord;
       }
       set
       {
-        if (this._intakerecord == value)
+        if (_intakerecord == value)
           return;
-        this._intakerecord = value;
-        this.RaisePropertyChanged("IntakeRecord");
+        _intakerecord = value;
+        RaisePropertyChanged("IntakeRecord");
       }
     }
 
@@ -120,14 +115,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._mytests;
+        return _mytests;
       }
       set
       {
-        if (this._mytests == value)
+        if (_mytests == value)
           return;
-        this._mytests = value;
-        this.RaisePropertyChanged("Tests");
+        _mytests = value;
+        RaisePropertyChanged("Tests");
       }
     }
 
@@ -135,14 +130,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myAQLE;
+        return _myAQLE;
       }
       set
       {
-        if (this._myAQLE == value)
+        if (_myAQLE == value)
           return;
-        this._myAQLE = value;
-        this.RaisePropertyChanged("AQLE");
+        _myAQLE = value;
+        RaisePropertyChanged("AQLE");
       }
     }
 
@@ -150,14 +145,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myAQLA;
+        return _myAQLA;
       }
       set
       {
-        if (this._myAQLA == value)
+        if (_myAQLA == value)
           return;
-        this._myAQLA = value;
-        this.RaisePropertyChanged("AQLA");
+        _myAQLA = value;
+        RaisePropertyChanged("AQLA");
       }
     }
 
@@ -165,14 +160,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myMATA;
+        return _myMATA;
       }
       set
       {
-        if (this._myMATA == value)
+        if (_myMATA == value)
           return;
-        this._myMATA = value;
-        this.RaisePropertyChanged("MATA");
+        _myMATA = value;
+        RaisePropertyChanged("MATA");
       }
     }
 
@@ -180,14 +175,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myMATE;
+        return _myMATE;
       }
       set
       {
-        if (this._myMATE == value)
+        if (_myMATE == value)
           return;
-        this._myMATE = value;
-        this.RaisePropertyChanged("MATE");
+        _myMATE = value;
+        RaisePropertyChanged("MATE");
       }
     }
 
@@ -195,14 +190,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myWrittenTest;
+        return _myWrittenTest;
       }
       set
       {
-        if (this._myWrittenTest == value)
+        if (_myWrittenTest == value)
           return;
-        this._myWrittenTest = value;
-        this.RaisePropertyChanged("WrittenTest");
+        _myWrittenTest = value;
+        RaisePropertyChanged("WrittenTest");
       }
     }
 
@@ -210,14 +205,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myUsers;
+        return _myUsers;
       }
       set
       {
-        if (this._myUsers == value)
+        if (_myUsers == value)
           return;
-        this._myUsers = value;
-        this.RaisePropertyChanged("BatchMakers");
+        _myUsers = value;
+        RaisePropertyChanged("BatchMakers");
       }
     }
 
@@ -225,21 +220,21 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._mybatcher;
+        return _mybatcher;
       }
       set
       {
-        if (this._mybatcher == value)
+        if (_mybatcher == value)
           return;
-        this._mybatcher = value;
-        if (this._mybatcher != null)
+        _mybatcher = value;
+        if (_mybatcher != null)
         {
-          if (this.Batch != null)
-            this.Batch.BatchedBy = this._mybatcher.Name.Trim();
-          this.getBatchesbyPerson();
+          if (Batch != null)
+            Batch.BatchedBy = _mybatcher.Name.Trim();
+          getBatchesbyPerson();
         }
-        this.RaisePropertyChanged("SelectedBatcher");
-        this.SaveBatchCommand.RaiseCanExecuteChanged();
+        RaisePropertyChanged("SelectedBatcher");
+        SaveBatchCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -247,16 +242,16 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._mybatch;
+        return _mybatch;
       }
       set
       {
-        if (this._mybatch == value)
+        if (_mybatch == value)
           return;
-        this._mybatch = value;
-        if (!string.IsNullOrWhiteSpace(this._mybatch) && this._mybatch.Length == 22)
-          this.GetBatchProperties();
-        this.RaisePropertyChanged("BatchName");
+        _mybatch = value;
+        if (!string.IsNullOrWhiteSpace(_mybatch) && _mybatch.Length == 22)
+          GetBatchProperties();
+        RaisePropertyChanged("BatchName");
       }
     }
 
@@ -264,14 +259,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myStamp;
+        return _myStamp;
       }
       set
       {
-        if (this._myStamp == value)
+        if (_myStamp == value)
           return;
-        this._myStamp = value;
-        this.RaisePropertyChanged("StampNo");
+        _myStamp = value;
+        RaisePropertyChanged("StampNo");
       }
     }
 
@@ -279,14 +274,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._clientType;
+        return _clientType;
       }
       set
       {
-        if (this._clientType == value)
+        if (_clientType == value)
           return;
-        this._clientType = value;
-        this.RaisePropertyChanged("ClientType");
+        _clientType = value;
+        RaisePropertyChanged("ClientType");
       }
     }
 
@@ -294,14 +289,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myProfile;
+        return _myProfile;
       }
       set
       {
-        if (this._myProfile == value)
+        if (_myProfile == value)
           return;
-        this._myProfile = value;
-        this.RaisePropertyChanged("SelectedProfile");
+        _myProfile = value;
+        RaisePropertyChanged("SelectedProfile");
       }
     }
 
@@ -309,14 +304,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myProfAllocs;
+        return _myProfAllocs;
       }
       set
       {
-        if (this._myProfAllocs == value)
+        if (_myProfAllocs == value)
           return;
-        this._myProfAllocs = value;
-        this.RaisePropertyChanged("ProfilesAllocations");
+        _myProfAllocs = value;
+        RaisePropertyChanged("ProfilesAllocations");
       }
     }
 
@@ -324,17 +319,17 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myTestDate;
+        return _myTestDate;
       }
       set
       {
-        if (this._myTestDate == value)
+        if (_myTestDate == value)
           return;
-        this._myTestDate = value;
-        this.GetProfileAllocations();
-        if (this._myTestDate < DateTime.Today)
-          this.SaveBatchCommand.RaiseCanExecuteChanged();
-        this.RaisePropertyChanged("TestDate");
+        _myTestDate = value;
+        GetProfileAllocations();
+        if (_myTestDate < DateTime.Today)
+          SaveBatchCommand.RaiseCanExecuteChanged();
+        RaisePropertyChanged("TestDate");
       }
     }
 
@@ -342,15 +337,15 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myVenue;
+        return _myVenue;
       }
       set
       {
-        if (this._myVenue == value)
+        if (_myVenue == value)
           return;
-        this._myVenue = value;
-        this.RaisePropertyChanged("Venue");
-        this.SaveBatchCommand.RaiseCanExecuteChanged();
+        _myVenue = value;
+        RaisePropertyChanged("Venue");
+        SaveBatchCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -358,14 +353,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._selectedVenue;
+        return _selectedVenue;
       }
       set
       {
-        if (this._selectedVenue == value)
+        if (_selectedVenue == value)
           return;
-        this._selectedVenue = value;
-        this.RaisePropertyChanged("SelectedVenue");
+        _selectedVenue = value;
+        RaisePropertyChanged("SelectedVenue");
       }
     }
 
@@ -373,14 +368,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._BatchCount;
+        return _BatchCount;
       }
       set
       {
-        if (this._BatchCount == value)
+        if (_BatchCount == value)
           return;
-        this._BatchCount = value;
-        this.RaisePropertyChanged("NoInBatch");
+        _BatchCount = value;
+        RaisePropertyChanged("NoInBatch");
       }
     }
 
@@ -388,14 +383,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._mystatus;
+        return _mystatus;
       }
       set
       {
-        if (this._mystatus == value)
+        if (_mystatus == value)
           return;
-        this._mystatus = value;
-        this.RaisePropertyChanged("Status");
+        _mystatus = value;
+        RaisePropertyChanged("Status");
       }
     }
 
@@ -403,14 +398,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._batch;
+        return _batch;
       }
       set
       {
-        if (this._batch == value)
+        if (_batch == value)
           return;
-        this._batch = value;
-        this.RaisePropertyChanged("Batch");
+        _batch = value;
+        RaisePropertyChanged("Batch");
       }
     }
 
@@ -418,15 +413,15 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._selectedBatch;
+        return _selectedBatch;
       }
       set
       {
-        if (this._selectedBatch == value)
+        if (_selectedBatch == value)
           return;
-        this._selectedBatch = value;
-        this.RaisePropertyChanged("SelectedBatch");
-        this.RestoreCommand.RaiseCanExecuteChanged();
+        _selectedBatch = value;
+        RaisePropertyChanged("SelectedBatch");
+        RestoreCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -434,14 +429,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._batches;
+        return _batches;
       }
       set
       {
-        if (this._batches == value)
+        if (_batches == value)
           return;
-        this._batches = value;
-        this.RaisePropertyChanged("Batches");
+        _batches = value;
+        RaisePropertyChanged("Batches");
       }
     }
 
@@ -449,70 +444,73 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._mypersonBatches;
+        return _mypersonBatches;
       }
       set
       {
-        if (this._mypersonBatches == value)
+        if (_mypersonBatches == value)
           return;
-        this._mypersonBatches = value;
-        this.RaisePropertyChanged("BatchesByPerson");
+        _mypersonBatches = value;
+        RaisePropertyChanged("BatchesByPerson");
       }
     }
 
     public BatchViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.TestDate = new DateTime();
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      TestDate = new DateTime();
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      this.BatchProvider = (IIntelliboxResultsProvider) new BatchResultsProvider(this._service);
+      BatchProvider = (IIntelliboxResultsProvider) new BatchResultsProvider(_service);
       List<UserBDO> userBdoList = new List<UserBDO>();
-      this.BatchMakers = this._service.GetAllUsers().Where<UserBDO>((Func<UserBDO, bool>) (a => a.Areas.StartsWith("1"))).OrderBy<UserBDO, string>((Func<UserBDO, string>) (c => c.Name)).Select<UserBDO, UserBDO>((Func<UserBDO, UserBDO>) (a => a)).ToList<UserBDO>();
-      this._myPeriods = this._service.GetAllIntakeYears();
-      this._intakerecord = this._myPeriods.Where<IntakeYearsBDO>((Func<IntakeYearsBDO, bool>) (x => x.Year == ApplicationSettings.Default.IntakeYear)).FirstOrDefault<IntakeYearsBDO>();
-      this.TestDate = DateTime.Now;
-      this.BatchesByPerson = (ObservableCollection<BatchBDO>) null;
-      this.RefreshData();
+
+      BatchMakers = _service.GetAllUsers().Where(a => a.Areas.StartsWith("1")).OrderBy(c => c.Name).Select(a => a).ToList();
+
+      _myPeriods = _service.GetAllIntakeYears();
+
+      _intakerecord = _myPeriods.Where(x => x.Year == ApplicationSettings.Default.IntakeYear).FirstOrDefault();
+      TestDate = DateTime.Now;
+      BatchesByPerson = null;
+      RefreshData();
     }
 
     private void RegisterCommands()
     {
-      this.SaveBatchCommand = new RelayCommand((Action) (() => this.SaveBatch()), (Func<bool>) (() => this.canSaveBatch()));
-      this.UpdateBatchCommand = new RelayCommand((Action) (() => this.UpdateBatch()));
-      this.DeleteBatchCommand = new RelayCommand((Action) (() => this.DeleteBatch()));
-      this.RestoreCommand = new RelayCommand((Action) (() => this.RestoreFile()), (Func<bool>) (() => this.canRestore()));
+          SaveBatchCommand = new RelayCommand(() => SaveBatch(), () => canSaveBatch());
+          UpdateBatchCommand = new RelayCommand(() => UpdateBatch());
+          DeleteBatchCommand = new RelayCommand(() => DeleteBatch());
+          RestoreCommand = new RelayCommand(() => RestoreFile(), () => canRestore());
     }
 
     private void RestoreFile()
     {
-      string batchName = this.SelectedBatch.BatchName;
-      ScannedFileBDO scannedFileBdo = new ScannedFileBDO();
-      ScannedFileBDO scannedFile = this._service.GetScannedFile(batchName);
-      if (scannedFile != null)
-      {
-        FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-        folderBrowserDialog.SelectedPath = ApplicationSettings.Default.ScoreFolder;
-        DialogResult dialogResult = folderBrowserDialog.ShowDialog();
-        string path2 = batchName + ".dat";
-        if (dialogResult == DialogResult.OK)
-          File.WriteAllBytes(Path.Combine(folderBrowserDialog.SelectedPath, path2), scannedFile.FileData);
-        int num = (int) ModernDialog.ShowMessage(path2 + " has been downloaded", "Scanned Files", MessageBoxButton.OK, (Window) null);
-      }
-      else
-      {
-        int num1 = (int) ModernDialog.ShowMessage("No scanned file with name " + batchName + " has been Scanned", "Scanned Files", MessageBoxButton.OK, (Window) null);
-      }
+          string batchName = SelectedBatch.BatchName;
+          ScannedFileBDO scannedFileBdo = new ScannedFileBDO();
+          ScannedFileBDO scannedFile = _service.GetScannedFile(batchName);
+          if (scannedFile != null)
+          {
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                folderBrowserDialog.SelectedPath = ApplicationSettings.Default.ScoreFolder;
+                DialogResult dialogResult = folderBrowserDialog.ShowDialog();
+                string path2 = batchName + ".dat";
+                if (dialogResult == DialogResult.OK)
+                  File.WriteAllBytes(Path.Combine(folderBrowserDialog.SelectedPath, path2), scannedFile.FileData);
+                int num = (int) ModernDialog.ShowMessage(path2 + " has been downloaded", "Scanned Files", MessageBoxButton.OK, (Window) null);
+          }
+          else
+          {
+               ModernDialog.ShowMessage("No scanned file with name " + batchName + " has been Scanned", "Scanned Files", MessageBoxButton.OK, (Window) null);
+          }
     }
 
     private bool canRestore()
     {
       bool flag = false;
-      if (this.SelectedBatch != null)
+      if (SelectedBatch != null)
         flag = true;
       return flag;
     }
@@ -520,94 +518,90 @@ namespace CETAP_LOB.ViewModel.processing
     private void DeleteBatch()
     {
       string message = "";
-      if (ModernDialog.ShowMessage("Are you sure !!! \n \n You want to delete batch " + this.SelectedBatch.BatchName.ToString(), "Delete Record", MessageBoxButton.YesNo, (Window) null) != MessageBoxResult.Yes)
+      if (ModernDialog.ShowMessage("Are you sure !!! \n \n You want to delete batch " + SelectedBatch.BatchName.ToString(), "Delete Record", MessageBoxButton.YesNo, (Window) null) != MessageBoxResult.Yes)
         return;
-      this._service.deleteBatch(this.SelectedBatch, ref message);
-      int num = (int) ModernDialog.ShowMessage(message, "Delete Record", MessageBoxButton.OK, (Window) null);
+      _service.deleteBatch(SelectedBatch, ref message);
+      ModernDialog.ShowMessage(message, "Delete Record", MessageBoxButton.OK, (Window) null);
     }
 
     private void getBatchesbyPerson()
     {
-      if (this.SelectedBatcher == null)
+      if (SelectedBatcher == null)
         return;
-      this.BatchesByPerson = new ObservableCollection<BatchBDO>(this.Batches.Where<BatchBDO>((Func<BatchBDO, bool>) (b => b.BatchedBy.Trim() == this.SelectedBatcher.Name.Trim())).OrderByDescending<BatchBDO, DateTime>((Func<BatchBDO, DateTime>) (x => x.BatchDate)).Select<BatchBDO, BatchBDO>((Func<BatchBDO, BatchBDO>) (x => x)).ToList<BatchBDO>());
+      BatchesByPerson = new ObservableCollection<BatchBDO>(Batches.Where(b => b.BatchedBy.Trim() == SelectedBatcher.Name.Trim()).OrderByDescending(x => x.BatchDate).Select(x => x).ToList());
     }
 
     private void UpdateBatch()
     {
       string message = "";
-      string text = "Record " + this.SelectedBatch.BatchName.ToString() + " has been updated";
-      if (this._service.updatebatch(this.SelectedBatch, ref message))
+      string text = "Record " + SelectedBatch.BatchName.ToString() + " has been updated";
+      if (_service.updatebatch(SelectedBatch, ref message))
       {
-        int num = (int) ModernDialog.ShowMessage(text, "Update Record", MessageBoxButton.OK, (Window) null);
-        this.RefreshData();
-        this.getBatchesbyPerson();
+        ModernDialog.ShowMessage(text, "Update Record", MessageBoxButton.OK, (Window) null);
+        RefreshData();
+        getBatchesbyPerson();
       }
       else
       {
-        int num1 = (int) ModernDialog.ShowMessage(message, "Update Record", MessageBoxButton.OK, (Window) null);
+         ModernDialog.ShowMessage(message, "Update Record", MessageBoxButton.OK, (Window) null);
       }
     }
 
     private void SaveBatch()
     {
       string message = "";
-      this.Batch.TestDate = this.TestDate;
-      this.Batch.BatchedBy = this.SelectedBatcher.Name.Trim();
-      this.Batch.BatchID = -1;
-      if (this._service.addBatch(this.Batch, ref message))
+      Batch.TestDate = TestDate;
+      Batch.BatchedBy = SelectedBatcher.Name.Trim();
+      Batch.BatchID = -1;
+      if (_service.addBatch(Batch, ref message))
       {
-        int num = (int) ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
-        this.RefreshData();
-        this.getBatchesbyPerson();
+        ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
+        RefreshData();
+        getBatchesbyPerson();
       }
       else
       {
-        int num1 = (int) ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
+         ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
       }
     }
 
     private bool canSaveBatch()
     {
       bool flag = false;
-      if (this.Batch != null && this.SelectedBatcher != null && (this.TestDate < DateTime.Today && this.isVenue) && this.isTestComb)
+      if (Batch != null && SelectedBatcher != null && (TestDate < DateTime.Today && isVenue) && isTestComb)
         flag = true;
       return flag;
     }
 
     private void GetProfileAllocations()
     {
-      this.ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(this._service.GetProfileAllocationsByDate(this.TestDate));
+      ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(_service.GetProfileAllocationsByDate(TestDate));
     }
 
     private bool canCreateBatch()
     {
-      if (this.SelectedVenue != null)
-        return this.NoInBatch != 0;
+      if (SelectedVenue != null)
+        return NoInBatch != 0;
       return false;
     }
 
     private bool canEditBatch()
     {
-      return this.SelectedBatch != null;
+      return SelectedBatch != null;
     }
 
     private void RefreshData()
     {
-      this.Batches = new ObservableCollection<BatchBDO>(this._service.GetAllbatches().Where<BatchBDO>((Func<BatchBDO, bool>) (x =>
-      {
-        if (x.TestDate > this._intakerecord.yearStart)
-          return x.TestDate < this._intakerecord.yearEnd;
-        return false;
-      })).OrderBy<BatchBDO, string>((Func<BatchBDO, string>) (b => b.BatchName)).Select<BatchBDO, BatchBDO>((Func<BatchBDO, BatchBDO>) (x => x)).ToList<BatchBDO>());
-      this.BatchName = "";
-      this.NoInBatch = 0;
-      this.StampNo = "";
-      this.WrittenTest = "";
-      this.SelectedBatcher = (UserBDO) null;
-      this.SelectedBatch = (BatchBDO) null;
-      this.Tests = (List<TestBDO>) null;
-      this.Venue = (VenueBDO) null;
+          Batches = new ObservableCollection<BatchBDO>(_service.GetAllbatches().Where(x => x.TestDate > _intakerecord.yearStart && x.TestDate < _intakerecord.yearEnd)
+                                                                               .OrderBy(b => b.BatchName).Select(x => x).ToList());
+          BatchName = "";
+          NoInBatch = 0;
+          StampNo = "";
+          WrittenTest = "";
+          SelectedBatcher = null;
+          SelectedBatch = null;
+          Tests = null;
+          Venue = null;
     }
 
     private void GetBatchProperties()
@@ -615,21 +609,21 @@ namespace CETAP_LOB.ViewModel.processing
       if (ApplicationSettings.Default.DBAvailable)
       {
         datFileAttributes datFileAttributes = new datFileAttributes();
-        datFileAttributes.SName = this.BatchName;
-        this.Batch = new BatchBDO();
-        this.NoInBatch = datFileAttributes.RecordCount;
-        this.ClientType = datFileAttributes.Client;
-        this.StampNo = datFileAttributes.RandNumber.ToString("D5");
-        BatchViewModel.datFileAttributesToBatch(datFileAttributes, this.Batch);
-        this.Batch.TestDate = this.TestDate;
-        this.Tests = new List<TestBDO>();
-        this.Tests = this._service.GetTestFromDatFile(datFileAttributes, this._intakerecord);
-        this.WrittenTest = " ";
+        datFileAttributes.SName = BatchName;
+        Batch = new BatchBDO();
+        NoInBatch = datFileAttributes.RecordCount;
+        ClientType = datFileAttributes.Client;
+        StampNo = datFileAttributes.RandNumber.ToString("D5");
+        BatchViewModel.datFileAttributesToBatch(datFileAttributes, Batch);
+        Batch.TestDate = TestDate;
+        Tests = new List<TestBDO>();
+        Tests = _service.GetTestFromDatFile(datFileAttributes, _intakerecord);
+        WrittenTest = " ";
         if (datFileAttributes.Client != "Walk-in Bio")
         {
           string text = "";
-          this.isTestComb = true;
-          foreach (TestBDO test in this.Tests)
+          isTestComb = true;
+          foreach (TestBDO test in Tests)
           {
             string str1 = test.TestName.Substring(0, 4);
             switch (datFileAttributes.TestCode)
@@ -637,45 +631,45 @@ namespace CETAP_LOB.ViewModel.processing
               case "0105":
                 if (str1 == "AQLE")
                 {
-                  this.AQLE = test;
-                  this.WrittenTest = this.AQLE.TestName;
+                  AQLE = test;
+                  WrittenTest = AQLE.TestName;
                   continue;
                 }
                 continue;
               case "0115":
                 if (str1 == "AQLA")
                 {
-                  this.AQLA = test;
-                  this.WrittenTest = this.AQLA.TestName;
+                  AQLA = test;
+                  WrittenTest = AQLA.TestName;
                   continue;
                 }
                 continue;
               case "0106":
                 if (str1 == "MATE")
-                  this.MATE = test;
-                this.WrittenTest = this.MATE.TestName;
+                  MATE = test;
+                WrittenTest = MATE.TestName;
                 continue;
               case "0116":
                 if (str1 == "MATA")
                 {
-                  this.MATA = test;
-                  this.WrittenTest = this.MATA.TestName;
+                  MATA = test;
+                  WrittenTest = MATA.TestName;
                   continue;
                 }
                 continue;
               case "0107":
                 if (str1 == "AQLE")
                 {
-                  this.AQLE = test;
+                  AQLE = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.AQLE.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + AQLE.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                 }
                 if (str1 == "MATE")
                 {
-                  this.MATE = test;
+                  MATE = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.MATE.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + MATE.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                   continue;
                 }
@@ -683,16 +677,16 @@ namespace CETAP_LOB.ViewModel.processing
               case "0117":
                 if (str1 == "AQLA")
                 {
-                  this.AQLA = test;
+                  AQLA = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.AQLA.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + AQLA.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                 }
                 if (str1 == "MATA")
                 {
-                  this.MATA = test;
+                  MATA = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.MATA.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + MATA.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                   continue;
                 }
@@ -700,16 +694,16 @@ namespace CETAP_LOB.ViewModel.processing
               case "0127":
                 if (str1 == "AQLE")
                 {
-                  this.AQLE = test;
+                  AQLE = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.AQLE.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + AQLE.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                 }
                 if (str1 == "MATA")
                 {
-                  this.MATA = test;
+                  MATA = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.MATA.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + MATA.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                   continue;
                 }
@@ -717,23 +711,23 @@ namespace CETAP_LOB.ViewModel.processing
               case "0137":
                 if (str1 == "AQLA")
                 {
-                  this.AQLA = test;
+                  AQLA = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.AQLA.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + AQLA.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                 }
                 if (str1 == "MATE")
                 {
-                  this.MATE = test;
+                  MATE = test;
                   BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + this.MATE.TestName + "    ";
+                  string str2 = batchViewModel.WrittenTest + MATE.TestName + "    ";
                   batchViewModel.WrittenTest = str2;
                   continue;
                 }
                 continue;
               default:
                 text = "No such test Combination!!!";
-                this.isTestComb = false;
+                isTestComb = false;
                 continue;
             }
           }
@@ -742,11 +736,11 @@ namespace CETAP_LOB.ViewModel.processing
             int num = (int) ModernDialog.ShowMessage(text, "Batch Name", MessageBoxButton.OK, (Window) null);
           }
         }
-        this.isVenue = true;
-        this.Venue = this._service.GetTestVenue(datFileAttributes.VenueCode);
-        if (this.Venue != null)
+        isVenue = true;
+        Venue = _service.GetTestVenue(datFileAttributes.VenueCode);
+        if (Venue != null)
           return;
-        this.isVenue = false;
+        isVenue = false;
         int num1 = (int) ModernDialog.ShowMessage("Cannot find Venue!!!", "Venue Name", MessageBoxButton.OK, (Window) null);
       }
       else
@@ -755,14 +749,14 @@ namespace CETAP_LOB.ViewModel.processing
       }
     }
 
-    private static void datFileAttributesToBatch(datFileAttributes datfileAttrib, BatchBDO batch)
-    {
-      batch.Count = datfileAttrib.RecordCount;
-      batch.BatchName = datfileAttrib.SName;
-      batch.TestProfileID = datfileAttrib.Profile;
-      batch.TestCombination = datfileAttrib.TestCode;
-      batch.TestVenueID = datfileAttrib.VenueCode;
-      batch.RandomTestNumber = datfileAttrib.RandNumber;
-    }
+        private static void datFileAttributesToBatch(datFileAttributes datfileAttrib, BatchBDO batch)
+        {
+              batch.Count = datfileAttrib.RecordCount;
+              batch.BatchName = datfileAttrib.SName;
+              batch.TestProfileID = datfileAttrib.Profile;
+              batch.TestCombination = datfileAttrib.TestCode;
+              batch.TestVenueID = datfileAttrib.VenueCode;
+              batch.RandomTestNumber = datfileAttrib.RandNumber;
+        }
   }
 }

@@ -85,6 +85,7 @@ namespace CETAP_LOB.Helper
       }
       catch (Exception ex)
       {
+                throw ex;
       }
     }
 

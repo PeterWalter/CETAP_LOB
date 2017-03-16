@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using LOB.Search;
 
 namespace CETAP_LOB.ViewModel.writers
 {

@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.ViewModel.ViewModelbase1
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using GalaSoft.MvvmLight;
 using System;
@@ -20,7 +16,7 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._errors.Count > 0;
+        return _errors.Count > 0;
       }
     }
 
@@ -28,7 +24,7 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return !this.HasErrors;
+        return !HasErrors;
       }
     }
 
@@ -36,32 +32,32 @@ namespace CETAP_LOB.ViewModel
 
     public IEnumerable GetErrors(string propertyName)
     {
-      if (string.IsNullOrEmpty(propertyName) || !this._errors.ContainsKey(propertyName))
+      if (string.IsNullOrEmpty(propertyName) || !_errors.ContainsKey(propertyName))
         return (IEnumerable) null;
-      return (IEnumerable) this._errors[propertyName];
+      return (IEnumerable) _errors[propertyName];
     }
 
     public void AddError(string propertyName, string error)
     {
-      this._errors[propertyName] = new List<string>()
+      _errors[propertyName] = new List<string>()
       {
         error
       };
-      this.NotifyErrorsChanged(propertyName);
+      NotifyErrorsChanged(propertyName);
     }
 
     public void RemoveError(string propertyName)
     {
-      if (this._errors.ContainsKey(propertyName))
-        this._errors.Remove(propertyName);
-      this.NotifyErrorsChanged(propertyName);
+      if (_errors.ContainsKey(propertyName))
+        _errors.Remove(propertyName);
+      NotifyErrorsChanged(propertyName);
     }
 
     private void NotifyErrorsChanged(string propertyName)
     {
-      if (this.ErrorsChanged == null)
+      if (ErrorsChanged == null)
         return;
-      this.ErrorsChanged((object) this, new DataErrorsChangedEventArgs(propertyName));
+      ErrorsChanged((object) this, new DataErrorsChangedEventArgs(propertyName));
     }
   }
 }

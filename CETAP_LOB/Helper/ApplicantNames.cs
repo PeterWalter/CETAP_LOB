@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Helper.ApplicantNames
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using CETAP_LOB.Database;
 using System;
@@ -22,7 +18,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return ApplicantNames._found;
+        return _found;
       }
     }
 
@@ -30,29 +26,29 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return ApplicantNames._name;
+        return _name;
       }
       set
       {
-        ApplicantNames._name = value;
-        ApplicantNames.isAvailable();
+       _name = value;
+        IsAvailable();
       }
     }
 
     static ApplicantNames()
     {
       using (CETAPEntities cetapEntities = new CETAPEntities())
-        ApplicantNames._writernames = cetapEntities.FirstNames.Select<LOB.Database.FirstName, string>((Expression<Func<LOB.Database.FirstName, string>>) (x => x.Name)).ToList<string>();
+         _writernames = cetapEntities.FirstNames.Select(x => x.Name).ToList();
     }
 
     public static void AddName(string name)
     {
-      ApplicantNames._writernames.Add(name.Trim());
+      _writernames.Add(name.Trim());
     }
 
-    private static void isAvailable()
+    private static void IsAvailable()
     {
-      ApplicantNames._found = ApplicantNames._writernames.Any<string>((Func<string, bool>) (a => a == ApplicantNames._name));
+      _found = _writernames.Any(a => a == _name);
     }
   }
 }

@@ -49,6 +49,7 @@ namespace CETAP_LOB.Model
         bool updateTest(TestBDO testBDO, ref string message);
         bool deleteTest(TestBDO test, ref string message);
         bool addTest(TestBDO testBDO, ref string message);
+        List<TestBDO> GetTestFromDatFile(datFileAttributes batchfile, IntakeYearsBDO intake);
 
         //Test Allocation
         List<TestAllocationBDO> GetAllTestAllocations();
@@ -74,7 +75,7 @@ namespace CETAP_LOB.Model
         bool addTestProfile(TestProfileBDO profileBDO, ref string message);
 
         List<TestBDO> GetTestfromTestProfile(int profile);
-        List<TestBDO> GetTestFromDatFile(datFileAttributes batchfile);
+        //List<TestBDO> GetTestFromDatFile(datFileAttributes batchfile);
 
         //Batch file
         List<BatchBDO> GetAllbatches();

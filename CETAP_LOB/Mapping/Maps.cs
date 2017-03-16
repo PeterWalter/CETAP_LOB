@@ -4,29 +4,29 @@
 // MVID: 3597789E-8774-4427-AE20-07195D9380BD
 // Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
 
-using AutoMapper;
-using CETAP_LOB.BDO;
-using CETAP_LOB;
-using CETAP_LOB.Database;
 using System;
 using System.Linq.Expressions;
+using AutoMapper;
+using CETAP_LOB.BDO;
+using CETAP_LOB.Database;
 
 namespace CETAP_LOB.Mapping
 {
-  public static class Maps
+    public static class Maps
   {
+
     public static void Initialize()
     {
-      Mapper.CreateMap<ScanTrackerBDO, ScanTracker>();
-      Mapper.CreateMap<ScanTracker, ScanTrackerBDO>();
-      Mapper.CreateMap<CompositBDO, Composit>();
-      Mapper.CreateMap<Composit, CompositBDO>();
+      Mapper.CreateMap<ScanTrackerBDO, ScanTracker>().ReverseMap();
+     // Mapper.CreateMap<ScanTracker, ScanTrackerBDO>();
+      Mapper.CreateMap<CompositBDO, Composit>().ReverseMap();
+    //  Mapper.CreateMap<Composit, CompositBDO>();
       Mapper.CreateMap<TestProfileBDO, TestProfile>();
       Mapper.CreateMap<TestProfile, TestProfileBDO>();
-      Mapper.CreateMap<TestName, TestBDO>().ForMember((Expression<Func<TestBDO, object>>) (dest => dest.TestName), (Action<IMemberConfigurationExpression<TestName>>) (opt => opt.MapFrom<string>((Expression<Func<TestName, string>>) (src => src.TestName1))));
-      Mapper.CreateMap<TestBDO, TestName>().ForMember((Expression<Func<TestName, object>>) (dest => dest.TestName1), (Action<IMemberConfigurationExpression<TestBDO>>) (opt => opt.MapFrom<string>((Expression<Func<TestBDO, string>>) (src => src.TestName))));
-      Mapper.CreateMap<Batch, BatchBDO>().ForMember((Expression<Func<BatchBDO, object>>) (dest => (object) dest.RandomTestNumber), (Action<IMemberConfigurationExpression<Batch>>) (opt => opt.MapFrom<int>((Expression<Func<Batch, int>>) (src => src.RandTestNumber))));
-      Mapper.CreateMap<BatchBDO, Batch>().ForMember((Expression<Func<Batch, object>>) (dest => (object) dest.RandTestNumber), (Action<IMemberConfigurationExpression<BatchBDO>>) (opt => opt.MapFrom<int>((Expression<Func<BatchBDO, int>>) (src => src.RandomTestNumber))));
+      Mapper.CreateMap<TestName, TestBDO>().ForMember(dest => dest.TestName, opt => opt.MapFrom(src => src.TestName1));
+      Mapper.CreateMap<TestBDO, TestName>().ForMember(dest => dest.TestName1, opt => opt.MapFrom(src => src.TestName));
+      Mapper.CreateMap<Batch, BatchBDO>().ForMember(dest => dest.RandomTestNumber, opt => opt.MapFrom(src => src.RandTestNumber));
+      Mapper.CreateMap<BatchBDO, Batch>().ForMember(dest => dest.RandTestNumber, opt => opt.MapFrom(src => src.RandomTestNumber));
     }
 
     public static TestProfile TestProfileBDOToTestProfile(TestProfileBDO testProfileBDO)

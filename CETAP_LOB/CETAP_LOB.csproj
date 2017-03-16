@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,9 +49,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>CETAP_LOB.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML, Version=0.86.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.86.0\lib\net40\ClosedXML.dll</HintPath>
@@ -98,6 +116,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -335,6 +357,30 @@
     <Compile Include="ViewModel\writers\VenueMapViewModel.cs" />
     <Compile Include="ViewModel\writers\VenuesViewModel.cs" />
     <Compile Include="ViewModel\writers\VenueViewModel.cs" />
+    <Page Include="Assets\modernui.bingimage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\modernui.bubbles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\modernui.cetap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\modernui.rose.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\modernui.snowflakes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\modernui.waterdrop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -390,16 +436,42 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="SplashScreen1.png" />
+    <None Include="SplashScreen1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
     <Folder Include="Converters\" />
     <Folder Include="Dll\" />
     <Folder Include="ViewModel\cluster\" />
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\background.snowflakes.jpg" />
+    <Resource Include="Assets\binary-code.png" />
+    <Resource Include="Assets\bubbles.jpg" />
+    <Resource Include="Assets\cetapwatermark.png" />
+    <Resource Include="Assets\contacts delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\data-replace.png" />
+    <Resource Include="Assets\logistics.png" />
+    <Resource Include="Assets\pink flower.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\waterdrop.jpg" />
+    <Resource Include="Assets\icons\delete.png" />
+    <Resource Include="Assets\icons\deleterow.png" />
+    <Resource Include="Assets\icons\deleteuser.png" />
+    <Resource Include="Assets\icons\enter.png" />
+    <Resource Include="Assets\icons\new.png" />
+    <Resource Include="Assets\icons\newbcard.png" />
+    <Resource Include="Assets\icons\pin.png" />
+    <Resource Include="Assets\icons\pinleft.png" />
+    <Resource Include="Assets\icons\rotcwup.png" />
+    <Resource Include="Assets\icons\savedb.png" />
+    <Resource Include="Assets\icons\updatecolumn.png" />
+    <Resource Include="Assets\icons\updatesheet.png" />
+    <Resource Include="Assets\icons\users.png" />
+    <SplashScreen Include="cetap.png" />
     <Content Include="Database\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -413,6 +485,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

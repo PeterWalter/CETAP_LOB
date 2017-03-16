@@ -16,7 +16,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace LOB.ViewModel.scoring
+namespace CETAP_LOB.ViewModel.scoring
 {
   public class ScoringViewModel : ViewModelBase
   {
