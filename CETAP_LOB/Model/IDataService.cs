@@ -122,8 +122,8 @@ namespace CETAP_LOB.Model
         bool updateComposit(CompositBDO results, ref string message);
         bool deleteComposit(CompositBDO results, ref string message);
         Task<bool> addComposit(CompositBDO results);
-        bool GenerateCompositFromDB(string path);
-        Task<bool> LogisticCompositeFromDB(string folder);
+        //bool GenerateCompositFromDB(string path);
+        //Task<bool> LogisticCompositeFromDB(string folder);
         void GetNoMatchFile(string filename);
         bool GenerateSelectedComposite(ObservableCollection<CompositBDO> mySelection, string folder);
         bool RemoveRecordsInQueue(List<long> ScoredRecords);

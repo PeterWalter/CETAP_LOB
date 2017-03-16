@@ -1,31 +1,30 @@
 ﻿using CETAP_LOB.BDO;
 using CETAP_LOB.Database;
+using CETAP_LOB.Helper;
+using CETAP_LOB.Mapping;
+using CETAP_LOB.Model.easypay;
 using CETAP_LOB.Model.QA;
 using CETAP_LOB.Model.scoring;
 using CETAP_LOB.Model.venueprep;
+using ClosedXML.Excel;
+using CommonLibrary;
+using CsvHelper;
+using FileHelpers;
+using FirstFloor.ModernUI.Windows.Controls;
+using LinqStatistics;
+using LINQtoCSV;
 using System;
-using CETAP_LOB.Model.easypay;
-using CETAP_LOB.Model;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CETAP_LOB.Helper;
-using System.IO;
-using CETAP_LOB.Mapping;
-using FirstFloor.ModernUI.Windows.Controls;
 using System.Windows;
-using ClosedXML.Excel;
-using System.Data.Entity.Validation;
-using CsvHelper;
-using System.Globalization;
-using System.Collections.Concurrent;
-using CommonLibrary;
-using LinqStatistics;
-using LINQtoCSV;
-using FileHelpers;
 
 namespace CETAP_LOB.Model
 {
@@ -3894,40 +3893,16 @@ namespace CETAP_LOB.Model
 
         public bool RemoveRecordsInQueue(List<long> ScoredRecords)
         {
-            // ISSUE: object of a compiler-generated type is created
-            // ISSUE: variable of a compiler-generated type
-            DataService.\u003C\u003Ec__DisplayClassf5 cDisplayClassf5 = new DataService.\u003C\u003Ec__DisplayClassf5();
-            // ISSUE: reference to a compiler-generated field
-            cDisplayClassf5.ScoredRecords = ScoredRecords;
+            
             bool flag = false;
             using (CETAPEntities cetapEntities = new CETAPEntities())
             {
                 if (cetapEntities.RecordsInQueues.Count<RecordsInQueue>() > 0)
                 {
-                    DbSet<RecordsInQueue> recordsInQueues = cetapEntities.RecordsInQueues;
-                    ParameterExpression parameterExpression1 = System.Linq.Expressions.Expression.Parameter(typeof(RecordsInQueue), "x");
-                    // ISSUE: variable of the null type
-                    __Null local = null;
-                    // ISSUE: method reference
-                    MethodInfo methodFromHandle = (MethodInfo)MethodBase.GetMethodFromHandle(__methodref(Enumerable.Any));
-                    // ISSUE: field reference
-                    System.Linq.Expressions.Expression[] expressionArray1 = new System.Linq.Expressions.Expression[2]
-                    {
-            (System.Linq.Expressions.Expression) System.Linq.Expressions.Expression.Field((System.Linq.Expressions.Expression) System.Linq.Expressions.Expression.Constant((object) cDisplayClassf5), System.Reflection.FieldInfo.GetFieldFromHandle(__fieldref (DataService.\u003C\u003Ec__DisplayClassf5.ScoredRecords))),
-            null
-                    };
-                    ParameterExpression parameterExpression2;
-                    // ISSUE: method reference
-                    expressionArray1[1] = (System.Linq.Expressions.Expression)System.Linq.Expressions.Expression.Lambda<Func<long, bool>>((System.Linq.Expressions.Expression)System.Linq.Expressions.Expression.Equal(s, (System.Linq.Expressions.Expression)System.Linq.Expressions.Expression.Property((System.Linq.Expressions.Expression)parameterExpression1, (MethodInfo)MethodBase.GetMethodFromHandle(__methodref(RecordsInQueue.get_Barcode)))), new ParameterExpression[1]
-                    {
-            parameterExpression2
-                    });
-                    System.Linq.Expressions.Expression[] expressionArray2 = expressionArray1;
-                    System.Linq.Expressions.Expression<Func<RecordsInQueue, bool>> predicate = System.Linq.Expressions.Expression.Lambda<Func<RecordsInQueue, bool>>((System.Linq.Expressions.Expression)System.Linq.Expressions.Expression.Call((System.Linq.Expressions.Expression)local, methodFromHandle, expressionArray2), new ParameterExpression[1]
-                    {
-            parameterExpression1
-                    });
-                    List<RecordsInQueue> list = recordsInQueues.Where<RecordsInQueue>(predicate).ToList<RecordsInQueue>();
+                    var recordsInQueues = cetapEntities.RecordsInQueues;
+
+                    List<RecordsInQueue> list = recordsInQueues.Where(x => ScoredRecords.Any(m => m == x.Barcode)).ToList();
+                                                               
                     cetapEntities.RecordsInQueues.RemoveRange((IEnumerable<RecordsInQueue>)list);
                     cetapEntities.SaveChanges();
                     flag = true;
@@ -6028,31 +6003,38 @@ namespace CETAP_LOB.Model
 
             var myBatch = new List<Composit>();
 
-            myYear.Year = GetIntakeRecord(intakeYear);
+            myYear = GetIntakeRecord(intakeYear);
             using (CETAPEntities cetapEntities = new CETAPEntities())
             {
 
-                var Scores = cetapEntities.Composits.Where(x => x.DOT >= myYear.yearStart && x.DOT <= myYear.yearEnd);
-              
+                var Scores = cetapEntities.Composits.Where(x => x.DOT >= myYear.yearStart && x.DOT <= myYear.yearEnd).ToList();
+
                 // find duplicates in Database
-                var result = Scores.Where(x => )
-
-                foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in BatchRecords)
+                var res = Scores.Where(x => x.Barcode.
+                ForDuplicatesBarcodesBDO result = from x in Scores
+                             join m in BatchRecords
+                             on x.Batch equals m.Barcode
+                             select BatchRecords;
+                if (result!=null)
                 {
-                    // find duplicates in Database
+                    foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in result)
+                    {
+                        // find duplicates in Database
 
-                    Reason = "Duplicate Barcode in Database";
-                    FID = duplicatesBarcodesBdo.FID;
-                    Barcode = duplicatesBarcodesBdo.Barcode;
-                    RefNo = duplicatesBarcodesBdo.RefNo;
-                    SAID = duplicatesBarcodesBdo.SAID;
-                    Batch = duplicatesBarcodesBdo.Batch;
-                    DateModified = DateTime.Now;
-                    duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
+                        duplicatesBarcodesBdo.Reason = "Duplicate Barcode in Database";
+                        //duplicatesBarcodesBdo.FID = duplicatesBarcodesBdo.FID;
+                        //Barcode = duplicatesBarcodesBdo.Barcode;
+                        //RefNo = duplicatesBarcodesBdo.RefNo;
+                        //SAID = duplicatesBarcodesBdo.SAID;
+                        //Batch = duplicatesBarcodesBdo.Batch;
+                        duplicatesBarcodesBdo.DateModified = DateTime.Now;
+                        duplicatesBarcodesBdoList.Add(duplicatesBarcodesBdo);
+                    }
+
                 }
 
             }
-            // ****
+            //Check for duplicate NBT numbers
             foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in BatchRecords.Where<ForDuplicatesBarcodesBDO>(new Func<ForDuplicatesBarcodesBDO, bool>(cDisplayClass15b1.\u003CFindDuplicatesFromDB\u003Eb__152)).ToList<ForDuplicatesBarcodesBDO>())
                 duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
                 {
@@ -6064,7 +6046,8 @@ namespace CETAP_LOB.Model
                     Batch = duplicatesBarcodesBdo.Batch,
                     DateModified = DateTime.Now
                 });
-            // ISSUE: reference to a compiler-generated field
+            
+            // Check duplicate SAID
             myScores.Clear();
             var source2 = Scores.Where(x => x.SAID != new long?()).GroupBy(m => m.SAID);
             var predicate2 = (s => s.Count<Composit>() > 1);
@@ -6076,8 +6059,7 @@ namespace CETAP_LOB.Model
                     myScores.Add(composit);
                 }
             }
-            // ISSUE: reference to a compiler-generated method
-            List<ForDuplicatesBarcodesBDO> list = BatchRecords.Where(new Func<ForDuplicatesBarcodesBDO, bool>(cDisplayClass15b1.\u003CFindDuplicatesFromDB\u003Eb__154)).ToList<ForDuplicatesBarcodesBDO>();
+                       List<ForDuplicatesBarcodesBDO> list = BatchRecords.Where(new Func<ForDuplicatesBarcodesBDO, bool>(cDisplayClass15b1.\u003CFindDuplicatesFromDB\u003Eb__154)).ToList<ForDuplicatesBarcodesBDO>();
             foreach (ForDuplicatesBarcodesBDO duplicatesBarcodesBdo in list)
                 duplicatesBarcodesBdoList.Add(new ForDuplicatesBarcodesBDO()
                 {
@@ -6089,7 +6071,8 @@ namespace CETAP_LOB.Model
                     Batch = duplicatesBarcodesBdo.Batch,
                     DateModified = DateTime.Now
                 });
-            // ISSUE: reference to a compiler-generated field
+         
+            // Check duplicate ForeignID
             cDisplayClass15b1.myScores.Clear();
             IQueryable<IGrouping<string, Composit>> source3 = Scores.Where<Composit>((System.Linq.Expressions.Expression<Func<Composit, bool>>)(f => f.ForeignID.Trim() != "")).GroupBy<Composit, string>((System.Linq.Expressions.Expression<Func<Composit, string>>)(m => m.ForeignID));
             System.Linq.Expressions.Expression<Func<IGrouping<string, Composit>, bool>> predicate3 = (System.Linq.Expressions.Expression<Func<IGrouping<string, Composit>, bool>>)(s => s.Count<Composit>() > 1);
@@ -6172,6 +6155,18 @@ namespace CETAP_LOB.Model
             }
         }
 
+
+        public ObservableCollection<Log> GetAllErrors()
+        {
+            ObservableCollection<Log> LogCollect = new ObservableCollection<Log>();
+            using (var context = new CETAPEntities())
+            {
+                var LC = context.Logs.OrderByDescending(x => x.Date).Select(x => x);
+                foreach (Log mylog in LC) LogCollect.Add(mylog);
+            }
+
+            return LogCollect;
+        }
         //public void LoadTestDate(DateTime TheTestDate)
         //{
         //    DataService.TestDate = TheTestDate;
