@@ -144,9 +144,9 @@
                             IconHeight="30" IconWidth="30" ToolTip="Restore selected batch"
                             Command="{Binding Batch.RestoreCommand, Mode=OneWay, Source={StaticResource Locator}}"/>
                     <Label Margin="50,19,11,16" Content="Batch prepared by:" FontSize="16"/>
-                    <ComboBox Width="140" Margin="0,14,0,21"
+                    <!--<ComboBox Width="140" Margin="0,14,0,21"
                     ItemsSource="{Binding Batch.BatchMakers, Source={StaticResource Locator}}"
-                    SelectedItem="{Binding SelectedBatcher}"/>
+                    SelectedItem="{Binding SelectedBatcher}"/>-->
                     <Label Content="{Binding Batch.SelectedBatcher.Name, Source={StaticResource Locator}}" Width="88" Margin="0,14,0,23" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Height="498" Margin="0,0,0,0" Orientation="Horizontal">

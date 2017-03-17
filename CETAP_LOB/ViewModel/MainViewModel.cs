@@ -103,8 +103,8 @@ namespace CETAP_LOB.ViewModel
         
         List<UserBDO> userBdoList = new List<UserBDO>();
         User = _service.GetAllUsers().Where<UserBDO>((Func<UserBDO, bool>)(m => m.StaffID == person.Substring(3))).Select(v => v).FirstOrDefault();
-       // ApplicationSettings.Default.LOBUser = User.Name.Trim();
-            ApplicationSettings.Default.LOBUser = "Carol";
+        ApplicationSettings.Default.LOBUser = User.Name.Trim();
+     //       ApplicationSettings.Default.LOBUser = "CAROL";
             ApplicationSettings.Default.Save();
         InitializeModels();
     }

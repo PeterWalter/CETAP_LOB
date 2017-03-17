@@ -231,10 +231,10 @@ namespace CETAP_LOB.ViewModel.processing
         {
           if (Batch != null)
             Batch.BatchedBy = _mybatcher.Name.Trim();
-          getBatchesbyPerson();
+         // getBatchesbyPerson();
         }
         RaisePropertyChanged("SelectedBatcher");
-        SaveBatchCommand.RaiseCanExecuteChanged();
+       // SaveBatchCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -478,9 +478,7 @@ namespace CETAP_LOB.ViewModel.processing
             {
                 Name = ApplicationSettings.Default.LOBUser
             };
-         //   BatchesByPerson = null;
-            SelectedBatcher.Name = "Carol";
-           // getBatchesbyPerson();
+         
       RefreshData();
     }
 
