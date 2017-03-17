@@ -17,7 +17,7 @@ namespace CETAP_LOB.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EasyPayFile()
         {
-            this.EasyPayRecords = new HashSet<EasyPayRecord>();
+            EasyPayRecords = new HashSet<EasyPayRecord>();
         }
     
         public int FileGenerationNumber { get; set; }

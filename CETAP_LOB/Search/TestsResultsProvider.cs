@@ -24,12 +24,12 @@ namespace CETAP_LOB.Search
 
     public TestsResultsProvider(IDataService Service)
     {
-      this._service = Service;
+      _service = Service;
     }
 
     public IEnumerable DoSearch(string searchTerm, int maxResults, object extraInfo)
     {
-      this._results = new List<TestBDO>();
+      _results = new List<TestBDO>();
       if (ApplicationSettings.Default.DBAvailable)
       {
         using (CETAPEntities cetapEntities = new CETAPEntities())
@@ -39,7 +39,7 @@ namespace CETAP_LOB.Search
             foreach (TestName test in cetapEntities.TestNames.ToList<TestName>().Where<TestName>((Func<TestName, bool>) (p => p.TestCode.ToString().StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase))).Cast<object>())
             {
               TestBDO testBdo = new TestBDO();
-              this._results.Add(Maps.TestDALToTestBDO(test));
+              _results.Add(Maps.TestDALToTestBDO(test));
             }
           }
           else
@@ -47,12 +47,12 @@ namespace CETAP_LOB.Search
             foreach (TestName test in cetapEntities.TestNames.ToList<TestName>().Where<TestName>((Func<TestName, bool>) (p => p.TestName1.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase))).Cast<object>())
             {
               TestBDO testBdo = new TestBDO();
-              this._results.Add(Maps.TestDALToTestBDO(test));
+              _results.Add(Maps.TestDALToTestBDO(test));
             }
           }
         }
       }
-      return (IEnumerable) this._results;
+      return (IEnumerable) _results;
     }
   }
 }

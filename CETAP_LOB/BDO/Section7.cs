@@ -22,26 +22,26 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._mySect;
+        return _mySect;
       }
       set
       {
-        if (this._mySect == value)
+        if (_mySect == value)
           return;
-        this._mySect = value;
-        this.RaisePropertyChanged("TrialSection");
+        _mySect = value;
+        RaisePropertyChanged("TrialSection");
       }
     }
 
     public override string ToString()
     {
-      return this.Barcode + this.ObsToString();
+      return Barcode + ObsToString();
     }
 
     private string ObsToString()
     {
       string str = "";
-      DatAnswer[] array = this.TrialSection.ToArray<DatAnswer>();
+      DatAnswer[] array = TrialSection.ToArray<DatAnswer>();
       for (int index = 0; index < 25; ++index)
         str = str + "," + (object) array[index].Value;
       return str;

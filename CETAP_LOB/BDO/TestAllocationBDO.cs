@@ -32,14 +32,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._testDate;
+        return _testDate;
       }
       set
       {
-        if (this._testDate == value)
+        if (_testDate == value)
           return;
-        this._testDate = value;
-        this.RaisePropertyChanged("TestDate");
+        _testDate = value;
+        RaisePropertyChanged("TestDate");
       }
     }
 
@@ -47,14 +47,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._clientType;
+        return _clientType;
       }
       set
       {
-        if (this._clientType == value)
+        if (_clientType == value)
           return;
-        this._clientType = value;
-        this.RaisePropertyChanged("ClientType");
+        _clientType = value;
+        RaisePropertyChanged("ClientType");
       }
     }
 
@@ -62,14 +62,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._testID;
+        return _testID;
       }
       set
       {
-        if (this._testID == value)
+        if (_testID == value)
           return;
-        this._testID = value;
-        this.RaisePropertyChanged("TestID");
+        _testID = value;
+        RaisePropertyChanged("TestID");
       }
     }
 
@@ -77,14 +77,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._mytestName;
+        return _mytestName;
       }
       set
       {
-        if (this._mytestName == value)
+        if (_mytestName == value)
           return;
-        this._mytestName = value;
-        this.RaisePropertyChanged("TestName");
+        _mytestName = value;
+        RaisePropertyChanged("TestName");
       }
     }
 
@@ -92,14 +92,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._client;
+        return _client;
       }
       set
       {
-        if (this._client == value)
+        if (_client == value)
           return;
-        this._client = value;
-        this.RaisePropertyChanged("Client");
+        _client = value;
+        RaisePropertyChanged("Client");
       }
     }
 
@@ -107,14 +107,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._estimated;
+        return _estimated;
       }
       set
       {
-        if (this._estimated == value)
+        if (_estimated == value)
           return;
-        this._estimated = value;
-        this.RaisePropertyChanged("Estimated");
+        _estimated = value;
+        RaisePropertyChanged("Estimated");
       }
     }
 
@@ -122,14 +122,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._actualUsed;
+        return _actualUsed;
       }
       set
       {
-        if (this._actualUsed == value)
+        if (_actualUsed == value)
           return;
-        this._actualUsed = value;
-        this.RaisePropertyChanged("ActualUsed");
+        _actualUsed = value;
+        RaisePropertyChanged("ActualUsed");
       }
     }
 
@@ -141,7 +141,7 @@ namespace CETAP_LOB.BDO
 
     public override string ToString()
     {
-      return this.TestDate.ToShortDateString() + " " + this.Client + " Amount : " + (object) this.Estimated;
+      return TestDate.ToShortDateString() + " " + Client + " Amount : " + (object) Estimated;
     }
   }
 }

@@ -12,33 +12,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace LOB.View
+namespace CETAP_LOB.View
 {
-  public partial class SettingsView : UserControl, IComponentConnector
+  public partial class SettingsView : UserControl
   {
-    private bool _contentLoaded;
-
     public SettingsView()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
 
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    public void InitializeComponent()
-    {
-      if (this._contentLoaded)
-        return;
-      this._contentLoaded = true;
-      Application.LoadComponent((object) this, new Uri("/LOB;component/view/settingsview.xaml", UriKind.Relative));
-    }
-
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    void IComponentConnector.Connect(int connectionId, object target)
-    {
-      this._contentLoaded = true;
-    }
   }
 }

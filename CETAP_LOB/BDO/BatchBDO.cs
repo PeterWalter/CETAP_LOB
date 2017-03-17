@@ -36,14 +36,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._myecount;
+        return _myecount;
       }
       set
       {
-        if (this._myecount == value)
+        if (_myecount == value)
           return;
-        this._myecount = value;
-        this.RaisePropertyChanged("errorCount");
+        _myecount = value;
+        RaisePropertyChanged("errorCount");
       }
     }
 
@@ -51,19 +51,19 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._mybatch;
+        return _mybatch;
       }
       set
       {
-        if (this._mybatch == value)
+        if (_mybatch == value)
           return;
-        this._mybatch = value;
-        if (string.IsNullOrWhiteSpace(this._mybatch))
-          this.AddError("BatchName", "Batch Name is required");
+        _mybatch = value;
+        if (string.IsNullOrWhiteSpace(_mybatch))
+          AddError("BatchName", "Batch Name is required");
         else
-          this.RemoveError("BatchName");
-        this.checkerrors();
-        this.RaisePropertyChanged("BatchName");
+          RemoveError("BatchName");
+        checkerrors();
+        RaisePropertyChanged("BatchName");
       }
     }
 
@@ -71,19 +71,19 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._testDate;
+        return _testDate;
       }
       set
       {
-        if (this._testDate == value)
+        if (_testDate == value)
           return;
-        this._testDate = value;
-        if (this._testDate > DateTime.Now)
-          this.AddError("TestDate", "Impossible date, test already written");
+        _testDate = value;
+        if (_testDate > DateTime.Now)
+          AddError("TestDate", "Impossible date, test already written");
         else
-          this.RemoveError("TestDate");
-        this.checkerrors();
-        this.RaisePropertyChanged("TestDate");
+          RemoveError("TestDate");
+        checkerrors();
+        RaisePropertyChanged("TestDate");
       }
     }
 
@@ -91,14 +91,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._testCombination;
+        return _testCombination;
       }
       set
       {
-        if (this._testCombination == value)
+        if (_testCombination == value)
           return;
-        this._testCombination = value;
-        this.RaisePropertyChanged("TestCombination");
+        _testCombination = value;
+        RaisePropertyChanged("TestCombination");
       }
     }
 
@@ -106,14 +106,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._batchedBy;
+        return _batchedBy;
       }
       set
       {
-        if (this._batchedBy == value)
+        if (_batchedBy == value)
           return;
-        this._batchedBy = value;
-        this.RaisePropertyChanged("BatchedBy");
+        _batchedBy = value;
+        RaisePropertyChanged("BatchedBy");
       }
     }
 
@@ -121,14 +121,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._batchDate;
+        return _batchDate;
       }
       set
       {
-        if (this._batchDate == value)
+        if (_batchDate == value)
           return;
-        this._batchDate = value;
-        this.RaisePropertyChanged("BatchDate");
+        _batchDate = value;
+        RaisePropertyChanged("BatchDate");
       }
     }
 
@@ -136,14 +136,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._randNumber;
+        return _randNumber;
       }
       set
       {
-        if (this._randNumber == value)
+        if (_randNumber == value)
           return;
-        this._randNumber = value;
-        this.RaisePropertyChanged("RandomTestNumber");
+        _randNumber = value;
+        RaisePropertyChanged("RandomTestNumber");
       }
     }
 
@@ -151,14 +151,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._mycount;
+        return _mycount;
       }
       set
       {
-        if (this._mycount == value)
+        if (_mycount == value)
           return;
-        this._mycount = value;
-        this.RaisePropertyChanged("Count");
+        _mycount = value;
+        RaisePropertyChanged("Count");
       }
     }
 
@@ -166,14 +166,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._venueID;
+        return _venueID;
       }
       set
       {
-        if (this._venueID == value)
+        if (_venueID == value)
           return;
-        this._venueID = value;
-        this.RaisePropertyChanged("TestVenueID");
+        _venueID = value;
+        RaisePropertyChanged("TestVenueID");
       }
     }
 
@@ -181,14 +181,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._myProfileID;
+        return _myProfileID;
       }
       set
       {
-        if (this._myProfileID == value)
+        if (_myProfileID == value)
           return;
-        this._myProfileID = value;
-        this.RaisePropertyChanged("TestProfileID");
+        _myProfileID = value;
+        RaisePropertyChanged("TestProfileID");
       }
     }
 
@@ -196,14 +196,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._desc;
+        return _desc;
       }
       set
       {
-        if (this._desc == value)
+        if (_desc == value)
           return;
-        this._desc = value;
-        this.RaisePropertyChanged("Description");
+        _desc = value;
+        RaisePropertyChanged("Description");
       }
     }
 
@@ -213,15 +213,15 @@ namespace CETAP_LOB.BDO
 
     public override string ToString()
     {
-      return this.BatchName;
+      return BatchName;
     }
 
     private void checkerrors()
     {
-      if (this.HasErrors)
-        this.errorCount = this._errors.Count;
+      if (HasErrors)
+        errorCount = _errors.Count;
       else
-        this.errorCount = 0;
+        errorCount = 0;
     }
   }
 }

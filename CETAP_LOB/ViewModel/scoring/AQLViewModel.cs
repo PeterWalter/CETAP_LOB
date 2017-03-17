@@ -42,7 +42,7 @@ namespace CETAP_LOB.ViewModel.scoring
       }
       set
       {
-        if (this._myAQL == value)
+        if (_myAQL == value)
           return;
         _myAQL = value;
         RaisePropertyChanged("AQL");

@@ -26,14 +26,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._profile;
+        return _profile;
       }
       set
       {
-        if (this._profile == value)
+        if (_profile == value)
           return;
-        this._profile = value;
-        this.RaisePropertyChanged("Profile");
+        _profile = value;
+        RaisePropertyChanged("Profile");
       }
     }
 
@@ -41,14 +41,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._myIntake;
+        return _myIntake;
       }
       set
       {
-        if (this._myIntake == value)
+        if (_myIntake == value)
           return;
-        this._myIntake = value;
-        this.RaisePropertyChanged("Intake");
+        _myIntake = value;
+        RaisePropertyChanged("Intake");
       }
     }
 
@@ -56,14 +56,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._myAllocID;
+        return _myAllocID;
       }
       set
       {
-        if (this._myAllocID == value)
+        if (_myAllocID == value)
           return;
-        this._myAllocID = value;
-        this.RaisePropertyChanged("AllocationID");
+        _myAllocID = value;
+        RaisePropertyChanged("AllocationID");
       }
     }
 
@@ -73,14 +73,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._mDate;
+        return _mDate;
       }
       set
       {
-        if (this._mDate == value)
+        if (_mDate == value)
           return;
-        this._mDate = value;
-        this.RaisePropertyChanged("ModifiedDate");
+        _mDate = value;
+        RaisePropertyChanged("ModifiedDate");
       }
     }
 
@@ -88,7 +88,7 @@ namespace CETAP_LOB.BDO
 
     public override string ToString()
     {
-      return this.Profile.ToString();
+      return Profile.ToString();
     }
   }
 }

@@ -17,7 +17,7 @@ namespace CETAP_LOB.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Institution()
         {
-            this.InstitutionMatches = new HashSet<InstitutionMatch>();
+            InstitutionMatches = new HashSet<InstitutionMatch>();
         }
     
         public int InstID { get; set; }

@@ -42,14 +42,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._myselectedrecord;
+        return _myselectedrecord;
       }
       set
       {
-        if (this._myselectedrecord == value)
+        if (_myselectedrecord == value)
           return;
-        this._myselectedrecord = value;
-        this.RaisePropertyChanged("SelectedRecord");
+        _myselectedrecord = value;
+        RaisePropertyChanged("SelectedRecord");
       }
     }
 
@@ -57,44 +57,44 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._bio;
+        return _bio;
       }
       set
       {
-        if (this._bio == value)
+        if (_bio == value)
           return;
-        this._bio = value;
-        this.RaisePropertyChanged("BIO");
+        _bio = value;
+        RaisePropertyChanged("BIO");
       }
     }
 
     public AnswerSheetBioViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.RegisterCommands();
-      this.Refresh();
+      _service = Service;
+      RegisterCommands();
+      Refresh();
     }
 
     private void RegisterCommands()
     {
-      this.GetNBTCommand = new RelayCommand(new Action(this.GetNBTNumber));
-      this.GetNamesCommand = new RelayCommand(new Action(this.GetNamesfromDB));
-      this.GetDOBCommand = new RelayCommand(new Action(this.GetDOBfromDB));
-      this.GetIDCommand = new RelayCommand(new Action(this.GetIDfromDB));
-      this.RefreshCommand = new RelayCommand(new Action(this.Refresh));
-      this.AutoCorrectCommand = new RelayCommand(new Action(this.AutoCorrect));
+      GetNBTCommand = new RelayCommand(new Action(GetNBTNumber));
+      GetNamesCommand = new RelayCommand(new Action(GetNamesfromDB));
+      GetDOBCommand = new RelayCommand(new Action(GetDOBfromDB));
+      GetIDCommand = new RelayCommand(new Action(GetIDfromDB));
+      RefreshCommand = new RelayCommand(new Action(Refresh));
+      AutoCorrectCommand = new RelayCommand(new Action(AutoCorrect));
     }
 
     private void Refresh()
     {
-      this.BIO = this._service.LoadAnswerSheet();
+      BIO = _service.LoadAnswerSheet();
     }
 
     private void AutoCorrect()
     {
       if (!ApplicationSettings.Default.DBAvailable)
         return;
-      foreach (AnswerSheetBio ans in this.BIO.Where<AnswerSheetBio>((Func<AnswerSheetBio, bool>) (a => a.HasErrors)).ToList<AnswerSheetBio>())
+      foreach (AnswerSheetBio ans in BIO.Where<AnswerSheetBio>((Func<AnswerSheetBio, bool>) (a => a.HasErrors)).ToList<AnswerSheetBio>())
       {
         bool flag = false;
         if (ans.NBT.ToString().Substring(7, 1) != "9")
@@ -112,15 +112,15 @@ namespace CETAP_LOB.ViewModel.scoring
                 {
                   QADatRecord qaDatRecord = new QADatRecord();
                   AnswerSheetBioViewModel.AnswersheetRecordToQARecord(ans, qaDatRecord);
-                  this.QARecord = this._service.GetSAIDbyNBT(qaDatRecord);
-                  AnswerSheetBioViewModel.QARecordToAnswersheetRecord(ans, this.QARecord);
+                  QARecord = _service.GetSAIDbyNBT(qaDatRecord);
+                  AnswerSheetBioViewModel.QARecordToAnswersheetRecord(ans, QARecord);
                 }
                 if (ans.ForeignID != "")
                 {
                   QADatRecord qaDatRecord = new QADatRecord();
                   AnswerSheetBioViewModel.AnswersheetRecordToQARecord(ans, qaDatRecord);
-                  this.QARecord = this._service.GetFIDbyNBT(qaDatRecord);
-                  AnswerSheetBioViewModel.QARecordToAnswersheetRecord(ans, this.QARecord);
+                  QARecord = _service.GetFIDbyNBT(qaDatRecord);
+                  AnswerSheetBioViewModel.QARecordToAnswersheetRecord(ans, QARecord);
                   break;
                 }
                 break;
@@ -133,37 +133,37 @@ namespace CETAP_LOB.ViewModel.scoring
     private void GetDOBfromDB()
     {
       QADatRecord qaDatRecord = new QADatRecord();
-      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(this.SelectedRecord, qaDatRecord);
-      this.QARecord = this._service.GetDOBfromDB(qaDatRecord);
-      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(this.SelectedRecord, this.QARecord);
+      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(SelectedRecord, qaDatRecord);
+      QARecord = _service.GetDOBfromDB(qaDatRecord);
+      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(SelectedRecord, QARecord);
     }
 
     private void GetIDfromDB()
     {
-      if (!(this.SelectedRecord.NBT.ToString().Substring(7, 1) != "9"))
+      if (!(SelectedRecord.NBT.ToString().Substring(7, 1) != "9"))
         return;
       QADatRecord qaDatRecord = new QADatRecord();
-      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(this.SelectedRecord, qaDatRecord);
-      this.QARecord = this._service.GetSAIDbyNBT(qaDatRecord);
-      this.QARecord = this._service.GetFIDbyNBT(qaDatRecord);
-      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(this.SelectedRecord, this.QARecord);
+      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(SelectedRecord, qaDatRecord);
+      QARecord = _service.GetSAIDbyNBT(qaDatRecord);
+      QARecord = _service.GetFIDbyNBT(qaDatRecord);
+      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(SelectedRecord, QARecord);
     }
 
     private void GetNBTNumber()
     {
       QADatRecord qaDatRecord = new QADatRecord();
-      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(this.SelectedRecord, qaDatRecord);
-      this.QARecord = !string.IsNullOrEmpty(this.SelectedRecord.ForeignID) ? this._service.GetNBTNumberFromDBbyFID(qaDatRecord) : this._service.GetNBTNumberFromDBbySAID(qaDatRecord);
-      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(this.SelectedRecord, this.QARecord);
+      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(SelectedRecord, qaDatRecord);
+      QARecord = !string.IsNullOrEmpty(SelectedRecord.ForeignID) ? _service.GetNBTNumberFromDBbyFID(qaDatRecord) : _service.GetNBTNumberFromDBbySAID(qaDatRecord);
+      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(SelectedRecord, QARecord);
     }
 
     private void GetNamesfromDB()
     {
       QADatRecord qaDatRecord = new QADatRecord();
-      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(this.SelectedRecord, qaDatRecord);
-      this.QARecord = this._service.GetNamebyNBT(qaDatRecord);
-      this.QARecord = this._service.GetSurnamebyNBT(qaDatRecord);
-      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(this.SelectedRecord, this.QARecord);
+      AnswerSheetBioViewModel.AnswersheetRecordToQARecord(SelectedRecord, qaDatRecord);
+      QARecord = _service.GetNamebyNBT(qaDatRecord);
+      QARecord = _service.GetSurnamebyNBT(qaDatRecord);
+      AnswerSheetBioViewModel.QARecordToAnswersheetRecord(SelectedRecord, QARecord);
     }
 
     private static void AnswersheetRecordToQARecord(AnswerSheetBio ans, QADatRecord QaDat)

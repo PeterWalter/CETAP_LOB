@@ -23,11 +23,11 @@ namespace CETAP_LOB.Model.easypay
     {
       get
       {
-        return this._nbt;
+        return _nbt;
       }
       set
       {
-        this._nbt = value;
+        _nbt = value;
       }
     }
 
@@ -35,11 +35,11 @@ namespace CETAP_LOB.Model.easypay
     {
       get
       {
-        return this.amount;
+        return amount;
       }
       set
       {
-        this.amount = value;
+        amount = value;
       }
     }
 
@@ -47,11 +47,11 @@ namespace CETAP_LOB.Model.easypay
     {
       get
       {
-        return this._Id;
+        return _Id;
       }
       set
       {
-        this._Id = value;
+        _Id = value;
       }
     }
 
@@ -59,10 +59,10 @@ namespace CETAP_LOB.Model.easypay
     {
       get
       {
-        this.CreateXrecord();
-        this.CreateTPrecord();
-        this.myRecord = this._xRecord + this._pRecord;
-        return this.myRecord;
+        CreateXrecord();
+        CreateTPrecord();
+        myRecord = _xRecord + _pRecord;
+        return myRecord;
       }
     }
 
@@ -70,19 +70,19 @@ namespace CETAP_LOB.Model.easypay
     {
       long num = 2630099999;
       DateTime now = DateTime.Now;
-      this._date = now.ToString("yyyyMMdd");
-      this._time = now.ToString("HHMMss");
-      this._xRecord = "X," + (object) num + "," + this._date + "," + this._time + ",0263," + this._Id;
-      this._xRecord += Environment.NewLine;
+      _date = now.ToString("yyyyMMdd");
+      _time = now.ToString("HHMMss");
+      _xRecord = "X," + (object) num + "," + _date + "," + _time + ",0263," + _Id;
+      _xRecord += Environment.NewLine;
     }
 
     private void CreateTPrecord()
     {
       string str1 = "P,";
-      string str2 = string.Format("{0,10:######0.00}", (object) this.amount);
+      string str2 = string.Format("{0,10:######0.00}", (object) amount);
       string str3 = str1 + str2;
       string str4 = string.Format("{0,10:######0.00}", (object) 0.0);
-      this._pRecord = str3 + "," + str4 + "," + (object) this._nbt + Environment.NewLine + ("T," + str2 + "," + str4 + ",Cash" + Environment.NewLine);
+      _pRecord = str3 + "," + str4 + "," + (object) _nbt + Environment.NewLine + ("T," + str2 + "," + str4 + ",Cash" + Environment.NewLine);
     }
   }
 }

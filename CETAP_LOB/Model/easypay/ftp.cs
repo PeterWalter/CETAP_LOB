@@ -23,29 +23,29 @@ namespace CETAP_LOB.Model.easypay
 
     public ftp(string hostIP, string userName, string password)
     {
-      this.host = "ftp://" + hostIP;
-      this.user = userName;
-      this.pass = password;
+      host = "ftp://" + hostIP;
+      user = userName;
+      pass = password;
     }
 
     public async Task downloadAsync(string remoteFile, string localFile)
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + remoteFile);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "RETR";
-        this.ftpResponse = (FtpWebResponse) this.ftpRequest.GetResponse();
-        this.ftpStream = this.ftpResponse.GetResponseStream();
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + remoteFile);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "RETR";
+        ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+        ftpStream = ftpResponse.GetResponseStream();
         FileStream localFileStream = new FileStream(localFile, FileMode.Create);
-        byte[] byteBuffer = new byte[this.bufferSize];
-        int bytesRead = await this.ftpStream.ReadAsync(byteBuffer, 0, this.bufferSize);
+        byte[] byteBuffer = new byte[bufferSize];
+        int bytesRead = await ftpStream.ReadAsync(byteBuffer, 0, bufferSize);
         try
         {
-          for (; bytesRead > 0; bytesRead = await this.ftpStream.ReadAsync(byteBuffer, 0, this.bufferSize))
+          for (; bytesRead > 0; bytesRead = await ftpStream.ReadAsync(byteBuffer, 0, bufferSize))
             await localFileStream.WriteAsync(byteBuffer, 0, bytesRead);
         }
         catch (Exception ex)
@@ -53,9 +53,9 @@ namespace CETAP_LOB.Model.easypay
           Console.WriteLine(ex.ToString());
         }
         localFileStream.Close();
-        this.ftpStream.Close();
-        this.ftpResponse.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpStream.Close();
+        ftpResponse.Close();
+        ftpRequest = (FtpWebRequest) null;
       }
       catch (Exception ex)
       {
@@ -67,28 +67,28 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + remoteFile);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "STOR";
-        this.ftpStream = this.ftpRequest.GetRequestStream();
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + remoteFile);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "STOR";
+        ftpStream = ftpRequest.GetRequestStream();
         FileStream fileStream = new FileStream(localFile, FileMode.Open);
-        byte[] buffer = new byte[this.bufferSize];
-        int count = fileStream.Read(buffer, 0, this.bufferSize);
+        byte[] buffer = new byte[bufferSize];
+        int count = fileStream.Read(buffer, 0, bufferSize);
         try
         {
-          for (; count != 0; count = fileStream.Read(buffer, 0, this.bufferSize))
-            this.ftpStream.Write(buffer, 0, count);
+          for (; count != 0; count = fileStream.Read(buffer, 0, bufferSize))
+            ftpStream.Write(buffer, 0, count);
         }
         catch (Exception ex)
         {
           Console.WriteLine(ex.ToString());
         }
         fileStream.Close();
-        this.ftpStream.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpStream.Close();
+        ftpRequest = (FtpWebRequest) null;
       }
       catch (Exception ex)
       {
@@ -100,15 +100,15 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + deleteFile);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "DELE";
-        this.ftpResponse = (FtpWebResponse) this.ftpRequest.GetResponse();
-        this.ftpResponse.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + deleteFile);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "DELE";
+        ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+        ftpResponse.Close();
+        ftpRequest = (FtpWebRequest) null;
       }
       catch (Exception ex)
       {
@@ -120,16 +120,16 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + currentFileNameAndPath);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "RENAME";
-        this.ftpRequest.RenameTo = newFileName;
-        this.ftpResponse = (FtpWebResponse) this.ftpRequest.GetResponse();
-        this.ftpResponse.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + currentFileNameAndPath);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "RENAME";
+        ftpRequest.RenameTo = newFileName;
+        ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+        ftpResponse.Close();
+        ftpRequest = (FtpWebRequest) null;
       }
       catch (Exception ex)
       {
@@ -141,15 +141,15 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + newDirectory);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "MKD";
-        this.ftpResponse = (FtpWebResponse) this.ftpRequest.GetResponse();
-        this.ftpResponse.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + newDirectory);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "MKD";
+        ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+        ftpResponse.Close();
+        ftpRequest = (FtpWebRequest) null;
       }
       catch (Exception ex)
       {
@@ -161,15 +161,15 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + fileName);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "MDTM";
-        this.ftpResponse = (FtpWebResponse) this.ftpRequest.GetResponse();
-        this.ftpStream = this.ftpResponse.GetResponseStream();
-        StreamReader streamReader = new StreamReader(this.ftpStream);
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + fileName);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "MDTM";
+        ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+        ftpStream = ftpResponse.GetResponseStream();
+        StreamReader streamReader = new StreamReader(ftpStream);
         string str = (string) null;
         try
         {
@@ -180,9 +180,9 @@ namespace CETAP_LOB.Model.easypay
           Console.WriteLine(ex.ToString());
         }
         streamReader.Close();
-        this.ftpStream.Close();
-        this.ftpResponse.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpStream.Close();
+        ftpResponse.Close();
+        ftpRequest = (FtpWebRequest) null;
         return str;
       }
       catch (Exception ex)
@@ -196,15 +196,15 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + fileName);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "SIZE";
-        this.ftpResponse = (FtpWebResponse) this.ftpRequest.GetResponse();
-        this.ftpStream = this.ftpResponse.GetResponseStream();
-        StreamReader streamReader = new StreamReader(this.ftpStream);
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + fileName);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "SIZE";
+        ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+        ftpStream = ftpResponse.GetResponseStream();
+        StreamReader streamReader = new StreamReader(ftpStream);
         string str = (string) null;
         try
         {
@@ -216,9 +216,9 @@ namespace CETAP_LOB.Model.easypay
           Console.WriteLine(ex.ToString());
         }
         streamReader.Close();
-        this.ftpStream.Close();
-        this.ftpResponse.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpStream.Close();
+        ftpResponse.Close();
+        ftpRequest = (FtpWebRequest) null;
         return str;
       }
       catch (Exception ex)
@@ -232,15 +232,15 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        FtpWebRequest ftpWebRequest = (FtpWebRequest) WebRequest.Create(this.host);
-        ftpWebRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
+        FtpWebRequest ftpWebRequest = (FtpWebRequest) WebRequest.Create(host);
+        ftpWebRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
         ftpWebRequest.UseBinary = true;
         ftpWebRequest.UsePassive = true;
         ftpWebRequest.KeepAlive = true;
         ftpWebRequest.Method = "NLST";
-        this.ftpResponse = (FtpWebResponse) ftpWebRequest.GetResponse();
-        this.ftpStream = this.ftpResponse.GetResponseStream();
-        StreamReader streamReader = new StreamReader(this.ftpStream);
+        ftpResponse = (FtpWebResponse) ftpWebRequest.GetResponse();
+        ftpStream = ftpResponse.GetResponseStream();
+        StreamReader streamReader = new StreamReader(ftpStream);
         string str = (string) null;
         try
         {
@@ -252,8 +252,8 @@ namespace CETAP_LOB.Model.easypay
           Console.WriteLine(ex.ToString());
         }
         streamReader.Close();
-        this.ftpStream.Close();
-        this.ftpResponse.Close();
+        ftpStream.Close();
+        ftpResponse.Close();
         try
         {
           return str.Split("|".ToCharArray());
@@ -274,15 +274,15 @@ namespace CETAP_LOB.Model.easypay
     {
       try
       {
-        this.ftpRequest = (FtpWebRequest) WebRequest.Create(this.host + "/" + directory);
-        this.ftpRequest.Credentials = (ICredentials) new NetworkCredential(this.user, this.pass);
-        this.ftpRequest.UseBinary = true;
-        this.ftpRequest.UsePassive = true;
-        this.ftpRequest.KeepAlive = true;
-        this.ftpRequest.Method = "LIST";
-        this.ftpResponse = (FtpWebResponse) this.ftpRequest.GetResponse();
-        this.ftpStream = this.ftpResponse.GetResponseStream();
-        StreamReader streamReader = new StreamReader(this.ftpStream);
+        ftpRequest = (FtpWebRequest) WebRequest.Create(host + "/" + directory);
+        ftpRequest.Credentials = (ICredentials) new NetworkCredential(user, pass);
+        ftpRequest.UseBinary = true;
+        ftpRequest.UsePassive = true;
+        ftpRequest.KeepAlive = true;
+        ftpRequest.Method = "LIST";
+        ftpResponse = (FtpWebResponse) ftpRequest.GetResponse();
+        ftpStream = ftpResponse.GetResponseStream();
+        StreamReader streamReader = new StreamReader(ftpStream);
         string str = (string) null;
         try
         {
@@ -294,9 +294,9 @@ namespace CETAP_LOB.Model.easypay
           Console.WriteLine(ex.ToString());
         }
         streamReader.Close();
-        this.ftpStream.Close();
-        this.ftpResponse.Close();
-        this.ftpRequest = (FtpWebRequest) null;
+        ftpStream.Close();
+        ftpResponse.Close();
+        ftpRequest = (FtpWebRequest) null;
         try
         {
           return str.Split("|".ToCharArray());

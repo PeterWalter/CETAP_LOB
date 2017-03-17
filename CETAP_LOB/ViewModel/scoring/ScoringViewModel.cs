@@ -49,14 +49,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._myStatus;
+        return _myStatus;
       }
       set
       {
-        if (this._myStatus == value)
+        if (_myStatus == value)
           return;
-        this._myStatus = value;
-        this.RaisePropertyChanged("Status");
+        _myStatus = value;
+        RaisePropertyChanged("Status");
       }
     }
 
@@ -64,14 +64,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._composit;
+        return _composit;
       }
       set
       {
-        if (this._composit == value)
+        if (_composit == value)
           return;
-        this._composit = value;
-        this.RaisePropertyChanged("Composit");
+        _composit = value;
+        RaisePropertyChanged("Composit");
       }
     }
 
@@ -79,14 +79,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._bio;
+        return _bio;
       }
       set
       {
-        if (this._bio == value)
+        if (_bio == value)
           return;
-        this._bio = value;
-        this.RaisePropertyChanged("BIO");
+        _bio = value;
+        RaisePropertyChanged("BIO");
       }
     }
 
@@ -94,14 +94,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._mat;
+        return _mat;
       }
       set
       {
-        if (this._mat == value)
+        if (_mat == value)
           return;
-        this._mat = value;
-        this.RaisePropertyChanged("MAT");
+        _mat = value;
+        RaisePropertyChanged("MAT");
       }
     }
 
@@ -109,14 +109,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._aql;
+        return _aql;
       }
       set
       {
-        if (this._aql == value)
+        if (_aql == value)
           return;
-        this._aql = value;
-        this.RaisePropertyChanged("AQL");
+        _aql = value;
+        RaisePropertyChanged("AQL");
       }
     }
 
@@ -124,56 +124,56 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._myfiles;
+        return _myfiles;
       }
       set
       {
-        if (this._myfiles == value)
+        if (_myfiles == value)
           return;
-        this._myfiles = value;
-        this.RaisePropertyChanged("FilesInFolder");
+        _myfiles = value;
+        RaisePropertyChanged("FilesInFolder");
       }
     }
 
     public ScoringViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      this.FilesInFolder = new ObservableCollection<string>();
-      this.Composit = new ObservableCollection<CompositBDO>();
+      FilesInFolder = new ObservableCollection<string>();
+      Composit = new ObservableCollection<CompositBDO>();
     }
 
     private void RegisterCommands()
     {
-      this.SelectFolderCommand = new RelayCommand(new Action(this.selectFolder));
-      this.ReadFilesCommand = new RelayCommand(new Action(this.readScoreFiles));
-      this.ProcessScoresCommand = new RelayCommand((Action) (() => this.ProcessScores()), (Func<bool>) (() => this.CanprocessScores()));
-      this.GenerateCompositeCommand = new RelayCommand((Action) (() => this.GenerateComposite()));
-      this.TrackScoresCommand = new RelayCommand((Action) (() => this.TrackScores()), (Func<bool>) (() => this.canTrack()));
+      SelectFolderCommand = new RelayCommand(new Action(selectFolder));
+      ReadFilesCommand = new RelayCommand(new Action(readScoreFiles));
+      ProcessScoresCommand = new RelayCommand((Action) (() => ProcessScores()), (Func<bool>) (() => CanprocessScores()));
+      GenerateCompositeCommand = new RelayCommand((Action) (() => GenerateComposite()));
+      TrackScoresCommand = new RelayCommand((Action) (() => TrackScores()), (Func<bool>) (() => canTrack()));
     }
 
     private void TrackScores()
     {
-      foreach (var data in this.Composit.GroupBy<CompositBDO, string>((Func<CompositBDO, string>) (b => b.Batch)).Select(g => new
+      foreach (var data in Composit.GroupBy<CompositBDO, string>((Func<CompositBDO, string>) (b => b.Batch)).Select(g => new
       {
         Batch = g.Key,
         Amount = g.Count<CompositBDO>()
       }).ToList())
       {
         int int32 = Convert.ToInt32(data.Amount);
-        this._service.RecordsTrackedScores(data.Batch.ToString(), int32);
+        _service.RecordsTrackedScores(data.Batch.ToString(), int32);
       }
     }
 
     private bool canTrack()
     {
       bool flag = false;
-      if (this.Composit.Count > 0)
+      if (Composit.Count > 0)
         flag = true;
       return flag;
     }
@@ -181,7 +181,7 @@ namespace CETAP_LOB.ViewModel.scoring
     private void GenerateComposite()
     {
       string text;
-      if (this._service.GenerateComposite())
+      if (_service.GenerateComposite())
       {
         text = "Composite files have been generated !!";
         int num = (int) ModernDialog.ShowMessage(text, "Composite", MessageBoxButton.OK, (Window) null);
@@ -191,17 +191,17 @@ namespace CETAP_LOB.ViewModel.scoring
         text = "Composite not created";
         int num = (int) ModernDialog.ShowMessage(text, "Composite", MessageBoxButton.OK, (Window) null);
       }
-      this.Status = text;
+      Status = text;
     }
 
     private bool CanGenerateComposite()
     {
-      return this.Composit.Count > 0;
+      return Composit.Count > 0;
     }
 
     private void ProcessScores()
     {
-      this.MatchScores();
+      MatchScores();
     }
 
     private bool CanprocessScores()
@@ -215,36 +215,36 @@ namespace CETAP_LOB.ViewModel.scoring
 
     private void readScoreFiles()
     {
-      this.AQL = this._service.GetAQL();
-      this.MAT = this._service.GetMat();
-      this.BIO = this._service.GetBIO();
-      this.IsmatchScores = true;
-      this.MatchScores();
+      AQL = _service.GetAQL();
+      MAT = _service.GetMat();
+      BIO = _service.GetBIO();
+      IsmatchScores = true;
+      MatchScores();
     }
 
     private void SendMessageCallback(string message)
     {
       if (!(message == "Clean BIO"))
         return;
-      this.MatchScores();
+      MatchScores();
     }
 
     private void MatchScores()
     {
-      if (!this.IsmatchScores)
+      if (!IsmatchScores)
         return;
-      this.Composit = this._service.MatchScores();
+      Composit = _service.MatchScores();
     }
 
     private void selectFolder()
     {
-      this.FilesInFolder.Clear();
+      FilesInFolder.Clear();
       FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
       folderBrowserDialog.SelectedPath = ApplicationSettings.Default.ScoreFolder;
       if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
         return;
       string selectedPath = folderBrowserDialog.SelectedPath;
-      this.FilesInFolder = this._service.ListScoreFiles(selectedPath);
+      FilesInFolder = _service.ListScoreFiles(selectedPath);
       ApplicationSettings.Default.ScoreFolder = selectedPath;
       ApplicationSettings.Default.Save();
     }

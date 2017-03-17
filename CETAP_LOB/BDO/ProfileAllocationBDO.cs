@@ -26,7 +26,7 @@ namespace CETAP_LOB.BDO
 
     public override string ToString()
     {
-      return this.Profile.ToString();
+      return Profile.ToString();
     }
   }
 }

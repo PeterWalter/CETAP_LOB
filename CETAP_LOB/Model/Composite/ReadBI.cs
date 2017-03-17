@@ -23,11 +23,11 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._filename;
+        return _filename;
       }
       set
       {
-        this._filename = value;
+        _filename = value;
       }
     }
 
@@ -35,23 +35,23 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this.Allbi;
+        return Allbi;
       }
       set
       {
-        this.Allbi = value;
+        Allbi = value;
       }
     }
 
     public ReadBI(string File)
     {
-      this._filename = File;
-      this.ReadExcelFile();
+      _filename = File;
+      ReadExcelFile();
     }
 
     private async void ReadExcelFile()
     {
-      IXLWorksheet xlWorksheet = new XLWorkbook(this._filename).Worksheet(1);
+      IXLWorksheet xlWorksheet = new XLWorkbook(_filename).Worksheet(1);
       xlWorksheet.FirstRowUsed();
       IXLTable xlTable = xlWorksheet.Range(xlWorksheet.FirstCellUsed().Address, xlWorksheet.LastCellUsed().Address).AsTable();
       int num = 0;
@@ -70,7 +70,7 @@ namespace CETAP_LOB.Model.Composite
         if (!row.Field("NBT Exam Date").IsEmpty())
           bi.DOT = HelperUtils.BioDate(row.Field("NBT Exam Date").GetString().Trim());
         ++num;
-        this.Allbi.Add(bi);
+        Allbi.Add(bi);
       }
     }
   }

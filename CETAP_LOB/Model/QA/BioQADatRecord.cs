@@ -91,14 +91,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myCSXNum;
+        return _myCSXNum;
       }
       set
       {
-        if (this._myCSXNum == value)
+        if (_myCSXNum == value)
           return;
-        this._myCSXNum = value;
-        this.RaisePropertyChanged("mCSX_Number");
+        _myCSXNum = value;
+        RaisePropertyChanged("mCSX_Number");
       }
     }
 
@@ -106,14 +106,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._csx;
+        return _csx;
       }
       set
       {
-        if (this._csx == value)
+        if (_csx == value)
           return;
-        this._csx = value;
-        this.RaisePropertyChanged("CSX");
+        _csx = value;
+        RaisePropertyChanged("CSX");
       }
     }
 
@@ -121,27 +121,27 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._nbt;
+        return _nbt;
       }
       set
       {
-        if (this._nbt == value)
+        if (_nbt == value)
           return;
-        this._nbt = value;
-        string str = this._nbt.Substring(1, 13);
-        if (!string.IsNullOrEmpty(this._nbt))
+        _nbt = value;
+        string str = _nbt.Substring(1, 13);
+        if (!string.IsNullOrEmpty(_nbt))
         {
-          if (this._nbt.Length != 14)
-            this.AddError("NBT", "Not proper length for NBT number");
+          if (_nbt.Length != 14)
+            AddError("NBT", "Not proper length for NBT number");
           else if (!HelperUtils.IsValidChecksum(str))
-            this.AddError("NBT", "Not a Valid NBT number");
+            AddError("NBT", "Not a Valid NBT number");
           else
-            this.RemoveError("NBT");
+            RemoveError("NBT");
         }
         else
-          this.AddError("NBT", "NBT number cannot be empty");
-        this.checkerrors();
-        this.RaisePropertyChanged("NBT");
+          AddError("NBT", "NBT number cannot be empty");
+        checkerrors();
+        RaisePropertyChanged("NBT");
       }
     }
 
@@ -149,28 +149,28 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._barcode;
+        return _barcode;
       }
       set
       {
-        if (this._barcode == value)
+        if (_barcode == value)
           return;
-        this._barcode = value;
-        this._barcode = this._barcode.Trim();
-        string barcode = this._barcode;
-        if (!string.IsNullOrEmpty(this._barcode))
+        _barcode = value;
+        _barcode = _barcode.Trim();
+        string barcode = _barcode;
+        if (!string.IsNullOrEmpty(_barcode))
         {
-          if (this._barcode.Length != 12)
-            this.AddError("Barcode", "Not proper length for Session ID number");
+          if (_barcode.Length != 12)
+            AddError("Barcode", "Not proper length for Session ID number");
           else if (!HelperUtils.IsValidChecksum(barcode))
-            this.AddError("Barcode", "Not a Valid Barcode number");
+            AddError("Barcode", "Not a Valid Barcode number");
           else
-            this.RemoveError("Barcode");
+            RemoveError("Barcode");
         }
         else
-          this.AddError("Barcode", "Barcode number cannot be empty");
-        this.checkerrors();
-        this.RaisePropertyChanged("Barcode");
+          AddError("Barcode", "Barcode number cannot be empty");
+        checkerrors();
+        RaisePropertyChanged("Barcode");
       }
     }
 
@@ -178,31 +178,31 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._said;
+        return _said;
       }
       set
       {
-        if (this._said == value)
+        if (_said == value)
           return;
-        this._said = value;
-        MatchCollection matchCollection = new Regex("\\s").Matches(this._said);
-        if (!HelperUtils.IsValidChecksum(this._said))
-          this.AddError("SAID", "Not a Valid South African ID number");
+        _said = value;
+        MatchCollection matchCollection = new Regex("\\s").Matches(_said);
+        if (!HelperUtils.IsValidChecksum(_said))
+          AddError("SAID", "Not a Valid South African ID number");
         else
-          this.RemoveError("SAID");
+          RemoveError("SAID");
         if (matchCollection.Count > 0)
-          this.AddError("SAID", "South African ID number cannot have spaces");
-        else if (!Regex.IsMatch(this._said, "[0-9]"))
-          this.AddError("SAID", "SA Id does not have characters");
-        if (!HelperUtils.IsNumeric(this._said))
-          this.AddError("SAID", "SA ID cannot have characters");
-        else if (!string.IsNullOrWhiteSpace(this._said))
-          this.RemoveError("ForeignID");
+          AddError("SAID", "South African ID number cannot have spaces");
+        else if (!Regex.IsMatch(_said, "[0-9]"))
+          AddError("SAID", "SA Id does not have characters");
+        if (!HelperUtils.IsNumeric(_said))
+          AddError("SAID", "SA ID cannot have characters");
+        else if (!string.IsNullOrWhiteSpace(_said))
+          RemoveError("ForeignID");
         else
-          this.RemoveError("SAID");
-        this.checkerrors();
-        this.RaisePropertyChanged("SAID");
-        this.RaisePropertyChanged("ForeignID");
+          RemoveError("SAID");
+        checkerrors();
+        RaisePropertyChanged("SAID");
+        RaisePropertyChanged("ForeignID");
       }
     }
 
@@ -210,35 +210,35 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._foreignID;
+        return _foreignID;
       }
       set
       {
-        if (this._foreignID == value)
+        if (_foreignID == value)
           return;
-        this._foreignID = value;
-        if (string.IsNullOrWhiteSpace(this._said) && string.IsNullOrWhiteSpace(this._foreignID))
+        _foreignID = value;
+        if (string.IsNullOrWhiteSpace(_said) && string.IsNullOrWhiteSpace(_foreignID))
         {
-          this.AddError("SAID", "SA Id missing");
-          this.AddError("ForeignID", "Foreign Id missing");
+          AddError("SAID", "SA Id missing");
+          AddError("ForeignID", "Foreign Id missing");
         }
-        else if (string.IsNullOrWhiteSpace(this._said) && !string.IsNullOrWhiteSpace(this._foreignID))
+        else if (string.IsNullOrWhiteSpace(_said) && !string.IsNullOrWhiteSpace(_foreignID))
         {
-          this.RemoveError("SAID");
-          this.RemoveError("ForeignID");
+          RemoveError("SAID");
+          RemoveError("ForeignID");
         }
-        else if (!string.IsNullOrWhiteSpace(this._said))
+        else if (!string.IsNullOrWhiteSpace(_said))
         {
-          this.RemoveError("ForeignID");
+          RemoveError("ForeignID");
         }
         else
         {
-          this.RemoveError("ForeignID");
-          this.RemoveError("SAID");
+          RemoveError("ForeignID");
+          RemoveError("SAID");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("ForeignID");
-        this.RaisePropertyChanged("SAID");
+        checkerrors();
+        RaisePropertyChanged("ForeignID");
+        RaisePropertyChanged("SAID");
       }
     }
 
@@ -246,28 +246,28 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._gender;
+        return _gender;
       }
       set
       {
-        if (this._gender == value)
+        if (_gender == value)
           return;
-        this._gender = value;
-        if (!string.IsNullOrWhiteSpace(this._gender))
+        _gender = value;
+        if (!string.IsNullOrWhiteSpace(_gender))
         {
-          if (this._said.Length == 13)
+          if (_said.Length == 13)
           {
-            int int32 = Convert.ToInt32(this._said.Substring(6, 1));
-            if (int32 < 5 && this._gender != "F")
-              this.AddError("Gender", "Gender should be F");
-            else if (int32 > 4 && this._gender != "M")
-              this.AddError("Gender", "Gender should be M");
+            int int32 = Convert.ToInt32(_said.Substring(6, 1));
+            if (int32 < 5 && _gender != "F")
+              AddError("Gender", "Gender should be F");
+            else if (int32 > 4 && _gender != "M")
+              AddError("Gender", "Gender should be M");
           }
           else
-            this.RemoveError("Gender");
+            RemoveError("Gender");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("Gender");
+        checkerrors();
+        RaisePropertyChanged("Gender");
       }
     }
 
@@ -275,14 +275,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myCitizenship;
+        return _myCitizenship;
       }
       set
       {
-        if (this._myCitizenship == value)
+        if (_myCitizenship == value)
           return;
-        this._myCitizenship = value;
-        this.RaisePropertyChanged("Citizenship");
+        _myCitizenship = value;
+        RaisePropertyChanged("Citizenship");
       }
     }
 
@@ -290,14 +290,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._homeLanguage;
+        return _homeLanguage;
       }
       set
       {
-        if (this._homeLanguage == value)
+        if (_homeLanguage == value)
           return;
-        this._homeLanguage = value;
-        this.RaisePropertyChanged("HomeLanguage");
+        _homeLanguage = value;
+        RaisePropertyChanged("HomeLanguage");
       }
     }
 
@@ -305,25 +305,25 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._classi;
+        return _classi;
       }
       set
       {
-        if (this._classi == value)
+        if (_classi == value)
           return;
-        this._classi = value;
-        bool flag = HelperUtils.IsNumeric(this._classi);
-        if (string.IsNullOrWhiteSpace(this._classi))
-          this.AddError("Classification", "There should be a value");
+        _classi = value;
+        bool flag = HelperUtils.IsNumeric(_classi);
+        if (string.IsNullOrWhiteSpace(_classi))
+          AddError("Classification", "There should be a value");
         else if (flag)
         {
-          if (Convert.ToInt32(this._classi) > 5)
-            this.AddError("Classification", "Value should be less than 5");
+          if (Convert.ToInt32(_classi) > 5)
+            AddError("Classification", "Value should be less than 5");
         }
         else
-          this.RemoveError("Classification");
-        this.checkerrors();
-        this.RaisePropertyChanged("Classification");
+          RemoveError("Classification");
+        checkerrors();
+        RaisePropertyChanged("Classification");
       }
     }
 
@@ -331,14 +331,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._phone;
+        return _phone;
       }
       set
       {
-        if (this._phone == value)
+        if (_phone == value)
           return;
-        this._phone = value;
-        this.RaisePropertyChanged("Phone");
+        _phone = value;
+        RaisePropertyChanged("Phone");
       }
     }
 
@@ -346,22 +346,22 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mProvince;
+        return _mProvince;
       }
       set
       {
-        if (this._mProvince == value)
+        if (_mProvince == value)
           return;
-        this._mProvince = value;
-        if (!string.IsNullOrWhiteSpace(this._mProvince))
+        _mProvince = value;
+        if (!string.IsNullOrWhiteSpace(_mProvince))
         {
-          if (Convert.ToInt32(this._mProvince) > 10)
-            this.AddError("HomeProvince", "No such Province exists");
+          if (Convert.ToInt32(_mProvince) > 10)
+            AddError("HomeProvince", "No such Province exists");
           else
-            this.RemoveError("HomeProvince");
+            RemoveError("HomeProvince");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("HomeProvince");
+        checkerrors();
+        RaisePropertyChanged("HomeProvince");
       }
     }
 
@@ -369,15 +369,15 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._dot;
+        return _dot;
       }
       set
       {
-        if (this._dot == value)
+        if (_dot == value)
           return;
-        this._dot = value;
-        this.checkerrors();
-        this.RaisePropertyChanged("DOT");
+        _dot = value;
+        checkerrors();
+        RaisePropertyChanged("DOT");
       }
     }
 
@@ -385,11 +385,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHomeType;
+        return mHomeType;
       }
       set
       {
-        this.mHomeType = value;
+        mHomeType = value;
       }
     }
 
@@ -397,11 +397,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHelectricity;
+        return mHelectricity;
       }
       set
       {
-        this.mHelectricity = value;
+        mHelectricity = value;
       }
     }
 
@@ -409,11 +409,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchool10Km;
+        return mSchool10Km;
       }
       set
       {
-        this.mSchool10Km = value;
+        mSchool10Km = value;
       }
     }
 
@@ -421,11 +421,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHomestudy;
+        return mHomestudy;
       }
       set
       {
-        this.mHomestudy = value;
+        mHomestudy = value;
       }
     }
 
@@ -433,11 +433,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSiblingsAttendedUni;
+        return mSiblingsAttendedUni;
       }
       set
       {
-        this.mSiblingsAttendedUni = value;
+        mSiblingsAttendedUni = value;
       }
     }
 
@@ -445,11 +445,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSiblingsAtUni;
+        return mSiblingsAtUni;
       }
       set
       {
-        this.mSiblingsAtUni = value;
+        mSiblingsAtUni = value;
       }
     }
 
@@ -457,11 +457,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueTime;
+        return mVenueTime;
       }
       set
       {
-        this.mVenueTime = value;
+        mVenueTime = value;
       }
     }
 
@@ -469,11 +469,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueCost;
+        return mVenueCost;
       }
       set
       {
-        this.mVenueCost = value;
+        mVenueCost = value;
       }
     }
 
@@ -481,11 +481,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueDist;
+        return mVenueDist;
       }
       set
       {
-        this.mVenueDist = value;
+        mVenueDist = value;
       }
     }
 
@@ -493,11 +493,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueModeOfTransport;
+        return mVenueModeOfTransport;
       }
       set
       {
-        this.mVenueModeOfTransport = value;
+        mVenueModeOfTransport = value;
       }
     }
 
@@ -505,11 +505,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchComputers;
+        return mSchComputers;
       }
       set
       {
-        this.mSchComputers = value;
+        mSchComputers = value;
       }
     }
 
@@ -517,11 +517,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchLibrary;
+        return mSchLibrary;
       }
       set
       {
-        this.mSchLibrary = value;
+        mSchLibrary = value;
       }
     }
 
@@ -529,11 +529,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchLabs;
+        return mSchLabs;
       }
       set
       {
-        this.mSchLabs = value;
+        mSchLabs = value;
       }
     }
 
@@ -541,11 +541,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchElectricity;
+        return mSchElectricity;
       }
       set
       {
-        this.mSchElectricity = value;
+        mSchElectricity = value;
       }
     }
 
@@ -553,11 +553,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchWater;
+        return mSchWater;
       }
       set
       {
-        this.mSchWater = value;
+        mSchWater = value;
       }
     }
 
@@ -565,11 +565,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchHall;
+        return mSchHall;
       }
       set
       {
-        this.mSchHall = value;
+        mSchHall = value;
       }
     }
 
@@ -577,11 +577,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchFields;
+        return mSchFields;
       }
       set
       {
-        this.mSchFields = value;
+        mSchFields = value;
       }
     }
 
@@ -589,11 +589,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchHostel;
+        return mSchHostel;
       }
       set
       {
-        this.mSchHostel = value;
+        mSchHostel = value;
       }
     }
 
@@ -601,11 +601,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedComputers;
+        return mUsedComputers;
       }
       set
       {
-        this.mUsedComputers = value;
+        mUsedComputers = value;
       }
     }
 
@@ -613,11 +613,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedLibrary;
+        return mUsedLibrary;
       }
       set
       {
-        this.mUsedLibrary = value;
+        mUsedLibrary = value;
       }
     }
 
@@ -625,11 +625,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedLabs;
+        return mUsedLabs;
       }
       set
       {
-        this.mUsedLabs = value;
+        mUsedLabs = value;
       }
     }
 
@@ -637,11 +637,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedElectricity;
+        return mUsedElectricity;
       }
       set
       {
-        this.mUsedElectricity = value;
+        mUsedElectricity = value;
       }
     }
 
@@ -649,11 +649,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedRWater;
+        return mUsedRWater;
       }
       set
       {
-        this.mUsedRWater = value;
+        mUsedRWater = value;
       }
     }
 
@@ -661,11 +661,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedHall;
+        return mUsedHall;
       }
       set
       {
-        this.mUsedHall = value;
+        mUsedHall = value;
       }
     }
 
@@ -673,11 +673,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedFields;
+        return mUsedFields;
       }
       set
       {
-        this.mUsedFields = value;
+        mUsedFields = value;
       }
     }
 
@@ -685,11 +685,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedHostel;
+        return mUsedHostel;
       }
       set
       {
-        this.mUsedHostel = value;
+        mUsedHostel = value;
       }
     }
 
@@ -697,11 +697,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchoolName;
+        return mSchoolName;
       }
       set
       {
-        this.mSchoolName = value;
+        mSchoolName = value;
       }
     }
 
@@ -709,11 +709,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mYrGr12;
+        return mYrGr12;
       }
       set
       {
-        this.mYrGr12 = value;
+        mYrGr12 = value;
       }
     }
 
@@ -721,11 +721,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mPostalCode;
+        return mPostalCode;
       }
       set
       {
-        this.mPostalCode = value;
+        mPostalCode = value;
       }
     }
 
@@ -733,11 +733,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchProvince;
+        return mSchProvince;
       }
       set
       {
-        this.mSchProvince = value;
+        mSchProvince = value;
       }
     }
 
@@ -745,14 +745,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myGr12L;
+        return _myGr12L;
       }
       set
       {
-        if (this._myGr12L == value)
+        if (_myGr12L == value)
           return;
-        this._myGr12L = value;
-        this.RaisePropertyChanged("Grade12Language");
+        _myGr12L = value;
+        RaisePropertyChanged("Grade12Language");
       }
     }
 
@@ -760,14 +760,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.schoolType;
+        return schoolType;
       }
       set
       {
-        if (this.schoolType == value)
+        if (schoolType == value)
           return;
-        this.schoolType = value;
-        this.RaisePropertyChanged("SchoolType");
+        schoolType = value;
+        RaisePropertyChanged("SchoolType");
       }
     }
 
@@ -775,14 +775,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myfaculty1;
+        return _myfaculty1;
       }
       set
       {
-        if (this._myfaculty1 == value)
+        if (_myfaculty1 == value)
           return;
-        this._myfaculty1 = value;
-        this.RaisePropertyChanged("Faculty1");
+        _myfaculty1 = value;
+        RaisePropertyChanged("Faculty1");
       }
     }
 
@@ -790,14 +790,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myfaculty2;
+        return _myfaculty2;
       }
       set
       {
-        if (this._myfaculty2 == value)
+        if (_myfaculty2 == value)
           return;
-        this._myfaculty2 = value;
-        this.RaisePropertyChanged("Faculty2");
+        _myfaculty2 = value;
+        RaisePropertyChanged("Faculty2");
       }
     }
 
@@ -805,14 +805,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myFaculty3;
+        return _myFaculty3;
       }
       set
       {
-        if (this._myFaculty3 == value)
+        if (_myFaculty3 == value)
           return;
-        this._myFaculty3 = value;
-        this.RaisePropertyChanged("Faculty3");
+        _myFaculty3 = value;
+        RaisePropertyChanged("Faculty3");
       }
     }
 
@@ -820,11 +820,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mEOL;
+        return mEOL;
       }
       set
       {
-        this.mEOL = value;
+        mEOL = value;
       }
     }
 
@@ -832,14 +832,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._mydatFile;
+        return _mydatFile;
       }
       set
       {
-        if (this._mydatFile == value)
+        if (_mydatFile == value)
           return;
-        this._mydatFile = value;
-        this.RaisePropertyChanged("DatFile");
+        _mydatFile = value;
+        RaisePropertyChanged("DatFile");
       }
     }
 
@@ -851,14 +851,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._myerrorcount;
+        return _myerrorcount;
       }
       set
       {
-        if (this._myerrorcount == value)
+        if (_myerrorcount == value)
           return;
-        this._myerrorcount = value;
-        this.RaisePropertyChanged("ErrorCount");
+        _myerrorcount = value;
+        RaisePropertyChanged("ErrorCount");
       }
     }
 
@@ -866,14 +866,14 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this._isSelected;
+        return _isSelected;
       }
       set
       {
-        if (this._isSelected == value)
+        if (_isSelected == value)
           return;
-        this._isSelected = value;
-        this.RaisePropertyChanged("IsSelected");
+        _isSelected = value;
+        RaisePropertyChanged("IsSelected");
       }
     }
 
@@ -883,17 +883,17 @@ namespace CETAP_LOB.Model.QA
 
     public BioQADatRecord(string file)
     {
-      this.DatFile = new datFileAttributes();
-      this.DatFile.SName = Path.GetFileNameWithoutExtension(file).ToUpper();
-      this.CSX_Number = this.DatFile.CSX.ToString();
+      DatFile = new datFileAttributes();
+      DatFile.SName = Path.GetFileNameWithoutExtension(file).ToUpper();
+      CSX_Number = DatFile.CSX.ToString();
     }
 
     private void checkerrors()
     {
-      if (this.HasErrors)
-        this.ErrorCount = this._errors.Count;
+      if (HasErrors)
+        ErrorCount = _errors.Count;
       else
-        this.ErrorCount = 0;
+        ErrorCount = 0;
     }
   }
 }

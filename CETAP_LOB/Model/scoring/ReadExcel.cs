@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Model.scoring.ReadExcel
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using ClosedXML.Excel;
 using System;
@@ -21,11 +17,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._filename;
+        return _filename;
       }
       set
       {
-        this._filename = value;
+        _filename = value;
       }
     }
 
@@ -33,11 +29,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this.aql;
+        return aql;
       }
       set
       {
-        this.aql = value;
+        aql = value;
       }
     }
 
@@ -45,29 +41,29 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this.mat;
+        return mat;
       }
       set
       {
-        this.mat = value;
+        mat = value;
       }
     }
 
     public ReadExcel(string File, string type)
     {
-      this._filename = File;
-      this._type = type;
-      this.ReadExcelFile();
+      _filename = File;
+      _type = type;
+      ReadExcelFile();
     }
 
     private void ReadExcelFile()
     {
-      IXLWorksheet xlWorksheet = new XLWorkbook(this._filename).Worksheet(1);
+      IXLWorksheet xlWorksheet = new XLWorkbook(_filename).Worksheet(1);
       foreach (IXLTableRow row in (IEnumerable<IXLTableRow>) xlWorksheet.Range(xlWorksheet.FirstCellUsed().Address, xlWorksheet.LastCellUsed().Address).AsTable().DataRange.Rows((Func<IXLTableRow, bool>) null))
       {
         if (!row.Field("ID").IsEmpty())
         {
-          switch (this._type)
+          switch (_type)
           {
             case "AQL":
               AQL_Score aqlScore = new AQL_Score();
@@ -77,7 +73,7 @@ namespace CETAP_LOB.Model.scoring
               aqlScore.ID = Convert.ToInt64(str1);
               aqlScore.AL = new int?(Convert.ToInt32(valueCached1));
               aqlScore.QL = new int?(Convert.ToInt32(valueCached2));
-              this.aql.Add(aqlScore);
+              aql.Add(aqlScore);
               continue;
             case "MAT":
               MAT_Score matScore = new MAT_Score();
@@ -85,7 +81,7 @@ namespace CETAP_LOB.Model.scoring
               string valueCached3 = row.Field("MAT_Score").ValueCached;
               matScore.ID = Convert.ToInt64(str2);
               matScore.MAT = new int?(Convert.ToInt32(valueCached3));
-              this.mat.Add(matScore);
+              mat.Add(matScore);
               continue;
             default:
               continue;

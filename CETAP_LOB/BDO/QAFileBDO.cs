@@ -32,20 +32,20 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._selected;
+        return _selected;
       }
       set
       {
-        if (this._selected == value)
+        if (_selected == value)
           return;
-        this._selected = value;
-        this.RaisePropertyChanged("IsSelected");
+        _selected = value;
+        RaisePropertyChanged("IsSelected");
       }
     }
 
     public override string ToString()
     {
-      return this.Filename;
+      return Filename;
     }
   }
 }

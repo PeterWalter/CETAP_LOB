@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Search.BatchResultsProvider
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using FeserWard.Controls;
 using CETAP_LOB.BDO;
@@ -23,12 +19,12 @@ namespace CETAP_LOB.Search
 
     public BatchResultsProvider(IDataService Service)
     {
-      this._service = Service;
+      _service = Service;
     }
 
     public IEnumerable DoSearch(string searchTerm, int maxResults, object extraInfo)
     {
-      this._results = new List<BatchBDO>();
+      _results = new List<BatchBDO>();
       if (ApplicationSettings.Default.DBAvailable)
       {
         using (CETAPEntities cetapEntities = new CETAPEntities())
@@ -41,11 +37,11 @@ namespace CETAP_LOB.Search
           })).Cast<object>())
           {
             BatchBDO batchBdo = new BatchBDO();
-            this._results.Add(Maps.BatchDALToBatchBDO(batch));
+            _results.Add(Maps.BatchDALToBatchBDO(batch));
           }
         }
       }
-      return (IEnumerable) this._results;
+      return (IEnumerable) _results;
     }
   }
 }

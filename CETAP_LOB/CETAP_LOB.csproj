@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -357,6 +357,48 @@
     <Compile Include="ViewModel\writers\VenueMapViewModel.cs" />
     <Compile Include="ViewModel\writers\VenuesViewModel.cs" />
     <Compile Include="ViewModel\writers\VenueViewModel.cs" />
+    <Compile Include="View\AboutView.xaml.cs">
+      <DependentUpon>aboutview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Introduction\InstructView.xaml.cs">
+      <DependentUpon>InstructView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Introduction\IntroView.xaml.cs">
+      <DependentUpon>IntroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListPage1.xaml.cs">
+      <DependentUpon>listpage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModernWindow1.xaml.cs">
+      <DependentUpon>modernwindow1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\processing\BatchView1.xaml.cs">
+      <DependentUpon>BatchView1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\processing\ScanTrackerView.xaml.cs">
+      <DependentUpon>ScanTrackerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ScanSettingsView.xaml.cs">
+      <DependentUpon>scansettingsview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\scoring\ScoringView.xaml.cs">
+      <DependentUpon>ScoringView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsAppearance.xaml.cs">
+      <DependentUpon>settingsappearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsView.xaml.cs">
+      <DependentUpon>settingsview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SplitPage1.xaml.cs">
+      <DependentUpon>splitpage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\writers\LoadFileView.xaml.cs">
+      <DependentUpon>LoadFileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\writers\ProcessView.xaml.cs">
+      <DependentUpon>ProcessView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Assets\modernui.bingimage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -393,6 +435,62 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\aboutview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Introduction\InstructView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Introduction\IntroView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\listpage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\modernwindow1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\processing\BatchView1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\processing\ScanTrackerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\scansettingsview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\scoring\ScoringView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\settingsappearance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\settingsview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\splitpage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\writers\LoadFileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\writers\ProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -442,7 +540,10 @@
     <Folder Include="Converters\" />
     <Folder Include="Dll\" />
     <Folder Include="ViewModel\cluster\" />
-    <Folder Include="View\" />
+    <Folder Include="View\cluster\" />
+    <Folder Include="View\Composite\" />
+    <Folder Include="View\easypay\" />
+    <Folder Include="View\Staffing\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\background.snowflakes.jpg" />

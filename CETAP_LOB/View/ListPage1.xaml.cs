@@ -12,33 +12,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace LOB.View
+namespace CETAP_LOB.View
 {
-  public partial class ListPage1 : UserControl, IComponentConnector
+  public partial class ListPage1 : UserControl
   {
-    private bool _contentLoaded;
+
 
     public ListPage1()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
 
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    [DebuggerNonUserCode]
-    public void InitializeComponent()
-    {
-      if (this._contentLoaded)
-        return;
-      this._contentLoaded = true;
-      Application.LoadComponent((object) this, new Uri("/LOB;component/view/listpage1.xaml", UriKind.Relative));
-    }
-
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    [DebuggerNonUserCode]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    void IComponentConnector.Connect(int connectionId, object target)
-    {
-      this._contentLoaded = true;
-    }
   }
 }

@@ -115,11 +115,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mCSX_Number;
+        return mCSX_Number;
       }
       set
       {
-        this.mCSX_Number = value;
+        mCSX_Number = value;
       }
     }
 
@@ -127,11 +127,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mCSX;
+        return mCSX;
       }
       set
       {
-        this.mCSX = value;
+        mCSX = value;
       }
     }
 
@@ -139,11 +139,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mNBT;
+        return mNBT;
       }
       set
       {
-        this.mNBT = value;
+        mNBT = value;
       }
     }
 
@@ -151,11 +151,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSessionID;
+        return mSessionID;
       }
       set
       {
-        this.mSessionID = value;
+        mSessionID = value;
       }
     }
 
@@ -163,11 +163,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSAID;
+        return mSAID;
       }
       set
       {
-        this.mSAID = value;
+        mSAID = value;
       }
     }
 
@@ -175,11 +175,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mForeignID;
+        return mForeignID;
       }
       set
       {
-        this.mForeignID = value;
+        mForeignID = value;
       }
     }
 
@@ -187,11 +187,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mGender;
+        return mGender;
       }
       set
       {
-        this.mGender = value;
+        mGender = value;
       }
     }
 
@@ -199,11 +199,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mIDType;
+        return mIDType;
       }
       set
       {
-        this.mIDType = value;
+        mIDType = value;
       }
     }
 
@@ -211,11 +211,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHomeLanguage;
+        return mHomeLanguage;
       }
       set
       {
-        this.mHomeLanguage = value;
+        mHomeLanguage = value;
       }
     }
 
@@ -223,11 +223,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mClassification;
+        return mClassification;
       }
       set
       {
-        this.mClassification = value;
+        mClassification = value;
       }
     }
 
@@ -235,11 +235,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mContactNo;
+        return mContactNo;
       }
       set
       {
-        this.mContactNo = value;
+        mContactNo = value;
       }
     }
 
@@ -247,11 +247,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHomeProvince;
+        return mHomeProvince;
       }
       set
       {
-        this.mHomeProvince = value;
+        mHomeProvince = value;
       }
     }
 
@@ -259,11 +259,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mDOT;
+        return mDOT;
       }
       set
       {
-        this.mDOT = value;
+        mDOT = value;
       }
     }
 
@@ -271,11 +271,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHomeType;
+        return mHomeType;
       }
       set
       {
-        this.mHomeType = value;
+        mHomeType = value;
       }
     }
 
@@ -283,11 +283,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHelectricity;
+        return mHelectricity;
       }
       set
       {
-        this.mHelectricity = value;
+        mHelectricity = value;
       }
     }
 
@@ -295,11 +295,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchool10Km;
+        return mSchool10Km;
       }
       set
       {
-        this.mSchool10Km = value;
+        mSchool10Km = value;
       }
     }
 
@@ -307,11 +307,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mHomestudy;
+        return mHomestudy;
       }
       set
       {
-        this.mHomestudy = value;
+        mHomestudy = value;
       }
     }
 
@@ -319,11 +319,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSiblingsAttendedUni;
+        return mSiblingsAttendedUni;
       }
       set
       {
-        this.mSiblingsAttendedUni = value;
+        mSiblingsAttendedUni = value;
       }
     }
 
@@ -331,11 +331,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSiblingsAtUni;
+        return mSiblingsAtUni;
       }
       set
       {
-        this.mSiblingsAtUni = value;
+        mSiblingsAtUni = value;
       }
     }
 
@@ -343,11 +343,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueTime;
+        return mVenueTime;
       }
       set
       {
-        this.mVenueTime = value;
+        mVenueTime = value;
       }
     }
 
@@ -355,11 +355,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueCost;
+        return mVenueCost;
       }
       set
       {
-        this.mVenueCost = value;
+        mVenueCost = value;
       }
     }
 
@@ -367,11 +367,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueDist;
+        return mVenueDist;
       }
       set
       {
-        this.mVenueDist = value;
+        mVenueDist = value;
       }
     }
 
@@ -379,11 +379,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mVenueModeOfTransport;
+        return mVenueModeOfTransport;
       }
       set
       {
-        this.mVenueModeOfTransport = value;
+        mVenueModeOfTransport = value;
       }
     }
 
@@ -391,11 +391,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchComputers;
+        return mSchComputers;
       }
       set
       {
-        this.mSchComputers = value;
+        mSchComputers = value;
       }
     }
 
@@ -403,11 +403,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchLibrary;
+        return mSchLibrary;
       }
       set
       {
-        this.mSchLibrary = value;
+        mSchLibrary = value;
       }
     }
 
@@ -415,11 +415,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchLabs;
+        return mSchLabs;
       }
       set
       {
-        this.mSchLabs = value;
+        mSchLabs = value;
       }
     }
 
@@ -427,11 +427,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchElectricity;
+        return mSchElectricity;
       }
       set
       {
-        this.mSchElectricity = value;
+        mSchElectricity = value;
       }
     }
 
@@ -439,11 +439,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchWater;
+        return mSchWater;
       }
       set
       {
-        this.mSchWater = value;
+        mSchWater = value;
       }
     }
 
@@ -451,11 +451,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchHall;
+        return mSchHall;
       }
       set
       {
-        this.mSchHall = value;
+        mSchHall = value;
       }
     }
 
@@ -463,11 +463,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchFields;
+        return mSchFields;
       }
       set
       {
-        this.mSchFields = value;
+        mSchFields = value;
       }
     }
 
@@ -475,11 +475,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchHostel;
+        return mSchHostel;
       }
       set
       {
-        this.mSchHostel = value;
+        mSchHostel = value;
       }
     }
 
@@ -487,11 +487,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedComputers;
+        return mUsedComputers;
       }
       set
       {
-        this.mUsedComputers = value;
+        mUsedComputers = value;
       }
     }
 
@@ -499,11 +499,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedLibrary;
+        return mUsedLibrary;
       }
       set
       {
-        this.mUsedLibrary = value;
+        mUsedLibrary = value;
       }
     }
 
@@ -511,11 +511,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedLabs;
+        return mUsedLabs;
       }
       set
       {
-        this.mUsedLabs = value;
+        mUsedLabs = value;
       }
     }
 
@@ -523,11 +523,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedElectricity;
+        return mUsedElectricity;
       }
       set
       {
-        this.mUsedElectricity = value;
+        mUsedElectricity = value;
       }
     }
 
@@ -535,11 +535,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedRWater;
+        return mUsedRWater;
       }
       set
       {
-        this.mUsedRWater = value;
+        mUsedRWater = value;
       }
     }
 
@@ -547,11 +547,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedHall;
+        return mUsedHall;
       }
       set
       {
-        this.mUsedHall = value;
+        mUsedHall = value;
       }
     }
 
@@ -559,11 +559,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedFields;
+        return mUsedFields;
       }
       set
       {
-        this.mUsedFields = value;
+        mUsedFields = value;
       }
     }
 
@@ -571,11 +571,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mUsedHostel;
+        return mUsedHostel;
       }
       set
       {
-        this.mUsedHostel = value;
+        mUsedHostel = value;
       }
     }
 
@@ -583,11 +583,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchoolName;
+        return mSchoolName;
       }
       set
       {
-        this.mSchoolName = value;
+        mSchoolName = value;
       }
     }
 
@@ -595,11 +595,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mYrGr12;
+        return mYrGr12;
       }
       set
       {
-        this.mYrGr12 = value;
+        mYrGr12 = value;
       }
     }
 
@@ -607,11 +607,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mPostalCode;
+        return mPostalCode;
       }
       set
       {
-        this.mPostalCode = value;
+        mPostalCode = value;
       }
     }
 
@@ -619,11 +619,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchProvince;
+        return mSchProvince;
       }
       set
       {
-        this.mSchProvince = value;
+        mSchProvince = value;
       }
     }
 
@@ -631,11 +631,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mGr12Language;
+        return mGr12Language;
       }
       set
       {
-        this.mGr12Language = value;
+        mGr12Language = value;
       }
     }
 
@@ -643,11 +643,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mSchType;
+        return mSchType;
       }
       set
       {
-        this.mSchType = value;
+        mSchType = value;
       }
     }
 
@@ -655,11 +655,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mFaculty1;
+        return mFaculty1;
       }
       set
       {
-        this.mFaculty1 = value;
+        mFaculty1 = value;
       }
     }
 
@@ -667,11 +667,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mFaculty2;
+        return mFaculty2;
       }
       set
       {
-        this.mFaculty2 = value;
+        mFaculty2 = value;
       }
     }
 
@@ -679,11 +679,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mFaculty3;
+        return mFaculty3;
       }
       set
       {
-        this.mFaculty3 = value;
+        mFaculty3 = value;
       }
     }
 
@@ -691,11 +691,11 @@ namespace CETAP_LOB.Model.QA
     {
       get
       {
-        return this.mEOL;
+        return mEOL;
       }
       set
       {
-        this.mEOL = value;
+        mEOL = value;
       }
     }
   }

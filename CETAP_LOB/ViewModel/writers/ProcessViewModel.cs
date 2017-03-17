@@ -399,10 +399,10 @@ namespace CETAP_LOB.ViewModel.writers
                         VenueN = VenueN.Substring(0, 30);
 
                   VenueN = HelperUtils.RemoveWorksheetChars(VenueN);
-                  string str = "NBT TEST - " + rws.DOT.Date.ToLongDateString() + Environment.NewLine;
+                    string str = "NBT TEST - " + rws.DOT.Date.ToLongDateString() + ",  "; //Environment.NewLine;
                   testDate = rws.DOT.Date.ToLongDateString();
                   NBTDOT = rws.DOT;
-                  string text = str + " CHECK-IN SHEET : REGISTERED WRITERS " + Environment.NewLine + VenueN.ToUpper();
+                  string text = str + " CHECK-IN SHEET : REGISTERED WRITERS " + ",  " + VenueN.ToUpper();
                   if (text.Length > 120)
                     text = text.Substring(0, 120);
 
@@ -418,14 +418,14 @@ namespace CETAP_LOB.ViewModel.writers
                   ws1.PageSetup.PaperSize = XLPaperSize.A4Paper;
                   ws1.PageSetup.VerticalDpi = 600;
                   ws1.PageSetup.HorizontalDpi = 600;
-                  ws1.PageSetup.PrintAreas.Add("A1:F31");
+                  ws1.PageSetup.PrintAreas.Add("A1:F51");
                   ws1.PageSetup.SetRowsToRepeatAtTop(1, 1);
-                  ws1.PageSetup.Margins.Top = 1.0;
-                  ws1.PageSetup.Margins.Bottom = 0.6;
+                  ws1.PageSetup.Margins.Top = 0.3;
+                  ws1.PageSetup.Margins.Bottom = 0.0;
                   ws1.PageSetup.Margins.Left = 0.2;
                   ws1.PageSetup.Margins.Right = 0.2;
-                  ws1.PageSetup.Margins.Footer = 0.3;
-                  ws1.PageSetup.Margins.Header = 0.3;
+                  ws1.PageSetup.Margins.Footer = 0.0;
+                  ws1.PageSetup.Margins.Header = 0.0;
                   ws1.PageSetup.CenterHorizontally = true;
                   ws1.PageSetup.CenterVertically = true;
                   ws1.PageSetup.PageOrder = XLPageOrderValues.DownThenOver;
@@ -515,8 +515,8 @@ namespace CETAP_LOB.ViewModel.writers
                   RowW.Style.Font.Bold = false;
                   RowW.Style.Font.FontSize = 10.0;
                   RowW.Style.Fill.BackgroundColor = XLColor.Cyan;
-                  RowW.Height = 29.5;
-                  ws1.Rows(2, lastRow).Height = 24.0;
+                  RowW.Height = 25.5;
+                  ws1.Rows(2, lastRow).Height = 20.0;
                   ws1.Rows(2, lastRow).Style.Font.FontSize = 10.0;
                   ws1.Column(1).Width = 5.0;
                   ws1.Column(2).Width = 30.0;

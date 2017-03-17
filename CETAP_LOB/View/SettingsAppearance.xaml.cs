@@ -12,37 +12,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace LOB.View
+namespace CETAP_LOB.View
 {
-  public partial class SettingsAppearance : UserControl, IComponentConnector
+  public partial class SettingsAppearance : UserControl
   {
-    internal StackPanel Panel;
-    private bool _contentLoaded;
-
     public SettingsAppearance()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
 
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    public void InitializeComponent()
-    {
-      if (this._contentLoaded)
-        return;
-      this._contentLoaded = true;
-      Application.LoadComponent((object) this, new Uri("/LOB;component/view/settingsappearance.xaml", UriKind.Relative));
-    }
-
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    void IComponentConnector.Connect(int connectionId, object target)
-    {
-      if (connectionId == 1)
-        this.Panel = (StackPanel) target;
-      else
-        this._contentLoaded = true;
-    }
   }
 }

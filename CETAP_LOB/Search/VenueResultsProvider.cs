@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CETAP_LOB;
 
-namespace LOB.Search
+namespace CETAP_LOB.Search
 {
   public class VenueResultsProvider : IIntelliboxResultsProvider
   {
@@ -24,12 +24,12 @@ namespace LOB.Search
 
     public VenueResultsProvider(IDataService Service)
     {
-      this._service = Service;
+      _service = Service;
     }
 
     public IEnumerable DoSearch(string searchTerm, int maxResults, object extraInfo)
     {
-      this._results = new List<VenueBDO>();
+      _results = new List<VenueBDO>();
       if (ApplicationSettings.Default.DBAvailable)
       {
         using (CETAPEntities cetapEntities = new CETAPEntities())
@@ -40,7 +40,7 @@ namespace LOB.Search
             {
               VenueBDO venueBDO = new VenueBDO();
               TestVenueToVenueBDO(venueBDO, testVenue);
-              this._results.Add(venueBDO);
+              _results.Add(venueBDO);
             }
           }
           else
@@ -49,12 +49,12 @@ namespace LOB.Search
             {
               VenueBDO venueBDO = new VenueBDO();
               VenueResultsProvider.TestVenueToVenueBDO(venueBDO, testVenue);
-              this._results.Add(venueBDO);
+              _results.Add(venueBDO);
             }
           }
         }
       }
-      return (IEnumerable) this._results;
+      return (IEnumerable) _results;
     }
 
     private static void TestVenueToVenueBDO(VenueBDO venueBDO, TestVenue testVenue)

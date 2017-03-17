@@ -17,7 +17,7 @@ namespace CETAP_LOB.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TestAllocation()
         {
-            this.TestProfiles = new HashSet<TestProfile>();
+            TestProfiles = new HashSet<TestProfile>();
         }
     
         public int ID { get; set; }

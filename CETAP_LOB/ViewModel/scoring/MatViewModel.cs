@@ -24,14 +24,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._mymatstats;
+        return _mymatstats;
       }
       set
       {
-        if (this._mymatstats == value)
+        if (_mymatstats == value)
           return;
-        this._mymatstats = value;
-        this.RaisePropertyChanged("MATStats");
+        _mymatstats = value;
+        RaisePropertyChanged("MATStats");
       }
     }
 
@@ -39,27 +39,27 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._myMAT;
+        return _myMAT;
       }
       set
       {
-        if (this._myMAT == value)
+        if (_myMAT == value)
           return;
-        this._myMAT = value;
-        this.RaisePropertyChanged("MAT");
+        _myMAT = value;
+        RaisePropertyChanged("MAT");
       }
     }
 
     public MatViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.Refresh();
+      _service = Service;
+      Refresh();
     }
 
     private void Refresh()
     {
-      this.MAT = this._service.LoadMATScores();
-      this.MATStats = this._service.GetMATStats();
+      MAT = _service.LoadMATScores();
+      MATStats = _service.GetMATStats();
     }
   }
 }

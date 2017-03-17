@@ -101,9 +101,9 @@ namespace CETAP_LOB.Model
 
         private void CompositToFullComposite()
     {
-      if (this.AllScores == null)
+      if (AllScores == null)
         return;
-      foreach (var data in this.AllScores.AsParallel<CompositBDO>().Select(mydata => new
+      foreach (var data in AllScores.AsParallel<CompositBDO>().Select(mydata => new
       {
         RefNo = mydata.RefNo.ToString(),
         Barcode = mydata.Barcode.ToString(),
@@ -164,7 +164,7 @@ namespace CETAP_LOB.Model
         AQL_Lang = mydata.AQLLanguage,
         Mat_Lang = mydata.MatLanguage
       }))
-        this.FComposite.Add(new FullComposite()
+        FComposite.Add(new FullComposite()
         {
           RefNo = data.RefNo,
           Barcode = data.Barcode,
@@ -229,9 +229,9 @@ namespace CETAP_LOB.Model
 
     private void CompositToLogisticsComposite()
     {
-      if (this.AllScores == null)
+      if (AllScores == null)
         return;
-      foreach (var data in this.AllScores.AsParallel<CompositBDO>().Select(mydata => new
+      foreach (var data in AllScores.AsParallel<CompositBDO>().Select(mydata => new
       {
         SessionID = mydata.Barcode.ToString(),
         NBTNumber = mydata.RefNo.ToString(),
@@ -262,7 +262,7 @@ namespace CETAP_LOB.Model
         TestType = MytestType(mydata.Batch),
         province = getProvince(mydata.VenueCode)
       }))
-        this.LComposite.Add(new LogisticsComposite()
+        LComposite.Add(new LogisticsComposite()
         {
           SessionId = data.SessionID,
           NBT = data.NBTNumber,
@@ -296,9 +296,9 @@ namespace CETAP_LOB.Model
 
         //public bool GenerateSelectedComposite(ObservableCollection<CompositBDO> mySelection, string folder)
         //{
-        //    this.Composite = mySelection;
-        //    this.myDir = new Dir_categories(folder);
-        //    return this.GenerateExcelComposite();
+        //    Composite = mySelection;
+        //    myDir = new Dir_categories(folder);
+        //    return GenerateExcelComposite();
         //}
 
         public async Task<List<CompositBDO>> GetAllNBTScoresAsync(int page, int size)
@@ -323,7 +323,7 @@ namespace CETAP_LOB.Model
                     }
                 }
             }
-            this.AllScores = new ObservableCollection<CompositBDO>(NBTScores);
+            AllScores = new ObservableCollection<CompositBDO>(NBTScores);
             return NBTScores;
         }
 
@@ -339,7 +339,7 @@ namespace CETAP_LOB.Model
 
         //private void GenerateCompFromDB(string folder)
         //{
-        //  IEnumerable<\u003C\u003Ef__AnonymousType0<string, string, string, string, string, string, string, string, string, int?, string, string, string, string, string, string, int?, string, string, int?, string, int?, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, int?, string, int?, string, int?, string, string, string>> source = this.AllScores.Select(mydata => new
+        //  IEnumerable<\u003C\u003Ef__AnonymousType0<string, string, string, string, string, string, string, string, string, int?, string, string, string, string, string, string, int?, string, string, int?, string, int?, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, int?, string, int?, string, int?, string, string, string>> source = AllScores.Select(mydata => new
         //  {
         //    RefNo = mydata.RefNo.ToString(),
         //    Barcode = mydata.Barcode.ToString(),
@@ -890,9 +890,9 @@ namespace CETAP_LOB.Model
         //{
         //  bool flag = false;
         //  string str1 = "NBT_Composite";
-        //  if (this.Composite.Count > 0)
+        //  if (Composite.Count > 0)
         //  {
-        //    IEnumerable<\u003C\u003Ef__AnonymousType0<string, string, string, string, string, string, string, string, string, int?, string, string, string, string, string, string, int?, string, string, int?, string, int?, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, int?, string, int?, string, int?, string, string, string>> source1 = this.Composite.Select(mydata => new
+        //    IEnumerable<\u003C\u003Ef__AnonymousType0<string, string, string, string, string, string, string, string, string, int?, string, string, string, string, string, string, int?, string, string, int?, string, int?, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, int?, string, int?, string, int?, string, string, string>> source1 = Composite.Select(mydata => new
         //    {
         //      RefNo = mydata.RefNo.ToString(),
         //      Barcode = mydata.Barcode.ToString(),
@@ -989,7 +989,7 @@ namespace CETAP_LOB.Model
         //      MATScore = C.MatScore,
         //      MATLevel = C.MatLevel == "Proficient Upper" ? "Proficient" : (C.MatLevel == "Proficient Lower" ? "Proficient" : (C.MatLevel == "Intermediate Upper" ? "Intermediate" : (C.MatLevel == "Intermediate Lower" ? "Intermediate" : (C.MatLevel == "Basic Upper" ? "Basic" : (C.MatLevel == "Basic Lower" ? "Basic" : "")))))
         //    });
-        //    IEnumerable<\u003C\u003Ef__AnonymousType8<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, int?, string, int?, string, int?, string, string, string>> source4 = this.Composite.Select(mydata => new
+        //    IEnumerable<\u003C\u003Ef__AnonymousType8<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, int?, string, int?, string, int?, string, string, string>> source4 = Composite.Select(mydata => new
         //    {
         //      Barcode = mydata.Barcode.ToString(),
         //      SessionID = mydata.Barcode.ToString(),
@@ -1007,7 +1007,7 @@ namespace CETAP_LOB.Model
         //      Faculty = "",
         //      Programme = "",
         //      DateTest = string.Format("{0:yyyyMMdd}", (object) mydata.DOT),
-        //      Venue = this.GetWebSiteNameByVenueCode(mydata.VenueCode),
+        //      Venue = GetWebSiteNameByVenueCode(mydata.VenueCode),
         //      Sex = mydata.Gender,
         //      street1 = "",
         //      street2 = "",
@@ -1175,7 +1175,7 @@ namespace CETAP_LOB.Model
         //    xlWorksheet4.Cell(1, 35).Value = (object) "MATHS TEST LANGUAGE";
         //    xlWorksheet4.Cell(2, 1).Value = (object) source4.AsEnumerable();
         //    xlWorksheet4.Columns().AdjustToContents();
-        //    string dir = this.myDir.Dir;
+        //    string dir = myDir.Dir;
         //    DateTime dateTime = new DateTime();
         //    DateTime now = DateTime.Now;
         //    string str2 = now.Year.ToString() + now.Month.ToString("00") + now.Day.ToString("00") + "_" + now.Hour.ToString("00") + now.Minute.ToString("00");

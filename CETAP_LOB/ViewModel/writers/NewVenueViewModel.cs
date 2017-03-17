@@ -26,14 +26,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myprovs;
+        return _myprovs;
       }
       set
       {
-        if (this._myprovs == value)
+        if (_myprovs == value)
           return;
-        this._myprovs = value;
-        this.RaisePropertyChanged("Provinces");
+        _myprovs = value;
+        RaisePropertyChanged("Provinces");
       }
     }
 
@@ -41,14 +41,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myvenue;
+        return _myvenue;
       }
       set
       {
-        if (this._myvenue == value)
+        if (_myvenue == value)
           return;
-        this._myvenue = value;
-        this.RaisePropertyChanged("Venue");
+        _myvenue = value;
+        RaisePropertyChanged("Venue");
       }
     }
 
@@ -56,32 +56,32 @@ namespace CETAP_LOB.ViewModel.writers
 
     public NewVenueViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModel();
-      this.registerCommands();
+      _service = Service;
+      InitializeModel();
+      registerCommands();
     }
 
     private void InitializeModel()
     {
-      this.Venue = new VenueBDO();
-      this.Provinces = this._service.getAllProvinces();
+      Venue = new VenueBDO();
+      Provinces = _service.getAllProvinces();
     }
 
     private void registerCommands()
     {
-      this.SaveVenueCommand = new RelayCommand((Action) (() => this.SaveVenue()), (Func<bool>) (() => this.canSaveVenue()));
+      SaveVenueCommand = new RelayCommand((Action) (() => SaveVenue()), (Func<bool>) (() => canSaveVenue()));
     }
 
     private bool canSaveVenue()
     {
-      return this.Venue.VenueCode > 0;
+      return Venue.VenueCode > 0;
     }
 
     private void SaveVenue()
     {
       string message = "";
-      this._service.addTestVenue(this.Venue, ref message);
-      Messenger.Default.Send<NotificationMessageAction<string>>(new NotificationMessageAction<string>(message, new Action<string>(this.SendMessageCallback)));
+      _service.addTestVenue(Venue, ref message);
+      Messenger.Default.Send<NotificationMessageAction<string>>(new NotificationMessageAction<string>(message, new Action<string>(SendMessageCallback)));
     }
 
     private void SendMessageCallback(string message)

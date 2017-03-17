@@ -21,14 +21,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._staffno;
+        return _staffno;
       }
       set
       {
-        if (this._staffno == value)
+        if (_staffno == value)
           return;
-        this._staffno = value;
-        this.RaisePropertyChanged("StaffID");
+        _staffno = value;
+        RaisePropertyChanged("StaffID");
       }
     }
 
@@ -36,14 +36,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._username;
+        return _username;
       }
       set
       {
-        if (this._username == value)
+        if (_username == value)
           return;
-        this._username = value;
-        this.RaisePropertyChanged("Name");
+        _username = value;
+        RaisePropertyChanged("Name");
       }
     }
 
@@ -51,20 +51,20 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._areas;
+        return _areas;
       }
       set
       {
-        if (this._areas == value)
+        if (_areas == value)
           return;
-        this._areas = value;
-        this.RaisePropertyChanged("Areas");
+        _areas = value;
+        RaisePropertyChanged("Areas");
       }
     }
 
     public override string ToString()
     {
-      return this.Name;
+      return Name;
     }
   }
 }

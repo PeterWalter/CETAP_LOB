@@ -24,12 +24,12 @@ namespace CETAP_LOB.Search
 
     public CompositResultsProvider(IDataService Service)
     {
-      this._service = Service;
+      _service = Service;
     }
 
     public IEnumerable DoSearch(string searchTerm, int maxResults, object extraInfo)
     {
-      this._results = new List<CompositBDO>();
+      _results = new List<CompositBDO>();
       if (ApplicationSettings.Default.DBAvailable)
       {
         using (CETAPEntities cetapEntities = new CETAPEntities())
@@ -44,7 +44,7 @@ namespace CETAP_LOB.Search
             })).Cast<object>())
             {
               CompositBDO compositBdo = new CompositBDO();
-              this._results.Add(Maps.CompositDALToCompositBDO(composit));
+              _results.Add(Maps.CompositDALToCompositBDO(composit));
             }
           }
           else
@@ -57,12 +57,12 @@ namespace CETAP_LOB.Search
             })).Cast<object>())
             {
               CompositBDO compositBdo = new CompositBDO();
-              this._results.Add(Maps.CompositDALToCompositBDO(composit));
+              _results.Add(Maps.CompositDALToCompositBDO(composit));
             }
           }
         }
       }
-      return (IEnumerable) this._results;
+      return (IEnumerable) _results;
     }
   }
 }

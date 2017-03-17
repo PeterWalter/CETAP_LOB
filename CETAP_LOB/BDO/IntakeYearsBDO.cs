@@ -22,7 +22,7 @@ namespace CETAP_LOB.BDO
 
     public override string ToString()
     {
-      return this.Year.ToString();
+      return Year.ToString();
     }
   }
 }

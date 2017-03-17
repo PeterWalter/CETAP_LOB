@@ -38,14 +38,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myfiles;
+        return _myfiles;
       }
       set
       {
-        if (this._myfiles == value)
+        if (_myfiles == value)
           return;
-        this._myfiles = value;
-        this.RaisePropertyChanged("DirList");
+        _myfiles = value;
+        RaisePropertyChanged("DirList");
       }
     }
 
@@ -53,14 +53,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myfile;
+        return _myfile;
       }
       set
       {
-        if (this._myfile == value)
+        if (_myfile == value)
           return;
-        this._myfile = value;
-        this.RaisePropertyChanged("SelectedFile");
+        _myfile = value;
+        RaisePropertyChanged("SelectedFile");
       }
     }
 
@@ -68,14 +68,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._folder;
+        return _folder;
       }
       set
       {
-        if (this._folder == value)
+        if (_folder == value)
           return;
-        this._folder = value;
-        this.RaisePropertyChanged("Folder");
+        _folder = value;
+        RaisePropertyChanged("Folder");
       }
     }
 
@@ -83,23 +83,23 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this.DirList.Where<ScannedFileBDO>((Func<ScannedFileBDO, bool>) (x => x.IsSelected));
+        return DirList.Where<ScannedFileBDO>((Func<ScannedFileBDO, bool>) (x => x.IsSelected));
       }
       set
       {
-        if (this._selectedfiles == value)
+        if (_selectedfiles == value)
           return;
-        this._selectedfiles = value;
-        this.RaisePropertyChanged("SelectedFiles");
+        _selectedfiles = value;
+        RaisePropertyChanged("SelectedFiles");
       }
     }
 
     public EditingViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
-      this.Refresh();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
+      Refresh();
     }
 
     private void InitializeModels()
@@ -108,7 +108,7 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void RegisterCommands()
     {
-      this.SaveScannedFileCommand = new RelayCommand(new Action(this.SaveDatFile));
+      SaveScannedFileCommand = new RelayCommand(new Action(SaveDatFile));
     }
 
     private void LoadData(string filename)
@@ -118,28 +118,28 @@ namespace CETAP_LOB.ViewModel.processing
     private void Selectfolder()
     {
       List<ScannedFileBDO> list = new List<ScannedFileBDO>();
-      foreach (FileInfo file in new DirectoryInfo(this.Folder).GetFiles("*.dat"))
+      foreach (FileInfo file in new DirectoryInfo(Folder).GetFiles("*.dat"))
         list.Add(new ScannedFileBDO()
         {
           Filepath = file.FullName,
           Filename = file.Name.ToUpper(),
           DateScanned = file.CreationTime
         });
-      this.DirList = new ObservableCollection<ScannedFileBDO>(list);
+      DirList = new ObservableCollection<ScannedFileBDO>(list);
     }
 
     private void Refresh()
     {
-      this.Folder = ApplicationSettings.Default.ScanningFolder;
-      this.Selectfolder();
+      Folder = ApplicationSettings.Default.ScanningFolder;
+      Selectfolder();
     }
 
     private void SaveDatFile()
     {
-      foreach (ScannedFileBDO selectedFile in this.SelectedFiles)
+      foreach (ScannedFileBDO selectedFile in SelectedFiles)
       {
         string message = "";
-        if (!this._service.SaveFileToDB(selectedFile, ref message))
+        if (!_service.SaveFileToDB(selectedFile, ref message))
         {
           int num = (int) ModernDialog.ShowMessage(message, "Existing File", MessageBoxButton.OK, (Window) null);
         }
@@ -149,7 +149,7 @@ namespace CETAP_LOB.ViewModel.processing
           File.Move(selectedFile.Filepath, destFileName);
         }
       }
-      this.Refresh();
+      Refresh();
     }
   }
 }

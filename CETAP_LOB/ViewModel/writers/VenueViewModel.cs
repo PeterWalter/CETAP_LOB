@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.ViewModel.writers.VenueViewModel
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using GalaSoft.MvvmLight;
 using CETAP_LOB.BDO;
@@ -44,15 +40,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._isDirty;
+        return _isDirty;
       }
       set
       {
-        if (this._isDirty == value)
+        if (_isDirty == value)
           return;
-        bool isDirty = this._isDirty;
-        this._isDirty = value;
-        this.RaisePropertyChanged<bool>("IsDirty", isDirty, value, true);
+        bool isDirty = _isDirty;
+        _isDirty = value;
+        RaisePropertyChanged<bool>("IsDirty", isDirty, value, true);
       }
     }
 
@@ -60,20 +56,20 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._code;
+        return _code;
       }
       set
       {
-        if (this._code == value)
+        if (_code == value)
           return;
-        int code = this._code;
-        this._code = value;
-        this.IsDirty = true;
-        if (this._code <= 0)
-          this.AddError("VenueCode", "Venue Codes should be positive numbers");
+        int code = _code;
+        _code = value;
+        IsDirty = true;
+        if (_code <= 0)
+          AddError("VenueCode", "Venue Codes should be positive numbers");
         else
-          this.RemoveError("VenueCode");
-        this.RaisePropertyChanged<int>("VenueCode", code, value, true);
+          RemoveError("VenueCode");
+        RaisePropertyChanged<int>("VenueCode", code, value, true);
       }
     }
 
@@ -81,16 +77,16 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._venue;
+        return _venue;
       }
       set
       {
-        if (this._venue == value)
+        if (_venue == value)
           return;
-        string venue = this._venue;
-        this._venue = value;
-        this.IsDirty = true;
-        this.RaisePropertyChanged<string>("VenueName", venue, value, true);
+        string venue = _venue;
+        _venue = value;
+        IsDirty = true;
+        RaisePropertyChanged<string>("VenueName", venue, value, true);
       }
     }
 
@@ -98,15 +94,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._sname;
+        return _sname;
       }
       set
       {
-        if (this._sname == value)
+        if (_sname == value)
           return;
-        this._sname = value;
-        this.IsDirty = true;
-        this.RaisePropertyChanged("ShortName");
+        _sname = value;
+        IsDirty = true;
+        RaisePropertyChanged("ShortName");
       }
     }
 
@@ -114,15 +110,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._webname;
+        return _webname;
       }
       set
       {
-        if (this._webname == value)
+        if (_webname == value)
           return;
-        this._webname = value;
-        this.IsDirty = true;
-        this.RaisePropertyChanged("WebSiteName");
+        _webname = value;
+        IsDirty = true;
+        RaisePropertyChanged("WebSiteName");
       }
     }
 
@@ -130,15 +126,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._room;
+        return _room;
       }
       set
       {
-        if (this._room == value)
+        if (_room == value)
           return;
-        this._room = value;
-        this.IsDirty = true;
-        this.RaisePropertyChanged("Room");
+        _room = value;
+        IsDirty = true;
+        RaisePropertyChanged("Room");
       }
     }
 
@@ -146,15 +142,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._venueType;
+        return _venueType;
       }
       set
       {
-        if (this._venueType == value)
+        if (_venueType == value)
           return;
-        this._venueType = value;
-        this.IsDirty = true;
-        this.RaisePropertyChanged("VenueType");
+        _venueType = value;
+        IsDirty = true;
+        RaisePropertyChanged("VenueType");
       }
     }
 
@@ -162,16 +158,16 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._province;
+        return _province;
       }
       set
       {
-        int? province = this._province;
+        int? province = _province;
         int? nullable = value;
         if ((province.GetValueOrDefault() != nullable.GetValueOrDefault() ? 0 : (province.HasValue == nullable.HasValue ? 1 : 0)) != 0)
           return;
-        this._province = value;
-        this.RaisePropertyChanged("ProvinceID");
+        _province = value;
+        RaisePropertyChanged("ProvinceID");
       }
     }
 
@@ -179,14 +175,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._available;
+        return _available;
       }
       set
       {
-        if (this._available == value)
+        if (_available == value)
           return;
-        this._available = value;
-        this.RaisePropertyChanged("Available");
+        _available = value;
+        RaisePropertyChanged("Available");
       }
     }
 
@@ -194,16 +190,16 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._capacity;
+        return _capacity;
       }
       set
       {
-        int? capacity = this._capacity;
+        int? capacity = _capacity;
         int? nullable = value;
         if ((capacity.GetValueOrDefault() != nullable.GetValueOrDefault() ? 0 : (capacity.HasValue == nullable.HasValue ? 1 : 0)) != 0)
           return;
-        this._capacity = value;
-        this.RaisePropertyChanged("Capacity");
+        _capacity = value;
+        RaisePropertyChanged("Capacity");
       }
     }
 
@@ -211,14 +207,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._comments;
+        return _comments;
       }
       set
       {
-        if (this._comments == value)
+        if (_comments == value)
           return;
-        this._comments = value;
-        this.RaisePropertyChanged("Description");
+        _comments = value;
+        RaisePropertyChanged("Description");
       }
     }
 
@@ -232,7 +228,7 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._errors.Count > 0;
+        return _errors.Count > 0;
       }
     }
 
@@ -240,7 +236,7 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return !this.HasErrors;
+        return !HasErrors;
       }
     }
 
@@ -248,37 +244,37 @@ namespace CETAP_LOB.ViewModel.writers
 
     public VenueViewModel(VenueBDO model)
     {
-      this.Model = model;
+      Model = model;
     }
 
     public IEnumerable GetErrors(string propertyName)
     {
-      if (string.IsNullOrEmpty(propertyName) || !this._errors.ContainsKey(propertyName))
+      if (string.IsNullOrEmpty(propertyName) || !_errors.ContainsKey(propertyName))
         return (IEnumerable) null;
-      return (IEnumerable) this._errors[propertyName];
+      return (IEnumerable) _errors[propertyName];
     }
 
     public void AddError(string propertyName, string error)
     {
-      this._errors[propertyName] = new List<string>()
+      _errors[propertyName] = new List<string>()
       {
         error
       };
-      this.NotifyErrorsChanged(propertyName);
+      NotifyErrorsChanged(propertyName);
     }
 
     public void RemoveError(string propertyName)
     {
-      if (this._errors.ContainsKey(propertyName))
-        this._errors.Remove(propertyName);
-      this.NotifyErrorsChanged(propertyName);
+      if (_errors.ContainsKey(propertyName))
+        _errors.Remove(propertyName);
+      NotifyErrorsChanged(propertyName);
     }
 
     private void NotifyErrorsChanged(string propertyName)
     {
-      if (this.ErrorsChanged == null)
+      if (ErrorsChanged == null)
         return;
-      this.ErrorsChanged((object) this, new DataErrorsChangedEventArgs(propertyName));
+      ErrorsChanged((object) this, new DataErrorsChangedEventArgs(propertyName));
     }
   }
 }

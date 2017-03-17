@@ -22,14 +22,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._testName;
+        return _testName;
       }
       set
       {
-        if (this._testName == value)
+        if (_testName == value)
           return;
-        this._testName = value;
-        this.RaisePropertyChanged("TestName");
+        _testName = value;
+        RaisePropertyChanged("TestName");
       }
     }
 
@@ -47,7 +47,7 @@ namespace CETAP_LOB.BDO
 
     public override string ToString()
     {
-      return this.TestName;
+      return TestName;
     }
   }
 }

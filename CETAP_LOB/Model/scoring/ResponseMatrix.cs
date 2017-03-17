@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Model.scoring.ResponseMatrix
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 namespace CETAP_LOB.Model.scoring
 {
@@ -17,14 +13,14 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._barcode;
+        return _barcode;
       }
       set
       {
-        if (this._barcode == value)
+        if (_barcode == value)
           return;
-        this._barcode = value;
-        this.RaisePropertyChanged("Barcode");
+        _barcode = value;
+        RaisePropertyChanged("Barcode");
       }
     }
 
@@ -32,14 +28,14 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._response;
+        return _response;
       }
       set
       {
-        if (this._response == value)
+        if (_response == value)
           return;
-        this._response = value;
-        this.RaisePropertyChanged("Responses");
+        _response = value;
+        RaisePropertyChanged("Responses");
       }
     }
   }

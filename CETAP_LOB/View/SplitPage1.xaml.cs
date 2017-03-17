@@ -12,33 +12,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace LOB.View
+namespace CETAP_LOB.View
 {
-  public partial class SplitPage1 : UserControl, IComponentConnector
+  public partial class SplitPage1 : UserControl
   {
-    private bool _contentLoaded;
+
 
     public SplitPage1()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
 
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    [DebuggerNonUserCode]
-    public void InitializeComponent()
-    {
-      if (this._contentLoaded)
-        return;
-      this._contentLoaded = true;
-      Application.LoadComponent((object) this, new Uri("/LOB;component/view/splitpage1.xaml", UriKind.Relative));
-    }
-
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    void IComponentConnector.Connect(int connectionId, object target)
-    {
-      this._contentLoaded = true;
-    }
   }
 }

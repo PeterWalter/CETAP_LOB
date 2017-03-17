@@ -68,14 +68,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._moderatedScores;
+        return _moderatedScores;
       }
       set
       {
-        if (this._moderatedScores == value)
+        if (_moderatedScores == value)
           return;
-        this._moderatedScores = value;
-        this.RaisePropertyChanged("ModeratedScores");
+        _moderatedScores = value;
+        RaisePropertyChanged("ModeratedScores");
       }
     }
 
@@ -83,14 +83,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._myscores;
+        return _myscores;
       }
       set
       {
-        if (this._myscores == value)
+        if (_myscores == value)
           return;
-        this._myscores = value;
-        this.RaisePropertyChanged("Scores");
+        _myscores = value;
+        RaisePropertyChanged("Scores");
       }
     }
 
@@ -98,14 +98,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._mySelectedScore;
+        return _mySelectedScore;
       }
       set
       {
-        if (this._mySelectedScore == value)
+        if (_mySelectedScore == value)
           return;
-        this._mySelectedScore = value;
-        this.RaisePropertyChanged("SelectedScoreRecord");
+        _mySelectedScore = value;
+        RaisePropertyChanged("SelectedScoreRecord");
       }
     }
 
@@ -113,14 +113,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._scoreFolder;
+        return _scoreFolder;
       }
       set
       {
-        if (this._scoreFolder == value)
+        if (_scoreFolder == value)
           return;
-        this._scoreFolder = value;
-        this.RaisePropertyChanged("ScoreFolder");
+        _scoreFolder = value;
+        RaisePropertyChanged("ScoreFolder");
       }
     }
 
@@ -128,14 +128,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._SMF;
+        return _SMF;
       }
       set
       {
-        if (this._SMF == value)
+        if (_SMF == value)
           return;
-        this._SMF = value;
-        this.RaisePropertyChanged("ScoreModerationFolder");
+        _SMF = value;
+        RaisePropertyChanged("ScoreModerationFolder");
       }
     }
 
@@ -143,14 +143,14 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._myFFS;
+        return _myFFS;
       }
       set
       {
-        if (this._myFFS == value)
+        if (_myFFS == value)
           return;
-        this._myFFS = value;
-        this.RaisePropertyChanged("FilesForScoring");
+        _myFFS = value;
+        RaisePropertyChanged("FilesForScoring");
       }
     }
 
@@ -158,34 +158,34 @@ namespace CETAP_LOB.ViewModel.scoring
     {
       get
       {
-        return this._myMFFS;
+        return _myMFFS;
       }
       set
       {
-        if (this._myMFFS == value)
+        if (_myMFFS == value)
           return;
-        this._myMFFS = value;
-        this.RaisePropertyChanged("ModeratedFilesForScoring");
+        _myMFFS = value;
+        RaisePropertyChanged("ModeratedFilesForScoring");
       }
     }
 
     public ModerationViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      this.ScoreFolder = ApplicationSettings.Default.ScoreFolder;
-      this.ScoreModerationFolder = ApplicationSettings.Default.ScoreModerationFolder;
-      this.FilesForScoring = ApplicationSettings.Default.FilesForScoring;
-      this.ModeratedFilesForScoring = ApplicationSettings.Default.ModerationFilesForScoring;
-      this.Scores = new ObservableCollection<CompositBDO>();
-      this.ModeratedScores = new ObservableCollection<CompositBDO>();
-      this.GetScores();
-      this.CompareScores();
+      ScoreFolder = ApplicationSettings.Default.ScoreFolder;
+      ScoreModerationFolder = ApplicationSettings.Default.ScoreModerationFolder;
+      FilesForScoring = ApplicationSettings.Default.FilesForScoring;
+      ModeratedFilesForScoring = ApplicationSettings.Default.ModerationFilesForScoring;
+      Scores = new ObservableCollection<CompositBDO>();
+      ModeratedScores = new ObservableCollection<CompositBDO>();
+      GetScores();
+      CompareScores();
       if (HasScoreErrors) GetAllRawScores();
     }
 
@@ -206,23 +206,23 @@ namespace CETAP_LOB.ViewModel.scoring
 
     private void GetAllRawScores()
     {
-      foreach (ScoreDifference diffScore in (Collection<ScoreDifference>) this.DiffScores)
+      foreach (ScoreDifference diffScore in (Collection<ScoreDifference>) DiffScores)
       {
         string path2_1 = diffScore.Batch + ".dat";
         string path2_2 = diffScore.M_Batch + ".dat";
-        Path.Combine(this.FilesForScoring, path2_1);
-        Path.Combine(this.ModeratedFilesForScoring, path2_2);
+        Path.Combine(FilesForScoring, path2_1);
+        Path.Combine(ModeratedFilesForScoring, path2_2);
       }
     }
 
     private void SaveModerationRecords()
     {
-      using (StreamWriter streamWriter = new StreamWriter(Path.Combine(this.ScoreModerationFolder, "Comparison.csv")))
+      using (StreamWriter streamWriter = new StreamWriter(Path.Combine(ScoreModerationFolder, "Comparison.csv")))
       {
         using (CsvWriter csvWriter = new CsvWriter((TextWriter) streamWriter))
         {
           csvWriter.Configuration.HasHeaderRecord = true;
-          IEnumerable<ScoreDifference> list = (IEnumerable<ScoreDifference>) this.DiffScores.ToList<ScoreDifference>();
+          IEnumerable<ScoreDifference> list = (IEnumerable<ScoreDifference>) DiffScores.ToList<ScoreDifference>();
           csvWriter.WriteRecords((IEnumerable) list);
         }
       }

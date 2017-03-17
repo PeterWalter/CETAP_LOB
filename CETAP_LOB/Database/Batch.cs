@@ -17,8 +17,8 @@ namespace CETAP_LOB.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Batch()
         {
-            this.QAs = new HashSet<QA>();
-            this.ScannedFiles = new HashSet<ScannedFile>();
+            QAs = new HashSet<QA>();
+            ScannedFiles = new HashSet<ScannedFile>();
         }
     
         public int BatchID { get; set; }

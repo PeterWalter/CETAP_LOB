@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Model.scoring.ReadExcelBioFile
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using ClosedXML.Excel;
 using CETAP_LOB.BDO;
@@ -24,11 +20,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._filename;
+        return _filename;
       }
       set
       {
-        this._filename = value;
+        _filename = value;
       }
     }
 
@@ -36,24 +32,24 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this.bio;
+        return bio;
       }
       set
       {
-        this.bio = value;
+        bio = value;
       }
     }
 
     public ReadExcelBioFile(string File, List<VenueBDO> venues)
     {
-      this._filename = File;
-      this._venues = venues;
-      this.ReadExcelFile();
+      _filename = File;
+      _venues = venues;
+      ReadExcelFile();
     }
 
     private async void ReadExcelFile()
     {
-      IXLWorksheet xlWorksheet = new XLWorkbook(this._filename).Worksheet(1);
+      IXLWorksheet xlWorksheet = new XLWorkbook(_filename).Worksheet(1);
       xlWorksheet.FirstRowUsed();
       foreach (IXLTableRow row in (IEnumerable<IXLTableRow>) xlWorksheet.Range(xlWorksheet.FirstCellUsed().Address, xlWorksheet.LastCellUsed().Address).AsTable().DataRange.Rows((Func<IXLTableRow, bool>) null))
       {
@@ -100,10 +96,10 @@ namespace CETAP_LOB.Model.scoring
           myBio.Mat_Language = row.Field("MAT_LANG").GetString().Trim();
         myBio.BatchFile = row.Field("BatchFile").GetString();
         myBio.VenueCode = Convert.ToInt32(row.Field("Test_Cen_Code").GetString().Trim());
-        myBio.VenueName = this._venues.Where<VenueBDO>((Func<VenueBDO, bool>) (x => x.VenueCode == myBio.VenueCode)).Select<VenueBDO, string>((Func<VenueBDO, string>) (x => x.ShortName)).FirstOrDefault<string>();
+        myBio.VenueName = _venues.Where<VenueBDO>((Func<VenueBDO, bool>) (x => x.VenueCode == myBio.VenueCode)).Select<VenueBDO, string>((Func<VenueBDO, string>) (x => x.ShortName)).FirstOrDefault<string>();
         myBio.aqltestname = row.Field("AQL_TestNo").GetString();
         myBio.matTestname = row.Field("MAT_TestNo").GetString();
-        this.bio.Add(myBio);
+        bio.Add(myBio);
       }
     }
   }

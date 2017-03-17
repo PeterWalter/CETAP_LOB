@@ -24,7 +24,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._listName;
+        return _listName;
       }
     }
 
@@ -32,7 +32,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._limit;
+        return _limit;
       }
     }
 
@@ -40,7 +40,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return new ReadOnlyCollection<T>((IList<T>) this._list);
+        return new ReadOnlyCollection<T>((IList<T>) _list);
       }
     }
 
@@ -52,23 +52,23 @@ namespace CETAP_LOB.Helper
         throw new ArgumentOutOfRangeException("listName", "name cannot be null or empty");
       if (limit <= 0)
         throw new ArgumentOutOfRangeException("limit", "limit must be greater than zero.");
-      this._listName = listName;
-      this._limit = limit;
-      this.LoadFromDisk();
+      _listName = listName;
+      _limit = limit;
+      LoadFromDisk();
     }
 
     public void Add(T item)
     {
-      if (this._list.Contains(item))
-        this._list.Remove(item);
-      this._list.Insert(0, item);
-      this.RemoveExtraItems();
-      this.SaveToDisk();
+      if (_list.Contains(item))
+        _list.Remove(item);
+      _list.Insert(0, item);
+      RemoveExtraItems();
+      SaveToDisk();
     }
 
     public void Clear()
     {
-      this._list.Clear();
+      _list.Clear();
     }
 
     private void SaveToDisk()
@@ -77,10 +77,10 @@ namespace CETAP_LOB.Helper
       {
         using (IsolatedStorageFile storeForAssembly = IsolatedStorageFile.GetUserStoreForAssembly())
         {
-          string str = "mruList_" + this.ListName;
+          string str = "mruList_" + ListName;
           IsolatedStorageFileStream storageFileStream = storeForAssembly.GetFileNames(str).Length <= 0 ? new IsolatedStorageFileStream(str, FileMode.Create, FileAccess.Write, storeForAssembly) : new IsolatedStorageFileStream(str, FileMode.Truncate, FileAccess.Write, storeForAssembly);
           using (storageFileStream)
-            new XmlSerializer(typeof (ObservableCollection<T>)).Serialize((Stream) storageFileStream, (object) this._list);
+            new XmlSerializer(typeof (ObservableCollection<T>)).Serialize((Stream) storageFileStream, (object) _list);
         }
       }
       catch (Exception ex)
@@ -96,7 +96,7 @@ namespace CETAP_LOB.Helper
       {
         using (IsolatedStorageFile storeForAssembly = IsolatedStorageFile.GetUserStoreForAssembly())
         {
-          string str = "mruList_" + this.ListName;
+          string str = "mruList_" + ListName;
           if (storeForAssembly.GetFileNames(str).Length > 0)
           {
             using (IsolatedStorageFileStream storageFileStream = new IsolatedStorageFileStream(str, FileMode.Open, FileAccess.Read, storeForAssembly))
@@ -109,25 +109,25 @@ namespace CETAP_LOB.Helper
       }
       if (observableCollection == null)
         observableCollection = new ObservableCollection<T>();
-      this._list = observableCollection;
-      this._list.CollectionChanged += new NotifyCollectionChangedEventHandler(this.CollectionChangedHandler);
-      this.RemoveExtraItems();
+      _list = observableCollection;
+      _list.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChangedHandler);
+      RemoveExtraItems();
     }
 
     private void RemoveExtraItems()
     {
-      if (this._list.Count <= this.Limit)
+      if (_list.Count <= Limit)
         return;
-      for (int limit = this.Limit; limit < this._list.Count; ++limit)
-        this._list.RemoveAt(limit);
+      for (int limit = Limit; limit < _list.Count; ++limit)
+        _list.RemoveAt(limit);
     }
 
     private void CollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
     {
-      this.SaveToDisk();
-      if (this.ListChanged == null)
+      SaveToDisk();
+      if (ListChanged == null)
         return;
-      this.ListChanged((object) this, EventArgs.Empty);
+      ListChanged((object) this, EventArgs.Empty);
     }
   }
 }

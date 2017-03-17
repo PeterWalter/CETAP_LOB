@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.ViewModel.SettingsAppearanceViewModel
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using FirstFloor.ModernUI.Presentation;
 using GalaSoft.MvvmLight;
@@ -44,16 +40,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._mySelectedPalette;
+        return _mySelectedPalette;
       }
       set
       {
-        if (this._mySelectedPalette == value)
+        if (_mySelectedPalette == value)
           return;
-        this._mySelectedPalette = value;
-        this.RaisePropertyChanged("AccentColors");
-        this.SelectedAccentColor = this.AccentColors.FirstOrDefault<Color>();
-        this.RaisePropertyChanged("SelectedPalette");
+        _mySelectedPalette = value;
+        RaisePropertyChanged("AccentColors");
+        SelectedAccentColor = AccentColors.FirstOrDefault<Color>();
+        RaisePropertyChanged("SelectedPalette");
       }
     }
 
@@ -61,14 +57,14 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._mypalettes;
+        return _mypalettes;
       }
       set
       {
-        if (this._mypalettes == value)
+        if (_mypalettes == value)
           return;
-        this._mypalettes = value;
-        this.RaisePropertyChanged("Palettes");
+        _mypalettes = value;
+        RaisePropertyChanged("Palettes");
       }
     }
 
@@ -76,14 +72,14 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myMetroColor;
+        return _myMetroColor;
       }
       set
       {
-        if (this._myMetroColor == value)
+        if (_myMetroColor == value)
           return;
-        this._myMetroColor = value;
-        this.RaisePropertyChanged("SelectedMetroAccentColor");
+        _myMetroColor = value;
+        RaisePropertyChanged("SelectedMetroAccentColor");
       }
     }
 
@@ -91,16 +87,16 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        if (!(this.SelectedPalette == "metro"))
-          return this.wpAccentColors;
-        return this.metroAccentColors;
+        if (!(SelectedPalette == "metro"))
+          return wpAccentColors;
+        return metroAccentColors;
       }
       set
       {
-        if (this._accentColors == value)
+        if (_accentColors == value)
           return;
-        this._accentColors = value;
-        this.RaisePropertyChanged("AccentColors");
+        _accentColors = value;
+        RaisePropertyChanged("AccentColors");
       }
     }
 
@@ -108,14 +104,14 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._metroColor;
+        return _metroColor;
       }
       set
       {
-        if (this._metroColor == value)
+        if (_metroColor == value)
           return;
-        this._metroColor = value;
-        this.RaisePropertyChanged("metroAccentColors");
+        _metroColor = value;
+        RaisePropertyChanged("metroAccentColors");
       }
     }
 
@@ -123,14 +119,14 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._myProperty;
+        return _myProperty;
       }
       set
       {
-        if (this._myProperty == value)
+        if (_myProperty == value)
           return;
-        this._myProperty = value;
-        this.RaisePropertyChanged("wpAccentColors");
+        _myProperty = value;
+        RaisePropertyChanged("wpAccentColors");
       }
     }
 
@@ -138,15 +134,15 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._selectedAccentColor;
+        return _selectedAccentColor;
       }
       set
       {
-        if (this._selectedAccentColor == value)
+        if (_selectedAccentColor == value)
           return;
-        this._selectedAccentColor = value;
+        _selectedAccentColor = value;
         AppearanceManager.Current.AccentColor = value;
-        this.RaisePropertyChanged("SelectedAccentColor");
+        RaisePropertyChanged("SelectedAccentColor");
       }
     }
 
@@ -154,14 +150,14 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this.themes;
+        return themes;
       }
       set
       {
-        if (this.themes == value)
+        if (themes == value)
           return;
-        this.themes = value;
-        this.RaisePropertyChanged("Themes");
+        themes = value;
+        RaisePropertyChanged("Themes");
       }
     }
 
@@ -169,14 +165,14 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this._selectedTheme;
+        return _selectedTheme;
       }
       set
       {
-        if (this._selectedTheme == value)
+        if (_selectedTheme == value)
           return;
-        this._selectedTheme = value;
-        this.RaisePropertyChanged("SelectedTheme");
+        _selectedTheme = value;
+        RaisePropertyChanged("SelectedTheme");
         AppearanceManager.Current.ThemeSource = value.Source;
       }
     }
@@ -185,18 +181,18 @@ namespace CETAP_LOB.ViewModel
     {
       get
       {
-        return this.selectedFontSize;
+        return selectedFontSize;
       }
       set
       {
-        if (this.selectedFontSize == value)
+        if (selectedFontSize == value)
           return;
-        this.selectedFontSize = value;
-        this.RaisePropertyChanged("SelectedFontSize");
+        selectedFontSize = value;
+        RaisePropertyChanged("SelectedFontSize");
         AppearanceManager.Current.FontSize = value == "large" ? FontSize.Large : FontSize.Small;
-        if (!this._colorLoadedYet)
+        if (!_colorLoadedYet)
           return;
-        ApplicationSettings.Default.SelectedFontSize = this.selectedFontSize;
+        ApplicationSettings.Default.SelectedFontSize = selectedFontSize;
         ApplicationSettings.Default.Save();
       }
     }
@@ -214,7 +210,7 @@ namespace CETAP_LOB.ViewModel
       ObservableCollection<string> observableCollection1 = new ObservableCollection<string>();
       observableCollection1.Add("metro");
       observableCollection1.Add("windows phone");
-      this._mypalettes = observableCollection1;
+      _mypalettes = observableCollection1;
       ObservableCollection<Color> observableCollection2 = new ObservableCollection<Color>();
       observableCollection2.Add(Color.FromRgb((byte) 51, (byte) 153, byte.MaxValue));
       observableCollection2.Add(Color.FromRgb((byte) 0, (byte) 171, (byte) 169));
@@ -225,7 +221,7 @@ namespace CETAP_LOB.ViewModel
       observableCollection2.Add(Color.FromRgb((byte) 229, (byte) 20, (byte) 0));
       observableCollection2.Add(Color.FromRgb(byte.MaxValue, (byte) 0, (byte) 151));
       observableCollection2.Add(Color.FromRgb((byte) 162, (byte) 0, byte.MaxValue));
-      this._metroColor = observableCollection2;
+      _metroColor = observableCollection2;
       ObservableCollection<Color> observableCollection3 = new ObservableCollection<Color>();
       observableCollection3.Add(Color.FromRgb((byte) 164, (byte) 196, (byte) 0));
       observableCollection3.Add(Color.FromRgb((byte) 96, (byte) 169, (byte) 23));
@@ -247,80 +243,80 @@ namespace CETAP_LOB.ViewModel
       observableCollection3.Add(Color.FromRgb((byte) 100, (byte) 118, (byte) 135));
       observableCollection3.Add(Color.FromRgb((byte) 118, (byte) 96, (byte) 138));
       observableCollection3.Add(Color.FromRgb((byte) 135, (byte) 121, (byte) 78));
-      this._myProperty = observableCollection3;
-      this.themes = new LinkCollection();
-      this.selectedFontSize = string.Empty;
+      _myProperty = observableCollection3;
+      themes = new LinkCollection();
+      selectedFontSize = string.Empty;
 
-      LinkCollection themes1 = this.themes;
+      LinkCollection themes1 = themes;
       Link link1 = new Link();
       link1.DisplayName = "dark";
       link1.Source = AppearanceManager.DarkThemeSource;
       Link link2 = link1;
       themes1.Add(link2);
-      LinkCollection themes2 = this.themes;
+      LinkCollection themes2 = themes;
       Link link3 = new Link();
       link3.DisplayName = "light";
       link3.Source = AppearanceManager.LightThemeSource;
       Link link4 = link3;
       themes2.Add(link4);
-      LinkCollection themes3 = this.themes;
+      LinkCollection themes3 = themes;
       Link link5 = new Link();
       link5.DisplayName = "snowflake";
       link5.Source = new Uri("/LOB;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative);
       Link link6 = link5;
       themes3.Add(link6);
-      LinkCollection themes4 = this.themes;
+      LinkCollection themes4 = themes;
       Link link7 = new Link();
       link7.DisplayName = "bing image";
       link7.Source = new Uri("/LOB;component/Assets/ModernUI.BingImage.xaml", UriKind.Relative);
       Link link8 = link7;
       themes4.Add(link8);
-      LinkCollection themes5 = this.themes;
+      LinkCollection themes5 = themes;
       Link link9 = new Link();
       link9.DisplayName = "cetap";
       link9.Source = new Uri("/LOB;component/Assets/ModernUI.Cetap.xaml", UriKind.Relative);
       Link link10 = link9;
       themes5.Add(link10);
-      LinkCollection themes6 = this.themes;
+      LinkCollection themes6 = themes;
       Link link11 = new Link();
       link11.DisplayName = "rose";
       link11.Source = new Uri("/LOB;component/Assets/ModernUI.Rose.xaml", UriKind.Relative);
       Link link12 = link11;
       themes6.Add(link12);
-      LinkCollection themes7 = this.themes;
+      LinkCollection themes7 = themes;
       Link link13 = new Link();
       link13.DisplayName = "bubbles";
       link13.Source = new Uri("/LOB;component/Assets/ModernUI.Bubbles.xaml", UriKind.Relative);
       Link link14 = link13;
       themes7.Add(link14);
-      LinkCollection themes8 = this.themes;
+      LinkCollection themes8 = themes;
       Link link15 = new Link();
       link15.DisplayName = "water drop";
       link15.Source = new Uri("/LOB;component/Assets/ModernUI.WaterDrop.xaml", UriKind.Relative);
       Link link16 = link15;
       themes8.Add(link16);
-      this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? "large" : "small";
-      this.SyncThemeAndColor();
-      AppearanceManager.Current.PropertyChanged += new PropertyChangedEventHandler(this.OnAppearanceManagerPropertyChanged);
+      SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? "large" : "small";
+      SyncThemeAndColor();
+      AppearanceManager.Current.PropertyChanged += new PropertyChangedEventHandler(OnAppearanceManagerPropertyChanged);
     }
 
     private void OnAppearanceManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
       if (!(e.PropertyName == "ThemeSource") && !(e.PropertyName == "AccentColor"))
         return;
-      this.SyncThemeAndColor();
+      SyncThemeAndColor();
     }
 
     private void SyncThemeAndColor()
     {
-      this.SelectedTheme = this.themes.FirstOrDefault<Link>((Func<Link, bool>) (l => l.Source.Equals((object) AppearanceManager.Current.ThemeSource)));
-      this.SelectedAccentColor = AppearanceManager.Current.AccentColor;
-      if (!this._colorLoadedYet)
+      SelectedTheme = themes.FirstOrDefault<Link>((Func<Link, bool>) (l => l.Source.Equals((object) AppearanceManager.Current.ThemeSource)));
+      SelectedAccentColor = AppearanceManager.Current.AccentColor;
+      if (!_colorLoadedYet)
         return;
-      ApplicationSettings.Default.SelectedThemeDisplayName = this.SelectedTheme.DisplayName;
-      ApplicationSettings.Default.SelectedThemeSource = this.SelectedTheme.Source;
-      ApplicationSettings.Default.SelectedAccentColor = this.SelectedAccentColor;
-      ApplicationSettings.Default.SelectedFontSize = this.SelectedFontSize;
+      ApplicationSettings.Default.SelectedThemeDisplayName = SelectedTheme.DisplayName;
+      ApplicationSettings.Default.SelectedThemeSource = SelectedTheme.Source;
+      ApplicationSettings.Default.SelectedAccentColor = SelectedAccentColor;
+      ApplicationSettings.Default.SelectedFontSize = SelectedFontSize;
       ApplicationSettings.Default.Save();
     }
 
@@ -329,10 +325,10 @@ namespace CETAP_LOB.ViewModel
       Link link = new Link();
       link.DisplayName = themeSourceDisplayName;
       link.Source = themeSourceUri;
-      this.SelectedTheme = link;
-      this.SelectedAccentColor = accentColor;
-      this.SelectedFontSize = fontSize;
-      this._colorLoadedYet = true;
+      SelectedTheme = link;
+      SelectedAccentColor = accentColor;
+      SelectedFontSize = fontSize;
+      _colorLoadedYet = true;
     }
   }
 }

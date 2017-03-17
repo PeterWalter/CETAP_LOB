@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Model.venueprep.WebWriters
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using CETAP_LOB.Helper;
 using System;
@@ -59,14 +55,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mycount;
+        return _mycount;
       }
       set
       {
-        if (this._mycount == value)
+        if (_mycount == value)
           return;
-        this._mycount = value;
-        this.RaisePropertyChanged("errorCount");
+        _mycount = value;
+        RaisePropertyChanged("errorCount");
       }
     }
 
@@ -74,26 +70,26 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._NBT;
+        return _NBT;
       }
       set
       {
-        if (this._NBT == value)
+        if (_NBT == value)
           return;
-        this._NBT = value;
-        if (!string.IsNullOrEmpty(this._NBT))
+        _NBT = value;
+        if (!string.IsNullOrEmpty(_NBT))
         {
-          if (this._NBT.Length != 14)
-            this.AddError("Reference", "Not proper length for NBT number");
-          else if (!HelperUtils.IsValidChecksum(this._NBT.Substring(1, 13)))
-            this.AddError("Reference", "Not a Valid NBT number");
+          if (_NBT.Length != 14)
+            AddError("Reference", "Not proper length for NBT number");
+          else if (!HelperUtils.IsValidChecksum(_NBT.Substring(1, 13)))
+            AddError("Reference", "Not a Valid NBT number");
           else
-            this.RemoveError("Reference");
+            RemoveError("Reference");
         }
         else
-          this.AddError("Reference", "NBT number cannot be empty");
-        this.checkerrors();
-        this.RaisePropertyChanged("Reference");
+          AddError("Reference", "NBT number cannot be empty");
+        checkerrors();
+        RaisePropertyChanged("Reference");
       }
     }
 
@@ -101,30 +97,30 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._surname;
+        return _surname;
       }
       set
       {
-        if (this._surname == value)
+        if (_surname == value)
           return;
-        this._surname = value;
-        if (string.IsNullOrEmpty(this._surname))
-          this.AddError("Surname", "Surname cannot be empty");
+        _surname = value;
+        if (string.IsNullOrEmpty(_surname))
+          AddError("Surname", "Surname cannot be empty");
         else
-          this.RemoveError("Surname");
-        if (!string.IsNullOrEmpty(this._surname))
+          RemoveError("Surname");
+        if (!string.IsNullOrEmpty(_surname))
         {
-          if (Regex.IsMatch(this._surname, "\\d"))
-            this.AddError("Surname", "Surname cannot have digits");
-          else if (!Regex.IsMatch(this._surname, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
-            this.AddError("Surname", "cannot start/end with space or have funny characters");
-          else if (this._surname.Length > 20)
-            this.AddError("Surname", "Too many characters for Surname");
+          if (Regex.IsMatch(_surname, "\\d"))
+            AddError("Surname", "Surname cannot have digits");
+          else if (!Regex.IsMatch(_surname, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
+            AddError("Surname", "cannot start/end with space or have funny characters");
+          else if (_surname.Length > 20)
+            AddError("Surname", "Too many characters for Surname");
           else
-            this.RemoveError("Surname");
+            RemoveError("Surname");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("Surname");
+        checkerrors();
+        RaisePropertyChanged("Surname");
       }
     }
 
@@ -132,30 +128,30 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._myname;
+        return _myname;
       }
       set
       {
-        if (this._myname == value)
+        if (_myname == value)
           return;
-        this._myname = value;
-        if (string.IsNullOrEmpty(this._myname))
-          this.AddError("FirstName", "FirstName cannot be empty");
+        _myname = value;
+        if (string.IsNullOrEmpty(_myname))
+          AddError("FirstName", "FirstName cannot be empty");
         else
-          this.RemoveError("FirstName");
-        if (!string.IsNullOrWhiteSpace(this._myname))
+          RemoveError("FirstName");
+        if (!string.IsNullOrWhiteSpace(_myname))
         {
-          if (Regex.IsMatch(this._myname, "\\d"))
-            this.AddError("FirstName", "First name cannot have digits");
-          else if (!Regex.IsMatch(this._myname, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
-            this.AddError("FirstName", "cannot start/end with space or have funny characters");
-          else if (this._myname.Length > 18)
-            this.AddError("FirstName", "To many characters for Name (max is 18)");
+          if (Regex.IsMatch(_myname, "\\d"))
+            AddError("FirstName", "First name cannot have digits");
+          else if (!Regex.IsMatch(_myname, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
+            AddError("FirstName", "cannot start/end with space or have funny characters");
+          else if (_myname.Length > 18)
+            AddError("FirstName", "To many characters for Name (max is 18)");
           else
-            this.RemoveError("FirstName");
+            RemoveError("FirstName");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("FirstName");
+        checkerrors();
+        RaisePropertyChanged("FirstName");
       }
     }
 
@@ -163,14 +159,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._initials;
+        return _initials;
       }
       set
       {
-        if (this._initials == value)
+        if (_initials == value)
           return;
-        this._initials = value;
-        this.RaisePropertyChanged("initials");
+        _initials = value;
+        RaisePropertyChanged("initials");
       }
     }
 
@@ -178,26 +174,26 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._said;
+        return _said;
       }
       set
       {
-        if (this._said == value)
+        if (_said == value)
           return;
-        this._said = value;
-        if (!string.IsNullOrEmpty(this._said))
+        _said = value;
+        if (!string.IsNullOrEmpty(_said))
         {
-          if (!Regex.IsMatch(this._said, "^[0-9]+$"))
-            this.AddError("SAID", "SA Id does not have characters");
-          else if (!HelperUtils.IsValidChecksum(this._said))
-            this.AddError("SAID", "Not a Valid South African ID number");
+          if (!Regex.IsMatch(_said, "^[0-9]+$"))
+            AddError("SAID", "SA Id does not have characters");
+          else if (!HelperUtils.IsValidChecksum(_said))
+            AddError("SAID", "Not a Valid South African ID number");
           else
-            this.RemoveError("SAID");
+            RemoveError("SAID");
         }
         else
-          this.RemoveError("SAID");
-        this.checkerrors();
-        this.RaisePropertyChanged("SAID");
+          RemoveError("SAID");
+        checkerrors();
+        RaisePropertyChanged("SAID");
       }
     }
 
@@ -205,22 +201,22 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._foreignID;
+        return _foreignID;
       }
       set
       {
-        if (this._foreignID == value)
+        if (_foreignID == value)
           return;
-        this._foreignID = value;
-        if (!string.IsNullOrEmpty(this._foreignID))
+        _foreignID = value;
+        if (!string.IsNullOrEmpty(_foreignID))
         {
-          if (this._foreignID.Length > 15)
-            this.AddError("ForeignID", "ForeignID has too many characters");
+          if (_foreignID.Length > 15)
+            AddError("ForeignID", "ForeignID has too many characters");
           else
-            this.RemoveError("ForeignID");
+            RemoveError("ForeignID");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("ForeignID");
+        checkerrors();
+        RaisePropertyChanged("ForeignID");
       }
     }
 
@@ -228,20 +224,20 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._dob;
+        return _dob;
       }
       set
       {
-        if (this._dob == value)
+        if (_dob == value)
           return;
-        this._dob = value;
-        TimeSpan timeSpan = DateTime.Now - this._dob;
+        _dob = value;
+        TimeSpan timeSpan = DateTime.Now - _dob;
         if (timeSpan.TotalDays < 3650.0 || timeSpan.TotalDays > 29100.0)
-          this.AddError("DOB", "Wrong age for Matric");
+          AddError("DOB", "Wrong age for Matric");
         else
-          this.RemoveError("DOB");
-        this.checkerrors();
-        this.RaisePropertyChanged("DOB");
+          RemoveError("DOB");
+        checkerrors();
+        RaisePropertyChanged("DOB");
       }
     }
 
@@ -249,14 +245,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._gender;
+        return _gender;
       }
       set
       {
-        if (this._gender == value)
+        if (_gender == value)
           return;
-        this._gender = value;
-        this.RaisePropertyChanged("Gender");
+        _gender = value;
+        RaisePropertyChanged("Gender");
       }
     }
 
@@ -264,14 +260,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._classification;
+        return _classification;
       }
       set
       {
-        if (this._classification == value)
+        if (_classification == value)
           return;
-        this._classification = value;
-        this.RaisePropertyChanged("Classification");
+        _classification = value;
+        RaisePropertyChanged("Classification");
       }
     }
 
@@ -279,14 +275,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._tests;
+        return _tests;
       }
       set
       {
-        if (this._tests == value)
+        if (_tests == value)
           return;
-        this._tests = value;
-        this.RaisePropertyChanged("Tests");
+        _tests = value;
+        RaisePropertyChanged("Tests");
       }
     }
 
@@ -294,14 +290,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._language;
+        return _language;
       }
       set
       {
-        if (this._language == value)
+        if (_language == value)
           return;
-        this._language = value;
-        this.RaisePropertyChanged("Language");
+        _language = value;
+        RaisePropertyChanged("Language");
       }
     }
 
@@ -309,14 +305,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._venue;
+        return _venue;
       }
       set
       {
-        if (this._venue == value)
+        if (_venue == value)
           return;
-        this._venue = value;
-        this.RaisePropertyChanged("Venue");
+        _venue = value;
+        RaisePropertyChanged("Venue");
       }
     }
 
@@ -324,14 +320,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._dot;
+        return _dot;
       }
       set
       {
-        if (this._dot == value)
+        if (_dot == value)
           return;
-        this._dot = value;
-        this.RaisePropertyChanged("DOT");
+        _dot = value;
+        RaisePropertyChanged("DOT");
       }
     }
 
@@ -339,22 +335,22 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mobile;
+        return _mobile;
       }
       set
       {
-        if (this._mobile == value)
+        if (_mobile == value)
           return;
-        this._mobile = value;
-        if (!string.IsNullOrEmpty(this._mobile))
+        _mobile = value;
+        if (!string.IsNullOrEmpty(_mobile))
         {
-          if (this._mobile.Length > 15)
-            this.AddError("Mobile", "Cellphone number has too many characters");
+          if (_mobile.Length > 15)
+            AddError("Mobile", "Cellphone number has too many characters");
           else
-            this.RemoveError("Mobile");
+            RemoveError("Mobile");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("Mobile");
+        checkerrors();
+        RaisePropertyChanged("Mobile");
       }
     }
 
@@ -362,22 +358,22 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._telephone;
+        return _telephone;
       }
       set
       {
-        if (this._telephone == value)
+        if (_telephone == value)
           return;
-        this._telephone = value;
-        if (!string.IsNullOrEmpty(this._telephone))
+        _telephone = value;
+        if (!string.IsNullOrEmpty(_telephone))
         {
-          if (this._telephone.Length > 15)
-            this.AddError("HTelephone", "Telephone number has too many characters");
+          if (_telephone.Length > 15)
+            AddError("HTelephone", "Telephone number has too many characters");
           else
-            this.RemoveError("HTelephone");
+            RemoveError("HTelephone");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("HTelephone");
+        checkerrors();
+        RaisePropertyChanged("HTelephone");
       }
     }
 
@@ -385,26 +381,26 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._email;
+        return _email;
       }
       set
       {
-        if (this._email == value)
+        if (_email == value)
           return;
-        this._email = value;
-        if (!string.IsNullOrEmpty(this._email))
+        _email = value;
+        if (!string.IsNullOrEmpty(_email))
         {
-          if (!HelperUtils.IsValidEmail(this._email))
-            this.AddError("Email", "Wrong email address");
-          else if (this._email.Length > 50)
-            this.AddError("Email", "Email is to long");
+          if (!HelperUtils.IsValidEmail(_email))
+            AddError("Email", "Wrong email address");
+          else if (_email.Length > 50)
+            AddError("Email", "Email is to long");
           else
-            this.RemoveError("Email");
+            RemoveError("Email");
         }
         else
-          this.RemoveError("Email");
-        this.checkerrors();
-        this.RaisePropertyChanged("Email");
+          RemoveError("Email");
+        checkerrors();
+        RaisePropertyChanged("Email");
       }
     }
 
@@ -412,14 +408,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._regdate;
+        return _regdate;
       }
       set
       {
-        if (this._regdate == value)
+        if (_regdate == value)
           return;
-        this._regdate = value;
-        this.RaisePropertyChanged("RegDate");
+        _regdate = value;
+        RaisePropertyChanged("RegDate");
       }
     }
 
@@ -427,14 +423,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._payment;
+        return _payment;
       }
       set
       {
-        if (this._payment == value)
+        if (_payment == value)
           return;
-        this._payment = value;
-        this.RaisePropertyChanged("Paid");
+        _payment = value;
+        RaisePropertyChanged("Paid");
       }
     }
 
@@ -442,14 +438,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._CreateDate;
+        return _CreateDate;
       }
       set
       {
-        if (this._CreateDate == value)
+        if (_CreateDate == value)
           return;
-        this._CreateDate = value;
-        this.RaisePropertyChanged("CreationDate");
+        _CreateDate = value;
+        RaisePropertyChanged("CreationDate");
       }
     }
 
@@ -457,23 +453,23 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._isSelected;
+        return _isSelected;
       }
       set
       {
-        if (this._isSelected == value)
+        if (_isSelected == value)
           return;
-        this._isSelected = value;
-        this.RaisePropertyChanged("IsSelected");
+        _isSelected = value;
+        RaisePropertyChanged("IsSelected");
       }
     }
 
     private void checkerrors()
     {
-      if (this.HasErrors)
-        this.errorCount = this._errors.Count;
+      if (HasErrors)
+        errorCount = _errors.Count;
       else
-        this.errorCount = 0;
+        errorCount = 0;
     }
   }
 }

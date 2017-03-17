@@ -60,14 +60,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._inProgress;
+        return _inProgress;
       }
       set
       {
-        if (this._inProgress == value)
+        if (_inProgress == value)
           return;
-        this._inProgress = value;
-        this.RaisePropertyChanged("InProgress");
+        _inProgress = value;
+        RaisePropertyChanged("InProgress");
       }
     }
 
@@ -75,14 +75,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._espRecords;
+        return _espRecords;
       }
       set
       {
-        if (this._espRecords == value)
+        if (_espRecords == value)
           return;
-        this._espRecords = value;
-        this.RaisePropertyChanged("EasyPayRecords");
+        _espRecords = value;
+        RaisePropertyChanged("EasyPayRecords");
       }
     }
 
@@ -90,14 +90,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._dateLoaded;
+        return _dateLoaded;
       }
       set
       {
-        if (this._dateLoaded == value)
+        if (_dateLoaded == value)
           return;
-        this._dateLoaded = value;
-        this.RaisePropertyChanged("DateLoaded");
+        _dateLoaded = value;
+        RaisePropertyChanged("DateLoaded");
       }
     }
 
@@ -105,14 +105,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._epFileName;
+        return _epFileName;
       }
       set
       {
-        if (this._epFileName == value)
+        if (_epFileName == value)
           return;
-        this._epFileName = value;
-        this.RaisePropertyChanged("EPFileName");
+        _epFileName = value;
+        RaisePropertyChanged("EPFileName");
       }
     }
 
@@ -120,14 +120,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._startDate;
+        return _startDate;
       }
       set
       {
-        if (this._startDate == value)
+        if (_startDate == value)
           return;
-        this._startDate = value;
-        this.RaisePropertyChanged("StartDate");
+        _startDate = value;
+        RaisePropertyChanged("StartDate");
       }
     }
 
@@ -135,14 +135,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._endDate;
+        return _endDate;
       }
       set
       {
-        if (this._endDate == value)
+        if (_endDate == value)
           return;
-        this._endDate = value;
-        this.RaisePropertyChanged("EndDate");
+        _endDate = value;
+        RaisePropertyChanged("EndDate");
       }
     }
 
@@ -150,14 +150,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._mrulist;
+        return _mrulist;
       }
       set
       {
-        if (this._mrulist == value)
+        if (_mrulist == value)
           return;
-        this._mrulist = value;
-        this.RaisePropertyChanged("mruList");
+        _mrulist = value;
+        RaisePropertyChanged("mruList");
       }
     }
 
@@ -165,14 +165,14 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._folder;
+        return _folder;
       }
       set
       {
-        if (this._folder == value)
+        if (_folder == value)
           return;
-        this._folder = value;
-        this.RaisePropertyChanged("Folder");
+        _folder = value;
+        RaisePropertyChanged("Folder");
       }
     }
 
@@ -180,16 +180,16 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        if (this.DirList != null)
-          return this.DirList.Where<EasypayFile>((Func<EasypayFile, bool>) (x => x.IsSelected));
-        return this._selectedfiles;
+        if (DirList != null)
+          return DirList.Where<EasypayFile>((Func<EasypayFile, bool>) (x => x.IsSelected));
+        return _selectedfiles;
       }
       set
       {
-        if (this._selectedfiles == value)
+        if (_selectedfiles == value)
           return;
-        this._selectedfiles = value;
-        this.RaisePropertyChanged("SelectedFiles");
+        _selectedfiles = value;
+        RaisePropertyChanged("SelectedFiles");
       }
     }
 
@@ -197,39 +197,39 @@ namespace CETAP_LOB.ViewModel.easypay
     {
       get
       {
-        return this._mylist;
+        return _mylist;
       }
       set
       {
-        if (this._mylist == value)
+        if (_mylist == value)
           return;
-        this._mylist = value;
-        this.RaisePropertyChanged("DirList");
+        _mylist = value;
+        RaisePropertyChanged("DirList");
       }
     }
 
     public EasyPayViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
-      this.ftpDirectoryList();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
+      ftpDirectoryList();
     }
 
     private void InitializeModels()
     {
-      this.mruList = new ObservableCollection<string>((IEnumerable<string>) EasyPayViewModel._mruManager.List);
-      this.StartDate = DateTime.Now;
-      this.EndDate = DateTime.Now;
+      mruList = new ObservableCollection<string>((IEnumerable<string>) EasyPayViewModel._mruManager.List);
+      StartDate = DateTime.Now;
+      EndDate = DateTime.Now;
     }
 
     private void RegisterCommands()
     {
-      this.ListCommand = new RelayCommand(new Action(this.GetFiles));
-      this.FolderBowserCommand = new RelayCommand(new Action(this.OpenNewFolder));
-      this.WriteToDatabaseCommand = new RelayCommand((Action) (() => this.WriteToDB()));
-      this.FromDBCommand = new RelayCommand((Action) (() => this.RecordsFromDB()));
-      this.SavetoCSVCommand = new RelayCommand((Action) (() => this.SaveCSVFile()));
+      ListCommand = new RelayCommand(new Action(GetFiles));
+      FolderBowserCommand = new RelayCommand(new Action(OpenNewFolder));
+      WriteToDatabaseCommand = new RelayCommand((Action) (() => WriteToDB()));
+      FromDBCommand = new RelayCommand((Action) (() => RecordsFromDB()));
+      SavetoCSVCommand = new RelayCommand((Action) (() => SaveCSVFile()));
     }
 
     private void SaveCSVFile()
@@ -239,7 +239,7 @@ namespace CETAP_LOB.ViewModel.easypay
       saveFileDialog.FilterIndex = 1;
       if (saveFileDialog.ShowDialog() != DialogResult.OK)
         return;
-      new CsvContext().Write<Vw_EasyPayRecords>((IEnumerable<Vw_EasyPayRecords>) this.EasyPayRecords.ToList<Vw_EasyPayRecords>(), saveFileDialog.FileName, new CsvFileDescription()
+      new CsvContext().Write<Vw_EasyPayRecords>((IEnumerable<Vw_EasyPayRecords>) EasyPayRecords.ToList<Vw_EasyPayRecords>(), saveFileDialog.FileName, new CsvFileDescription()
       {
         SeparatorChar = ',',
         FirstLineHasColumnNames = true
@@ -248,27 +248,27 @@ namespace CETAP_LOB.ViewModel.easypay
 
     private async void RecordsFromDB()
     {
-      this.InProgress = true;
-      this.EasyPayRecords = await this._service.GetEasyPayRecords(this._startDate, this._endDate);
-      this.InProgress = false;
+      InProgress = true;
+      EasyPayRecords = await _service.GetEasyPayRecords(_startDate, _endDate);
+      InProgress = false;
     }
 
     private async void ftpDirectoryList()
     {
-      this.EPFile = this._service.ReadLastFile();
-      this._epFileName = this.EPFile.FileName;
-      this._dateLoaded = Convert.ToDateTime(this.EPFile.DateWritten);
-      this.DirList = this._service.ListFTPFiles();
+      EPFile = _service.ReadLastFile();
+      _epFileName = EPFile.FileName;
+      _dateLoaded = Convert.ToDateTime(EPFile.DateWritten);
+      DirList = _service.ListFTPFiles();
     }
 
     private async void GetFiles()
     {
-      this.SelectedFiles = this.DirList.Where<EasypayFile>((Func<EasypayFile, bool>) (x => x.IsSelected));
-      foreach (EasypayFile selectedFile in this.SelectedFiles)
+      SelectedFiles = DirList.Where<EasypayFile>((Func<EasypayFile, bool>) (x => x.IsSelected));
+      foreach (EasypayFile selectedFile in SelectedFiles)
       {
         string Aname = selectedFile.FileName.ToString();
-        string b = this.Folder + "/" + Aname;
-        await this._service.DownloadfileAsync(Aname, b);
+        string b = Folder + "/" + Aname;
+        await _service.DownloadfileAsync(Aname, b);
       }
     }
 
@@ -280,13 +280,13 @@ namespace CETAP_LOB.ViewModel.easypay
         return;
       string selectedPath = folderBrowserDialog.SelectedPath;
       EasyPayViewModel._mruManager.Add(selectedPath);
-      this.mruList.Add(selectedPath);
-      this.Folder = selectedPath;
+      mruList.Add(selectedPath);
+      Folder = selectedPath;
     }
 
     private async void WriteToDB()
     {
-      await this._service.WriteFilesToDBAsync(this.Folder);
+      await _service.WriteFilesToDBAsync(Folder);
     }
   }
 }

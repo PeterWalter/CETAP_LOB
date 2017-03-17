@@ -17,7 +17,7 @@ namespace CETAP_LOB.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Province()
         {
-            this.TestVenues = new HashSet<TestVenue>();
+            TestVenues = new HashSet<TestVenue>();
         }
     
         public int Id { get; set; }

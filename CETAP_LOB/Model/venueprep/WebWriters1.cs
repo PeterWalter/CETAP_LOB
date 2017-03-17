@@ -56,14 +56,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._NBT;
+        return _NBT;
       }
       set
       {
-        if (this._NBT == value)
+        if (_NBT == value)
           return;
-        this._NBT = value;
-        this.RaisePropertyChanged("Reference");
+        _NBT = value;
+        RaisePropertyChanged("Reference");
       }
     }
 
@@ -71,14 +71,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._surname;
+        return _surname;
       }
       set
       {
-        if (this._surname == value)
+        if (_surname == value)
           return;
-        this._surname = value;
-        this.RaisePropertyChanged("Surname");
+        _surname = value;
+        RaisePropertyChanged("Surname");
       }
     }
 
@@ -86,14 +86,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._myname;
+        return _myname;
       }
       set
       {
-        if (this._myname == value)
+        if (_myname == value)
           return;
-        this._myname = value;
-        this.RaisePropertyChanged("FirstName");
+        _myname = value;
+        RaisePropertyChanged("FirstName");
       }
     }
 
@@ -101,14 +101,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._initials;
+        return _initials;
       }
       set
       {
-        if (this._initials == value)
+        if (_initials == value)
           return;
-        this._initials = value;
-        this.RaisePropertyChanged("initials");
+        _initials = value;
+        RaisePropertyChanged("initials");
       }
     }
 
@@ -116,14 +116,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._said;
+        return _said;
       }
       set
       {
-        if (this._said == value)
+        if (_said == value)
           return;
-        this._said = value;
-        this.RaisePropertyChanged("SAID");
+        _said = value;
+        RaisePropertyChanged("SAID");
       }
     }
 
@@ -131,14 +131,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._foreignID;
+        return _foreignID;
       }
       set
       {
-        if (this._foreignID == value)
+        if (_foreignID == value)
           return;
-        this._foreignID = value;
-        this.RaisePropertyChanged("ForeignID");
+        _foreignID = value;
+        RaisePropertyChanged("ForeignID");
       }
     }
 
@@ -146,14 +146,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._dob;
+        return _dob;
       }
       set
       {
-        if (this._dob == value)
+        if (_dob == value)
           return;
-        this._dob = value;
-        this.RaisePropertyChanged("DOB");
+        _dob = value;
+        RaisePropertyChanged("DOB");
       }
     }
 
@@ -161,14 +161,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._gender;
+        return _gender;
       }
       set
       {
-        if (this._gender == value)
+        if (_gender == value)
           return;
-        this._gender = value;
-        this.RaisePropertyChanged("Gender");
+        _gender = value;
+        RaisePropertyChanged("Gender");
       }
     }
 
@@ -176,14 +176,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._classification;
+        return _classification;
       }
       set
       {
-        if (this._classification == value)
+        if (_classification == value)
           return;
-        this._classification = value;
-        this.RaisePropertyChanged("Classification");
+        _classification = value;
+        RaisePropertyChanged("Classification");
       }
     }
 
@@ -191,14 +191,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._tests;
+        return _tests;
       }
       set
       {
-        if (this._tests == value)
+        if (_tests == value)
           return;
-        this._tests = value;
-        this.RaisePropertyChanged("Tests");
+        _tests = value;
+        RaisePropertyChanged("Tests");
       }
     }
 
@@ -206,14 +206,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._language;
+        return _language;
       }
       set
       {
-        if (this._language == value)
+        if (_language == value)
           return;
-        this._language = value;
-        this.RaisePropertyChanged("Language");
+        _language = value;
+        RaisePropertyChanged("Language");
       }
     }
 
@@ -221,14 +221,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._venue;
+        return _venue;
       }
       set
       {
-        if (this._venue == value)
+        if (_venue == value)
           return;
-        this._venue = value;
-        this.RaisePropertyChanged("Venue");
+        _venue = value;
+        RaisePropertyChanged("Venue");
       }
     }
 
@@ -236,14 +236,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._dot;
+        return _dot;
       }
       set
       {
-        if (this._dot == value)
+        if (_dot == value)
           return;
-        this._dot = value;
-        this.RaisePropertyChanged("DOT");
+        _dot = value;
+        RaisePropertyChanged("DOT");
       }
     }
 
@@ -251,14 +251,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mobile;
+        return _mobile;
       }
       set
       {
-        if (this._mobile == value)
+        if (_mobile == value)
           return;
-        this._mobile = value;
-        this.RaisePropertyChanged("Mobile");
+        _mobile = value;
+        RaisePropertyChanged("Mobile");
       }
     }
 
@@ -266,14 +266,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._telephone;
+        return _telephone;
       }
       set
       {
-        if (this._telephone == value)
+        if (_telephone == value)
           return;
-        this._telephone = value;
-        this.RaisePropertyChanged("HTelephone");
+        _telephone = value;
+        RaisePropertyChanged("HTelephone");
       }
     }
 
@@ -281,14 +281,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._email;
+        return _email;
       }
       set
       {
-        if (this._email == value)
+        if (_email == value)
           return;
-        this._email = value;
-        this.RaisePropertyChanged("Email");
+        _email = value;
+        RaisePropertyChanged("Email");
       }
     }
 
@@ -296,14 +296,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._regdate;
+        return _regdate;
       }
       set
       {
-        if (this._regdate == value)
+        if (_regdate == value)
           return;
-        this._regdate = value;
-        this.RaisePropertyChanged("RegDate");
+        _regdate = value;
+        RaisePropertyChanged("RegDate");
       }
     }
 
@@ -311,14 +311,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._payment;
+        return _payment;
       }
       set
       {
-        if (this._payment == value)
+        if (_payment == value)
           return;
-        this._payment = value;
-        this.RaisePropertyChanged("Paid");
+        _payment = value;
+        RaisePropertyChanged("Paid");
       }
     }
 
@@ -326,14 +326,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._CreateDate;
+        return _CreateDate;
       }
       set
       {
-        if (this._CreateDate == value)
+        if (_CreateDate == value)
           return;
-        this._CreateDate = value;
-        this.RaisePropertyChanged("CreationDate");
+        _CreateDate = value;
+        RaisePropertyChanged("CreationDate");
       }
     }
 
@@ -341,14 +341,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mylast;
+        return _mylast;
       }
       set
       {
-        if (this._mylast == value)
+        if (_mylast == value)
           return;
-        this._mylast = value;
-        this.RaisePropertyChanged("Last");
+        _mylast = value;
+        RaisePropertyChanged("Last");
       }
     }
   }

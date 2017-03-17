@@ -57,14 +57,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myBioRec;
+        return _myBioRec;
       }
       set
       {
-        if (this._myBioRec == value)
+        if (_myBioRec == value)
           return;
-        this._myBioRec = value;
-        this.RaisePropertyChanged("BioQARecords");
+        _myBioRec = value;
+        RaisePropertyChanged("BioQARecords");
       }
     }
 
@@ -72,14 +72,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myFolder;
+        return _myFolder;
       }
       set
       {
-        if (this._myFolder == value)
+        if (_myFolder == value)
           return;
-        this._myFolder = value;
-        this.RaisePropertyChanged("Folder");
+        _myFolder = value;
+        RaisePropertyChanged("Folder");
       }
     }
 
@@ -87,14 +87,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myQAFiles;
+        return _myQAFiles;
       }
       set
       {
-        if (this._myQAFiles == value)
+        if (_myQAFiles == value)
           return;
-        this._myQAFiles = value;
-        this.RaisePropertyChanged("DirList");
+        _myQAFiles = value;
+        RaisePropertyChanged("DirList");
       }
     }
 
@@ -102,14 +102,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myDOT;
+        return _myDOT;
       }
       set
       {
-        if (this._myDOT == value)
+        if (_myDOT == value)
           return;
-        this._myDOT = value;
-        this.RaisePropertyChanged("DateofTest");
+        _myDOT = value;
+        RaisePropertyChanged("DateofTest");
       }
     }
 
@@ -117,40 +117,40 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myQAFile;
+        return _myQAFile;
       }
       set
       {
-        if (this._myQAFile == value)
+        if (_myQAFile == value)
           return;
-        this._myQAFile = value;
-        if (this._myQAFile == null)
+        _myQAFile = value;
+        if (_myQAFile == null)
           return;
-        this.RaisePropertyChanged("SelectedFile");
+        RaisePropertyChanged("SelectedFile");
       }
     }
 
     public BioQAViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      this.Folder = ApplicationSettings.Default.QAFolder;
+      Folder = ApplicationSettings.Default.QAFolder;
       DateTime.Now.Year.ToString();
-      this._service.ReadEndofDatFile();
-      this._myDOT = DateTime.Now;
-      this.Selectfolder();
+      _service.ReadEndofDatFile();
+      _myDOT = DateTime.Now;
+      Selectfolder();
     }
 
     private void RegisterCommands()
     {
-      this.UpdateTrackerCommand = new RelayCommand(new Action(this.updateTracker));
-      this.AddSurnameCommand = new RelayCommand((Action) (() => this.AddSurname()));
-      this.AddNameCommand = new RelayCommand((Action) (() => this.AddName()));
+      UpdateTrackerCommand = new RelayCommand(new Action(updateTracker));
+      AddSurnameCommand = new RelayCommand((Action) (() => AddSurname()));
+      AddNameCommand = new RelayCommand((Action) (() => AddName()));
     }
 
     private void Selectfolder()
@@ -158,14 +158,14 @@ namespace CETAP_LOB.ViewModel.processing
       List<datFileAttributes> datFileAttributesList = new List<datFileAttributes>();
       try
       {
-        foreach (FileSystemInfo file in new DirectoryInfo(this.Folder).GetFiles("*.dat"))
+        foreach (FileSystemInfo file in new DirectoryInfo(Folder).GetFiles("*.dat"))
         {
           datFileAttributes datFileAttributes = new datFileAttributes(file.FullName);
-          this.SelectedFile = datFileAttributes;
-          this.GetBioQAData();
-          datFileAttributes.NoOfErrors = this.BioQARecords.Sum<BioQADatRecord>((Func<BioQADatRecord, int>) (x => x.ErrorCount));
+          SelectedFile = datFileAttributes;
+          GetBioQAData();
+          datFileAttributes.NoOfErrors = BioQARecords.Sum<BioQADatRecord>((Func<BioQADatRecord, int>) (x => x.ErrorCount));
           datFileAttributesList.Add(datFileAttributes);
-          this.SelectedFile = (datFileAttributes) null;
+          SelectedFile = (datFileAttributes) null;
         }
       }
       catch (Exception ex)
@@ -188,7 +188,7 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void updateTracker()
     {
-      foreach (datFileAttributes dir in (Collection<datFileAttributes>) this.DirList)
+      foreach (datFileAttributes dir in (Collection<datFileAttributes>) DirList)
       {
         bool flag = false;
         File.ReadAllLines(dir.FilePath);

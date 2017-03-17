@@ -54,14 +54,14 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._mylist;
+        return _mylist;
       }
       set
       {
-        if (this._mylist == value)
+        if (_mylist == value)
           return;
-        this._mylist = value;
-        this.RaisePropertyChanged("RecInList");
+        _mylist = value;
+        RaisePropertyChanged("RecInList");
       }
     }
 
@@ -69,14 +69,14 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._myRecords;
+        return _myRecords;
       }
       set
       {
-        if (this._myRecords == value)
+        if (_myRecords == value)
           return;
-        this._myRecords = value;
-        this.RaisePropertyChanged("Records");
+        _myRecords = value;
+        RaisePropertyChanged("Records");
       }
     }
 
@@ -84,14 +84,14 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._myQAData;
+        return _myQAData;
       }
       set
       {
-        if (this._myQAData == value)
+        if (_myQAData == value)
           return;
-        this._myQAData = value;
-        this.RaisePropertyChanged("QAData");
+        _myQAData = value;
+        RaisePropertyChanged("QAData");
       }
     }
 
@@ -99,14 +99,14 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._myTrials;
+        return _myTrials;
       }
       set
       {
-        if (this._myTrials == value)
+        if (_myTrials == value)
           return;
-        this._myTrials = value;
-        this.RaisePropertyChanged("TrialSect");
+        _myTrials = value;
+        RaisePropertyChanged("TrialSect");
       }
     }
 
@@ -114,14 +114,14 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._myCount;
+        return _myCount;
       }
       set
       {
-        if (this._myCount == value)
+        if (_myCount == value)
           return;
-        this._myCount = value;
-        this.RaisePropertyChanged("NoOfFiles");
+        _myCount = value;
+        RaisePropertyChanged("NoOfFiles");
       }
     }
 
@@ -129,14 +129,14 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._myfiles;
+        return _myfiles;
       }
       set
       {
-        if (this._myfiles == value)
+        if (_myfiles == value)
           return;
-        this._myfiles = value;
-        this.RaisePropertyChanged("DatFiles");
+        _myfiles = value;
+        RaisePropertyChanged("DatFiles");
       }
     }
 
@@ -144,14 +144,14 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._myfile;
+        return _myfile;
       }
       set
       {
-        if (this._myfile == value)
+        if (_myfile == value)
           return;
-        this._myfile = value;
-        this.RaisePropertyChanged("FileName");
+        _myfile = value;
+        RaisePropertyChanged("FileName");
       }
     }
 
@@ -159,23 +159,23 @@ namespace CETAP_LOB.ViewModel.composite
     {
       get
       {
-        return this._composit;
+        return _composit;
       }
       set
       {
-        if (this._composit == value)
+        if (_composit == value)
           return;
-        this._composit = value;
-        this.RaisePropertyChanged("Composit");
+        _composit = value;
+        RaisePropertyChanged("Composit");
       }
     }
 
     public EditCompositeViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
-      this.TrialSect = new ObservableCollection<Section7>();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
+      TrialSect = new ObservableCollection<Section7>();
     }
 
     private void InitializeModels()
@@ -184,10 +184,10 @@ namespace CETAP_LOB.ViewModel.composite
 
     private void RegisterCommands()
     {
-      this.NoMatchCommand = new RelayCommand(new Action(this.NoMatchFile));
-      this.GenerateCompositeCommand = new RelayCommand((Action) (() => this.GenerateComposite()), (Func<bool>) (() => this.HasSelection()));
-      this.ReadFilesCommand = new RelayCommand(new Action(this.ReadFiles));
-      this.SavetoCSVCommand = new RelayCommand(new Action(this.SaveToCSVFile));
+      NoMatchCommand = new RelayCommand(new Action(NoMatchFile));
+      GenerateCompositeCommand = new RelayCommand((Action) (() => GenerateComposite()), (Func<bool>) (() => HasSelection()));
+      ReadFilesCommand = new RelayCommand(new Action(ReadFiles));
+      SavetoCSVCommand = new RelayCommand(new Action(SaveToCSVFile));
     }
 
     private void SaveToCSVFile()
@@ -198,14 +198,14 @@ namespace CETAP_LOB.ViewModel.composite
       bool? nullable = saveFileDialog.ShowDialog();
       if ((!nullable.GetValueOrDefault() ? 0 : (nullable.HasValue ? 1 : 0)) == 0)
         return;
-      this.GenerateCSVFile(saveFileDialog.FileName);
+      GenerateCSVFile(saveFileDialog.FileName);
     }
 
     private void GenerateCSVFile(string filename)
     {
       using (StreamWriter streamWriter = new StreamWriter(filename))
       {
-        foreach (Section7 section7 in (Collection<Section7>) this.TrialSect)
+        foreach (Section7 section7 in (Collection<Section7>) TrialSect)
           streamWriter.WriteLine((object) section7);
       }
       int num = (int) ModernDialog.ShowMessage("Excel File has been saved to folder", "Save File!!", MessageBoxButton.OK, (Window) null);
@@ -213,20 +213,20 @@ namespace CETAP_LOB.ViewModel.composite
 
     private async void ReadFiles()
     {
-      await this.ReadFilesAsync();
-      await this.WriteRecords();
-      this.RecInList = this.TrialSect.Count<Section7>();
+      await ReadFilesAsync();
+      await WriteRecords();
+      RecInList = TrialSect.Count<Section7>();
     }
 
     private async Task WriteRecords()
     {
-      foreach (string datFile in (Collection<string>) this.DatFiles)
+      foreach (string datFile in (Collection<string>) DatFiles)
       {
         datFileAttributes thefile = new datFileAttributes(datFile);
-        this.Records += thefile.RecordCount;
+        Records += thefile.RecordCount;
         ObservableCollection<Section7> data = new ObservableCollection<Section7>();
-        data = this._service.getSec7DatFile(thefile);
-        await this.AddAsync(data);
+        data = _service.getSec7DatFile(thefile);
+        await AddAsync(data);
       }
     }
 
@@ -274,13 +274,13 @@ namespace CETAP_LOB.ViewModel.composite
       bool? nullable = openFileDialog.ShowDialog();
       if ((!nullable.GetValueOrDefault() ? 0 : (nullable.HasValue ? 1 : 0)) == 0)
         return;
-      this.FileName = openFileDialog.FileName;
-      this.GetFile();
+      FileName = openFileDialog.FileName;
+      GetFile();
     }
 
     public void GetFile()
     {
-      this._service.GetNoMatchFile(this.FileName);
+      _service.GetNoMatchFile(FileName);
     }
   }
 }

@@ -21,12 +21,12 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this.thename;
+        return thename;
       }
       set
       {
-        this.thename = value;
-        this.SplitDetails(this.thename);
+        thename = value;
+        SplitDetails(thename);
       }
     }
 
@@ -34,11 +34,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._name;
+        return _name;
       }
       set
       {
-        this._name = value;
+        _name = value;
       }
     }
 
@@ -46,11 +46,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._size;
+        return _size;
       }
       set
       {
-        this._size = value;
+        _size = value;
       }
     }
 
@@ -58,11 +58,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._date;
+        return _date;
       }
       set
       {
-        this._date = value;
+        _date = value;
       }
     }
 
@@ -70,14 +70,14 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._isSelected;
+        return _isSelected;
       }
       set
       {
-        if (this._isSelected == value)
+        if (_isSelected == value)
           return;
-        this._isSelected = value;
-        this.RaisePropertyChanged("IsSelected");
+        _isSelected = value;
+        RaisePropertyChanged("IsSelected");
       }
     }
 
@@ -86,20 +86,20 @@ namespace CETAP_LOB.Helper
       char[] chArray = new char[2]{ ' ', ' ' };
       string[] strArray = filedata.Split(chArray);
       int length = strArray.Length;
-      this._name = strArray[length - 1];
+      _name = strArray[length - 1];
       string str1 = strArray[length - 2];
       string str2 = strArray[length - 3];
       string str3 = strArray[length - 4];
-      this._date = strArray[length - 5];
+      _date = strArray[length - 5];
       EasypayFile easypayFile = this;
       string str4 = easypayFile._date + " " + str3 + " " + str2 + " " + str1;
       easypayFile._date = str4;
-      this._size = strArray[length - 6];
+      _size = strArray[length - 6];
     }
 
     public override string ToString()
     {
-      return this._name + " " + this._date + " " + this._size;
+      return _name + " " + _date + " " + _size;
     }
   }
 }

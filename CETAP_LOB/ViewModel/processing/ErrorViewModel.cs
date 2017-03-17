@@ -21,21 +21,21 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myerrors;
+        return _myerrors;
       }
       set
       {
-        if (this._myerrors == value)
+        if (_myerrors == value)
           return;
-        this._myerrors = value;
-        this.RaisePropertyChanged("Errors");
+        _myerrors = value;
+        RaisePropertyChanged("Errors");
       }
     }
 
     public ErrorViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.Errors = this._service.GetAllErrors();
+      _service = Service;
+      Errors = _service.GetAllErrors();
     }
   }
 }

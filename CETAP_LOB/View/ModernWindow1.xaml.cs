@@ -12,33 +12,16 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Markup;
 
-namespace LOB.View
+namespace CETAP_LOB.View
 {
-  public partial class ModernWindow1 : ModernWindow, IComponentConnector
-  {
-    private bool _contentLoaded;
+  public partial class ModernWindow1 : ModernWindow
+  {  
 
     public ModernWindow1()
     {
-      this.InitializeComponent();
+      InitializeComponent();
     }
 
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    public void InitializeComponent()
-    {
-      if (this._contentLoaded)
-        return;
-      this._contentLoaded = true;
-      Application.LoadComponent((object) this, new Uri("/LOB;component/view/modernwindow1.xaml", UriKind.Relative));
-    }
-
-    [DebuggerNonUserCode]
-    [GeneratedCode("PresentationBuildTasks", "4.0.0.0")]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    void IComponentConnector.Connect(int connectionId, object target)
-    {
-      this._contentLoaded = true;
-    }
+   
   }
 }

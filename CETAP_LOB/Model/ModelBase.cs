@@ -20,7 +20,7 @@ namespace CETAP_LOB.Model
     {
       get
       {
-        return this._errors.Count > 0;
+        return _errors.Count > 0;
       }
     }
 
@@ -28,7 +28,7 @@ namespace CETAP_LOB.Model
     {
       get
       {
-        return !this.HasErrors;
+        return !HasErrors;
       }
     }
 
@@ -36,32 +36,32 @@ namespace CETAP_LOB.Model
 
     public IEnumerable GetErrors(string propertyName)
     {
-      if (string.IsNullOrEmpty(propertyName) || !this._errors.ContainsKey(propertyName))
+      if (string.IsNullOrEmpty(propertyName) || !_errors.ContainsKey(propertyName))
         return (IEnumerable) null;
-      return (IEnumerable) this._errors[propertyName];
+      return (IEnumerable) _errors[propertyName];
     }
 
     public void AddError(string propertyName, string error)
     {
-      this._errors[propertyName] = new List<string>()
+      _errors[propertyName] = new List<string>()
       {
         error
       };
-      this.NotifyErrorsChanged(propertyName);
+      NotifyErrorsChanged(propertyName);
     }
 
     public void RemoveError(string propertyName)
     {
-      if (this._errors.ContainsKey(propertyName))
-        this._errors.Remove(propertyName);
-      this.NotifyErrorsChanged(propertyName);
+      if (_errors.ContainsKey(propertyName))
+        _errors.Remove(propertyName);
+      NotifyErrorsChanged(propertyName);
     }
 
     private void NotifyErrorsChanged(string propertyName)
     {
-      if (this.ErrorsChanged == null)
+      if (ErrorsChanged == null)
         return;
-      this.ErrorsChanged((object) this, new DataErrorsChangedEventArgs(propertyName));
+      ErrorsChanged((object) this, new DataErrorsChangedEventArgs(propertyName));
     }
   }
 }

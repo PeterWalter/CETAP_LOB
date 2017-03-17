@@ -64,14 +64,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myPeriods;
+        return _myPeriods;
       }
       set
       {
-        if (this._myPeriods == value)
+        if (_myPeriods == value)
           return;
-        this._myPeriods = value;
-        this.RaisePropertyChanged("Periods");
+        _myPeriods = value;
+        RaisePropertyChanged("Periods");
       }
     }
 
@@ -79,16 +79,16 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._intakerecord;
+        return _intakerecord;
       }
       set
       {
-        if (this._intakerecord == value)
+        if (_intakerecord == value)
           return;
-        this._intakerecord = value;
-        this.IntakeYear = this._intakerecord.Year;
-        this.RefreshAll();
-        this.RaisePropertyChanged("IntakeRecord");
+        _intakerecord = value;
+        IntakeYear = _intakerecord.Year;
+        RefreshAll();
+        RaisePropertyChanged("IntakeRecord");
       }
     }
 
@@ -96,15 +96,15 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._intakeyear;
+        return _intakeyear;
       }
       set
       {
-        if (this._intakeyear == value)
+        if (_intakeyear == value)
           return;
-        this._intakeyear = value;
-        this.GetSelectedIntake();
-        this.RaisePropertyChanged("IntakeYear");
+        _intakeyear = value;
+        GetSelectedIntake();
+        RaisePropertyChanged("IntakeYear");
       }
     }
 
@@ -112,14 +112,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._mygrpProfiles;
+        return _mygrpProfiles;
       }
       set
       {
-        if (this._mygrpProfiles == value)
+        if (_mygrpProfiles == value)
           return;
-        this._mygrpProfiles = value;
-        this.RaisePropertyChanged("GrpProfiles");
+        _mygrpProfiles = value;
+        RaisePropertyChanged("GrpProfiles");
       }
     }
 
@@ -127,14 +127,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myProfAllocs;
+        return _myProfAllocs;
       }
       set
       {
-        if (this._myProfAllocs == value)
+        if (_myProfAllocs == value)
           return;
-        this._myProfAllocs = value;
-        this.RaisePropertyChanged("ProfilesAllocations");
+        _myProfAllocs = value;
+        RaisePropertyChanged("ProfilesAllocations");
       }
     }
 
@@ -142,15 +142,15 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myProfile;
+        return _myProfile;
       }
       set
       {
-        if (this._myProfile == value)
+        if (_myProfile == value)
           return;
-        this._myProfile = value;
-        this.RaisePropertyChanged("SelectedProfile");
-        this.SaveAProfileCommand.RaiseCanExecuteChanged();
+        _myProfile = value;
+        RaisePropertyChanged("SelectedProfile");
+        SaveAProfileCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -158,14 +158,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myProfiles;
+        return _myProfiles;
       }
       set
       {
-        if (this._myProfiles == value)
+        if (_myProfiles == value)
           return;
-        this._myProfiles = value;
-        this.RaisePropertyChanged("Profiles");
+        _myProfiles = value;
+        RaisePropertyChanged("Profiles");
       }
     }
 
@@ -173,16 +173,16 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myProfNumber;
+        return _myProfNumber;
       }
       set
       {
-        if (this._myProfNumber == value)
+        if (_myProfNumber == value)
           return;
-        this._myProfNumber = value;
-        this._myProfile.Profile = this._myProfNumber;
-        this.RaisePropertyChanged("SelectedProfNumber");
-        this.GetGroupProfiles();
+        _myProfNumber = value;
+        _myProfile.Profile = _myProfNumber;
+        RaisePropertyChanged("SelectedProfNumber");
+        GetGroupProfiles();
       }
     }
 
@@ -190,14 +190,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myselectedProfAlloc;
+        return _myselectedProfAlloc;
       }
       set
       {
-        if (this._myselectedProfAlloc == value)
+        if (_myselectedProfAlloc == value)
           return;
-        this._myselectedProfAlloc = value;
-        this.RaisePropertyChanged("SelectedProfAlloc");
+        _myselectedProfAlloc = value;
+        RaisePropertyChanged("SelectedProfAlloc");
       }
     }
 
@@ -205,14 +205,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._allAlloc;
+        return _allAlloc;
       }
       set
       {
-        if (this._allAlloc == value)
+        if (_allAlloc == value)
           return;
-        this._allAlloc = value;
-        this.RaisePropertyChanged("AllAllocations");
+        _allAlloc = value;
+        RaisePropertyChanged("AllAllocations");
       }
     }
 
@@ -220,14 +220,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myBstatus;
+        return _myBstatus;
       }
       set
       {
-        if (this._myBstatus == value)
+        if (_myBstatus == value)
           return;
-        this._myBstatus = value;
-        this.RaisePropertyChanged("BStatus");
+        _myBstatus = value;
+        RaisePropertyChanged("BStatus");
       }
     }
 
@@ -235,14 +235,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myAstatus;
+        return _myAstatus;
       }
       set
       {
-        if (this._myAstatus == value)
+        if (_myAstatus == value)
           return;
-        this._myAstatus = value;
-        this.RaisePropertyChanged("AStatus");
+        _myAstatus = value;
+        RaisePropertyChanged("AStatus");
       }
     }
 
@@ -250,14 +250,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._status;
+        return _status;
       }
       set
       {
-        if (this._status == value)
+        if (_status == value)
           return;
-        this._status = value;
-        this.RaisePropertyChanged("Status");
+        _status = value;
+        RaisePropertyChanged("Status");
       }
     }
 
@@ -265,14 +265,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myselectedAllocation;
+        return _myselectedAllocation;
       }
       set
       {
-        if (this._myselectedAllocation == value)
+        if (_myselectedAllocation == value)
           return;
-        this._myselectedAllocation = value;
-        this.RaisePropertyChanged("SelectedAllocation");
+        _myselectedAllocation = value;
+        RaisePropertyChanged("SelectedAllocation");
       }
     }
 
@@ -280,20 +280,20 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._test;
+        return _test;
       }
       set
       {
-        if (this._test == value)
+        if (_test == value)
           return;
-        this._test = value;
-        this.Status = "";
-        if (this._test != null)
-          this.getAllocationBytestID(this._test.TestID);
-        this.RaisePropertyChanged("SelectedTest");
-        this.DeleteTestCommand.RaiseCanExecuteChanged();
-        this.SaveTestCommand.RaiseCanExecuteChanged();
-        this.UpDateTestCommand.RaiseCanExecuteChanged();
+        _test = value;
+        Status = "";
+        if (_test != null)
+          getAllocationBytestID(_test.TestID);
+        RaisePropertyChanged("SelectedTest");
+        DeleteTestCommand.RaiseCanExecuteChanged();
+        SaveTestCommand.RaiseCanExecuteChanged();
+        UpDateTestCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -301,14 +301,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._myallocations;
+        return _myallocations;
       }
       set
       {
-        if (this._myallocations == value)
+        if (_myallocations == value)
           return;
-        this._myallocations = value;
-        this.RaisePropertyChanged("Allocations");
+        _myallocations = value;
+        RaisePropertyChanged("Allocations");
       }
     }
 
@@ -316,14 +316,14 @@ namespace CETAP_LOB.ViewModel.processing
     {
       get
       {
-        return this._tests;
+        return _tests;
       }
       set
       {
-        if (this._tests == value)
+        if (_tests == value)
           return;
-        this._tests = value;
-        this.RaisePropertyChanged("Tests");
+        _tests = value;
+        RaisePropertyChanged("Tests");
       }
     }
 
@@ -357,41 +357,41 @@ namespace CETAP_LOB.ViewModel.processing
 
     public TestsViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      this.Tests = new ObservableCollection<TestBDO>();
-      this.TestsProvider = (IIntelliboxResultsProvider) new TestsResultsProvider(this._service);
-      this.AllAllocations = new ObservableCollection<TestAllocationBDO>();
+      Tests = new ObservableCollection<TestBDO>();
+      TestsProvider = (IIntelliboxResultsProvider) new TestsResultsProvider(_service);
+      AllAllocations = new ObservableCollection<TestAllocationBDO>();
       if (!ApplicationSettings.Default.DBAvailable)
         return;
-      this.RefreshTests();
-      this._myPeriods = this._service.GetAllIntakeYears();
-      this.IntakeYear = this._service.GetCurrentYear();
-      this.GetProfiles();
-      this.Refresh_alloc();
-      this.Refresh_ProfAllocs();
+      RefreshTests();
+      _myPeriods = _service.GetAllIntakeYears();
+      IntakeYear = _service.GetCurrentYear();
+      GetProfiles();
+      Refresh_alloc();
+      Refresh_ProfAllocs();
     }
 
     private void RegisterCommands()
     {
-      this.AddTestCommand = new RelayCommand((Action) (() => this.CreateTest()));
-      this.UpDateTestCommand = new RelayCommand((Action) (() => this.UpdateTest()), (Func<bool>) (() => this.canSaveTest()));
-      this.SaveTestCommand = new RelayCommand((Action) (() => this.SaveTest()), (Func<bool>) (() => this.canSaveTest()));
-      this.DeleteTestCommand = new RelayCommand((Action) (() => this.DeleteTest()), (Func<bool>) (() => this.canDeleteTest()));
-      this.AllocateTestCommand = new RelayCommand((Action) (() => this.AllocateTest()), (Func<bool>) (() => this.canAllocateTest()));
-      this.SaveAllocationCommand = new RelayCommand((Action) (() => this.SaveAllocation()), (Func<bool>) (() => this.canSaveAllocation()));
-      this.DeleteAllocationCommand = new RelayCommand((Action) (() => this.DeleteAllocation()), (Func<bool>) (() => this.canSaveAllocation()));
-      this.UpdateAllocationCommand = new RelayCommand((Action) (() => this.UpdateAllocation()), (Func<bool>) (() => this.canSaveAllocation()));
-      this.SaveExcelAllocationsCommand = new RelayCommand((Action) (() => this.SaveAllocationsToExcel()));
-      this.AllocationProfileToExcelCommand = new RelayCommand((Action) (() => this.AllocationProfileToExcel()));
-      this.NewProfileCommand = new RelayCommand((Action) (() => this.CreateProfile()));
-      this.SaveAProfileCommand = new RelayCommand((Action) (() => this.SaveAProfile()), (Func<bool>) (() => this.canSaveProfile()));
-      this.DeleteProfileCommand = new RelayCommand((Action) (() => this.DeletingProfile()));
+      AddTestCommand = new RelayCommand((Action) (() => CreateTest()));
+      UpDateTestCommand = new RelayCommand((Action) (() => UpdateTest()), (Func<bool>) (() => canSaveTest()));
+      SaveTestCommand = new RelayCommand((Action) (() => SaveTest()), (Func<bool>) (() => canSaveTest()));
+      DeleteTestCommand = new RelayCommand((Action) (() => DeleteTest()), (Func<bool>) (() => canDeleteTest()));
+      AllocateTestCommand = new RelayCommand((Action) (() => AllocateTest()), (Func<bool>) (() => canAllocateTest()));
+      SaveAllocationCommand = new RelayCommand((Action) (() => SaveAllocation()), (Func<bool>) (() => canSaveAllocation()));
+      DeleteAllocationCommand = new RelayCommand((Action) (() => DeleteAllocation()), (Func<bool>) (() => canSaveAllocation()));
+      UpdateAllocationCommand = new RelayCommand((Action) (() => UpdateAllocation()), (Func<bool>) (() => canSaveAllocation()));
+      SaveExcelAllocationsCommand = new RelayCommand((Action) (() => SaveAllocationsToExcel()));
+      AllocationProfileToExcelCommand = new RelayCommand((Action) (() => AllocationProfileToExcel()));
+      NewProfileCommand = new RelayCommand((Action) (() => CreateProfile()));
+      SaveAProfileCommand = new RelayCommand((Action) (() => SaveAProfile()), (Func<bool>) (() => canSaveProfile()));
+      DeleteProfileCommand = new RelayCommand((Action) (() => DeletingProfile()));
     }
 
     private void SaveAllocationsToExcel()
@@ -402,32 +402,32 @@ namespace CETAP_LOB.ViewModel.processing
       if ((!nullable.GetValueOrDefault() ? 0 : (nullable.HasValue ? 1 : 0)) == 0)
         return;
       string title = "Test Allocations";
-      if (!this._service.AllocationsToExcel(saveFileDialog.FileName))
+      if (!_service.AllocationsToExcel(saveFileDialog.FileName))
         return;
       int num = (int) ModernDialog.ShowMessage("Allocation Data saved to excel file ", title, MessageBoxButton.OK, (Window) null);
     }
 
     private void Refresh_ProfAllocs()
     {
-      this.ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(this._service.GetAllProfileAllocations().Where<ProfileAllocationBDO>((Func<ProfileAllocationBDO, bool>) (x =>
+      ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(_service.GetAllProfileAllocations().Where<ProfileAllocationBDO>((Func<ProfileAllocationBDO, bool>) (x =>
       {
-        if (x.TestDate > this.IntakeRecord.yearStart)
-          return x.TestDate < this.IntakeRecord.yearEnd;
+        if (x.TestDate > IntakeRecord.yearStart)
+          return x.TestDate < IntakeRecord.yearEnd;
         return false;
       })).Select<ProfileAllocationBDO, ProfileAllocationBDO>((Func<ProfileAllocationBDO, ProfileAllocationBDO>) (m => m)).ToList<ProfileAllocationBDO>());
     }
 
     private void Refresh_alloc()
     {
-      this.AllAllocations.Clear();
-      IEnumerable<TestAllocationBDO> source = this._service.GetAllTestAllocations().Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (x =>
+      AllAllocations.Clear();
+      IEnumerable<TestAllocationBDO> source = _service.GetAllTestAllocations().Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (x =>
       {
-        if (x.TestDate > this.IntakeRecord.yearStart)
-          return x.TestDate < this.IntakeRecord.yearEnd;
+        if (x.TestDate > IntakeRecord.yearStart)
+          return x.TestDate < IntakeRecord.yearEnd;
         return false;
       })).Select<TestAllocationBDO, TestAllocationBDO>((Func<TestAllocationBDO, TestAllocationBDO>) (m => m));
-      List<TestProfileBDO> profs = this._service.GetAllTestProfiles();
-      this.AllAllocations = new ObservableCollection<TestAllocationBDO>(source.Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (i => !profs.Any<TestProfileBDO>((Func<TestProfileBDO, bool>) (e => e.AllocationID == i.ID)))).OrderBy<TestAllocationBDO, DateTime>((Func<TestAllocationBDO, DateTime>) (m => m.TestDate)).ToList<TestAllocationBDO>());
+      List<TestProfileBDO> profs = _service.GetAllTestProfiles();
+      AllAllocations = new ObservableCollection<TestAllocationBDO>(source.Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (i => !profs.Any<TestProfileBDO>((Func<TestProfileBDO, bool>) (e => e.AllocationID == i.ID)))).OrderBy<TestAllocationBDO, DateTime>((Func<TestAllocationBDO, DateTime>) (m => m.TestDate)).ToList<TestAllocationBDO>());
     }
 
     private void AllocationProfileToExcel()
@@ -437,43 +437,43 @@ namespace CETAP_LOB.ViewModel.processing
       bool? nullable = saveFileDialog.ShowDialog();
       if ((!nullable.GetValueOrDefault() ? 0 : (nullable.HasValue ? 1 : 0)) == 0)
         return;
-      this._service.SaveProfileAllocationsToExcel(saveFileDialog.FileName);
+      _service.SaveProfileAllocationsToExcel(saveFileDialog.FileName);
     }
 
     private void GetProfiles()
     {
-      this.Profiles = new ObservableCollection<TestProfileBDO>(new ObservableCollection<TestProfileBDO>(this._service.GetAllTestProfiles()).Where<TestProfileBDO>((Func<TestProfileBDO, bool>) (x => x.Intake == this.IntakeYear)).Select<TestProfileBDO, TestProfileBDO>((Func<TestProfileBDO, TestProfileBDO>) (v => v)).ToList<TestProfileBDO>().GroupBy<TestProfileBDO, int>((Func<TestProfileBDO, int>) (e => e.Profile)).Select<IGrouping<int, TestProfileBDO>, TestProfileBDO>((Func<IGrouping<int, TestProfileBDO>, TestProfileBDO>) (gp => gp.First<TestProfileBDO>())).OrderBy<TestProfileBDO, int>((Func<TestProfileBDO, int>) (m => m.Profile)).ToList<TestProfileBDO>());
+      Profiles = new ObservableCollection<TestProfileBDO>(new ObservableCollection<TestProfileBDO>(_service.GetAllTestProfiles()).Where<TestProfileBDO>((Func<TestProfileBDO, bool>) (x => x.Intake == IntakeYear)).Select<TestProfileBDO, TestProfileBDO>((Func<TestProfileBDO, TestProfileBDO>) (v => v)).ToList<TestProfileBDO>().GroupBy<TestProfileBDO, int>((Func<TestProfileBDO, int>) (e => e.Profile)).Select<IGrouping<int, TestProfileBDO>, TestProfileBDO>((Func<IGrouping<int, TestProfileBDO>, TestProfileBDO>) (gp => gp.First<TestProfileBDO>())).OrderBy<TestProfileBDO, int>((Func<TestProfileBDO, int>) (m => m.Profile)).ToList<TestProfileBDO>());
     }
 
     private void GetGroupProfiles()
     {
-      this.GrpProfiles = new ObservableCollection<TestProfileBDO>(this._service.getTestprofileByProfile(this._myProfNumber));
+      GrpProfiles = new ObservableCollection<TestProfileBDO>(_service.getTestprofileByProfile(_myProfNumber));
     }
 
     private void SaveAProfile()
     {
       string message = "";
-      this._service.addTestProfile(this.SelectedProfile, ref message);
-      this.BStatus = message;
-      this.Refresh_alloc();
-      this.Refresh_ProfAllocs();
+      _service.addTestProfile(SelectedProfile, ref message);
+      BStatus = message;
+      Refresh_alloc();
+      Refresh_ProfAllocs();
     }
 
     private void CreateProfile()
     {
-      this.SelectedProfile = (TestProfileBDO) null;
-      this._myProfile = new TestProfileBDO()
+      SelectedProfile = (TestProfileBDO) null;
+      _myProfile = new TestProfileBDO()
       {
-        AllocationID = this.SelectedProfAlloc.ID
+        AllocationID = SelectedProfAlloc.ID
       };
-      this._myProfile.Intake = this._intakeyear;
-      this.SaveAProfileCommand.RaiseCanExecuteChanged();
+      _myProfile.Intake = _intakeyear;
+      SaveAProfileCommand.RaiseCanExecuteChanged();
     }
 
     private bool canSaveProfile()
     {
       bool flag = false;
-      if (this.SelectedProfile != null)
+      if (SelectedProfile != null)
         return true;
       return flag;
     }
@@ -481,150 +481,150 @@ namespace CETAP_LOB.ViewModel.processing
     private void DeletingProfile()
     {
       string message = "";
-      this._service.deleteTestProfile(this.SelectedProfile, ref message);
-      this.Status = message;
+      _service.deleteTestProfile(SelectedProfile, ref message);
+      Status = message;
     }
 
     private void SaveAllocation()
     {
       string message = "";
-      this._service.addTestAllocation(this.SelectedAllocation, ref message);
-      this.AStatus = message;
-      this.getAllocationBytestID(this.SelectedTest.TestID);
-      this.Refresh_alloc();
+      _service.addTestAllocation(SelectedAllocation, ref message);
+      AStatus = message;
+      getAllocationBytestID(SelectedTest.TestID);
+      Refresh_alloc();
     }
 
     private bool canSaveAllocation()
     {
-      if (this.SelectedAllocation != null && !string.IsNullOrWhiteSpace(this.SelectedAllocation.Client))
-        return !string.IsNullOrWhiteSpace(this.SelectedAllocation.ClientType);
+      if (SelectedAllocation != null && !string.IsNullOrWhiteSpace(SelectedAllocation.Client))
+        return !string.IsNullOrWhiteSpace(SelectedAllocation.ClientType);
       return false;
     }
 
     private void DeleteAllocation()
     {
-      if (this.SelectedAllocation == null)
+      if (SelectedAllocation == null)
         return;
-      if (ModernDialog.ShowMessage("Do you really want to delete this Test Allocation?", "Test Name: " + this.SelectedTest.TestName.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
+      if (ModernDialog.ShowMessage("Do you really want to delete this Test Allocation?", "Test Name: " + SelectedTest.TestName.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
       {
         string message = "";
-        this._service.deleteTestAllocation(this.SelectedAllocation, ref message);
-        this.Status = message;
+        _service.deleteTestAllocation(SelectedAllocation, ref message);
+        Status = message;
       }
-      this.RefreshAllocations();
-      this.Refresh_alloc();
-      this.RefreshTests();
+      RefreshAllocations();
+      Refresh_alloc();
+      RefreshTests();
     }
 
     private void UpdateAllocation()
     {
-      this.AStatus = "";
+      AStatus = "";
       string message = "";
-      this._service.updateTestAllocation(this.SelectedAllocation, ref message);
+      _service.updateTestAllocation(SelectedAllocation, ref message);
       int num = (int) ModernDialog.ShowMessage(message, "Update", MessageBoxButton.OK, (Window) null);
-      this.AStatus = message;
-      this.getAllocationBytestID(this.SelectedTest.TestID);
-      this.Refresh_alloc();
+      AStatus = message;
+      getAllocationBytestID(SelectedTest.TestID);
+      Refresh_alloc();
     }
 
     private void RefreshAllocations()
     {
-      this.Allocations.Clear();
-      this.Allocations = new ObservableCollection<TestAllocationBDO>(this._service.GetAllTestAllocations());
+      Allocations.Clear();
+      Allocations = new ObservableCollection<TestAllocationBDO>(_service.GetAllTestAllocations());
     }
 
     private void getAllocationBytestID(int testID)
     {
-      this.Allocations = new ObservableCollection<TestAllocationBDO>(this._service.getTestAllocationByTestID(testID).Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (x =>
+      Allocations = new ObservableCollection<TestAllocationBDO>(_service.getTestAllocationByTestID(testID).Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (x =>
       {
-        if (x.TestDate > this.IntakeRecord.yearStart)
-          return x.TestDate < this.IntakeRecord.yearEnd;
+        if (x.TestDate > IntakeRecord.yearStart)
+          return x.TestDate < IntakeRecord.yearEnd;
         return false;
       })).Select<TestAllocationBDO, TestAllocationBDO>((Func<TestAllocationBDO, TestAllocationBDO>) (m => m)).OrderBy<TestAllocationBDO, DateTime>((Func<TestAllocationBDO, DateTime>) (v => v.TestDate)).ToList<TestAllocationBDO>());
     }
 
     private void AllocateTest()
     {
-      this.SelectedAllocation = new TestAllocationBDO()
+      SelectedAllocation = new TestAllocationBDO()
       {
-        TestID = this.SelectedTest.TestID
+        TestID = SelectedTest.TestID
       };
-      this.SelectedAllocation.TestDate = DateTime.Now;
+      SelectedAllocation.TestDate = DateTime.Now;
     }
 
     private bool canAllocateTest()
     {
-      if (this.SelectedTest != null && !string.IsNullOrWhiteSpace(this.SelectedTest.TestName))
-        return this.SelectedTest.TestID > 0;
+      if (SelectedTest != null && !string.IsNullOrWhiteSpace(SelectedTest.TestName))
+        return SelectedTest.TestID > 0;
       return false;
     }
 
     private void DeleteTest()
     {
-      if (this.SelectedTest == null)
+      if (SelectedTest == null)
         return;
-      if (ModernDialog.ShowMessage("Do you really want to delete this Test?\n Tests affect other parts of the application \n and the NBT_Production Database ", "Test Name: " + this.SelectedTest.TestName.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
+      if (ModernDialog.ShowMessage("Do you really want to delete this Test?\n Tests affect other parts of the application \n and the NBT_Production Database ", "Test Name: " + SelectedTest.TestName.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
       {
         string message = "";
-        this._service.deleteTest(this.SelectedTest, ref message);
-        this.Status = message;
+        _service.deleteTest(SelectedTest, ref message);
+        Status = message;
       }
-      this.RefreshTests();
+      RefreshTests();
     }
 
     private void RefreshTests()
     {
-      this.Tests.Clear();
-      this.Tests = new ObservableCollection<TestBDO>((IEnumerable<TestBDO>) this._service.GetAllTests().OrderBy<TestBDO, string>((Func<TestBDO, string>) (t => t.TestName)));
+      Tests.Clear();
+      Tests = new ObservableCollection<TestBDO>((IEnumerable<TestBDO>) _service.GetAllTests().OrderBy<TestBDO, string>((Func<TestBDO, string>) (t => t.TestName)));
     }
 
     private void UpdateTest()
     {
-      this.Status = "";
+      Status = "";
       string message = "";
-      this._service.updateTest(this.SelectedTest, ref message);
+      _service.updateTest(SelectedTest, ref message);
       int num = (int) ModernDialog.ShowMessage(message, "Update", MessageBoxButton.OK, (Window) null);
-      this.Status = message;
-      this.RefreshTests();
+      Status = message;
+      RefreshTests();
     }
 
     private void CreateTest()
     {
-      this.SelectedTest = (TestBDO) null;
-      this.SelectedTest = new TestBDO();
+      SelectedTest = (TestBDO) null;
+      SelectedTest = new TestBDO();
     }
 
     private void SaveTest()
     {
       string message = "";
-      this._service.addTest(this.SelectedTest, ref message);
-      this.Status = message;
-      this.RefreshTests();
+      _service.addTest(SelectedTest, ref message);
+      Status = message;
+      RefreshTests();
     }
 
     private bool canSaveTest()
     {
-      if (this.SelectedTest != null)
-        return !string.IsNullOrWhiteSpace(this.SelectedTest.TestName);
+      if (SelectedTest != null)
+        return !string.IsNullOrWhiteSpace(SelectedTest.TestName);
       return false;
     }
 
     private bool canDeleteTest()
     {
-      if (this.SelectedTest != null)
-        return !string.IsNullOrWhiteSpace(this.SelectedTest.TestName);
+      if (SelectedTest != null)
+        return !string.IsNullOrWhiteSpace(SelectedTest.TestName);
       return false;
     }
 
     private void GetSelectedIntake()
     {
-      this.IntakeRecord = this._myPeriods.Where<IntakeYearsBDO>((Func<IntakeYearsBDO, bool>) (x => x.Year == this.IntakeYear)).Select<IntakeYearsBDO, IntakeYearsBDO>((Func<IntakeYearsBDO, IntakeYearsBDO>) (x => x)).FirstOrDefault<IntakeYearsBDO>();
+      IntakeRecord = _myPeriods.Where<IntakeYearsBDO>((Func<IntakeYearsBDO, bool>) (x => x.Year == IntakeYear)).Select<IntakeYearsBDO, IntakeYearsBDO>((Func<IntakeYearsBDO, IntakeYearsBDO>) (x => x)).FirstOrDefault<IntakeYearsBDO>();
     }
 
     private void RefreshAll()
     {
-      this.Refresh_ProfAllocs();
-      this.Refresh_alloc();
+      Refresh_ProfAllocs();
+      Refresh_alloc();
     }
   }
 }

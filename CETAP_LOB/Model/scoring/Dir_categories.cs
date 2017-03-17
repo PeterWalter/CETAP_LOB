@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Model.scoring.Dir_categories
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using System.Collections.Generic;
 using System.IO;
@@ -23,11 +19,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._AnswersheetBio;
+        return _AnswersheetBio;
       }
       set
       {
-        this._AnswersheetBio = value;
+        _AnswersheetBio = value;
       }
     }
 
@@ -35,11 +31,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._AQLScorefiles;
+        return _AQLScorefiles;
       }
       set
       {
-        this._AQLScorefiles = value;
+        _AQLScorefiles = value;
       }
     }
 
@@ -47,11 +43,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._MATScorefiles;
+        return _MATScorefiles;
       }
       set
       {
-        this._MATScorefiles = value;
+        _MATScorefiles = value;
       }
     }
 
@@ -59,11 +55,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._folder;
+        return _folder;
       }
       set
       {
-        this._folder = value;
+        _folder = value;
       }
     }
 
@@ -71,11 +67,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._ResponseMatrix;
+        return _ResponseMatrix;
       }
       set
       {
-        this._ResponseMatrix = value;
+        _ResponseMatrix = value;
       }
     }
 
@@ -83,18 +79,18 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._filesinFolder;
+        return _filesinFolder;
       }
       set
       {
-        this._filesinFolder = value;
+        _filesinFolder = value;
       }
     }
 
     public Dir_categories(string path)
     {
-      this._folder = path;
-      this.SortFiles(((IEnumerable<string>) Directory.GetFiles(this._folder)).ToList<string>());
+      _folder = path;
+      SortFiles(((IEnumerable<string>) Directory.GetFiles(_folder)).ToList<string>());
     }
 
     private void SortFiles(List<string> thefiles)
@@ -102,7 +98,7 @@ namespace CETAP_LOB.Model.scoring
       foreach (string thefile in thefiles)
       {
         string fileName = Path.GetFileName(thefile);
-        this._filesinFolder.Add(fileName);
+        _filesinFolder.Add(fileName);
         if (Path.GetExtension(thefile) == ".xlsx")
         {
           string str = fileName.Split(' ')[0];
@@ -111,20 +107,20 @@ namespace CETAP_LOB.Model.scoring
             case "NBT":
               if (str.Substring(0, 7) == "NBT_Ans")
               {
-                this._AnswersheetBio = thefile;
+                _AnswersheetBio = thefile;
                 break;
               }
               break;
             case "AQL":
-              this._AQLScorefiles.Add(thefile);
+              _AQLScorefiles.Add(thefile);
               break;
             case "MAT":
-              this._MATScorefiles.Add(thefile);
+              _MATScorefiles.Add(thefile);
               break;
           }
         }
         if (fileName.Contains("Response"))
-          this._ResponseMatrix.Add(thefile);
+          _ResponseMatrix.Add(thefile);
       }
     }
   }

@@ -37,20 +37,20 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._nameWithoutext;
+        return _nameWithoutext;
       }
       set
       {
-        if (this._nameWithoutext == value)
+        if (_nameWithoutext == value)
           return;
-        this._nameWithoutext = value;
-        if (this._nameWithoutext.Length != 22)
-          this.AddError("SName", "Wrong File Name");
+        _nameWithoutext = value;
+        if (_nameWithoutext.Length != 22)
+          AddError("SName", "Wrong File Name");
         else
-          this.RemoveError("SName");
-        if (this._nameWithoutext.Length == 22)
-          this.SplitFileparts(this._nameWithoutext);
-        this.RaisePropertyChanged("SName");
+          RemoveError("SName");
+        if (_nameWithoutext.Length == 22)
+          SplitFileparts(_nameWithoutext);
+        RaisePropertyChanged("SName");
       }
     }
 
@@ -60,11 +60,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._recCount;
+        return _recCount;
       }
       set
       {
-        this._recCount = value;
+        _recCount = value;
       }
     }
 
@@ -72,11 +72,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._aql_Lang;
+        return _aql_Lang;
       }
       set
       {
-        this._aql_Lang = value;
+        _aql_Lang = value;
       }
     }
 
@@ -84,7 +84,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._edited;
+        return _edited;
       }
     }
 
@@ -92,11 +92,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._mat_Lang;
+        return _mat_Lang;
       }
       set
       {
-        this._mat_Lang = value;
+        _mat_Lang = value;
       }
     }
 
@@ -104,11 +104,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._randNumber;
+        return _randNumber;
       }
       set
       {
-        value = this._randNumber;
+        value = _randNumber;
       }
     }
 
@@ -116,11 +116,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._venuecode;
+        return _venuecode;
       }
       set
       {
-        this._venuecode = value;
+        _venuecode = value;
       }
     }
 
@@ -128,11 +128,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._profile;
+        return _profile;
       }
       set
       {
-        this._profile = value;
+        _profile = value;
       }
     }
 
@@ -140,7 +140,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._filecomb;
+        return _filecomb;
       }
       set
       {
@@ -151,11 +151,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._filepath;
+        return _filepath;
       }
       set
       {
-        this._filepath = value;
+        _filepath = value;
       }
     }
 
@@ -163,11 +163,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._info;
+        return _info;
       }
       set
       {
-        this._info = value;
+        _info = value;
       }
     }
 
@@ -175,11 +175,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._client;
+        return _client;
       }
       set
       {
-        this._client = value;
+        _client = value;
       }
     }
 
@@ -187,7 +187,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._firstRecord;
+        return _firstRecord;
       }
     }
 
@@ -195,11 +195,11 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._csx;
+        return _csx;
       }
       set
       {
-        this._csx = value;
+        _csx = value;
       }
     }
 
@@ -207,7 +207,7 @@ namespace CETAP_LOB.Helper
     {
       get
       {
-        return this._testCode;
+        return _testCode;
       }
     }
 
@@ -217,29 +217,29 @@ namespace CETAP_LOB.Helper
 
     public datFileAttributes(string filepath)
     {
-      this._filepath = filepath;
-      this.readLineAsync();
-      this._nameWithoutext = Path.GetFileNameWithoutExtension(this._filepath).ToUpper();
-      if (this._nameWithoutext.Length != 22)
+      _filepath = filepath;
+      readLineAsync();
+      _nameWithoutext = Path.GetFileNameWithoutExtension(_filepath).ToUpper();
+      if (_nameWithoutext.Length != 22)
         return;
-      this.SplitFileparts(this._nameWithoutext);
+      SplitFileparts(_nameWithoutext);
     }
 
     public async Task readLineAsync()
     {
       try
       {
-        using (FileStream fileStream = File.Open(this._filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        using (FileStream fileStream = File.Open(_filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         {
           using (StreamReader streamReader = new StreamReader((Stream) fileStream))
           {
             string str = streamReader.ReadLine();
-            this._firstRecord = str;
-            this._ncs_ModifyFlag = str.Substring(21, 1);
-            this._ncs_Errorflag = str.Substring(23, 1);
-            if (this._ncs_ModifyFlag == "Y" && this._ncs_Errorflag == " ")
-              this._edited = true;
-            this._csx = Convert.ToInt32(str.Substring(0, 3));
+            _firstRecord = str;
+            _ncs_ModifyFlag = str.Substring(21, 1);
+            _ncs_Errorflag = str.Substring(23, 1);
+            if (_ncs_ModifyFlag == "Y" && _ncs_Errorflag == " ")
+              _edited = true;
+            _csx = Convert.ToInt32(str.Substring(0, 3));
             streamReader.Close();
           }
         }
@@ -252,101 +252,101 @@ namespace CETAP_LOB.Helper
 
     public void SplitFileparts(string namefile)
     {
-      this._recCount = Convert.ToInt32(namefile.Substring(19, 3));
-      this._profile = Convert.ToInt32(namefile.Substring(4, 2));
-      this._testCode = namefile.Substring(0, 4);
-      switch (this._testCode)
+      _recCount = Convert.ToInt32(namefile.Substring(19, 3));
+      _profile = Convert.ToInt32(namefile.Substring(4, 2));
+      _testCode = namefile.Substring(0, 4);
+      switch (_testCode)
       {
         case "0105":
-          this._filecomb = "AQLE";
-          this._aql_Lang = "E";
+          _filecomb = "AQLE";
+          _aql_Lang = "E";
           break;
         case "0115":
-          this._filecomb = "AQLA";
-          this._aql_Lang = "A";
+          _filecomb = "AQLA";
+          _aql_Lang = "A";
           break;
         case "0106":
-          this._filecomb = "MATE";
-          this._mat_Lang = "E";
+          _filecomb = "MATE";
+          _mat_Lang = "E";
           break;
         case "0116":
-          this._filecomb = "MATA";
-          this._mat_Lang = "A";
+          _filecomb = "MATA";
+          _mat_Lang = "A";
           break;
         case "0107":
-          this._filecomb = "AQLE_MATE";
-          this._aql_Lang = "E";
-          this._mat_Lang = "E";
+          _filecomb = "AQLE_MATE";
+          _aql_Lang = "E";
+          _mat_Lang = "E";
           break;
         case "0117":
-          this._filecomb = "AQLA_MATA";
-          this._aql_Lang = "A";
-          this._mat_Lang = "A";
+          _filecomb = "AQLA_MATA";
+          _aql_Lang = "A";
+          _mat_Lang = "A";
           break;
         case "0127":
-          this._filecomb = "AQLE_MATA";
-          this._aql_Lang = "E";
-          this._mat_Lang = "A";
+          _filecomb = "AQLE_MATA";
+          _aql_Lang = "E";
+          _mat_Lang = "A";
           break;
         case "0137":
-          this._filecomb = "AQLA_MATE";
-          this._aql_Lang = "A";
-          this._mat_Lang = "E";
+          _filecomb = "AQLA_MATE";
+          _aql_Lang = "A";
+          _mat_Lang = "E";
           break;
         default:
-          this.AddError("SName", "No Such Test Code");
+          AddError("SName", "No Such Test Code");
           break;
       }
-      this._clientType = namefile.Substring(18, 1);
-      if (this._clientType != "O")
+      _clientType = namefile.Substring(18, 1);
+      if (_clientType != "O")
       {
-        this._randNumber = Convert.ToInt32(namefile.Substring(13, 5));
-        this._venuecode = Convert.ToInt32(namefile.Substring(7, 5));
+        _randNumber = Convert.ToInt32(namefile.Substring(13, 5));
+        _venuecode = Convert.ToInt32(namefile.Substring(7, 5));
       }
       else
       {
-        this._randNumber = Convert.ToInt32(namefile.Substring(11, 5));
-        this._venuecode = Convert.ToInt32(namefile.Substring(6, 5));
+        _randNumber = Convert.ToInt32(namefile.Substring(11, 5));
+        _venuecode = Convert.ToInt32(namefile.Substring(6, 5));
       }
-      switch (this._clientType)
+      switch (_clientType)
       {
         case "R":
-          this._client = "National";
+          _client = "National";
           break;
         case "X":
-          this._client = "Re-score";
+          _client = "Re-score";
           break;
         case "M":
-          this._client = "Moderated";
+          _client = "Moderated";
           break;
         case "W":
-          this._client = "Remote";
+          _client = "Remote";
           break;
         case "S":
-          this._client = "Special";
+          _client = "Special";
           break;
         case "O":
-          this._client = "Walk-in Bio";
+          _client = "Walk-in Bio";
           break;
         case "D":
-          this._client = "Disability";
+          _client = "Disability";
           break;
         case "B":
-          this._client = "Braille";
+          _client = "Braille";
           break;
         case "L":
-          this._client = "Large Print";
+          _client = "Large Print";
           break;
         default:
-          this._client = "Unknown Client";
-          this.AddError("SName", "No Such Client");
+          _client = "Unknown Client";
+          AddError("SName", "No Such Client");
           break;
       }
     }
 
     public override string ToString()
     {
-      return string.Format("{0}{1:00}C{2:00000}B{3:00000}{4}{5:000}", (object) this._testCode, (object) this._profile, (object) this._venuecode, (object) this._randNumber, (object) this._clientType, (object) this._recCount);
+      return string.Format("{0}{1:00}C{2:00000}B{3:00000}{4}{5:000}", (object) _testCode, (object) _profile, (object) _venuecode, (object) _randNumber, (object) _clientType, (object) _recCount);
     }
   }
 }

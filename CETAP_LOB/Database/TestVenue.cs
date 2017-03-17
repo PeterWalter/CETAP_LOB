@@ -17,7 +17,7 @@ namespace CETAP_LOB.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TestVenue()
         {
-            this.WriterLists = new HashSet<WriterList>();
+            WriterLists = new HashSet<WriterList>();
         }
     
         public int VenueCode { get; set; }

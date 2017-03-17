@@ -474,11 +474,17 @@ namespace CETAP_LOB.ViewModel.processing
 
       _intakerecord = _myPeriods.Where(x => x.Year == ApplicationSettings.Default.IntakeYear).FirstOrDefault();
       TestDate = DateTime.Now;
-      BatchesByPerson = null;
+            SelectedBatcher = new UserBDO()
+            {
+                Name = ApplicationSettings.Default.LOBUser
+            };
+         //   BatchesByPerson = null;
+            SelectedBatcher.Name = "Carol";
+           // getBatchesbyPerson();
       RefreshData();
     }
 
-    private void RegisterCommands()
+      private void RegisterCommands()
     {
           SaveBatchCommand = new RelayCommand(() => SaveBatch(), () => canSaveBatch());
           UpdateBatchCommand = new RelayCommand(() => UpdateBatch());
@@ -486,7 +492,7 @@ namespace CETAP_LOB.ViewModel.processing
           RestoreCommand = new RelayCommand(() => RestoreFile(), () => canRestore());
     }
 
-    private void RestoreFile()
+      private void RestoreFile()
     {
           string batchName = SelectedBatch.BatchName;
           ScannedFileBDO scannedFileBdo = new ScannedFileBDO();
@@ -507,256 +513,258 @@ namespace CETAP_LOB.ViewModel.processing
           }
     }
 
-    private bool canRestore()
-    {
-      bool flag = false;
-      if (SelectedBatch != null)
-        flag = true;
-      return flag;
-    }
-
-    private void DeleteBatch()
-    {
-      string message = "";
-      if (ModernDialog.ShowMessage("Are you sure !!! \n \n You want to delete batch " + SelectedBatch.BatchName.ToString(), "Delete Record", MessageBoxButton.YesNo, (Window) null) != MessageBoxResult.Yes)
-        return;
-      _service.deleteBatch(SelectedBatch, ref message);
-      ModernDialog.ShowMessage(message, "Delete Record", MessageBoxButton.OK, (Window) null);
-    }
-
-    private void getBatchesbyPerson()
-    {
-      if (SelectedBatcher == null)
-        return;
-      BatchesByPerson = new ObservableCollection<BatchBDO>(Batches.Where(b => b.BatchedBy.Trim() == SelectedBatcher.Name.Trim()).OrderByDescending(x => x.BatchDate).Select(x => x).ToList());
-    }
-
-    private void UpdateBatch()
-    {
-      string message = "";
-      string text = "Record " + SelectedBatch.BatchName.ToString() + " has been updated";
-      if (_service.updatebatch(SelectedBatch, ref message))
-      {
-        ModernDialog.ShowMessage(text, "Update Record", MessageBoxButton.OK, (Window) null);
-        RefreshData();
-        getBatchesbyPerson();
-      }
-      else
-      {
-         ModernDialog.ShowMessage(message, "Update Record", MessageBoxButton.OK, (Window) null);
-      }
-    }
-
-    private void SaveBatch()
-    {
-      string message = "";
-      Batch.TestDate = TestDate;
-      Batch.BatchedBy = SelectedBatcher.Name.Trim();
-      Batch.BatchID = -1;
-      if (_service.addBatch(Batch, ref message))
-      {
-        ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
-        RefreshData();
-        getBatchesbyPerson();
-      }
-      else
-      {
-         ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
-      }
-    }
-
-    private bool canSaveBatch()
-    {
-      bool flag = false;
-      if (Batch != null && SelectedBatcher != null && (TestDate < DateTime.Today && isVenue) && isTestComb)
-        flag = true;
-      return flag;
-    }
-
-    private void GetProfileAllocations()
-    {
-      ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(_service.GetProfileAllocationsByDate(TestDate));
-    }
-
-    private bool canCreateBatch()
-    {
-      if (SelectedVenue != null)
-        return NoInBatch != 0;
-      return false;
-    }
-
-    private bool canEditBatch()
-    {
-      return SelectedBatch != null;
-    }
-
-    private void RefreshData()
-    {
-          Batches = new ObservableCollection<BatchBDO>(_service.GetAllbatches().Where(x => x.TestDate > _intakerecord.yearStart && x.TestDate < _intakerecord.yearEnd)
-                                                                               .OrderBy(b => b.BatchName).Select(x => x).ToList());
-          BatchName = "";
-          NoInBatch = 0;
-          StampNo = "";
-          WrittenTest = "";
-          SelectedBatcher = null;
-          SelectedBatch = null;
-          Tests = null;
-          Venue = null;
-    }
-
-    private void GetBatchProperties()
-    {
-      if (ApplicationSettings.Default.DBAvailable)
-      {
-        datFileAttributes datFileAttributes = new datFileAttributes();
-        datFileAttributes.SName = BatchName;
-        Batch = new BatchBDO();
-        NoInBatch = datFileAttributes.RecordCount;
-        ClientType = datFileAttributes.Client;
-        StampNo = datFileAttributes.RandNumber.ToString("D5");
-        BatchViewModel.datFileAttributesToBatch(datFileAttributes, Batch);
-        Batch.TestDate = TestDate;
-        Tests = new List<TestBDO>();
-        Tests = _service.GetTestFromDatFile(datFileAttributes, _intakerecord);
-        WrittenTest = " ";
-        if (datFileAttributes.Client != "Walk-in Bio")
+      private bool canRestore()
         {
-          string text = "";
-          isTestComb = true;
-          foreach (TestBDO test in Tests)
+          bool flag = false;
+          if (SelectedBatch != null)
+            flag = true;
+          return flag;
+        }
+
+      private void DeleteBatch()
+        {
+          string message = "";
+          if (ModernDialog.ShowMessage("Are you sure !!! \n \n You want to delete batch " + SelectedBatch.BatchName.ToString(), "Delete Record", MessageBoxButton.YesNo, (Window) null) != MessageBoxResult.Yes)
+            return;
+          _service.deleteBatch(SelectedBatch, ref message);
+          ModernDialog.ShowMessage(message, "Delete Record", MessageBoxButton.OK, (Window) null);
+        }
+
+      private void getBatchesbyPerson()
+        {
+          if (SelectedBatcher == null)
+            return;
+          BatchesByPerson = new ObservableCollection<BatchBDO>(Batches.Where(b => b.BatchedBy.Trim() == SelectedBatcher.Name.Trim()).OrderByDescending(x => x.BatchDate).Select(x => x).ToList());
+        }
+
+      private void UpdateBatch()
+        {
+          string message = "";
+          string text = "Record " + SelectedBatch.BatchName.ToString() + " has been updated";
+          if (_service.updatebatch(SelectedBatch, ref message))
           {
-            string str1 = test.TestName.Substring(0, 4);
-            switch (datFileAttributes.TestCode)
+            ModernDialog.ShowMessage(text, "Update Record", MessageBoxButton.OK, (Window) null);
+            RefreshData();
+            getBatchesbyPerson();
+          }
+          else
+          {
+             ModernDialog.ShowMessage(message, "Update Record", MessageBoxButton.OK, (Window) null);
+          }
+        }
+
+      private void SaveBatch()
+        {
+          string message = "";
+          Batch.TestDate = TestDate;
+          Batch.BatchedBy = SelectedBatcher.Name.Trim();
+          Batch.BatchID = -1;
+          if (_service.addBatch(Batch, ref message))
+          {
+            ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
+            RefreshData();
+            getBatchesbyPerson();
+          }
+          else
+          {
+             ModernDialog.ShowMessage(message, "Save Batch", MessageBoxButton.OK, (Window) null);
+          }
+        }
+
+      private bool canSaveBatch()
+        {
+          bool flag = false;
+          if (Batch != null && SelectedBatcher != null && (TestDate < DateTime.Today && isVenue) && isTestComb)
+            flag = true;
+          return flag;
+        }
+
+      private void GetProfileAllocations()
+        {
+          ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(_service.GetProfileAllocationsByDate(TestDate));
+        }
+
+      private bool canCreateBatch()
+        {
+          if (SelectedVenue != null)
+            return NoInBatch != 0;
+          return false;
+        }
+
+      private bool canEditBatch()
+        {
+          return SelectedBatch != null;
+        }
+
+      private void RefreshData()
+        {
+              Batches = new ObservableCollection<BatchBDO>(_service.GetAllbatches().Where(x => x.TestDate > _intakerecord.yearStart && x.TestDate < _intakerecord.yearEnd)
+                                                                                   .OrderBy(b => b.BatchName).Select(x => x).ToList());
+              BatchName = "";
+              NoInBatch = 0;
+              StampNo = "";
+              WrittenTest = "";
+            //  SelectedBatcher = null;
+              
+              SelectedBatch = null;
+              Tests = null;
+              Venue = null;
+              getBatchesbyPerson();
+        }
+
+      private void GetBatchProperties()
+        {
+          if (ApplicationSettings.Default.DBAvailable)
+          {
+            datFileAttributes datFileAttributes = new datFileAttributes();
+            datFileAttributes.SName = BatchName;
+            Batch = new BatchBDO();
+            NoInBatch = datFileAttributes.RecordCount;
+            ClientType = datFileAttributes.Client;
+            StampNo = datFileAttributes.RandNumber.ToString("D5");
+            BatchViewModel.datFileAttributesToBatch(datFileAttributes, Batch);
+            Batch.TestDate = TestDate;
+            Tests = new List<TestBDO>();
+            Tests = _service.GetTestFromDatFile(datFileAttributes, _intakerecord);
+            WrittenTest = " ";
+            if (datFileAttributes.Client != "Walk-in Bio")
             {
-              case "0105":
-                if (str1 == "AQLE")
+              string text = "";
+              isTestComb = true;
+              foreach (TestBDO test in Tests)
+              {
+                string str1 = test.TestName.Substring(0, 4);
+                switch (datFileAttributes.TestCode)
                 {
-                  AQLE = test;
-                  WrittenTest = AQLE.TestName;
-                  continue;
+                  case "0105":
+                    if (str1 == "AQLE")
+                    {
+                      AQLE = test;
+                      WrittenTest = AQLE.TestName;
+                      continue;
+                    }
+                    continue;
+                  case "0115":
+                    if (str1 == "AQLA")
+                    {
+                      AQLA = test;
+                      WrittenTest = AQLA.TestName;
+                      continue;
+                    }
+                    continue;
+                  case "0106":
+                    if (str1 == "MATE")
+                      MATE = test;
+                    WrittenTest = MATE.TestName;
+                    continue;
+                  case "0116":
+                    if (str1 == "MATA")
+                    {
+                      MATA = test;
+                      WrittenTest = MATA.TestName;
+                      continue;
+                    }
+                    continue;
+                  case "0107":
+                    if (str1 == "AQLE")
+                    {
+                      AQLE = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + AQLE.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                    }
+                    if (str1 == "MATE")
+                    {
+                      MATE = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + MATE.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                      continue;
+                    }
+                    continue;
+                  case "0117":
+                    if (str1 == "AQLA")
+                    {
+                      AQLA = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + AQLA.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                    }
+                    if (str1 == "MATA")
+                    {
+                      MATA = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + MATA.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                      continue;
+                    }
+                    continue;
+                  case "0127":
+                    if (str1 == "AQLE")
+                    {
+                      AQLE = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + AQLE.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                    }
+                    if (str1 == "MATA")
+                    {
+                      MATA = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + MATA.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                      continue;
+                    }
+                    continue;
+                  case "0137":
+                    if (str1 == "AQLA")
+                    {
+                      AQLA = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + AQLA.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                    }
+                    if (str1 == "MATE")
+                    {
+                      MATE = test;
+                      BatchViewModel batchViewModel = this;
+                      string str2 = batchViewModel.WrittenTest + MATE.TestName + "    ";
+                      batchViewModel.WrittenTest = str2;
+                      continue;
+                    }
+                    continue;
+                  default:
+                    text = "No such test Combination!!!";
+                    isTestComb = false;
+                    continue;
                 }
-                continue;
-              case "0115":
-                if (str1 == "AQLA")
-                {
-                  AQLA = test;
-                  WrittenTest = AQLA.TestName;
-                  continue;
-                }
-                continue;
-              case "0106":
-                if (str1 == "MATE")
-                  MATE = test;
-                WrittenTest = MATE.TestName;
-                continue;
-              case "0116":
-                if (str1 == "MATA")
-                {
-                  MATA = test;
-                  WrittenTest = MATA.TestName;
-                  continue;
-                }
-                continue;
-              case "0107":
-                if (str1 == "AQLE")
-                {
-                  AQLE = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + AQLE.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                }
-                if (str1 == "MATE")
-                {
-                  MATE = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + MATE.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                  continue;
-                }
-                continue;
-              case "0117":
-                if (str1 == "AQLA")
-                {
-                  AQLA = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + AQLA.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                }
-                if (str1 == "MATA")
-                {
-                  MATA = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + MATA.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                  continue;
-                }
-                continue;
-              case "0127":
-                if (str1 == "AQLE")
-                {
-                  AQLE = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + AQLE.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                }
-                if (str1 == "MATA")
-                {
-                  MATA = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + MATA.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                  continue;
-                }
-                continue;
-              case "0137":
-                if (str1 == "AQLA")
-                {
-                  AQLA = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + AQLA.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                }
-                if (str1 == "MATE")
-                {
-                  MATE = test;
-                  BatchViewModel batchViewModel = this;
-                  string str2 = batchViewModel.WrittenTest + MATE.TestName + "    ";
-                  batchViewModel.WrittenTest = str2;
-                  continue;
-                }
-                continue;
-              default:
-                text = "No such test Combination!!!";
-                isTestComb = false;
-                continue;
+              }
+              if (!string.IsNullOrWhiteSpace(text))
+              {
+                int num = (int) ModernDialog.ShowMessage(text, "Batch Name", MessageBoxButton.OK, (Window) null);
+              }
             }
+            isVenue = true;
+            Venue = _service.GetTestVenue(datFileAttributes.VenueCode);
+            if (Venue != null)
+              return;
+            isVenue = false;
+            int num1 = (int) ModernDialog.ShowMessage("Cannot find Venue!!!", "Venue Name", MessageBoxButton.OK, (Window) null);
           }
-          if (!string.IsNullOrWhiteSpace(text))
+          else
           {
-            int num = (int) ModernDialog.ShowMessage(text, "Batch Name", MessageBoxButton.OK, (Window) null);
+            int num2 = (int) ModernDialog.ShowMessage("Cannot connect to Server for Database!!!", "Batching", MessageBoxButton.OK, (Window) null);
           }
         }
-        isVenue = true;
-        Venue = _service.GetTestVenue(datFileAttributes.VenueCode);
-        if (Venue != null)
-          return;
-        isVenue = false;
-        int num1 = (int) ModernDialog.ShowMessage("Cannot find Venue!!!", "Venue Name", MessageBoxButton.OK, (Window) null);
-      }
-      else
-      {
-        int num2 = (int) ModernDialog.ShowMessage("Cannot connect to Server for Database!!!", "Batching", MessageBoxButton.OK, (Window) null);
-      }
-    }
 
-        private static void datFileAttributesToBatch(datFileAttributes datfileAttrib, BatchBDO batch)
-        {
-              batch.Count = datfileAttrib.RecordCount;
-              batch.BatchName = datfileAttrib.SName;
-              batch.TestProfileID = datfileAttrib.Profile;
-              batch.TestCombination = datfileAttrib.TestCode;
-              batch.TestVenueID = datfileAttrib.VenueCode;
-              batch.RandomTestNumber = datfileAttrib.RandNumber;
-        }
+      private static void datFileAttributesToBatch(datFileAttributes datfileAttrib, BatchBDO batch)
+            {
+                  batch.Count = datfileAttrib.RecordCount;
+                  batch.BatchName = datfileAttrib.SName;
+                  batch.TestProfileID = datfileAttrib.Profile;
+                  batch.TestCombination = datfileAttrib.TestCode;
+                  batch.TestVenueID = datfileAttrib.VenueCode;
+                  batch.RandomTestNumber = datfileAttrib.RandNumber;
+            }
   }
 }

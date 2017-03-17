@@ -4,22 +4,22 @@
 // MVID: 3597789E-8774-4427-AE20-07195D9380BD
 // Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
 
-using FeserWard.Controls;
-using FirstFloor.ModernUI.Windows.Controls;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using CETAP_LOB.BDO;
-using CETAP_LOB.Model;
-using CETAP_LOB.Search;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using LOB.Search;
+using CETAP_LOB.BDO;
+using CETAP_LOB.Search;
+using CETAP_LOB.Model;
+using FeserWard.Controls;
+using FirstFloor.ModernUI.Windows.Controls;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+
 
 namespace CETAP_LOB.ViewModel.writers
 {
-  public class VenuesViewModel : ViewModelBase
+    public class VenuesViewModel : ViewModelBase
   {
     private string _mystatus = "";
     public const string StatusPropertyName = "Status";
@@ -55,14 +55,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._mystatus;
+        return _mystatus;
       }
       set
       {
-        if (this._mystatus == value)
+        if (_mystatus == value)
           return;
-        this._mystatus = value;
-        this.RaisePropertyChanged("Status");
+        _mystatus = value;
+        RaisePropertyChanged("Status");
       }
     }
 
@@ -72,14 +72,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myprovs;
+        return _myprovs;
       }
       set
       {
-        if (this._myprovs == value)
+        if (_myprovs == value)
           return;
-        this._myprovs = value;
-        this.RaisePropertyChanged("Provinces");
+        _myprovs = value;
+        RaisePropertyChanged("Provinces");
       }
     }
 
@@ -87,14 +87,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._isDirty;
+        return _isDirty;
       }
       set
       {
-        if (this._isDirty == value)
+        if (_isDirty == value)
           return;
-        this._isDirty = value;
-        this.RaisePropertyChanged("IsDirty");
+        _isDirty = value;
+        RaisePropertyChanged("IsDirty");
       }
     }
 
@@ -102,17 +102,17 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._selectedVenue;
+        return _selectedVenue;
       }
       set
       {
-        if (this._selectedVenue == value)
+        if (_selectedVenue == value)
           return;
-        this._selectedVenue = value;
-        this.RaisePropertyChanged("SelectedVenue");
-        this.DeleteVenueCommand.RaiseCanExecuteChanged();
-        this.UpdateVenueCommand.RaiseCanExecuteChanged();
-        this.SaveVenueCommand.RaiseCanExecuteChanged();
+        _selectedVenue = value;
+        RaisePropertyChanged("SelectedVenue");
+        DeleteVenueCommand.RaiseCanExecuteChanged();
+        UpdateVenueCommand.RaiseCanExecuteChanged();
+        SaveVenueCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -120,14 +120,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._specialSession;
+        return _specialSession;
       }
       set
       {
-        if (this._specialSession == value)
+        if (_specialSession == value)
           return;
-        this._specialSession = value;
-        this.RaisePropertyChanged("SpecialSession");
+        _specialSession = value;
+        RaisePropertyChanged("SpecialSession");
       }
     }
 
@@ -135,14 +135,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._remotes;
+        return _remotes;
       }
       set
       {
-        if (this._remotes == value)
+        if (_remotes == value)
           return;
-        this._remotes = value;
-        this.RaisePropertyChanged("RemoteVenues");
+        _remotes = value;
+        RaisePropertyChanged("RemoteVenues");
       }
     }
 
@@ -150,14 +150,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._national;
+        return _national;
       }
       set
       {
-        if (this._national == value)
+        if (_national == value)
           return;
-        this._national = value;
-        this.RaisePropertyChanged("NationalVenues");
+        _national = value;
+        RaisePropertyChanged("NationalVenues");
       }
     }
 
@@ -165,109 +165,109 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._venues;
+        return _venues;
       }
       set
       {
-        if (this._venues == value)
+        if (_venues == value)
           return;
-        this._venues = value;
-        this.RaisePropertyChanged("TestVenues");
+        _venues = value;
+        RaisePropertyChanged("TestVenues");
       }
     }
 
     public VenuesViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.registerCommands();
-      this.InitializeModel();
+      _service = Service;
+      registerCommands();
+      InitializeModel();
     }
 
     private void InitializeModel()
     {
-      this.Provinces = new List<ProvinceBDO>();
-      this.VenueProvider = (IIntelliboxResultsProvider) new VenueResultsProvider(this._service);
-      this.TestVenues = new ObservableCollection<VenueBDO>();
-      this.Provinces = this._service.getAllProvinces();
-      this.canCreateVenue = false;
-      this.TestVenues = new ObservableCollection<VenueBDO>(this._service.GetAllvenues());
+      Provinces = new List<ProvinceBDO>();
+      VenueProvider = (IIntelliboxResultsProvider) new VenueResultsProvider(_service);
+      TestVenues = new ObservableCollection<VenueBDO>();
+      Provinces = _service.getAllProvinces();
+      canCreateVenue = false;
+      TestVenues = new ObservableCollection<VenueBDO>(_service.GetAllvenues());
     }
 
     private void registerCommands()
     {
-      this.UpdateVenueCommand = new RelayCommand((Action) (() => this.UpdateVenues()), (Func<bool>) (() => this.canDelete()));
-      this.DeleteVenueCommand = new RelayCommand((Action) (() => this.DeleteVenue()), (Func<bool>) (() => this.canDelete()));
-      this.CreateVenueCommand = new RelayCommand((Action) (() => this.CreateVenue()));
-      this.SaveVenueCommand = new RelayCommand((Action) (() => this.SaveVenue()), (Func<bool>) (() => this.canSaveVenue()));
-      this.SelectedVenueCommand = new RelayCommand<VenueBDO>((Action<VenueBDO>) (e => this.SelectVenue(e)));
+      UpdateVenueCommand = new RelayCommand((Action) (() => UpdateVenues()), (Func<bool>) (() => canDelete()));
+      DeleteVenueCommand = new RelayCommand((Action) (() => DeleteVenue()), (Func<bool>) (() => canDelete()));
+      CreateVenueCommand = new RelayCommand((Action) (() => CreateVenue()));
+      SaveVenueCommand = new RelayCommand((Action) (() => SaveVenue()), (Func<bool>) (() => canSaveVenue()));
+      SelectedVenueCommand = new RelayCommand<VenueBDO>((Action<VenueBDO>) (e => SelectVenue(e)));
     }
 
     private void SelectVenue(VenueBDO venue)
     {
-      this.SelectedVenue = venue;
+      SelectedVenue = venue;
     }
 
     private bool canDelete()
     {
-      if (this.SelectedVenue != null && this.SelectedVenue.VenueCode > 0)
-        return !string.IsNullOrWhiteSpace(this.SelectedVenue.VenueName);
+      if (SelectedVenue != null && SelectedVenue.VenueCode > 0)
+        return !string.IsNullOrWhiteSpace(SelectedVenue.VenueName);
       return false;
     }
 
     private bool canSaveVenue()
     {
-      if (this.SelectedVenue != null && !string.IsNullOrWhiteSpace(this.SelectedVenue.VenueName) && !string.IsNullOrWhiteSpace(this.SelectedVenue.ShortName))
-        return this.canCreateVenue;
+      if (SelectedVenue != null && !string.IsNullOrWhiteSpace(SelectedVenue.VenueName) && !string.IsNullOrWhiteSpace(SelectedVenue.ShortName))
+        return canCreateVenue;
       return false;
     }
 
     private void SaveVenue()
     {
       string message = "";
-      bool flag = this._service.addTestVenue(this.SelectedVenue, ref message);
-      this.canCreateVenue = false;
+      bool flag = _service.addTestVenue(SelectedVenue, ref message);
+      canCreateVenue = false;
       if (!flag)
       {
         int num = (int) ModernDialog.ShowMessage(message, "Add Test Venue", MessageBoxButton.OK, (Window) null);
       }
-      this.Status = message;
-      this.RefreshAsync();
+      Status = message;
+      RefreshAsync();
     }
 
     private void UpdateVenues()
     {
       string message = "";
-      if (!this._service.updateTestVenue(this.SelectedVenue, ref message))
+      if (!_service.updateTestVenue(SelectedVenue, ref message))
       {
         int num = (int) ModernDialog.ShowMessage(message, "Update Test Venue", MessageBoxButton.OK, (Window) null);
       }
-      this.IsDirty = false;
-      this.Status = message;
-      this.RefreshAsync();
+      IsDirty = false;
+      Status = message;
+      RefreshAsync();
     }
 
     private void DeleteVenue()
     {
-      if (ModernDialog.ShowMessage("Do you really want to delete this Test Site?", "Test Venue: " + this.SelectedVenue.ShortName.ToString() + " | Code: " + this.SelectedVenue.VenueCode.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
+      if (ModernDialog.ShowMessage("Do you really want to delete this Test Site?", "Test Venue: " + SelectedVenue.ShortName.ToString() + " | Code: " + SelectedVenue.VenueCode.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
       {
         string message = "";
-        this._service.deleteTestVenue(this.SelectedVenue.VenueCode, ref message);
-        this.Status = message;
+        _service.deleteTestVenue(SelectedVenue.VenueCode, ref message);
+        Status = message;
       }
-      this.RefreshAsync();
+      RefreshAsync();
     }
 
     private void CreateVenue()
     {
-      this.SelectedVenue = (VenueBDO) null;
-      this.SelectedVenue = new VenueBDO();
-      this.canCreateVenue = true;
+      SelectedVenue = (VenueBDO) null;
+      SelectedVenue = new VenueBDO();
+      canCreateVenue = true;
     }
 
     public void RefreshAsync()
     {
-      this.TestVenues.Clear();
-      this.TestVenues = new ObservableCollection<VenueBDO>(this._service.GetAllvenues());
+      TestVenues.Clear();
+      TestVenues = new ObservableCollection<VenueBDO>(_service.GetAllvenues());
     }
   }
 }

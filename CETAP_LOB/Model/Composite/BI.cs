@@ -31,14 +31,14 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._errorCount;
+        return _errorCount;
       }
       set
       {
-        if (this._errorCount == value)
+        if (_errorCount == value)
           return;
-        this._errorCount = value;
-        this.RaisePropertyChanged("errorCount");
+        _errorCount = value;
+        RaisePropertyChanged("errorCount");
       }
     }
 
@@ -46,26 +46,26 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._refNo;
+        return _refNo;
       }
       set
       {
-        if (this._refNo == value)
+        if (_refNo == value)
           return;
-        this._refNo = value;
-        if (!string.IsNullOrEmpty(this._refNo.ToString()))
+        _refNo = value;
+        if (!string.IsNullOrEmpty(_refNo.ToString()))
         {
-          if (this._refNo.ToString().Length != 14)
-            this.AddError("NBT", "Not proper length for NBT number");
-          else if (!HelperUtils.IsValidChecksum(this._refNo.ToString().Substring(1, 13)))
-            this.AddError("NBT", "Not a Valid NBT number");
+          if (_refNo.ToString().Length != 14)
+            AddError("NBT", "Not proper length for NBT number");
+          else if (!HelperUtils.IsValidChecksum(_refNo.ToString().Substring(1, 13)))
+            AddError("NBT", "Not a Valid NBT number");
           else
-            this.RemoveError("NBT");
+            RemoveError("NBT");
         }
         else
-          this.AddError("NBT", "NBT number cannot be empty");
-        this.checkerrors();
-        this.RaisePropertyChanged("NBT");
+          AddError("NBT", "NBT number cannot be empty");
+        checkerrors();
+        RaisePropertyChanged("NBT");
       }
     }
 
@@ -73,32 +73,32 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._surname;
+        return _surname;
       }
       set
       {
-        if (this._surname == value)
+        if (_surname == value)
           return;
-        this._surname = value;
-        if (string.IsNullOrEmpty(this._surname))
-          this.AddError("Surname", "Surname cannot be empty");
+        _surname = value;
+        if (string.IsNullOrEmpty(_surname))
+          AddError("Surname", "Surname cannot be empty");
         else
-          this.RemoveError("Surname");
-        if (!string.IsNullOrEmpty(this._surname))
+          RemoveError("Surname");
+        if (!string.IsNullOrEmpty(_surname))
         {
-          if (Regex.IsMatch(this._surname, "\\d"))
-            this.AddError("Surname", "Surname cannot have digits");
-          else if (!Regex.IsMatch(this._surname, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
-            this.AddError("Surname", "cannot start/end with space or have funny characters");
+          if (Regex.IsMatch(_surname, "\\d"))
+            AddError("Surname", "Surname cannot have digits");
+          else if (!Regex.IsMatch(_surname, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
+            AddError("Surname", "cannot start/end with space or have funny characters");
           else
-            this.RemoveError("Surname");
+            RemoveError("Surname");
         }
-        if (new Regex("\\s").Matches(this._surname).Count > 2)
-          this.AddError("Surname", "Surname has too many spaces");
+        if (new Regex("\\s").Matches(_surname).Count > 2)
+          AddError("Surname", "Surname has too many spaces");
         else
-          this.RemoveError("Surname");
-        this.checkerrors();
-        this.RaisePropertyChanged("Surname");
+          RemoveError("Surname");
+        checkerrors();
+        RaisePropertyChanged("Surname");
       }
     }
 
@@ -106,32 +106,32 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._name;
+        return _name;
       }
       set
       {
-        if (this._name == value)
+        if (_name == value)
           return;
-        this._name = value;
-        if (string.IsNullOrEmpty(this._name))
-          this.AddError("Name", "Name cannot be empty");
+        _name = value;
+        if (string.IsNullOrEmpty(_name))
+          AddError("Name", "Name cannot be empty");
         else
-          this.RemoveError("Name");
-        if (!string.IsNullOrEmpty(this._surname))
+          RemoveError("Name");
+        if (!string.IsNullOrEmpty(_surname))
         {
-          if (Regex.IsMatch(this._surname, "\\d"))
-            this.AddError("Name", "Name cannot have digits");
-          else if (!Regex.IsMatch(this._name, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
-            this.AddError("Name", "cannot start/end with space or have funny characters");
+          if (Regex.IsMatch(_surname, "\\d"))
+            AddError("Name", "Name cannot have digits");
+          else if (!Regex.IsMatch(_name, "^[^\\s=!@#](?:[^!@#]*[^\\s!@#])?$"))
+            AddError("Name", "cannot start/end with space or have funny characters");
           else
-            this.RemoveError("Name");
+            RemoveError("Name");
         }
-        if (new Regex("\\s").Matches(this._name).Count > 2)
-          this.AddError("Name", "Surname has too many spaces");
+        if (new Regex("\\s").Matches(_name).Count > 2)
+          AddError("Name", "Surname has too many spaces");
         else
-          this.RemoveError("Name");
-        this.checkerrors();
-        this.RaisePropertyChanged("Name");
+          RemoveError("Name");
+        checkerrors();
+        RaisePropertyChanged("Name");
       }
     }
 
@@ -139,27 +139,27 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._said;
+        return _said;
       }
       set
       {
-        if (this._said == value)
+        if (_said == value)
           return;
-        this._said = value;
-        this._said = this._said.Trim();
-        if (!string.IsNullOrEmpty(this._said))
+        _said = value;
+        _said = _said.Trim();
+        if (!string.IsNullOrEmpty(_said))
         {
-          if (this._said.Length != 13)
-            this.AddError("SAID", "Not proper length for SA ID");
-          else if (!Regex.IsMatch(this._said, "^[0-9]+$"))
-            this.AddError("SAID", "SA Id does not have characters");
-          else if (!HelperUtils.IsValidChecksum(this._said))
-            this.AddError("SAID", "Not a Valid South African ID number");
+          if (_said.Length != 13)
+            AddError("SAID", "Not proper length for SA ID");
+          else if (!Regex.IsMatch(_said, "^[0-9]+$"))
+            AddError("SAID", "SA Id does not have characters");
+          else if (!HelperUtils.IsValidChecksum(_said))
+            AddError("SAID", "Not a Valid South African ID number");
           else
-            this.RemoveError("SAID");
+            RemoveError("SAID");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("SAID");
+        checkerrors();
+        RaisePropertyChanged("SAID");
       }
     }
 
@@ -167,27 +167,27 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._dob;
+        return _dob;
       }
       set
       {
-        if (this._dob == value)
+        if (_dob == value)
           return;
-        this._dob = value;
-        TimeSpan timeSpan = DateTime.Now - this._dob;
+        _dob = value;
+        TimeSpan timeSpan = DateTime.Now - _dob;
         if (timeSpan.TotalDays < 3650.0 || timeSpan.TotalDays > 29100.0)
-          this.AddError("DOB", "Wrong age for Matric");
+          AddError("DOB", "Wrong age for Matric");
         else
-          this.RemoveError("DOB");
-        if (!string.IsNullOrWhiteSpace(this._said) || !string.IsNullOrEmpty(this._said))
+          RemoveError("DOB");
+        if (!string.IsNullOrWhiteSpace(_said) || !string.IsNullOrEmpty(_said))
         {
-          if (HelperUtils.DOBfromSAID(this._said) != string.Format("{0:dd/MM/yyyy}", (object) this._dob))
-            this.AddError("DOB", "ID and DOB not the same");
+          if (HelperUtils.DOBfromSAID(_said) != string.Format("{0:dd/MM/yyyy}", (object) _dob))
+            AddError("DOB", "ID and DOB not the same");
           else
-            this.RemoveError("DOB");
+            RemoveError("DOB");
         }
-        this.checkerrors();
-        this.RaisePropertyChanged("DOB");
+        checkerrors();
+        RaisePropertyChanged("DOB");
       }
     }
 
@@ -195,23 +195,23 @@ namespace CETAP_LOB.Model.Composite
     {
       get
       {
-        return this._dot;
+        return _dot;
       }
       set
       {
-        if (this._dot == value)
+        if (_dot == value)
           return;
-        this._dot = value;
-        this.RaisePropertyChanged("DOT");
+        _dot = value;
+        RaisePropertyChanged("DOT");
       }
     }
 
     private void checkerrors()
     {
-      if (this.HasErrors)
-        this.errorCount = this._errors.Count;
+      if (HasErrors)
+        errorCount = _errors.Count;
       else
-        this.errorCount = 0;
+        errorCount = 0;
     }
   }
 }

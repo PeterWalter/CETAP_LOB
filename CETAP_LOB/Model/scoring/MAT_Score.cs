@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Model.scoring.MAT_Score
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 namespace CETAP_LOB.Model.scoring
 {
@@ -15,11 +11,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this._id;
+        return _id;
       }
       set
       {
-        this._id = value;
+        _id = value;
       }
     }
 
@@ -27,11 +23,11 @@ namespace CETAP_LOB.Model.scoring
     {
       get
       {
-        return this.mat;
+        return mat;
       }
       set
       {
-        this.mat = value;
+        mat = value;
       }
     }
   }

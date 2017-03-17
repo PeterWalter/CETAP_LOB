@@ -90,14 +90,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._isStarted;
+        return _isStarted;
       }
       set
       {
-        if (this._isStarted == value)
+        if (_isStarted == value)
           return;
-        this._isStarted = value;
-        this.RaisePropertyChanged("IsStarted");
+        _isStarted = value;
+        RaisePropertyChanged("IsStarted");
       }
     }
 
@@ -105,16 +105,16 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._isLoaded;
+        return _isLoaded;
       }
       set
       {
-        if (this._isLoaded == value)
+        if (_isLoaded == value)
           return;
-        this._isLoaded = value;
-        this.RaisePropertyChanged("isLoaded");
-        this.CreateFileCommand.RaiseCanExecuteChanged();
-        this.RefreshCommand.RaiseCanExecuteChanged();
+        _isLoaded = value;
+        RaisePropertyChanged("isLoaded");
+        CreateFileCommand.RaiseCanExecuteChanged();
+        RefreshCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -122,15 +122,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._mystatus;
+        return _mystatus;
       }
       set
       {
-        if (this._mystatus == value)
+        if (_mystatus == value)
           return;
-        this._mystatus = value;
-        this.RaisePropertyChanged("Status");
-        this.LoadwritersToDBCommand.RaiseCanExecuteChanged();
+        _mystatus = value;
+        RaisePropertyChanged("Status");
+        LoadwritersToDBCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -138,15 +138,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._mydata;
+        return _mydata;
       }
       set
       {
-        if (this._mydata == value)
+        if (_mydata == value)
           return;
-        this._mydata = value;
-        this.RaisePropertyChanged("CleanData");
-        this.LoadwritersToDBCommand.RaiseCanExecuteChanged();
+        _mydata = value;
+        RaisePropertyChanged("CleanData");
+        LoadwritersToDBCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -154,14 +154,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myDBDuplicates;
+        return _myDBDuplicates;
       }
       set
       {
-        if (this._myDBDuplicates == value)
+        if (_myDBDuplicates == value)
           return;
-        this._myDBDuplicates = value;
-        this.RaisePropertyChanged("DBDuplicates");
+        _myDBDuplicates = value;
+        RaisePropertyChanged("DBDuplicates");
       }
     }
 
@@ -169,14 +169,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myduplicates;
+        return _myduplicates;
       }
       set
       {
-        if (this._myduplicates == value)
+        if (_myduplicates == value)
           return;
-        this._myduplicates = value;
-        this.RaisePropertyChanged("Duplicates");
+        _myduplicates = value;
+        RaisePropertyChanged("Duplicates");
       }
     }
 
@@ -184,15 +184,15 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._isDirty;
+        return _isDirty;
       }
       set
       {
-        if (this._isDirty == value)
+        if (_isDirty == value)
           return;
-        this._isDirty = value;
-        this.RaisePropertyChanged("IsDirty");
-        this.LoadwritersToDBCommand.RaiseCanExecuteChanged();
+        _isDirty = value;
+        RaisePropertyChanged("IsDirty");
+        LoadwritersToDBCommand.RaiseCanExecuteChanged();
       }
     }
 
@@ -204,14 +204,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._selectedWriter;
+        return _selectedWriter;
       }
       set
       {
-        if (this._selectedWriter == value)
+        if (_selectedWriter == value)
           return;
-        this._selectedWriter = value;
-        this.RaisePropertyChanged("SelectedWriter");
+        _selectedWriter = value;
+        RaisePropertyChanged("SelectedWriter");
       }
     }
 
@@ -219,14 +219,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._afrikaans;
+        return _afrikaans;
       }
       set
       {
-        if (this._afrikaans == value)
+        if (_afrikaans == value)
           return;
-        this._afrikaans = value;
-        this.RaisePropertyChanged("Afrikaans");
+        _afrikaans = value;
+        RaisePropertyChanged("Afrikaans");
       }
     }
 
@@ -234,14 +234,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myenglish;
+        return _myenglish;
       }
       set
       {
-        if (this._myenglish == value)
+        if (_myenglish == value)
           return;
-        this._myenglish = value;
-        this.RaisePropertyChanged("English");
+        _myenglish = value;
+        RaisePropertyChanged("English");
       }
     }
 
@@ -249,14 +249,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._venues;
+        return _venues;
       }
       set
       {
-        if (this._venues == value)
+        if (_venues == value)
           return;
-        this._venues = value;
-        this.RaisePropertyChanged("Venues");
+        _venues = value;
+        RaisePropertyChanged("Venues");
       }
     }
 
@@ -264,14 +264,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._female;
+        return _female;
       }
       set
       {
-        if (this._female == value)
+        if (_female == value)
           return;
-        this._female = value;
-        this.RaisePropertyChanged("Female");
+        _female = value;
+        RaisePropertyChanged("Female");
       }
     }
 
@@ -279,14 +279,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._male;
+        return _male;
       }
       set
       {
-        if (this._male == value)
+        if (_male == value)
           return;
-        this._male = value;
-        this.RaisePropertyChanged("Male");
+        _male = value;
+        RaisePropertyChanged("Male");
       }
     }
 
@@ -294,14 +294,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._count;
+        return _count;
       }
       set
       {
-        if (this._count == value)
+        if (_count == value)
           return;
-        this._count = value;
-        this.RaisePropertyChanged("Count");
+        _count = value;
+        RaisePropertyChanged("Count");
       }
     }
 
@@ -309,14 +309,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myProperty;
+        return _myProperty;
       }
       set
       {
-        if (this._myProperty == value)
+        if (_myProperty == value)
           return;
-        this._myProperty = value;
-        this.RaisePropertyChanged("Errors");
+        _myProperty = value;
+        RaisePropertyChanged("Errors");
       }
     }
 
@@ -324,18 +324,18 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._writers;
+        return _writers;
       }
       set
       {
-        if (this._writers == value)
+        if (_writers == value)
           return;
-        this._writers = value;
-        this.RaisePropertyChanged("writers");
-        if (this._writers.Count <= 0)
+        _writers = value;
+        RaisePropertyChanged("writers");
+        if (_writers.Count <= 0)
           return;
-        this.LoadwritersToDBCommand.RaiseCanExecuteChanged();
-        this.RaisePropertyChanged("CleanData");
+        LoadwritersToDBCommand.RaiseCanExecuteChanged();
+        RaisePropertyChanged("CleanData");
       }
     }
 
@@ -343,14 +343,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._filename;
+        return _filename;
       }
       set
       {
-        if (this._filename == value)
+        if (_filename == value)
           return;
-        this._filename = value;
-        this.RaisePropertyChanged("FileName");
+        _filename = value;
+        RaisePropertyChanged("FileName");
       }
     }
 
@@ -358,121 +358,121 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._myDBResults;
+        return _myDBResults;
       }
       set
       {
-        if (this._myDBResults == value)
+        if (_myDBResults == value)
           return;
-        this._myDBResults = value;
-        this.RaisePropertyChanged("DBResults");
+        _myDBResults = value;
+        RaisePropertyChanged("DBResults");
       }
     }
 
     public LoadWritersViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void InitializeModels()
     {
-      this.writers = new ObservableCollection<WebWriters>();
-      this.Errors = new ObservableCollection<string>();
-      this.Duplicates = new ObservableCollection<WebWriters>();
-      this.DBDuplicates = new ObservableCollection<WebWriters>();
+      writers = new ObservableCollection<WebWriters>();
+      Errors = new ObservableCollection<string>();
+      Duplicates = new ObservableCollection<WebWriters>();
+      DBDuplicates = new ObservableCollection<WebWriters>();
     }
 
     private void RegisterCommands()
     {
-      this.OpenFileCommand = new RelayCommand(new Action(this.OpenCSVFile));
-      this.CreateFileCommand = new RelayCommand((Action) (() => this.createCsvFile()), (Func<bool>) (() => this.canManipulateData()));
-      this.DeleteRowCommand = new RelayCommand((Action) (() => this.DeleteWriter()), (Func<bool>) (() => this.canManipulateData()));
-      this.GetNBTCommand = new RelayCommand((Action) (() => this.GetNewNBTNumber()), (Func<bool>) (() => this.canManipulateData()));
-      this.LoadwritersToDBCommand = new RelayCommand((Action) (() => this.LoadDB()), (Func<bool>) (() => this.canSaveToDB()));
-      this.CleanNamesCommand = new RelayCommand((Action) (() => this.RemoveFunnyCharacters()), (Func<bool>) (() => this.canManipulateData()));
-      this.GetDBDuplicatesCommand = new RelayCommand((Action) (() => this.GetDBDuplicates()), (Func<bool>) (() => this.canSaveToDB()));
-      this.RefreshCommand = new RelayCommand((Action) (() => this.Refresh()), (Func<bool>) (() => this.canManipulateData()));
+      OpenFileCommand = new RelayCommand(new Action(OpenCSVFile));
+      CreateFileCommand = new RelayCommand((Action) (() => createCsvFile()), (Func<bool>) (() => canManipulateData()));
+      DeleteRowCommand = new RelayCommand((Action) (() => DeleteWriter()), (Func<bool>) (() => canManipulateData()));
+      GetNBTCommand = new RelayCommand((Action) (() => GetNewNBTNumber()), (Func<bool>) (() => canManipulateData()));
+      LoadwritersToDBCommand = new RelayCommand((Action) (() => LoadDB()), (Func<bool>) (() => canSaveToDB()));
+      CleanNamesCommand = new RelayCommand((Action) (() => RemoveFunnyCharacters()), (Func<bool>) (() => canManipulateData()));
+      GetDBDuplicatesCommand = new RelayCommand((Action) (() => GetDBDuplicates()), (Func<bool>) (() => canSaveToDB()));
+      RefreshCommand = new RelayCommand((Action) (() => Refresh()), (Func<bool>) (() => canManipulateData()));
     }
 
     private bool canManipulateData()
     {
-      return this._isLoaded;
+      return _isLoaded;
     }
 
     private bool canSaveToDB()
     {
-      if (this._mydata)
-        return this._isDirty;
+      if (_mydata)
+        return _isDirty;
       return false;
     }
 
     private void RemoveFunnyCharacters()
     {
-      this._service.CleanFunnyChars();
+      _service.CleanFunnyChars();
     }
 
     private void GetNewNBTNumber()
     {
       string NewNBT = "";
-      this._service.GetNewNBT(this.SelectedWriter, ref NewNBT);
-      this.Status = NewNBT;
-      this.Refresh();
+      _service.GetNewNBT(SelectedWriter, ref NewNBT);
+      Status = NewNBT;
+      Refresh();
     }
 
     private void DeleteWriter()
     {
-      if (!this._service.DeleteWriterfromList(this._selectedWriter))
+      if (!_service.DeleteWriterfromList(_selectedWriter))
         return;
-      this.Refresh();
+      Refresh();
     }
 
     private async void GetDBDuplicates()
     {
-      this.IsStarted = true;
-      this.DBDuplicates = await this._service.GetDuplicatesfromDBAsync();
-      this.IsStarted = false;
+      IsStarted = true;
+      DBDuplicates = await _service.GetDuplicatesfromDBAsync();
+      IsStarted = false;
     }
 
     private void GetDuplicates()
     {
-      this.Duplicates = this._service.GetDuplicates();
-      if (this.Duplicates.Count<WebWriters>() > 0)
+      Duplicates = _service.GetDuplicates();
+      if (Duplicates.Count<WebWriters>() > 0)
       {
-        this.CleanData = false;
-        foreach (WebWriters duplicate in (Collection<WebWriters>) this.Duplicates)
+        CleanData = false;
+        foreach (WebWriters duplicate in (Collection<WebWriters>) Duplicates)
         {
           WebWriters a = duplicate;
-          this.writers.Where<WebWriters>((Func<WebWriters, bool>) (x => x.Reference == a.Reference)).Select<WebWriters, WebWriters>((Func<WebWriters, WebWriters>) (m => m)).ToList<WebWriters>();
+          writers.Where<WebWriters>((Func<WebWriters, bool>) (x => x.Reference == a.Reference)).Select<WebWriters, WebWriters>((Func<WebWriters, WebWriters>) (m => m)).ToList<WebWriters>();
         }
       }
       else
       {
-        this._mydata = true;
-        this._isDirty = true;
+        _mydata = true;
+        _isDirty = true;
       }
     }
 
     private async void LoadDB()
     {
-      this._isDirty = false;
-      this.IsStarted = true;
-      await this.LoadDBAsync();
-      this.IsStarted = false;
-      this._isDirty = true;
+      _isDirty = false;
+      IsStarted = true;
+      await LoadDBAsync();
+      IsStarted = false;
+      _isDirty = true;
       string title = "Writer List: ";
       int num = (int) ModernDialog.ShowMessage("Writer list loaded to DB", title, MessageBoxButton.OK, (Window) null);
     }
 
     private async Task LoadDBAsync()
     {
-      if (this.DBDuplicates.Count<WebWriters>() < 1)
+      if (DBDuplicates.Count<WebWriters>() < 1)
       {
-        int num = await this._service.addwriterToDBAsync() ? 1 : 0;
+        int num = await _service.addwriterToDBAsync() ? 1 : 0;
       }
       else
-        LoadWritersViewModel.log.Warn((object) ("There are uncleaned errors in " + this.FileName));
+        LoadWritersViewModel.log.Warn((object) ("There are uncleaned errors in " + FileName));
     }
 
     private void OpenCSVFile()
@@ -483,8 +483,8 @@ namespace CETAP_LOB.ViewModel.writers
       bool? nullable = openFileDialog.ShowDialog();
       if ((!nullable.GetValueOrDefault() ? 0 : (nullable.HasValue ? 1 : 0)) == 0)
         return;
-      this.FileName = openFileDialog.FileName;
-      this.LoadData(this.FileName);
+      FileName = openFileDialog.FileName;
+      LoadData(FileName);
     }
 
     private void createCsvFile()
@@ -495,32 +495,32 @@ namespace CETAP_LOB.ViewModel.writers
       bool? nullable = saveFileDialog.ShowDialog();
       if ((!nullable.GetValueOrDefault() ? 0 : (nullable.HasValue ? 1 : 0)) == 0)
         return;
-      this.FileName = saveFileDialog.FileName;
-      this._service.generateFile(this.FileName);
+      FileName = saveFileDialog.FileName;
+      _service.generateFile(FileName);
     }
 
     private void Refresh()
     {
-      this.writers.Clear();
-      this.writers = new ObservableCollection<WebWriters>(this._service.Processdata().OrderByDescending<WebWriters, int>((Func<WebWriters, int>) (s => s.errorCount)).ToList<WebWriters>());
-      this.CheckHasErrors();
-      this.GetDuplicates();
+      writers.Clear();
+      writers = new ObservableCollection<WebWriters>(_service.Processdata().OrderByDescending<WebWriters, int>((Func<WebWriters, int>) (s => s.errorCount)).ToList<WebWriters>());
+      CheckHasErrors();
+      GetDuplicates();
     }
 
     private void LoadData(string filename)
     {
-      ObservableCollection<WebWriters> data = this._service.GetData(filename);
+      ObservableCollection<WebWriters> data = _service.GetData(filename);
       if (data != null)
       {
-        this.Count = data.Count;
-        this.Venues = data.GroupBy<WebWriters, string>((Func<WebWriters, string>) (a => a.Venue)).Select<IGrouping<string, WebWriters>, string>((Func<IGrouping<string, WebWriters>, string>) (venueGroup => venueGroup.Key)).Count<string>();
-        this.Female = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Gender == "Female")).Count<WebWriters>();
-        this.Male = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Gender == "Male")).Count<WebWriters>();
-        this.English = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Language == "English")).Count<WebWriters>();
-        this.Afrikaans = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Language == "Afrikaans")).Count<WebWriters>();
-        this.writers = new ObservableCollection<WebWriters>(data.OrderByDescending<WebWriters, int>((Func<WebWriters, int>) (s => s.errorCount)).ToList<WebWriters>());
-        this._isLoaded = true;
-        this.CheckHasErrors();
+        Count = data.Count;
+        Venues = data.GroupBy<WebWriters, string>((Func<WebWriters, string>) (a => a.Venue)).Select<IGrouping<string, WebWriters>, string>((Func<IGrouping<string, WebWriters>, string>) (venueGroup => venueGroup.Key)).Count<string>();
+        Female = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Gender == "Female")).Count<WebWriters>();
+        Male = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Gender == "Male")).Count<WebWriters>();
+        English = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Language == "English")).Count<WebWriters>();
+        Afrikaans = data.Where<WebWriters>((Func<WebWriters, bool>) (a => a.Language == "Afrikaans")).Count<WebWriters>();
+        writers = new ObservableCollection<WebWriters>(data.OrderByDescending<WebWriters, int>((Func<WebWriters, int>) (s => s.errorCount)).ToList<WebWriters>());
+        _isLoaded = true;
+        CheckHasErrors();
       }
       else
       {
@@ -530,25 +530,25 @@ namespace CETAP_LOB.ViewModel.writers
 
     private void CheckHasErrors()
     {
-      if (this.writers.Where<WebWriters>((Func<WebWriters, bool>) (x => x.HasErrors)).Select<WebWriters, WebWriters>((Func<WebWriters, WebWriters>) (m => m)).ToList<WebWriters>() != null)
+      if (writers.Where<WebWriters>((Func<WebWriters, bool>) (x => x.HasErrors)).Select<WebWriters, WebWriters>((Func<WebWriters, WebWriters>) (m => m)).ToList<WebWriters>() != null)
         return;
-      this._mydata = true;
+      _mydata = true;
     }
 
     private void HandleChangeSortDirection(object obj)
     {
-      this.WebA.SortDescriptions.Clear();
-      if (this.AscendingChecked)
-        this.WebA.SortDescriptions.Add(new SortDescription(string.Empty, ListSortDirection.Ascending));
+      WebA.SortDescriptions.Clear();
+      if (AscendingChecked)
+        WebA.SortDescriptions.Add(new SortDescription(string.Empty, ListSortDirection.Ascending));
       else
-        this.WebA.SortDescriptions.Add(new SortDescription(string.Empty, ListSortDirection.Descending));
+        WebA.SortDescriptions.Add(new SortDescription(string.Empty, ListSortDirection.Descending));
     }
 
     private void applicants_Filter(object sender, FilterEventArgs e)
     {
-      if (e.Item == null || this.FilterText == null)
+      if (e.Item == null || FilterText == null)
         return;
-      e.Accepted = ((string) e.Item).ToLower().StartsWith(this.FilterText.ToLower());
+      e.Accepted = ((string) e.Item).ToLower().StartsWith(FilterText.ToLower());
     }
   }
 }

@@ -90,7 +90,7 @@ namespace CETAP_LOB.Helper
     public static string YourChange(int amount)
     {
       string str = "";
-      if (amount < 30)
+      if (amount < 50)
       {
         if (amount == 0)
           return str;
@@ -99,14 +99,14 @@ namespace CETAP_LOB.Helper
           ++num;
         return num.ToString() + "(10)";
       }
-      int num1 = amount / 30;
-      int num2 = amount % 30;
+      int num1 = amount / 50;
+      int num2 = amount % 50;
       int num3 = num2 / 10;
       if (num2 % 10 > 0)
         ++num3;
       if (num3 == 0)
-        return num1.ToString() + "(30)";
-      return num1.ToString() + "(30) " + num3.ToString() + "(10)";
+        return num1.ToString() + "(50)";
+      return num1.ToString() + "(50) " + num3.ToString() + "(10)";
     }
 
     public static int RoundAmount(int amount)

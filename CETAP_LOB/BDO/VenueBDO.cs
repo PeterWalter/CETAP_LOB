@@ -45,18 +45,18 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._code;
+        return _code;
       }
       set
       {
-        if (this._code == value)
+        if (_code == value)
           return;
-        this._code = value;
-        if (this._code < 1)
-          this.AddError("VenueCode", "Venue Codes should be positive numbers");
+        _code = value;
+        if (_code < 1)
+          AddError("VenueCode", "Venue Codes should be positive numbers");
         else
-          this.RemoveError("VenueCode");
-        this.RaisePropertyChanged("VenueCode");
+          RemoveError("VenueCode");
+        RaisePropertyChanged("VenueCode");
       }
     }
 
@@ -64,18 +64,18 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._venue;
+        return _venue;
       }
       set
       {
-        if (this._venue == value)
+        if (_venue == value)
           return;
-        this._venue = value;
-        if (string.IsNullOrWhiteSpace(this._venue))
-          this.AddError("VenueName", "Venue Name is required");
+        _venue = value;
+        if (string.IsNullOrWhiteSpace(_venue))
+          AddError("VenueName", "Venue Name is required");
         else
-          this.RemoveError("VenueName");
-        this.RaisePropertyChanged("VenueName");
+          RemoveError("VenueName");
+        RaisePropertyChanged("VenueName");
       }
     }
 
@@ -83,18 +83,18 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._sname;
+        return _sname;
       }
       set
       {
-        if (this._sname == value)
+        if (_sname == value)
           return;
-        this._sname = value;
-        if (string.IsNullOrWhiteSpace(this._venue))
-          this.AddError("ShortName", "Venue Name is required");
+        _sname = value;
+        if (string.IsNullOrWhiteSpace(_venue))
+          AddError("ShortName", "Venue Name is required");
         else
-          this.RemoveError("ShortName");
-        this.RaisePropertyChanged("ShortName");
+          RemoveError("ShortName");
+        RaisePropertyChanged("ShortName");
       }
     }
 
@@ -102,14 +102,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._webname;
+        return _webname;
       }
       set
       {
-        if (this._webname == value)
+        if (_webname == value)
           return;
-        this._webname = value;
-        this.RaisePropertyChanged("WebSiteName");
+        _webname = value;
+        RaisePropertyChanged("WebSiteName");
       }
     }
 
@@ -117,14 +117,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._room;
+        return _room;
       }
       set
       {
-        if (this._room == value)
+        if (_room == value)
           return;
-        this._room = value;
-        this.RaisePropertyChanged("Room");
+        _room = value;
+        RaisePropertyChanged("Room");
       }
     }
 
@@ -132,14 +132,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._venueType;
+        return _venueType;
       }
       set
       {
-        if (this._venueType == value)
+        if (_venueType == value)
           return;
-        this._venueType = value;
-        this.RaisePropertyChanged("VenueType");
+        _venueType = value;
+        RaisePropertyChanged("VenueType");
       }
     }
 
@@ -147,14 +147,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._province;
+        return _province;
       }
       set
       {
-        if (this._province == value)
+        if (_province == value)
           return;
-        this._province = value;
-        this.RaisePropertyChanged("ProvinceID");
+        _province = value;
+        RaisePropertyChanged("ProvinceID");
       }
     }
 
@@ -162,14 +162,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._available;
+        return _available;
       }
       set
       {
-        if (this._available == value)
+        if (_available == value)
           return;
-        this._available = value;
-        this.RaisePropertyChanged("Available");
+        _available = value;
+        RaisePropertyChanged("Available");
       }
     }
 
@@ -177,16 +177,16 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._capacity;
+        return _capacity;
       }
       set
       {
-        int? capacity = this._capacity;
+        int? capacity = _capacity;
         int? nullable = value;
         if ((capacity.GetValueOrDefault() != nullable.GetValueOrDefault() ? 0 : (capacity.HasValue == nullable.HasValue ? 1 : 0)) != 0)
           return;
-        this._capacity = value;
-        this.RaisePropertyChanged("Capacity");
+        _capacity = value;
+        RaisePropertyChanged("Capacity");
       }
     }
 
@@ -194,14 +194,14 @@ namespace CETAP_LOB.BDO
     {
       get
       {
-        return this._comments;
+        return _comments;
       }
       set
       {
-        if (this._comments == value)
+        if (_comments == value)
           return;
-        this._comments = value;
-        this.RaisePropertyChanged("Description");
+        _comments = value;
+        RaisePropertyChanged("Description");
       }
     }
   }

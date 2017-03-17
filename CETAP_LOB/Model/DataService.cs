@@ -49,7 +49,6 @@ namespace CETAP_LOB.Model
         Stopwatch Timer = new Stopwatch();
         private ObservableCollection<FullComposite> FComposite = new ObservableCollection<FullComposite>();
         private ObservableCollection<LogisticsComposite> LComposite = new ObservableCollection<LogisticsComposite>();
-
         public ObservableCollection<WebWriters> WritersList1;
         private bool hasrecords;
         private Dir_categories myDir;

@@ -1,8 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: LOB.Model.venueprep.VenueSummary
-// Assembly: LOB, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 3597789E-8774-4427-AE20-07195D9380BD
-// Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
+﻿
 
 using GalaSoft.MvvmLight;
 using CETAP_LOB.Helper;
@@ -55,14 +51,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mytestDate;
+        return _mytestDate;
       }
       set
       {
-        if (this._mytestDate == value)
+        if (_mytestDate == value)
           return;
-        this._mytestDate = value;
-        this.RaisePropertyChanged("TestDate");
+        _mytestDate = value;
+        RaisePropertyChanged("TestDate");
       }
     }
 
@@ -70,14 +66,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._venue;
+        return _venue;
       }
       set
       {
-        if (this._venue == value)
+        if (_venue == value)
           return;
-        this._venue = value;
-        this.RaisePropertyChanged("Venue");
+        _venue = value;
+        RaisePropertyChanged("Venue");
       }
     }
 
@@ -85,14 +81,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._writers;
+        return _writers;
       }
       set
       {
-        if (this._writers == value)
+        if (_writers == value)
           return;
-        this._writers = value;
-        this.RaisePropertyChanged("TotalWriters");
+        _writers = value;
+        RaisePropertyChanged("TotalWriters");
       }
     }
 
@@ -100,14 +96,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._vcode;
+        return _vcode;
       }
       set
       {
-        if (this._vcode == value)
+        if (_vcode == value)
           return;
-        this._vcode = value;
-        this.RaisePropertyChanged("CentreCode");
+        _vcode = value;
+        RaisePropertyChanged("CentreCode");
       }
     }
 
@@ -115,16 +111,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._aql_e;
+        return _aql_e;
       }
       set
       {
-        if (this._aql_e == value)
+        if (_aql_e == value)
           return;
-        this._aql_e = value;
-        this.RaisePropertyChanged("AQL_E");
-        this._aqle_s = HelperUtils.RoundAmount(this._aql_e);
-        this.RaisePropertyChanged("AQLE_S");
+        _aql_e = value;
+        RaisePropertyChanged("AQL_E");
+        _aqle_s = HelperUtils.RoundAmount(_aql_e);
+        RaisePropertyChanged("AQLE_S");
       }
     }
 
@@ -132,16 +128,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._walkin_e;
+        return _walkin_e;
       }
       set
       {
-        if (this._walkin_e == value)
+        if (_walkin_e == value)
           return;
-        if (this._aql_e == 0)
+        if (_aql_e == 0)
           value = 0;
-        this._walkin_e = value;
-        this.RaisePropertyChanged("Walkin_E");
+        _walkin_e = value;
+        RaisePropertyChanged("Walkin_E");
       }
     }
 
@@ -149,18 +145,18 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._aqle_s;
+        return _aqle_s;
       }
       set
       {
-        if (this._aqle_s == value)
+        if (_aqle_s == value)
           return;
-        this._aqle_s = value;
-        this.RaisePropertyChanged("AQLE_S");
-        this.AQLE_Batch = HelperUtils.YourChange(this._aqle_s);
-        this.RaisePropertyChanged("AQLE_Batch");
-        this._totalsent = this._aqle_s + this._aqla_s;
-        this.RaisePropertyChanged("TotalSent");
+        _aqle_s = value;
+        RaisePropertyChanged("AQLE_S");
+        AQLE_Batch = HelperUtils.YourChange(_aqle_s);
+        RaisePropertyChanged("AQLE_Batch");
+        _totalsent = _aqle_s + _aqla_s;
+        RaisePropertyChanged("TotalSent");
       }
     }
 
@@ -168,14 +164,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._aqle_b;
+        return _aqle_b;
       }
       set
       {
-        if (this._aqle_b == value)
+        if (_aqle_b == value)
           return;
-        this._aqle_b = value;
-        this.RaisePropertyChanged("AQLE_Batch");
+        _aqle_b = value;
+        RaisePropertyChanged("AQLE_Batch");
       }
     }
 
@@ -183,16 +179,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._maths_e;
+        return _maths_e;
       }
       set
       {
-        if (this._maths_e == value)
+        if (_maths_e == value)
           return;
-        this._maths_e = value;
-        this._mate_s = HelperUtils.RoundAmount(this._maths_e);
-        this.RaisePropertyChanged("Maths_E");
-        this.RaisePropertyChanged("MATE_S");
+        _maths_e = value;
+        _mate_s = HelperUtils.RoundAmount(_maths_e);
+        RaisePropertyChanged("Maths_E");
+        RaisePropertyChanged("MATE_S");
       }
     }
 
@@ -200,16 +196,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mate_s;
+        return _mate_s;
       }
       set
       {
-        if (this._mate_s == value)
+        if (_mate_s == value)
           return;
-        this._mate_s = value;
-        this._mate_batch = HelperUtils.YourChange(this._mate_s);
-        this.RaisePropertyChanged("MATE_S");
-        this.RaisePropertyChanged("MATE_Batch");
+        _mate_s = value;
+        _mate_batch = HelperUtils.YourChange(_mate_s);
+        RaisePropertyChanged("MATE_S");
+        RaisePropertyChanged("MATE_Batch");
       }
     }
 
@@ -217,14 +213,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mate_batch;
+        return _mate_batch;
       }
       set
       {
-        if (this._mate_batch == value)
+        if (_mate_batch == value)
           return;
-        this._mate_batch = value;
-        this.RaisePropertyChanged("MATE_Batch");
+        _mate_batch = value;
+        RaisePropertyChanged("MATE_Batch");
       }
     }
 
@@ -232,16 +228,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._aql_a;
+        return _aql_a;
       }
       set
       {
-        if (this._aql_a == value)
+        if (_aql_a == value)
           return;
-        this._aql_a = value;
-        this._aqla_s = HelperUtils.RoundAmount(this._aql_a);
-        this.RaisePropertyChanged("AQL_A");
-        this.RaisePropertyChanged("AQLA_S");
+        _aql_a = value;
+        _aqla_s = HelperUtils.RoundAmount(_aql_a);
+        RaisePropertyChanged("AQL_A");
+        RaisePropertyChanged("AQLA_S");
       }
     }
 
@@ -249,16 +245,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._walkin_a;
+        return _walkin_a;
       }
       set
       {
-        if (this._walkin_a == value)
+        if (_walkin_a == value)
           return;
-        if (this._aql_a == 0)
+        if (_aql_a == 0)
           value = 0;
-        this._walkin_a = value;
-        this.RaisePropertyChanged("Walkin_A");
+        _walkin_a = value;
+        RaisePropertyChanged("Walkin_A");
       }
     }
 
@@ -266,18 +262,18 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._aqla_s;
+        return _aqla_s;
       }
       set
       {
-        if (this._aqla_s == value)
+        if (_aqla_s == value)
           return;
-        this._aqla_s = value;
-        this._totalsent = this._aqle_s + this._aqla_s;
-        this._aqla_b = HelperUtils.YourChange(this._aqla_s);
-        this.RaisePropertyChanged("AQLA_S");
-        this.RaisePropertyChanged("AQLA_Batch");
-        this.RaisePropertyChanged("TotalSent");
+        _aqla_s = value;
+        _totalsent = _aqle_s + _aqla_s;
+        _aqla_b = HelperUtils.YourChange(_aqla_s);
+        RaisePropertyChanged("AQLA_S");
+        RaisePropertyChanged("AQLA_Batch");
+        RaisePropertyChanged("TotalSent");
       }
     }
 
@@ -285,14 +281,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._aqla_b;
+        return _aqla_b;
       }
       set
       {
-        if (this._aqla_b == value)
+        if (_aqla_b == value)
           return;
-        this._aqla_b = value;
-        this.RaisePropertyChanged("AQLA_Batch");
+        _aqla_b = value;
+        RaisePropertyChanged("AQLA_Batch");
       }
     }
 
@@ -300,16 +296,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._math_a;
+        return _math_a;
       }
       set
       {
-        if (this._math_a == value)
+        if (_math_a == value)
           return;
-        this._math_a = value;
-        this._mata_s = HelperUtils.RoundAmount(this._math_a);
-        this.RaisePropertyChanged("Maths_A");
-        this.RaisePropertyChanged("MATA_S");
+        _math_a = value;
+        _mata_s = HelperUtils.RoundAmount(_math_a);
+        RaisePropertyChanged("Maths_A");
+        RaisePropertyChanged("MATA_S");
       }
     }
 
@@ -317,16 +313,16 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mata_s;
+        return _mata_s;
       }
       set
       {
-        if (this._mata_s == value)
+        if (_mata_s == value)
           return;
-        this._mata_s = value;
-        this._mata_batch = HelperUtils.YourChange(this._mata_s);
-        this.RaisePropertyChanged("MATA_S");
-        this.RaisePropertyChanged("MATA_Batch");
+        _mata_s = value;
+        _mata_batch = HelperUtils.YourChange(_mata_s);
+        RaisePropertyChanged("MATA_S");
+        RaisePropertyChanged("MATA_Batch");
       }
     }
 
@@ -334,14 +330,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._mata_batch;
+        return _mata_batch;
       }
       set
       {
-        if (this._mata_batch == value)
+        if (_mata_batch == value)
           return;
-        this._mata_batch = value;
-        this.RaisePropertyChanged("MATA_Batch");
+        _mata_batch = value;
+        RaisePropertyChanged("MATA_Batch");
       }
     }
 
@@ -349,14 +345,14 @@ namespace CETAP_LOB.Model.venueprep
     {
       get
       {
-        return this._totalsent;
+        return _totalsent;
       }
       set
       {
-        if (this._totalsent == value)
+        if (_totalsent == value)
           return;
-        this._totalsent = value;
-        this.RaisePropertyChanged("TotalSent");
+        _totalsent = value;
+        RaisePropertyChanged("TotalSent");
       }
     }
   }

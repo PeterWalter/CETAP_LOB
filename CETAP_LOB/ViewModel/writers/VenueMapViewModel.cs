@@ -34,14 +34,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._tileLayer;
+        return _tileLayer;
       }
       set
       {
-        if (this._tileLayer == value)
+        if (_tileLayer == value)
           return;
-        this._tileLayer = value;
-        this.RaisePropertyChanged("TileLayer");
+        _tileLayer = value;
+        RaisePropertyChanged("TileLayer");
       }
     }
 
@@ -49,14 +49,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._location;
+        return _location;
       }
       set
       {
-        if (this._location == value)
+        if (_location == value)
           return;
-        this._location = value;
-        this.RaisePropertyChanged("Location");
+        _location = value;
+        RaisePropertyChanged("Location");
       }
     }
 
@@ -64,14 +64,14 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._pin;
+        return _pin;
       }
       set
       {
-        if (this._pin == value)
+        if (_pin == value)
           return;
-        this._pin = value;
-        this.RaisePropertyChanged("Pin");
+        _pin = value;
+        RaisePropertyChanged("Pin");
       }
     }
 
@@ -79,28 +79,28 @@ namespace CETAP_LOB.ViewModel.writers
     {
       get
       {
-        return this._zoomLevel;
+        return _zoomLevel;
       }
       set
       {
-        if (this._zoomLevel == value)
+        if (_zoomLevel == value)
           return;
-        this._zoomLevel = value;
-        this.RaisePropertyChanged("ZoomLevel");
+        _zoomLevel = value;
+        RaisePropertyChanged("ZoomLevel");
       }
     }
 
     public VenueMapViewModel(IDataService Service)
     {
-      this._service = Service;
-      this.InitializeModels();
-      this.RegisterCommands();
+      _service = Service;
+      InitializeModels();
+      RegisterCommands();
     }
 
     private void RegisterCommands()
     {
-      this.SelectVenueCommand = new RelayCommand(new Action(this.SelectVenue));
-      this.NewVenueLocationCommand = new RelayCommand<MouseButtonEventArgs>((Action<MouseButtonEventArgs>) (e => this.NewVenueLocation(e)));
+      SelectVenueCommand = new RelayCommand(new Action(SelectVenue));
+      NewVenueLocationCommand = new RelayCommand<MouseButtonEventArgs>((Action<MouseButtonEventArgs>) (e => NewVenueLocation(e)));
     }
 
     private void NewVenueLocation(MouseButtonEventArgs e)
