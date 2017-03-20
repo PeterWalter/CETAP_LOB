@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CETAP_LOB.View
 {
     /// <summary>
-    /// Interaction logic for SettingsAppearance.xaml
+    /// Interaction logic for ScanSettingView.xaml
     /// </summary>
-    public partial class SettingsAppearance : UserControl
+    public partial class ScanSettingView : UserControl
     {
-        public SettingsAppearance()
+        public ScanSettingView()
         {
             InitializeComponent();
         }

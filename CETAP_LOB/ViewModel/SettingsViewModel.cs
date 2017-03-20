@@ -34,18 +34,24 @@ namespace CETAP_LOB.ViewModel
 
     private void InitializeModels()
     {
-      Link link1 = new Link();
-      link1.DisplayName = "Settings";
-      link1.Source = new Uri("View/SettingsAppearance.xaml", UriKind.Relative);
-      _mylinks.Add(link1);
-      Link link2 = new Link();
-      link2.DisplayName = "About";
-      link2.Source = new Uri("View/AboutView.xaml", UriKind.Relative);
-      _mylinks.Add(link2);
-      Link link3 = new Link();
-      link3.DisplayName = "Working Folders";
-      link3.Source = new Uri("View/ScanSettingsView.xaml", UriKind.Relative);
-      _mylinks.Add(link3);
+            Link link1 = new Link()
+            {
+                DisplayName = "Settings",
+                Source = new Uri("View/SettingsAppearance.xaml", UriKind.Relative)
+            };
+            _mylinks.Add(link1);
+            Link link2 = new Link()
+            {
+                DisplayName = "About",
+                Source = new Uri("View/AboutView.xaml", UriKind.Relative)
+            };
+            _mylinks.Add(link2);
+            Link link3 = new Link()
+            {
+                DisplayName = "Working Folders",
+                Source = new Uri("View/ScanSettingView.xaml", UriKind.Relative)
+            };
+            _mylinks.Add(link3);
     }
 
     private void RegisterCommands()

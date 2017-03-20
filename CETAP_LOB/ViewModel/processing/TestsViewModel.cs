@@ -404,7 +404,7 @@ namespace CETAP_LOB.ViewModel.processing
       string title = "Test Allocations";
       if (!_service.AllocationsToExcel(saveFileDialog.FileName))
         return;
-      int num = (int) ModernDialog.ShowMessage("Allocation Data saved to excel file ", title, MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage("Allocation Data saved to excel file ", title, MessageBoxButton.OK);
     }
 
     private void Refresh_ProfAllocs()
@@ -505,7 +505,8 @@ namespace CETAP_LOB.ViewModel.processing
     {
       if (SelectedAllocation == null)
         return;
-      if (ModernDialog.ShowMessage("Do you really want to delete this Test Allocation?", "Test Name: " + SelectedTest.TestName.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
+            var result = ModernDialog.ShowMessage("Do you really want to delete this Test Allocation?", "Test Name: " + SelectedTest.TestName.ToString(), MessageBoxButton.YesNo);
+      if (result.ToString()== "Yes")
       {
         string message = "";
         _service.deleteTestAllocation(SelectedAllocation, ref message);
@@ -521,7 +522,7 @@ namespace CETAP_LOB.ViewModel.processing
       AStatus = "";
       string message = "";
       _service.updateTestAllocation(SelectedAllocation, ref message);
-      int num = (int) ModernDialog.ShowMessage(message, "Update", MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage(message, "Update", MessageBoxButton.OK);
       AStatus = message;
       getAllocationBytestID(SelectedTest.TestID);
       Refresh_alloc();
@@ -561,15 +562,16 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void DeleteTest()
     {
-      if (SelectedTest == null)
-        return;
-      if (ModernDialog.ShowMessage("Do you really want to delete this Test?\n Tests affect other parts of the application \n and the NBT_Production Database ", "Test Name: " + SelectedTest.TestName.ToString(), MessageBoxButton.YesNo, (Window) null).ToString() == "Yes")
-      {
-        string message = "";
-        _service.deleteTest(SelectedTest, ref message);
-        Status = message;
-      }
-      RefreshTests();
+          if (SelectedTest == null)
+            return;
+          var result = ModernDialog.ShowMessage("Do you really want to delete this Test?\n Tests affect other parts of the application \n and the NBT_Production Database ", "Test Name: " + SelectedTest.TestName.ToString(), MessageBoxButton.YesNo);
+          if (result.ToString() == "Yes")
+          {
+                string message = "";
+                _service.deleteTest(SelectedTest, ref message);
+                Status = message;
+          }
+          RefreshTests();
     }
 
     private void RefreshTests()
@@ -583,7 +585,7 @@ namespace CETAP_LOB.ViewModel.processing
       Status = "";
       string message = "";
       _service.updateTest(SelectedTest, ref message);
-      int num = (int) ModernDialog.ShowMessage(message, "Update", MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage(message, "Update", MessageBoxButton.OK);
       Status = message;
       RefreshTests();
     }

@@ -173,8 +173,8 @@ namespace CETAP_LOB.ViewModel
           return;
         _selectedTheme = value;
         RaisePropertyChanged("SelectedTheme");
-        AppearanceManager.Current.ThemeSource = value.Source;
-      }
+                AppearanceManager.Current.ThemeSource = value.Source; // update the actual theme
+            }
     }
 
     public string SelectedFontSize
@@ -262,37 +262,37 @@ namespace CETAP_LOB.ViewModel
       LinkCollection themes3 = themes;
       Link link5 = new Link();
       link5.DisplayName = "snowflake";
-      link5.Source = new Uri("/LOB;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative);
+      link5.Source = new Uri("/CETAP_LOB;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative);
       Link link6 = link5;
       themes3.Add(link6);
       LinkCollection themes4 = themes;
       Link link7 = new Link();
       link7.DisplayName = "bing image";
-      link7.Source = new Uri("/LOB;component/Assets/ModernUI.BingImage.xaml", UriKind.Relative);
+      link7.Source = new Uri("/CETAP_LOB;component/Assets/ModernUI.BingImage.xaml", UriKind.Relative);
       Link link8 = link7;
       themes4.Add(link8);
       LinkCollection themes5 = themes;
       Link link9 = new Link();
       link9.DisplayName = "cetap";
-      link9.Source = new Uri("/LOB;component/Assets/ModernUI.Cetap.xaml", UriKind.Relative);
+      link9.Source = new Uri("/CETAP_LOB;component/Assets/ModernUI.Cetap.xaml", UriKind.Relative);
       Link link10 = link9;
       themes5.Add(link10);
       LinkCollection themes6 = themes;
       Link link11 = new Link();
       link11.DisplayName = "rose";
-      link11.Source = new Uri("/LOB;component/Assets/ModernUI.Rose.xaml", UriKind.Relative);
+      link11.Source = new Uri("/CETAP_LOB;component/Assets/ModernUI.Rose.xaml", UriKind.Relative);
       Link link12 = link11;
       themes6.Add(link12);
       LinkCollection themes7 = themes;
       Link link13 = new Link();
       link13.DisplayName = "bubbles";
-      link13.Source = new Uri("/LOB;component/Assets/ModernUI.Bubbles.xaml", UriKind.Relative);
+      link13.Source = new Uri("/CETAP_LOB;component/Assets/ModernUI.Bubbles.xaml", UriKind.Relative);
       Link link14 = link13;
       themes7.Add(link14);
       LinkCollection themes8 = themes;
       Link link15 = new Link();
       link15.DisplayName = "water drop";
-      link15.Source = new Uri("/LOB;component/Assets/ModernUI.WaterDrop.xaml", UriKind.Relative);
+      link15.Source = new Uri("/CETAP_LOB;component/Assets/ModernUI.WaterDrop.xaml", UriKind.Relative);
       Link link16 = link15;
       themes8.Add(link16);
       SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? "large" : "small";

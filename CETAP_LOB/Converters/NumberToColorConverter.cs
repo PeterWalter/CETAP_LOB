@@ -9,7 +9,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace LOB.Converters
+namespace CETAP_LOB.Converters
 {
   [ValueConversion(typeof (int), typeof (Brush))]
   public class NumberToColorConverter : IValueConverter

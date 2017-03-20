@@ -12,15 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FeserWard.Controls;
 
-namespace CETAP_LOB.View
+namespace CETAP_LOB.View.writers
 {
     /// <summary>
-    /// Interaction logic for SettingsAppearance.xaml
+    /// Interaction logic for VenuesView.xaml
     /// </summary>
-    public partial class SettingsAppearance : UserControl
+    public partial class VenuesView : UserControl
     {
-        public SettingsAppearance()
+        public VenuesView()
         {
             InitializeComponent();
         }

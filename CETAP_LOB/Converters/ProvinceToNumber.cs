@@ -8,7 +8,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace LOB.Converters
+namespace CETAP_LOB.Converters
 {
   public class ProvinceToNumber : IValueConverter
   {

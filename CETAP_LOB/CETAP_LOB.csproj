@@ -78,8 +78,9 @@
     <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
       <HintPath>..\packages\FileHelpers.3.1.5\lib\net45\FileHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="FirstFloor.ModernUI, Version=1.0.9.0, Culture=neutral, PublicKeyToken=bc9b0c37bf06c6a9, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.6.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dll\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -187,6 +188,8 @@
     <Compile Include="BDO\VenueBDO.cs" />
     <Compile Include="BDO\WritersBDO.cs" />
     <Compile Include="BingImage.cs" />
+    <Compile Include="Converters\NumberToColorConverter.cs" />
+    <Compile Include="Converters\ProvinceToNumber.cs" />
     <Compile Include="Database\Batch.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -360,6 +363,9 @@
     <Compile Include="View\AboutView.xaml.cs">
       <DependentUpon>aboutview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\easypay\EasyPayView.xaml.cs">
+      <DependentUpon>EasyPayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Introduction\InstructView.xaml.cs">
       <DependentUpon>InstructView.xaml</DependentUpon>
     </Compile>
@@ -378,17 +384,20 @@
     <Compile Include="View\processing\ScanTrackerView.xaml.cs">
       <DependentUpon>ScanTrackerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ScanSettingsView.xaml.cs">
-      <DependentUpon>scansettingsview.xaml</DependentUpon>
+    <Compile Include="View\processing\TestsView.xaml.cs">
+      <DependentUpon>TestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ScanSettingView.xaml.cs">
+      <DependentUpon>ScanSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\scoring\ScoringView.xaml.cs">
       <DependentUpon>ScoringView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsAppearance.xaml.cs">
-      <DependentUpon>settingsappearance.xaml</DependentUpon>
+      <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsView.xaml.cs">
-      <DependentUpon>settingsview.xaml</DependentUpon>
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SplitPage1.xaml.cs">
       <DependentUpon>splitpage1.xaml</DependentUpon>
@@ -399,29 +408,24 @@
     <Compile Include="View\writers\ProcessView.xaml.cs">
       <DependentUpon>ProcessView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Assets\modernui.bingimage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Compile Include="View\writers\VenuesView.xaml.cs">
+      <DependentUpon>VenuesView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Assets\ModernUI.BingImage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\modernui.bubbles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Assets\ModernUI.Bubbles.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\modernui.cetap.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Assets\ModernUI.Snowflakes.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\modernui.rose.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Assets\ModernUi.WaterDrop.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Assets\modernui.snowflakes.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Assets\modernui.waterdrop.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -438,6 +442,10 @@
     <Page Include="View\aboutview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\easypay\EasyPayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Introduction\InstructView.xaml">
       <SubType>Designer</SubType>
@@ -463,21 +471,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\scansettingsview.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\processing\TestsView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ScanSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\scoring\ScoringView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\settingsappearance.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\SettingsAppearance.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\settingsview.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\splitpage1.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -488,6 +500,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\writers\ProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\writers\VenuesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -537,28 +553,13 @@
     <None Include="SplashScreen1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Converters\" />
     <Folder Include="Dll\" />
     <Folder Include="ViewModel\cluster\" />
     <Folder Include="View\cluster\" />
     <Folder Include="View\Composite\" />
-    <Folder Include="View\easypay\" />
     <Folder Include="View\Staffing\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\background.snowflakes.jpg" />
-    <Resource Include="Assets\binary-code.png" />
-    <Resource Include="Assets\bubbles.jpg" />
-    <Resource Include="Assets\cetapwatermark.png" />
-    <Resource Include="Assets\contacts delete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\data-replace.png" />
-    <Resource Include="Assets\logistics.png" />
-    <Resource Include="Assets\pink flower.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\waterdrop.jpg" />
     <Resource Include="Assets\icons\delete.png" />
     <Resource Include="Assets\icons\deleterow.png" />
     <Resource Include="Assets\icons\deleteuser.png" />
@@ -573,6 +574,33 @@
     <Resource Include="Assets\icons\updatesheet.png" />
     <Resource Include="Assets\icons\users.png" />
     <SplashScreen Include="cetap.png" />
+    <Resource Include="Assets\background.snowflakes.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Binary-Code.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Bubbles.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\CetapWatermark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Contacts Delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Data-Replace.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Logistics.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\pink flower.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\WaterDrop.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Database\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

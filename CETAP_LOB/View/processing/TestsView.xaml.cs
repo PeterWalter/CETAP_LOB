@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CETAP_LOB.View
+namespace CETAP_LOB.View.processing
 {
     /// <summary>
-    /// Interaction logic for SettingsAppearance.xaml
+    /// Interaction logic for TestsView.xaml
     /// </summary>
-    public partial class SettingsAppearance : UserControl
+    public partial class TestsView : UserControl
     {
-        public SettingsAppearance()
+        public TestsView()
         {
             InitializeComponent();
         }

@@ -23,7 +23,7 @@ using CETAP_LOB.ViewModel.scoring;
 using CETAP_LOB.ViewModel.writers;
 using CETAP_LOB.ViewModel.Introduction;
 using CETAP_LOB.ViewModel.composite;
-using CETAP_LOB.ViewModel.easypay;
+using CETAP_LOB.ViewModel;
 
 namespace CETAP_LOB.ViewModel
 {
