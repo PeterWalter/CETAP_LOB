@@ -363,6 +363,12 @@
     <Compile Include="View\AboutView.xaml.cs">
       <DependentUpon>aboutview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Composite\CompositeView.xaml.cs">
+      <DependentUpon>CompositeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Composite\EditCompositeView.xaml.cs">
+      <DependentUpon>EditCompositeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\easypay\EasyPayView.xaml.cs">
       <DependentUpon>EasyPayView.xaml</DependentUpon>
     </Compile>
@@ -381,6 +387,15 @@
     <Compile Include="View\processing\BatchView1.xaml.cs">
       <DependentUpon>BatchView1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\processing\EditingView.xaml.cs">
+      <DependentUpon>EditingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\processing\ErrorView.xaml.cs">
+      <DependentUpon>ErrorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\processing\QAView.xaml.cs">
+      <DependentUpon>QAView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\processing\ScanTrackerView.xaml.cs">
       <DependentUpon>ScanTrackerView.xaml</DependentUpon>
     </Compile>
@@ -389,6 +404,18 @@
     </Compile>
     <Compile Include="View\ScanSettingView.xaml.cs">
       <DependentUpon>ScanSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\scoring\AnswerSheetBioView.xaml.cs">
+      <DependentUpon>AnswerSheetBioView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\scoring\AqlView.xaml.cs">
+      <DependentUpon>AqlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\scoring\MatView.xaml.cs">
+      <DependentUpon>MatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\scoring\ModerationView.xaml.cs">
+      <DependentUpon>ModerationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\scoring\ScoringView.xaml.cs">
       <DependentUpon>ScoringView.xaml</DependentUpon>
@@ -407,6 +434,9 @@
     </Compile>
     <Compile Include="View\writers\ProcessView.xaml.cs">
       <DependentUpon>ProcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\writers\VenueMapView.xaml.cs">
+      <DependentUpon>VenueMapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\writers\VenuesView.xaml.cs">
       <DependentUpon>VenuesView.xaml</DependentUpon>
@@ -443,6 +473,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Composite\CompositeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Composite\EditCompositeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\easypay\EasyPayView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -467,6 +505,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\processing\EditingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\processing\ErrorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\processing\QAView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\processing\ScanTrackerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -476,6 +526,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ScanSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\scoring\AnswerSheetBioView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\scoring\AqlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\scoring\MatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\scoring\ModerationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -500,6 +566,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\writers\ProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\writers\VenueMapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -534,6 +604,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ApplicationSettings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="CetapDat.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Database\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -556,7 +629,6 @@
     <Folder Include="Dll\" />
     <Folder Include="ViewModel\cluster\" />
     <Folder Include="View\cluster\" />
-    <Folder Include="View\Composite\" />
     <Folder Include="View\Staffing\" />
   </ItemGroup>
   <ItemGroup>

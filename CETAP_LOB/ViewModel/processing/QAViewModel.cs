@@ -426,11 +426,11 @@ namespace CETAP_LOB.ViewModel.processing
                 return;
           if (Duplicates.Count() == 0)
           {
-            int num1 = (int) MessageBox.Show("No duplicate records!");
+            ModernDialog.ShowMessage("No duplicate records!","No Duplicates",MessageBoxButton.OK);
           }
           else
           {
-            int num2 = (int) MessageBox.Show(messageBoxText);
+                ModernDialog.ShowMessage(messageBoxText,"Duplicates",MessageBoxButton.OK);
           }
     }
 
@@ -476,7 +476,7 @@ namespace CETAP_LOB.ViewModel.processing
       string surname = SelectedQARecord.Surname;
       if (!_service.AddSurnameToList(surname))
         return;
-      int num = (int) ModernDialog.ShowMessage(surname + " Has been Added to Database", "Add Surname", MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage(surname + " Has been Added to Database", "Add Surname", MessageBoxButton.OK);
     }
 
     private void AddName()
@@ -484,7 +484,7 @@ namespace CETAP_LOB.ViewModel.processing
       string firstName = SelectedQARecord.FirstName;
       if (!_service.AddNameToList(firstName))
         return;
-      int num = (int) ModernDialog.ShowMessage(firstName + " Has been Added to Database", "Add Name", MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage(firstName + " Has been Added to Database", "Add Name", MessageBoxButton.OK);
     }
 
     private void updateTracker()
@@ -495,7 +495,7 @@ namespace CETAP_LOB.ViewModel.processing
         string sname = dir.SName;
         if (!_service.updateQAtoTracker(sname, Count))
         {
-          int num = (int) ModernDialog.ShowMessage("Batch was not recorded on tracker!!!", sname, MessageBoxButton.OK, (Window) null);
+          ModernDialog.ShowMessage("Batch was not recorded on tracker!!!", sname, MessageBoxButton.OK);
         }
       }
     }
@@ -582,7 +582,7 @@ namespace CETAP_LOB.ViewModel.processing
       }
       else
       {
-        int num = (int) ModernDialog.ShowMessage(message, "Save Error !!", MessageBoxButton.OK, (Window) null);
+         ModernDialog.ShowMessage(message, "Save Error !!", MessageBoxButton.OK);
       }
       Status = message;
     }

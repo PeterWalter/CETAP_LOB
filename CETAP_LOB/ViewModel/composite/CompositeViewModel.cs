@@ -313,7 +313,7 @@ namespace CETAP_LOB.ViewModel.composite
         flag = _service.GenerateSelectedComposite(SelectedWriters, folder);
       if (!flag)
         return;
-      int num = (int) ModernDialog.ShowMessage("Composite of Selected Records created", " Selected Records!!!", MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage("Composite of Selected Records created", " Selected Records!!!", MessageBoxButton.OK);
     }
 
     private void SelectWriters(CompositBDO writer)
@@ -385,7 +385,7 @@ namespace CETAP_LOB.ViewModel.composite
           results.Add(Messages);
         }
       }
-      int num = (int) ModernDialog.ShowMessage("Scores loaded to DB !!!", "Scores Update", MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage("Scores loaded to DB !!!", "Scores Update", MessageBoxButton.OK);
     }
 
     private async void AddScoresToDB()
@@ -404,7 +404,7 @@ namespace CETAP_LOB.ViewModel.composite
           results.Add(Messages);
       }
       await Refresh(_page);
-      int num = (int) ModernDialog.ShowMessage("Scores loaded to DB !!!", Messages, MessageBoxButton.OK, (Window) null);
+      ModernDialog.ShowMessage("Scores loaded to DB !!!", Messages, MessageBoxButton.OK);
     }
 
     private void DeleteInQueueRecords()
@@ -416,11 +416,13 @@ namespace CETAP_LOB.ViewModel.composite
       if (_service.RemoveRecordsInQueue(longList))
       {
         msg = longList.Count().ToString() + " records in Queue removed";
-                System.Windows.Forms.MessageBox.Show(msg);
+                ModernDialog.ShowMessage(msg, "Remove Records in Queue", MessageBoxButton.OK);
+               // System.Windows.Forms.MessageBox.Show(msg);
       }
       else
       {
-        System.Windows.Forms.MessageBox.Show("No records found in Queue");
+                ModernDialog.ShowMessage("No records found in Queue","", MessageBoxButton.OK);
+                //System.Windows.Forms.MessageBox.Show("No records found in Queue");
       }
     }
   }
