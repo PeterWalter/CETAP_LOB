@@ -29,8 +29,8 @@ namespace CETAP_LOB.Model
     private ObservableCollection<LogisticsComposite> LComposite = new ObservableCollection<LogisticsComposite>();
     private ObservableCollection<CompositBDO> AllScores;
     private ObservableCollection<VenueBDO> AllVenues;
-    private ObservableCollection<CompositBDO> Composite;
-    private Dir_categories myDir;
+   // private ObservableCollection<CompositBDO> Composite;
+    //private Dir_categories myDir;
 
         public Task<bool> addComposit(CompositBDO results)
         {
@@ -310,14 +310,14 @@ namespace CETAP_LOB.Model
                 {
                     try
                     {
-                        List<Composit> scores = await cetapEntities.Composits.OrderBy<Composit, DateTime>((System.Linq.Expressions.Expression<Func<Composit, DateTime>>)(x => x.DOT)).Skip<Composit>(page * size).Take<Composit>(size).ToListAsync<Composit>();
+                        List<Composit> scores = await cetapEntities.Composits.OrderBy(x => x.DOT).Skip(page * size).Take(size).ToListAsync();
                         foreach (Composit composit in scores)
                         {
                             CompositBDO compositBdo = new CompositBDO();
                             NBTScores.Add(Maps.CompositDALToCompositBDO(composit));
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         throw;
                     }

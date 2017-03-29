@@ -140,7 +140,7 @@ namespace CETAP_LOB.Helper
 
     public static DateTime WebDateTime(string date)
     {
-      DateTime dateTime = new DateTime();
+     // DateTime dateTime = new DateTime();
       string[] strArray = date.Split(new char[2]{ '-', '/' });
       return strArray[0].Trim().Length != 4 ? (strArray[2].Length >= 13 ? DateTime.ParseExact(date, "dd-MM-yyyy HH:mm:ss", (IFormatProvider) null) : DateTime.ParseExact(date, "dd-MM-yyyy HH:mm", (IFormatProvider) null)) : DateTime.ParseExact(date, "yyyy/MM/dd HH:mm:ss", (IFormatProvider) null);
     }
@@ -184,7 +184,7 @@ namespace CETAP_LOB.Helper
         date = "19000101";
       if (date.Substring(6, 2) == "00" || date.Substring(4, 2) == "00" || int32_1 > 12)
         date = "19000101";
-      DateTime dateTime = new DateTime();
+    //  DateTime dateTime = new DateTime();
       return DateTime.ParseExact(date, "yyyyMMdd", (IFormatProvider) null);
     }
 
@@ -304,7 +304,7 @@ namespace CETAP_LOB.Helper
         MailAddress mailAddress = new MailAddress(emailaddress);
         return true;
       }
-      catch (FormatException ex)
+      catch (FormatException)
       {
         return false;
       }

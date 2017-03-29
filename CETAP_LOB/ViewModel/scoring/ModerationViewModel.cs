@@ -7,7 +7,6 @@
 using CsvHelper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight;
 using CETAP_LOB.BDO;
 using CETAP_LOB.Model;
 using CETAP_LOB.Model.scoring;
