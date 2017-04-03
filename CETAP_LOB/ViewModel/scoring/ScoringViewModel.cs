@@ -150,16 +150,16 @@ namespace CETAP_LOB.ViewModel.scoring
 
     private void RegisterCommands()
     {
-      SelectFolderCommand = new RelayCommand(new Action(selectFolder));
-      ReadFilesCommand = new RelayCommand(new Action(readScoreFiles));
-      ProcessScoresCommand = new RelayCommand((Action) (() => ProcessScores()), (Func<bool>) (() => CanprocessScores()));
-      GenerateCompositeCommand = new RelayCommand((Action) (() => GenerateComposite()));
-      TrackScoresCommand = new RelayCommand((Action) (() => TrackScores()), (Func<bool>) (() => canTrack()));
+      SelectFolderCommand = new RelayCommand((selectFolder));
+      ReadFilesCommand = new RelayCommand((readScoreFiles));
+      ProcessScoresCommand = new RelayCommand(() => ProcessScores(), () => CanprocessScores());
+      GenerateCompositeCommand = new RelayCommand(() => GenerateComposite());
+      TrackScoresCommand = new RelayCommand(() => TrackScores(),() => canTrack());
     }
 
     private void TrackScores()
     {
-      foreach (var data in Composit.GroupBy<CompositBDO, string>((Func<CompositBDO, string>) (b => b.Batch)).Select(g => new
+      foreach (var data in Composit.GroupBy( (b => b.Batch)).Select(g => new
       {
         Batch = g.Key,
         Amount = g.Count<CompositBDO>()

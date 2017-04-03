@@ -202,19 +202,19 @@
                             <Label Grid.Row="5" Height="16" Margin="0,12,0,13" VerticalAlignment="Center"
                      VerticalContentAlignment="Center" Content="Stamp"/>
                             <TextBox Grid.Row="5" Grid.Column="1" Margin="0,2" TextWrapping="Wrap"
-                       Text="{Binding SelectedBatch.RandomTestNumber, Mode=TwoWay, StringFormat=/{0:D5/}}"/>
+                       Text="{Binding SelectedBatch.RandomTestNumber, Mode=TwoWay, StringFormat=\{0:D5\}}"/>
                             <Label Grid.Row="6" Height="16" Margin="0,12" VerticalAlignment="Center" VerticalContentAlignment="Center"
                      Content="Record Count"/>
                             <TextBox Grid.Row="6" Grid.Column="1" Margin="0,2" TextWrapping="Wrap"
-                       Text="{Binding Batch.SelectedBatch.Count, Source={StaticResource Locator}, StringFormat=/{0:D3/}}"/>
+                       Text="{Binding Batch.SelectedBatch.Count, Source={StaticResource Locator}, StringFormat=\{0:D3\}}"/>
                             <Label Grid.Row="7" Height="16" Margin="0,13,0,12" VerticalAlignment="Center"
                      VerticalContentAlignment="Center" Content="TestVenue Code"/>
                             <TextBox Grid.Row="7" Grid.Column="1" Margin="0,2" TextWrapping="Wrap"
-                       Text="{Binding Batch.SelectedBatch.TestVenueID, Source={StaticResource Locator}, StringFormat=/{0:D5/}}"/>
+                       Text="{Binding Batch.SelectedBatch.TestVenueID, Source={StaticResource Locator}, StringFormat=\{0:D5\}}"/>
                             <Label Grid.Row="8" Height="16" Margin="0,12" VerticalAlignment="Center" VerticalContentAlignment="Center"
                      Content="Test Profile"/>
                             <TextBox Grid.Row="8" Grid.Column="1" Margin="0,2" TextWrapping="Wrap"
-                       Text="{Binding Batch.SelectedBatch.TestProfileID, Source={StaticResource Locator}, StringFormat=/{0:D2/}}"/>
+                       Text="{Binding Batch.SelectedBatch.TestProfileID, Source={StaticResource Locator}, StringFormat=\{0:D2\}}"/>
                             <Label Grid.Row="9" Height="16" Margin="0,12,0,13" VerticalAlignment="Center"
                      VerticalContentAlignment="Center" Content="Description"/>
                             <TextBox Grid.Row="9" Grid.Column="1" Margin="0,2,0,0" TextWrapping="Wrap"

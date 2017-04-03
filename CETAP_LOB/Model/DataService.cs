@@ -4380,6 +4380,10 @@ namespace CETAP_LOB.Model
                 record.DateModified = DateTime.Now;
 
                 Composite.Add(record);
+                //if (Composite.Count() % 315 == 0)
+                //{
+                //    MessageBox.Show("Hi there!!");
+                //}
             }
             return Composite;
         }

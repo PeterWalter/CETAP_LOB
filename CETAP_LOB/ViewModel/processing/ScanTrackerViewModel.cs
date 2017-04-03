@@ -29,7 +29,44 @@ namespace CETAP_LOB.ViewModel.processing
     public RelayCommand SavetoExcelCommand { get; private set; }
 
     public RelayCommand FolderBowserCommand { get; private set; }
+    //public RelayCommand SelectVenue { get; private set; }
+    public RelayCommand  RefreshDataCommand { get; private set; }
+    public RelayCommand LoadDataCommand { get; private set; }
 
+        private const string SelectedVenuePropertyName = "SelectedVenue";
+        private VenueBDO _selectedVenue;
+        public VenueBDO SelectedVenue
+        {
+            get
+            {
+                return _selectedVenue;
+            }
+            set
+            {
+                if (_selectedVenue == value) return;
+                _selectedVenue = value;
+                RaisePropertyChanged("SelectedVenue");
+            }
+        }
+
+        public List<VenueBDO> Venues { get; private set; }
+       
+        private const string SelectedDate = "SelectedProcessDate";
+
+        private DateTime _selectedProcessDate;
+        public DateTime SelectedProcessDate
+        {
+            get
+            {
+                return _selectedProcessDate;
+            }
+            set
+            {
+                if (_selectedProcessDate == value) return;
+                _selectedProcessDate = value;
+                RaisePropertyChanged("SelectedProcessDate");
+            }
+        }
     public List<IntakeYearsBDO> Periods
     {
       get
@@ -84,20 +121,39 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void InitializeModels()
     {
+            _selectedProcessDate = DateTime.Now;
         List<ScanTrackerBDO> allTracks = _service.GetAllTracks();
         _myPeriods = _service.GetAllIntakeYears();
         _intakerecord = _myPeriods.Where(m => m.Year == ApplicationSettings.Default.IntakeYear).FirstOrDefault();
             Trackers = new ObservableCollection<ScanTrackerBDO>(allTracks
                        .Where(x => !x.FileName.Contains("BIO") && x.DateBatched >= _intakerecord.yearStart && x.DateBatched <= _intakerecord.yearEnd)
                        .OrderByDescending(q => q.DateBatched));
-       
+            var Venues1 = _service.GetAllvenues();
+            Venues = Venues1.OrderBy(x => x.VenueName).Select(x => x).ToList();
+
     }
 
     private void RegisterCommands()
     {
-      SavetoExcelCommand = new RelayCommand(new Action(SaveToExcelFile));
+        SavetoExcelCommand = new RelayCommand(SaveToExcelFile);
+            RefreshDataCommand = new RelayCommand(() => RefreshData());
+            LoadDataCommand = new RelayCommand(() => LoadData());
     }
 
+     private void LoadData()
+        {
+            var myDate = _selectedProcessDate;
+            var myVenue = _selectedVenue;
+            string venueCode = myVenue.VenueCode.ToString("00000");
+            var MyList = Trackers
+                            .Where(x => x.TestDate == myDate && x.FileName.Substring(7, 5) == venueCode);
+            Trackers = new ObservableCollection<ScanTrackerBDO>(MyList);
+        }
+
+    private void RefreshData()
+        {
+            InitializeModels();
+        }
     private void SaveToExcelFile()
     {
       SaveFileDialog saveFileDialog = new SaveFileDialog();

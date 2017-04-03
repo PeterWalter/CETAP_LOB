@@ -5,7 +5,7 @@
 // Assembly location: C:\Program Files (x86)\CETAP LOB\LOB.exe
 
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using LINQtoCSV;
 using CETAP_LOB.Database;
 using CETAP_LOB.Helper;
@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace CETAP_LOB.ViewModel.easypay
 {
@@ -181,7 +182,7 @@ namespace CETAP_LOB.ViewModel.easypay
       get
       {
         if (DirList != null)
-          return DirList.Where<EasypayFile>((Func<EasypayFile, bool>) (x => x.IsSelected));
+          return DirList.Where(x => x.IsSelected);
         return _selectedfiles;
       }
       set
@@ -213,23 +214,23 @@ namespace CETAP_LOB.ViewModel.easypay
       _service = Service;
       InitializeModels();
       RegisterCommands();
-      ftpDirectoryList();
+      FtpDirectoryList();
     }
 
     private void InitializeModels()
     {
-      mruList = new ObservableCollection<string>((IEnumerable<string>) EasyPayViewModel._mruManager.List);
+      mruList = new ObservableCollection<string>(EasyPayViewModel._mruManager.List);
       StartDate = DateTime.Now;
       EndDate = DateTime.Now;
     }
 
     private void RegisterCommands()
     {
-      ListCommand = new RelayCommand(new Action(GetFiles));
-      FolderBowserCommand = new RelayCommand(new Action(OpenNewFolder));
-      WriteToDatabaseCommand = new RelayCommand((Action) (() => WriteToDB()));
-      FromDBCommand = new RelayCommand((Action) (() => RecordsFromDB()));
-      SavetoCSVCommand = new RelayCommand((Action) (() => SaveCSVFile()));
+      ListCommand = new RelayCommand(() => GetFiles());
+      FolderBowserCommand = new RelayCommand(OpenNewFolder);
+      WriteToDatabaseCommand = new RelayCommand(() => WriteToDB());
+      FromDBCommand = new RelayCommand(() => RecordsFromDB());
+      SavetoCSVCommand = new RelayCommand(() => SaveCSVFile());
     }
 
     private void SaveCSVFile()
@@ -239,7 +240,7 @@ namespace CETAP_LOB.ViewModel.easypay
       saveFileDialog.FilterIndex = 1;
       if (saveFileDialog.ShowDialog() != DialogResult.OK)
         return;
-      new CsvContext().Write<Vw_EasyPayRecords>((IEnumerable<Vw_EasyPayRecords>) EasyPayRecords.ToList<Vw_EasyPayRecords>(), saveFileDialog.FileName, new CsvFileDescription()
+      new CsvContext().Write(EasyPayRecords.ToList(), saveFileDialog.FileName, new CsvFileDescription()
       {
         SeparatorChar = ',',
         FirstLineHasColumnNames = true
@@ -253,12 +254,14 @@ namespace CETAP_LOB.ViewModel.easypay
       InProgress = false;
     }
 
-    private async void ftpDirectoryList()
+    private  void FtpDirectoryList()
     {
-      EPFile = _service.ReadLastFile();
-      _epFileName = EPFile.FileName;
-      _dateLoaded = Convert.ToDateTime(EPFile.DateWritten);
-      DirList = _service.ListFTPFiles();
+      
+          EPFile = _service.ReadLastFile();
+          _epFileName = EPFile.FileName;
+          _dateLoaded = DateTime.ParseExact(EPFile.DateWritten, "d/M/yyyy",CultureInfo.InvariantCulture);
+          //DateLoaded = Convert.ToDateTime(this.EPFile.DateWritten);
+          DirList =  _service.ListFTPFiles();
     }
 
     private async void GetFiles()

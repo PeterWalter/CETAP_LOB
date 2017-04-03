@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:local="clr-namespace:CETAP_LOB.View.processing"
              mc:Ignorable="d" 
               BorderBrush="{Binding SettingsAppearance.SelectedAccentColor, Source={StaticResource Locator}}"
              DataContext="{Binding Path=Tracks, Source={StaticResource Locator}}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="306" d:DesignWidth="757">
     <FrameworkElement.Resources>
         <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
             <Style.Triggers>
@@ -154,5 +155,30 @@
                 </ContextMenu>
             </FrameworkElement.ContextMenu>
         </DataGrid>
+        <StackPanel VerticalAlignment="Bottom" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Height="25">
+                <Label Content="Venue Code" Width="96" Margin="20,0,0,0" FontSize="16" />
+                <TextBlock TextWrapping="Wrap" Text="{Binding Tracks.SelectedVenue.VenueCode, Source={StaticResource Locator}, StringFormat=\{0:D5\}}" FontSize="16"  Background="{Binding SettingsAppearance.SelectedAccentColor, Source={StaticResource Locator}}"/>
+            </StackPanel>
+
+            <StackPanel Height="45" Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Label Content="Venue" HorizontalAlignment="Left" Height="19" Margin="10,0,0,0" Width="51"/>
+                <ComboBox Width="247" Margin="0,10" ItemsSource="{Binding Tracks.Venues, Source={StaticResource Locator}}" DisplayMemberPath="VenueName" SelectedItem="{Binding Tracks.SelectedVenue, Source={StaticResource Locator}}" />
+                <Label Content="Test Date" HorizontalAlignment="Center"  Width="60" Margin="20,14,0,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Height="21"/>
+                <DatePicker HorizontalAlignment="Left" Width="144" Margin="0,10"  SelectedDate="{Binding SelectedProcessDate, Mode=TwoWay}"/>
+                <Button Content="Get Records" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="114" Command="{Binding Tracks.LoadDataCommand, Source={StaticResource Locator}}"/>
+                
+                <mui:ModernButton Margin="15,0,5,0"
+								  BorderThickness="5,10,0,0"
+								  Command="{Binding Tracks.RefreshDataCommand,
+													Mode=OneWay,
+													Source={StaticResource Locator}}"
+								  EllipseDiameter="40"
+								  IconData="F1 M 24,13C 27.1521,13 29.9945,14.3258 32,16.4501L 32,11L 35,14L 35,22L 27,22L 24,19L 29.5903,19C 28.217,17.4656 26.2212,16.5 24,16.5C 20.1969,16.5 17.055,19.3306 16.5661,23L 13.0448,23C 13.5501,17.3935 18.262,13 24,13 Z M 24,31.5C 27.8031,31.5 30.945,28.6694 31.4339,25L 34.9552,25C 34.4499,30.6065 29.738,35 24,35C 20.8479,35 18.0055,33.6742 16,31.5499L 16,37L 13,34L 13,26L 21,26L 24,29L 18.4097,29C 19.783,30.5344 21.7787,31.5 24,31.5 Z"
+								  IconHeight="33"
+								  IconWidth="33"
+								  ToolTip="Refresh All Data" HorizontalAlignment="Right"  HorizontalContentAlignment="Center" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
