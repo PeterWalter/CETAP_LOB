@@ -40,13 +40,14 @@
                         <DatePicker Width="243" Height="51" FontSize="36"
                         SelectedDate="{Binding Batch.TestDate, Mode=TwoWay, ValidatesOnNotifyDataErrors=true, Source={StaticResource Locator}, ValidatesOnDataErrors=true}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0">
                         <Label Margin="5,10,0,5" HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                    Content="Batch Compiled By:" FontFamily="Perpetua Titling MT" FontSize="20" FontWeight="SemiBold"/>
-                        <ComboBox Width="244" Height="50" Margin="10,0,0,0" HorizontalContentAlignment="Center"
+                        <!--<ComboBox Width="244" Height="13" Margin="10,0,0,0" HorizontalContentAlignment="Center"
                       VerticalContentAlignment="Center" FontSize="30"
                       ItemsSource="{Binding Batch.BatchMakers, Source={StaticResource Locator}}"
-                      SelectedItem="{Binding SelectedBatcher}"/>
+                      SelectedItem="{Binding SelectedBatcher}"/>-->
+                        <TextBox TextWrapping="Wrap" Text="{Binding Batch.SelectedBatcher.Name, Source={StaticResource Locator}}" Height="52" FontSize="22" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"/>
                 </StackPanel>
@@ -143,11 +144,11 @@
                             IconData="M 40.110691,17.336001 L 43.787209,19.603006 47.739838,17.851579 46.722206,22.052104 49.609001,25.26417 45.300961,25.597356 43.13229,29.337 41.485435,25.338367 37.260998,24.432104 40.553104,21.631422 M 30.316431,15.311499 C 30.737907,15.3207 31.141415,15.45716 31.470024,15.730532 L 33.818306,17.694105 C 34.694302,18.424594 34.7043,19.856977 33.841408,20.888161 L 6.1638265,54.03081 C 5.2956729,55.0699 3.888453,55.316195 3.0118785,54.583106 L 0.66258836,52.621932 C -0.21271044,51.889041 -0.22314736,50.462062 0.64531529,49.424178 L 28.322847,16.281325 C 28.861591,15.634333 29.61397,15.296166 30.316431,15.311499 M 17.982637,0.28100014 L 22.582518,3.1118908 27.524708,0.93214035 26.253859,6.1756935 29.865,10.203163 24.47509,10.621074 21.760185,15.288001 19.702805,10.298364 14.42,9.1577039 18.53216,5.6602993 M 37.014431,0 L 40.23534,1.97754 43.692245,0.45019531 42.80167,4.1220703 45.327003,6.9426298 41.552406,7.2316895 39.658558,10.5 38.221096,7.0024395 34.521999,6.2094698 37.39922,3.7629395 Z"
                             IconHeight="30" IconWidth="30" ToolTip="Restore selected batch"
                             Command="{Binding Batch.RestoreCommand, Mode=OneWay, Source={StaticResource Locator}}"/>
-                    <Label Margin="50,19,11,16" Content="Batch prepared by:" FontSize="16"/>
+                    <Label Margin="50,19,11,16" Content="Batches prepared by:" FontSize="20"/>
                     <!--<ComboBox Width="140" Margin="0,14,0,21"
                     ItemsSource="{Binding Batch.BatchMakers, Source={StaticResource Locator}}"
                     SelectedItem="{Binding SelectedBatcher}"/>-->
-                    <Label Content="{Binding Batch.SelectedBatcher.Name, Source={StaticResource Locator}}" Width="88" Margin="0,14,0,23" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    <Label Content="{Binding Batch.SelectedBatcher.Name, Source={StaticResource Locator}}" Width="88" Margin="0,14,0,23" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
                 </StackPanel>
                 <StackPanel Height="498" Margin="0,0,0,0" Orientation="Horizontal">
                     <ListBox Width="225" Margin="0,4,0,5" BorderThickness="0,1,1,0"

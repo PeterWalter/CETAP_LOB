@@ -7,7 +7,7 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              DataContext="{Binding Introduction,
                                    Source={StaticResource Locator}}"
-             BorderThickness="1">
+             BorderThickness="1" >
     <UserControl.BorderBrush>
         <SolidColorBrush Color="{Binding SettingsAppearance.SelectedAccentColor, Source={StaticResource Locator}}"/>
     </UserControl.BorderBrush>
@@ -17,7 +17,7 @@
             <StackPanel>
                 <TextBlock Margin="0,0,0,8" Style="{StaticResource Heading1}" Text="Line of Business Application for CETAP"/>
                 <mui:BBCodeBlock Margin="0,0,0,32"
-                         BBCode="[b]CETAP LOB[/b], is an application made up of styles and modules for processing the NBT data from Logistics, scoring to research. The WPF application is a great looking Modern UI app. 
+                         BBCode="[b]CETAP LOB[/b], is an application made up of modules for processing the NBT data from Logistics section, scoring up to research section. The application was created using WPF, MVVM and ModernUI WPF for the visuals. 
  
 This project is a spin-off of [url=http://nbt.uct.ac.za]NBT website[/url], ..... 
  
