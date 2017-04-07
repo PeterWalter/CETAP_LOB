@@ -288,6 +288,7 @@
     <Compile Include="Helper\LambdaHelper.cs" />
     <Compile Include="Helper\ListSurnames.cs" />
     <Compile Include="Helper\MRUManager.cs" />
+    <Compile Include="Helper\EasyPayRecord.cs" />
     <Compile Include="Mapping\Maps.cs" />
     <Compile Include="Model\CompositeService.cs" />
     <Compile Include="Model\Composite\BI.cs" />
