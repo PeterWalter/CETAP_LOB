@@ -259,7 +259,7 @@ namespace CETAP_LOB.ViewModel.easypay
       
           EPFile = _service.ReadLastFile();
           _epFileName = EPFile.FileName;
-          _dateLoaded = DateTime.ParseExact(EPFile.DateWritten, "d/M/yyyy",CultureInfo.InvariantCulture);
+          _dateLoaded = DateTime.ParseExact(EPFile.DateWritten, "yyyy/MM/dd",CultureInfo.InvariantCulture);
           //DateLoaded = Convert.ToDateTime(this.EPFile.DateWritten);
           DirList =  _service.ListFTPFiles();
     }

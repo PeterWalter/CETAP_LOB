@@ -409,25 +409,20 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void Refresh_ProfAllocs()
     {
-      ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(_service.GetAllProfileAllocations().Where<ProfileAllocationBDO>((Func<ProfileAllocationBDO, bool>) (x =>
-      {
-        if (x.TestDate > IntakeRecord.yearStart)
-          return x.TestDate < IntakeRecord.yearEnd;
-        return false;
-      })).Select<ProfileAllocationBDO, ProfileAllocationBDO>((Func<ProfileAllocationBDO, ProfileAllocationBDO>) (m => m)).ToList<ProfileAllocationBDO>());
+      ProfilesAllocations = new ObservableCollection<ProfileAllocationBDO>(_service.GetAllProfileAllocations()
+                                                .Where(x => x.TestDate >= IntakeRecord.yearStart && x.TestDate <= IntakeRecord.yearEnd)
+                                                .Select(m => m).ToList());
     }
 
     private void Refresh_alloc()
     {
       AllAllocations.Clear();
-      IEnumerable<TestAllocationBDO> source = _service.GetAllTestAllocations().Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (x =>
-      {
-        if (x.TestDate > IntakeRecord.yearStart)
-          return x.TestDate < IntakeRecord.yearEnd;
-        return false;
-      })).Select<TestAllocationBDO, TestAllocationBDO>((Func<TestAllocationBDO, TestAllocationBDO>) (m => m));
+      IEnumerable<TestAllocationBDO> source = _service.GetAllTestAllocations()
+                                                      .Where(x => x.TestDate >= IntakeRecord.yearStart && x.TestDate <= IntakeRecord.yearEnd)
+                                                      .Select(m => m);
       List<TestProfileBDO> profs = _service.GetAllTestProfiles();
-      AllAllocations = new ObservableCollection<TestAllocationBDO>(source.Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (i => !profs.Any<TestProfileBDO>((Func<TestProfileBDO, bool>) (e => e.AllocationID == i.ID)))).OrderBy<TestAllocationBDO, DateTime>((Func<TestAllocationBDO, DateTime>) (m => m.TestDate)).ToList<TestAllocationBDO>());
+      AllAllocations = new ObservableCollection<TestAllocationBDO>(source.Where(i => !profs.Any(e => e.AllocationID == i.ID))
+                                                                         .OrderBy(m => m.TestDate).ToList());
     }
 
     private void AllocationProfileToExcel()
@@ -442,7 +437,13 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void GetProfiles()
     {
-      Profiles = new ObservableCollection<TestProfileBDO>(new ObservableCollection<TestProfileBDO>(_service.GetAllTestProfiles()).Where<TestProfileBDO>((Func<TestProfileBDO, bool>) (x => x.Intake == IntakeYear)).Select<TestProfileBDO, TestProfileBDO>((Func<TestProfileBDO, TestProfileBDO>) (v => v)).ToList<TestProfileBDO>().GroupBy<TestProfileBDO, int>((Func<TestProfileBDO, int>) (e => e.Profile)).Select<IGrouping<int, TestProfileBDO>, TestProfileBDO>((Func<IGrouping<int, TestProfileBDO>, TestProfileBDO>) (gp => gp.First<TestProfileBDO>())).OrderBy<TestProfileBDO, int>((Func<TestProfileBDO, int>) (m => m.Profile)).ToList<TestProfileBDO>());
+      Profiles = new ObservableCollection<TestProfileBDO>(new ObservableCollection<TestProfileBDO>(_service.GetAllTestProfiles())
+                                                                                                           .Where(x => x.Intake == IntakeYear)
+                                                                                                           .Select(v => v).ToList()
+                                                                                                           .GroupBy(e => e.Profile)
+                                                                                                           .Select(gp => gp.First())
+                                                                                                           .OrderBy(m => m.Profile)
+                                                                                                           .ToList());
     }
 
     private void GetGroupProfiles()
@@ -536,12 +537,9 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void getAllocationBytestID(int testID)
     {
-      Allocations = new ObservableCollection<TestAllocationBDO>(_service.getTestAllocationByTestID(testID).Where<TestAllocationBDO>((Func<TestAllocationBDO, bool>) (x =>
-      {
-        if (x.TestDate > IntakeRecord.yearStart)
-          return x.TestDate < IntakeRecord.yearEnd;
-        return false;
-      })).Select<TestAllocationBDO, TestAllocationBDO>((Func<TestAllocationBDO, TestAllocationBDO>) (m => m)).OrderBy<TestAllocationBDO, DateTime>((Func<TestAllocationBDO, DateTime>) (v => v.TestDate)).ToList<TestAllocationBDO>());
+      Allocations = new ObservableCollection<TestAllocationBDO>(_service.getTestAllocationByTestID(testID)
+                                                                .Where(x => x.TestDate >= IntakeRecord.yearStart && x.TestDate <= IntakeRecord.yearEnd)
+                                                                .Select(m => m).OrderBy(v => v.TestDate).ToList());
     }
 
     private void AllocateTest()
@@ -577,7 +575,7 @@ namespace CETAP_LOB.ViewModel.processing
     private void RefreshTests()
     {
       Tests.Clear();
-      Tests = new ObservableCollection<TestBDO>((IEnumerable<TestBDO>) _service.GetAllTests().OrderBy<TestBDO, string>((Func<TestBDO, string>) (t => t.TestName)));
+      Tests = new ObservableCollection<TestBDO>( _service.GetAllTests().OrderBy(t => t.TestName));
     }
 
     private void UpdateTest()
@@ -620,7 +618,7 @@ namespace CETAP_LOB.ViewModel.processing
 
     private void GetSelectedIntake()
     {
-      IntakeRecord = _myPeriods.Where<IntakeYearsBDO>((Func<IntakeYearsBDO, bool>) (x => x.Year == IntakeYear)).Select<IntakeYearsBDO, IntakeYearsBDO>((Func<IntakeYearsBDO, IntakeYearsBDO>) (x => x)).FirstOrDefault<IntakeYearsBDO>();
+      IntakeRecord = _myPeriods.Where(x => x.Year == IntakeYear).Select(x => x).FirstOrDefault();
     }
 
     private void RefreshAll()
