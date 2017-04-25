@@ -513,10 +513,10 @@ namespace CETAP_LOB.ViewModel.writers
                   var RowW = ws1.Row(1);
                   var Row2 = ws1.Row(2);
                   RowW.Style.Font.Bold = false;
-                  RowW.Style.Font.FontSize = 10.0;
+                  RowW.Style.Font.FontSize = 9.0;
                   RowW.Style.Fill.BackgroundColor = XLColor.Cyan;
-                  RowW.Height = 25.5;
-                  ws1.Rows(2, lastRow).Height = 20.0;
+                  RowW.Height = 20;
+                  ws1.Rows(2, lastRow).Height = 16.0;
                   ws1.Rows(2, lastRow).Style.Font.FontSize = 10.0;
                   ws1.Column(1).Width = 5.0;
                   ws1.Column(2).Width = 30.0;
