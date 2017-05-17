@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace CETAP_LOB.Helper
 {
@@ -67,12 +68,16 @@ namespace CETAP_LOB.Helper
 
     public static int ComputeChecksum(string input)
     {
-      return input.Where<char>((Func<char, bool>) (c => char.IsDigit(c))).Reverse<char>().SelectMany<char, char>((Func<char, int, IEnumerable<char>>) ((c, i) => (IEnumerable<char>) ((int) c - 48 << (i & 1)).ToString())).Sum<char>((Func<char, int>) (c => (int) c - 48)) % 10;
-    }
+            int x = -1;
+      x = input.Where<char>((Func<char, bool>) (c => char.IsDigit(c))).Reverse<char>().SelectMany<char, char>((Func<char, int, IEnumerable<char>>) ((c, i) => (IEnumerable<char>) ((int) c - 48 << (i & 1)).ToString())).Sum<char>((Func<char, int>) (c => (int) c - 48)) % 10;
+            return x;
+        }
 
     public static bool IsValidChecksum(string value)
+           
     {
-      return HelperUtils.ComputeChecksum(value) == 0;
+       //     if (value.Substring(0, 1) == "0") MessageBox.Show(value);
+            return HelperUtils.ComputeChecksum(value) == 0;
     }
 
     public static bool GenerateWriterList(ProcessList list)
@@ -137,7 +142,22 @@ namespace CETAP_LOB.Helper
       string[] strArray = date.Split(new char[2]{ '-', '/' });
       return strArray[2].Trim().Length <= 13 ? (strArray[2].Trim().Length <= 8 ? DateTime.ParseExact(date, "yyyy/MM/dd HH:mm", (IFormatProvider) null) : DateTime.ParseExact(date, "yyyy/MM/dd HH:mm:ss", (IFormatProvider) null)) : DateTime.ParseExact(date, "yyyy/MM/dd hh:mm:ss tt", (IFormatProvider) null);
     }
-
+    
+        public static string CheckDateFormat(string date)
+        {
+            string First = "";
+          
+            if (date.Substring(2, 1) == "/")
+            {
+                First = "Day";
+            }
+            else
+            {
+                First = "Year";
+            }
+                
+            return First;
+        }
     public static DateTime WebDateTime(string date)
     {
      // DateTime dateTime = new DateTime();

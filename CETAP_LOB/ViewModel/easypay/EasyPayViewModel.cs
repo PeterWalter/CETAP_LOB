@@ -215,7 +215,8 @@ namespace CETAP_LOB.ViewModel.easypay
       InitializeModels();
       RegisterCommands();
       FtpDirectoryList();
-    }
+          //  _dateLoaded = DateTime.ParseExact(EPFile.DateWritten, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+        }
 
     private void InitializeModels()
     {
@@ -259,10 +260,18 @@ namespace CETAP_LOB.ViewModel.easypay
       
           EPFile = _service.ReadLastFile();
           _epFileName = EPFile.FileName;
-          _dateLoaded = DateTime.ParseExact(EPFile.DateWritten, "yyyy/MM/dd",CultureInfo.InvariantCulture);
+         
           //DateLoaded = Convert.ToDateTime(this.EPFile.DateWritten);
           DirList =  _service.ListFTPFiles();
-    }
+            if (HelperUtils.CheckDateFormat(EPFile.DateWritten) == "Day")
+            {
+                _dateLoaded = DateTime.ParseExact(EPFile.DateWritten, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                _dateLoaded = DateTime.ParseExact(EPFile.DateWritten, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            }
+        }
 
     private async void GetFiles()
     {

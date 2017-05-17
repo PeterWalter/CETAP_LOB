@@ -16,8 +16,8 @@
     </Control.BorderBrush>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="165*"/>
-            <ColumnDefinition Width="1033*"/>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="125*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="65*"/>
@@ -75,7 +75,7 @@
             </StackPanel>
         </Border>
         <StackPanel HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
-            <ListBox Height="400" Margin="0,0,2,10" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+            <ListBox Height="400" Margin="0,0,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                BorderThickness="0,0,1,1" Padding="0,0,0,5" ScrollViewer.VerticalScrollBarVisibility="Visible"
                SelectionMode="Multiple" ItemsSource="{Binding EasyPay.DirList, Source={StaticResource Locator}}">
                 <Control.BorderBrush>
