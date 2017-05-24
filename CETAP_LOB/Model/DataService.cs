@@ -5417,6 +5417,7 @@ namespace CETAP_LOB.Model
                                 //file.Write(line); SPSS gives error if file does not have CR\LF
                                 break;
                             case 761:
+                            case 833:
                                 string line1 = QADataRecordToCSX761(QA);
                                 //line1 += "\r";
                                 //file.Write(line1); // spss errors if line does not have windows CR\LF
